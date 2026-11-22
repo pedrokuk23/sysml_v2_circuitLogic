@@ -330,7 +330,7 @@
       "dr",
       "h"
      ],
-     "replacement": "And(Or(Not(dr >= 0), -500 <= -1*dr + -1/2048*h, h <= 0),\n    Or(-500 <= -1*dr + -1309/2500000*h,\n       Not(dr >= 0),\n       h <= 0))",
+     "replacement": "And(Or(Not(dr >= 0), h <= 0, -500 <= -1/2048*h + -1*dr),\n    Or(Not(dr >= 0),\n       h <= 0,\n       -500 <= -1309/2500000*h + -1*dr))",
      "method": "quantifier elimination",
      "certification": "sufficient",
      "weakest": true,
@@ -341,7 +341,7 @@
       "dr",
       "thetaK"
      ],
-     "replacement": "And(Or(-500 <= -500001*thetaK + -1*dr,\n       Not(thetaK >= 0),\n       Not(dr >= 0)),\n    Or(Not(thetaK >= 0),\n       Not(dr >= 0),\n       -500 <= -700000*thetaK + -1*dr))",
+     "replacement": "And(Or(Not(dr >= 0),\n       -500 <= -1*dr + -500001*thetaK,\n       Not(thetaK >= 0)),\n    Or(Not(dr >= 0),\n       -500 <= -1*dr + -700000*thetaK,\n       Not(thetaK >= 0)))",
      "method": "quantifier elimination",
      "certification": "sufficient",
      "weakest": true,
@@ -416,11 +416,12 @@
      "vocabulary": [
       "h"
      ],
-     "replacement": "And(Or(h <= 0, h <= 5242880/7),\n    Or(h <= 0, h <= 2977847967734612974030/3975861198663081),\n    Or(h <= 0,\n       h <=\n       74446199193365324350750000000/99396660558325627241199),\n    Or(h <= 0,\n       h <=\n       1861154979834133108768750000000000000/2484919778756145173725577460921),\n    Or(h <= 0, h <= 1099511627776/1468013),\n    Or(h <= 0, h <= 1030792151040/1457381),\n    Or(h <= 0, h <= 650000000/919))",
-     "method": "quantifier elimination",
+     "replacement": "h <= 707290",
+     "method": "numerical, conservative approximation (bisection; quantifier elimination exceeded the time limit)",
      "certification": "sufficient",
-     "weakest": true,
-     "exists": true
+     "weakest": null,
+     "exists": true,
+     "inconclusive_points": 0
     },
     "PAY-2": {
      "vocabulary": [
@@ -536,5 +537,5 @@
   },
   "statements_recognized": 92
  },
- "seconds": 22.53822922706604
+ "seconds": 43.08579421043396
 }

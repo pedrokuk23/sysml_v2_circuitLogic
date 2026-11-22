@@ -64,8 +64,19 @@ def report(R, files):
                  + (f"; reactive refinement: {r.get('reactive_refinement')}" if r.get("kind") == "reactive" else "")
                  + " (None = inconclusive: the solver answered UNKNOWN)")
         for k, a in r["abduction"].items():
+            if a["replacement"] is None:
+                L.append(f"- Replace {k} (over {', '.join(a['vocabulary'])}): no replacement reported [{a['method']}]")
+                continue
+            if a.get("weakest") is True:
+                grade = "sufficient; exact (weakest)"
+            elif a.get("weakest") is None and str(a["method"]).startswith("numerical"):
+                grade = "sufficient; conservative approximation"
+            elif a.get("weakest") is None:
+                grade = f"sufficient; weakestness inconclusive ({a.get('weakest_reason')})"
+            else:
+                grade = "sufficient; not the weakest"
             L.append(f"- Replace {k} (over {', '.join(a['vocabulary'])}): `{a['replacement']}` "
-                     f"[{a['method']}; {'exists' if a['exists'] else 'none exists' if a['exists'] is False else 'n/a'}]")
+                     f"[{grade}; {a['method']}; {'exists' if a['exists'] else 'none exists' if a['exists'] is False else 'n/a'}]")
         for g, e in r["interfaces"].items():
             if e.get("contract", 1) is None:
                 L.append(f"- Interface {g} (shared {', '.join(e['shared'])}): none, {e['note']}")

@@ -14,7 +14,7 @@ F  every name is declared once in its scope: a second, different declaration of 
 G  the three translations of each requirement (SMT for z3, Verilog for Yosys, Lustre for Kind 2) agree on every
    input valuation of the domain (exhaustive check, independent evaluators for the Verilog and Lustre text).
 H  the front end agrees with the AST of the SysML v2 Pilot Implementation;
-I  regressions for the semantic contract (20 tests): undeclared types, non-Boolean constraints and Boolean/number coercions are
+I  regressions for the semantic contract (21 tests): undeclared types, non-Boolean constraints and Boolean/number coercions are
    rejected; two machines over one enumeration are rejected rather than bound by guess; a solver answer UNKNOWN
    yields 'inconclusive' and never an equivalence, a refutation or an absence; static and reactive refinement are
    distinguished (C = x and y refines P = y statically, not reactively); a single requirement that the glossary
@@ -513,6 +513,7 @@ def class_regressions():
     try:
         far = analysis._abduce_bounded(w_ <= 1e11, [x_ == w_], BoolVal(True), [w_])
         third = analysis._abduce_bounded(3 * w_ <= 1, [x_ == w_], BoolVal(True), [w_])
+        neg = analysis._abduce_bounded(w_ <= -1e11, [x_ == w_], BoolVal(True), [w_])
         logic_engine.Solver = Unknown
         try:
             allunk = analysis._abduce_bounded(w_ <= 1, [x_ == w_], BoolVal(True), [w_])
@@ -522,10 +523,20 @@ def class_regressions():
         z3.Tactic = real_tac
     record("I", "numerical abduction: a threshold beyond the grid gives no candidate (True is rejected as "
                 "insufficient); w <= 1/3 gives a certified conservative bound; a grid answered UNKNOWN gives no "
-                "candidate and counts the inconclusive points",
+                "candidate and counts the inconclusive points; a grid without a valid point gives no candidate",
            far["W"] is None and far.get("certification") == "insufficient"
            and third["certification"] == "sufficient" and third["W"] == "w <= 333333/1000000"
-           and allunk["W"] is None and allunk.get("inconclusive_points", 0) > 100, f"{far['method']} | {third['W']} | {allunk['method']}")
+           and allunk["W"] is None and allunk.get("inconclusive_points", 0) > 100
+           and neg["W"] is None and "finite grid" in neg["method"],
+           f"{far['method']} | {third['W']} | {allunk['method']} | {neg['method']}")
+    _real = z3.Solver
+    z3.Solver = Unknown
+    try:
+        wk = analysis._weakest(w_ <= 1, z3.ForAll([x_], z3.Implies(x_ == w_, w_ <= 1)))
+    finally:
+        z3.Solver = _real
+    record("I", "weakest-condition check: UNKNOWN gives None with the solver's reason (False is kept for a refutation)",
+           wk[0] is None and bool(wk[1]), str(wk))
     # command line: an analysis that depends on UNKNOWN ends with status 'inconclusive' and exit code 3
     import importlib.util
     spec = importlib.util.spec_from_file_location("sysmlc_main", os.path.join(ROOT, "sysmlc", "__main__.py"))

@@ -86,9 +86,14 @@ def check(model):
             same += 1
             continue
         kind = lambda m: re.match(r"[a-z]+", m or "") and re.match(r"[a-z]+", m).group(0)
-        if k.endswith("/weakest") and {x, y} <= {None, True} and \
-                {kind(la.get(k[:-8] + "/method")), kind(lb.get(k[:-8] + "/method"))} == {"quantifier", "numerical"}:
-            method += 1            # 'weakest' is checked only for exact (QE) results
+        if k.endswith("/weakest") and {x, y} <= {None, True}:
+            method += 1            # 'weakest' is a diagnostic: checked only for exact results, None when it timed out
+            continue
+        if k.endswith("/inconclusive_points") and {x, y} <= {None, 0}:
+            method += 1            # present (0) only for numerical results
+            continue
+        if k.endswith("/weakest_reason") and (x is None or y is None):
+            method += 1
             continue
         if k not in la or k not in lb or not isinstance(x, str) or not isinstance(y, str):
             fails.append(f"{k}: {x!r} vs {y!r}"); continue

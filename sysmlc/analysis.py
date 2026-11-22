@@ -509,10 +509,17 @@ def _certify(P, rest, A, W, voc_body=None, ms=20000):
 
 def _weakest(W, quantified, ms=20000):
     """Whether W is implied by the quantified weakest condition (so W is the weakest replacement, not only a
-    sufficient one): UNSAT of  quantified & not W."""
-    from z3 import Solver, unsat
+    sufficient one): UNSAT of  quantified & not W.  Returns (True, None) on UNSAT, (False, witness) on SAT and
+    (None, reason) on UNKNOWN."""
+    from z3 import Solver, sat, unsat
     s = Solver(); s.set(timeout=ms); s.add(quantified, Not(W))
-    return s.check() == unsat
+    r = s.check()
+    if r == unsat:
+        return True, None
+    if r == sat:
+        m = s.model()
+        return False, {str(d): str(m[d]) for d in m.decls()}
+    return None, s.reason_unknown()
 
 
 def _abduce_bounded(P, rest, A, voc, ms=20000):
@@ -540,7 +547,7 @@ def _abduce_bounded(P, rest, A, voc, ms=20000):
         W = _simp(body)
         r = report(W, "no variable to eliminate")
         if r["W_expr"] is not None:
-            r["weakest"] = True
+            r["weakest"] = True                 # the implication itself is the weakest condition
         return r
     W = None
     for t in ("qe2", "qe"):
@@ -555,7 +562,11 @@ def _abduce_bounded(P, rest, A, voc, ms=20000):
     if W is not None:
         r = report(W, "quantifier elimination")
         if r["W_expr"] is not None:
-            r["weakest"] = _weakest(W, quantified, ms)
+            r["weakest"], detail = _weakest(W, quantified, ms)
+            if r["weakest"] is False:
+                r["weakest_witness"] = detail
+            elif r["weakest"] is None:
+                r["weakest_reason"] = detail
         return r
     if len(voc) != 1:
         return dict(W=None, W_expr=None, method=f"not computed (quantifier elimination exceeded {ms // 1000} s)")
@@ -572,11 +583,10 @@ def _abduce_bounded(P, rest, A, voc, ms=20000):
             return False
     grid = sorted({sg * 10 ** (e / 4) for sg in (-1, 1) for e in range(-40, 41)} | {0.0})
     flags = [ok(c) for c in grid]
-    if not any(flags):
-        if unk[0]:
-            return dict(W=None, W_expr=None, inconclusive_points=unk[0],
-                        method=f"not computed (numerical: no grid point certified, {unk[0]} inconclusive)")
-        return report(BoolVal(False), "numerical (no value of the grid is valid)")
+    if not any(flags):           # a finite grid without a valid point says nothing about values outside it
+        return dict(W=None, W_expr=None, inconclusive_points=unk[0],
+                    method="not computed (numerical: no certified value found on the finite grid"
+                           + (f", {unk[0]} inconclusive points)" if unk[0] else ")"))
     bounds, uncertified = [], False
     for (a, fa), (b, fb) in zip(zip(grid, flags), zip(grid[1:], flags[1:])):
         if fa != fb:
@@ -725,11 +735,13 @@ def check_flowdown(S):
                 voc = sorted({v for k in drop for v in reals(kids[k])}, key=str)
                 rest = [kids[k] for k in ids if k not in drop]
                 a = _abduce_bounded(P, rest, A, voc)
-                ab[" + ".join(drop)] = dict(vocabulary=[str(v) for v in voc], replacement=a["W"], method=a["method"],
-                                            certification=a.get("certification"), weakest=a.get("weakest"),
-                                            exists=is_sat(A, *rest, a["W_expr"])[0] if a["W_expr"] is not None else None)
-                if a.get("certification_detail") is not None:
-                    ab[" + ".join(drop)]["certification_detail"] = a["certification_detail"]
+                e_ = dict(vocabulary=[str(v) for v in voc], replacement=a["W"], method=a["method"],
+                          certification=a.get("certification"), weakest=a.get("weakest"),
+                          exists=is_sat(A, *rest, a["W_expr"])[0] if a["W_expr"] is not None else None)
+                for f_ in ("certification_detail", "weakest_reason", "weakest_witness", "inconclusive_points"):
+                    if a.get(f_) is not None:
+                        e_[f_] = a[f_]
+                ab[" + ".join(drop)] = e_
         r["abduction"] = ab
         # interface contracts: one subsystem (subject type) against the rest and the negated parent
         groups = sorted({subj[k] for k in ids if subj[k]} - {subj[d["original"]]})
