@@ -25,8 +25,11 @@ a.tick_params(length=2, width=0.5, labelsize=8)
 xs_g = [r for r, g in zip(R, generic) if g]; g = [x for x in generic if x]
 a.plot(xs_g, g, "-o", color=C1, lw=1.6, ms=4.5, mec="white", mew=0.6, label="quantified test (3), up to R = 100")
 a.plot(R, circuit, "-s", color=C2, lw=1.6, ms=4.5, mec="white", mew=0.6, label="overlap test (Proposition 1)")
-a.plot(R, yosys, "-^", color=C3, lw=1.6, ms=5, mec="white", mew=0.6, label="Yosys check of all requirements")
+a.plot(R, yosys, "--^", color=C3, lw=1.6, ms=5, mec="white", mew=0.6, label="different task: Yosys global check of all requirements")
 a.set_yscale("log"); a.set_ylabel("time (s)", fontsize=8); a.set_ylim(0.04, 400)
+from matplotlib.ticker import FixedLocator, FixedFormatter
+a.yaxis.set_major_locator(FixedLocator([0.1, 1, 10, 100])); a.yaxis.set_major_formatter(FixedFormatter(["0.1", "1", "10", "100"]))
+a.yaxis.set_minor_locator(FixedLocator([]))
 a.text(R[-1], yosys[-1] * 1.6, "1.2 s", ha="center", va="bottom", fontsize=8, color=INK2)
 a.text(R[-1], circuit[-1] * 1.6, "133 s", ha="center", va="bottom", fontsize=8, color=INK2)
 a.text(xs_g[-1] * 1.12, g[-1], "40 s", ha="left", va="center", fontsize=8, color=INK2)

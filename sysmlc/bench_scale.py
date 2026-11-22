@@ -52,7 +52,7 @@ def run(S, B, R, seed=1, outdir=os.path.join(tempfile.gettempdir(), "sysmlc_benc
     # generic quantified check (eq. 3), pairs only, capped by time
     if R <= 100:
         ins = [Sm.vars[n] for n in Sm.vars if Sm.vtype.get(n) == "Boolean"]
-        t0 = time.time(); gen = conflicts(reqs, Sm.domain, [cur] + ins, max_size=2)
+        t0 = time.time(); gen = conflicts(reqs, Sm.domain, [cur] + ins, max_size=2, min_size=2)   # pairs, as in Fig. 6
         t["conflicts_generic_s"] = time.time() - t0
         t["agree"] = sorted(map(tuple, (c["requirements"] for c in gen))) == sorted(circ)
     # holes

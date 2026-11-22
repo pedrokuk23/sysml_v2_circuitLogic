@@ -1,6 +1,6 @@
 {
- "passed": 96,
- "total": 96,
+ "passed": 110,
+ "total": 110,
  "tests": [
   {
    "cls": "A",
@@ -70,9 +70,9 @@
   },
   {
    "cls": "A",
-   "test": "NASA Lift+Cruise mini set: thrust-borne first at step 11; within 6 ticks unrealizable, within 12 realizable",
+   "test": "NASA Lift+Cruise mini set: thrust-borne first at step 11; within 6 ticks refuted (UNSAT), within 12 a lasso (SAT)",
    "passed": true,
-   "detail": "(11, False, True)"
+   "detail": "('sat', 11, 'unsat', 'sat')"
   },
   {
    "cls": "A",
@@ -228,7 +228,7 @@
    "cls": "B",
    "test": "CLI exits with status 2 and emits no proof",
    "passed": true,
-   "detail": "/tmp/tmp97onijex.sysml: 1 error(s)\n  ERROR: name 'godo' is used but not declared\n"
+   "detail": "/tmp/tmp89co3yzr.sysml: 1 error(s)\n  ERROR: name 'godo' is used but not declared\n"
   },
   {
    "cls": "C",
@@ -550,19 +550,19 @@
   },
   {
    "cls": "H",
-   "test": "firesat_flowdown: every analysis gives the same results through the Pilot front end (252 result leaves; 24 equal up to formula printing or the QE time limit)",
+   "test": "firesat_flowdown: every analysis gives the same results through the Pilot front end (264 result leaves; 21 equal up to formula printing or the QE time limit)",
    "passed": true,
    "detail": ""
   },
   {
    "cls": "H",
-   "test": "lmcps_fsm: every analysis gives the same results through the Pilot front end (164 result leaves; 1 equal up to formula printing or the QE time limit)",
+   "test": "lmcps_fsm: every analysis gives the same results through the Pilot front end (164 result leaves; 2 equal up to formula printing or the QE time limit)",
    "passed": true,
    "detail": ""
   },
   {
    "cls": "H",
-   "test": "lmcps_fsm_rev: every analysis gives the same results through the Pilot front end (119 result leaves; 1 equal up to formula printing or the QE time limit)",
+   "test": "lmcps_fsm_rev: every analysis gives the same results through the Pilot front end (119 result leaves; 2 equal up to formula printing or the QE time limit)",
    "passed": true,
    "detail": ""
   },
@@ -577,6 +577,90 @@
    "test": "lmcps_roll_tsm_glossary: every analysis gives the same results through the Pilot front end (47 result leaves; 2 equal up to formula printing or the QE time limit)",
    "passed": true,
    "detail": ""
+  },
+  {
+   "cls": "I",
+   "test": "rejected: undeclared type Reel",
+   "passed": true,
+   "detail": "attribute 'turnKnob' has type 'Reel', which is neither Boolean, Integer, Real nor a declared enumeration"
+  },
+  {
+   "cls": "I",
+   "test": "rejected: numeric require constraint { x + 1 }",
+   "passed": true,
+   "detail": "requirement 'AP-003B': the require constraint 'rollAngle + 1.0' is not a Boolean expression"
+  },
+  {
+   "cls": "I",
+   "test": "rejected: Boolean in arithmetic (good + 1 > 0)",
+   "passed": true,
+   "detail": "requirement 'FSM-003': Boolean 'good' used in arithmetic or in an order comparison"
+  },
+  {
+   "cls": "I",
+   "test": "rejected: Boolean compared with a number (good == 1)",
+   "passed": true,
+   "detail": "requirement 'FSM-003': comparison of a Boolean with a number ('good' == '1')"
+  },
+  {
+   "cls": "I",
+   "test": "rejected: number used as a Boolean operand",
+   "passed": true,
+   "detail": "requirement 'AP-003B': 'rollAngle' is a number where a Boolean is required"
+  },
+  {
+   "cls": "I",
+   "test": "rejected: numeric guard of a transition",
+   "passed": true,
+   "detail": "transition 't02': the guard '1.0 + 1.0' is not a Boolean expression"
+  },
+  {
+   "cls": "I",
+   "test": "rejected: two machines over one enumeration (ambiguous current/next binding)",
+   "passed": true,
+   "detail": "machines 'm1' and 'm2' have the same states, so their current/next attributes of type Mode cannot be bound unambiguously; machines 'm2' and 'm1' have the same states, so their current/next attributes of type Mode cannot be bound unambiguously"
+  },
+  {
+   "cls": "I",
+   "test": "accepted: one machine, binding state1/next1",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "I",
+   "test": "UNKNOWN in unrolling: trace, lasso, earliest and equivalence report 'unknown', no conflict concluded",
+   "passed": true,
+   "detail": "('unknown', 'unknown', 'unknown', 'unknown', [])"
+  },
+  {
+   "cls": "I",
+   "test": "UNKNOWN in the Lift+Cruise checks: realizability 'inconclusive', no finite refutation",
+   "passed": true,
+   "detail": "{'verdict': 'inconclusive', 'lasso_status': 'unknown', 'lasso_reason': 'forced by the test', 'refutation': {'steps': 1, 'reason': 'forced by the test'}}"
+  },
+  {
+   "cls": "I",
+   "test": "UNKNOWN in the static analyses raises Inconclusive (no SAT/UNSAT reading)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "I",
+   "test": "C = x and y, P = y: static refinement holds, reactive refinement fails (not input-total)",
+   "passed": true,
+   "detail": "{'original': 'P', 'derived': ['C'], 'valid': True, 'children_consistent': True, 'static_refinement': True, 'kind': 'reactive', 'input_total': False, 'reactive_refinement': False, 'abduction': {'C': {'"
+  },
+  {
+   "cls": "I",
+   "test": "FireSat flow-downs are static (no output attributes)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "I",
+   "test": "unit conflict (y <= 0 and x -> y == 1) reported as a conflict of size one",
+   "passed": true,
+   "detail": "[{'requirements': ['R1'], 'region': 'x'}]"
   }
  ]
 }

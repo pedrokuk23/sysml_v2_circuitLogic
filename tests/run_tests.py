@@ -13,6 +13,12 @@ F  every name is declared once in its scope: a second, different declaration of 
    models inserted next to the original;
 G  the three translations of each requirement (SMT for z3, Verilog for Yosys, Lustre for Kind 2) agree on every
    input valuation of the domain (exhaustive check, independent evaluators for the Verilog and Lustre text).
+H  the front end agrees with the AST of the SysML v2 Pilot Implementation;
+I  regressions for the semantic contract: undeclared types, non-Boolean constraints and Boolean/number coercions are
+   rejected; two machines over one enumeration are rejected rather than bound by guess; a solver answer UNKNOWN
+   yields 'inconclusive' and never an equivalence, a refutation or an absence; static and reactive refinement are
+   distinguished (C = x and y refines P = y statically, not reactively); a single requirement that the glossary
+   contradicts is reported as a conflict of size one.
 
     python3 tests/run_tests.py            # or: python3 -m pytest tests/run_tests.py
 Exit status 0 when every test passes; a JSON summary is written to tests/test_results.json.
@@ -99,11 +105,11 @@ def class_a():
     L = compile_model(os.path.join(ROOT, "models", "third_party", "lpc_mini.sysml"))
     reach = [k for k in L.R if "REACH" in k]; base = [k for k in L.R if k not in reach]
     TB = L.enums["LiftModeKind"].index("thrust_borne")
-    t_tb, _ = unroll.earliest(L, base, 14, lambda U, t: U.var("lift_mode", t) == TB)
-    r06 = unroll.lasso(L, base + ["LPC_REACH_HOVER_06"], 20)[0]
+    st_tb, t_tb, _ = unroll.earliest(L, base, 14, lambda U, t: U.var("lift_mode", t) == TB)
+    r06 = unroll.trace(L, base + ["LPC_REACH_HOVER_06"], 6)[0]
     r12 = unroll.lasso(L, base + ["LPC_REACH_HOVER_12"], 20)[0]
-    record("A", "NASA Lift+Cruise mini set: thrust-borne first at step 11; within 6 ticks unrealizable, within 12 realizable",
-           (t_tb, r06, r12) == (11, False, True), str((t_tb, r06, r12)))
+    record("A", "NASA Lift+Cruise mini set: thrust-borne first at step 11; within 6 ticks refuted (UNSAT), within 12 a lasso (SAT)",
+           (st_tb, t_tb, r06, r12) == ("sat", 11, "unsat", "sat"), str((st_tb, t_tb, r06, r12)))
     record("A", "CLI exit status 0 on a valid model", p.returncode == 0, p.stderr[-200:])
 
 
@@ -378,14 +384,100 @@ def class_ast():
                not r["failures"], "; ".join(r["failures"][:3]))
 
 
+# ------------------------------------------------------------------ I: semantic contract regressions
+ROLL = open(os.path.join(M, "lmcps_roll_tsm.sysml")).read()
+FX = os.path.join(HERE, "fixtures")
+I_REJECT = [
+    ("undeclared type Reel", ROLL, "in attribute turnKnob : Real;", "in attribute turnKnob : Reel;"),
+    ("numeric require constraint { x + 1 }", ROLL,
+     "require constraint { (rollAngle < 6.0 and rollAngle > -6.0) implies rollHoldReference == 0.0 }",
+     "require constraint { rollAngle + 1.0 }"),
+    ("Boolean in arithmetic (good + 1 > 0)", LM, "(apState == ApState::T and good and supported)",
+     "(apState == ApState::T and good + 1.0 > 0.0 and supported)"),
+    ("Boolean compared with a number (good == 1)", LM, "(apState == ApState::T and good and supported)",
+     "(apState == ApState::T and good == 1.0 and supported)"),
+    ("number used as a Boolean operand", ROLL, "(rollAngle < 6.0 and rollAngle > -6.0) implies",
+     "(rollAngle and rollAngle > -6.0) implies"),
+    ("numeric guard of a transition", LM, "transition t02 first T if standby then S;",
+     "transition t02 first T if 1.0 + 1.0 then S;"),
+]
+
+
+def class_regressions():
+    for name, base, old, new in I_REJECT:
+        if old not in base:
+            record("I", name, False, "test fixture does not apply"); continue
+        ok, why = rejected(once(base, old, new))
+        record("I", f"rejected: {name}", ok, why)
+    ok, why = rejected(open(os.path.join(FX, "two_machines_same_enum.sysml")).read())
+    record("I", "rejected: two machines over one enumeration (ambiguous current/next binding)",
+           ok and "cannot be bound unambiguously" in why, why)
+    S1 = compile_model(os.path.join(FX, "one_machine.sysml"))
+    record("I", "accepted: one machine, binding state1/next1", str(S1.machine_vars("m1")[1:]) == "(state1, next1)")
+    # solver UNKNOWN is never read as a conclusion
+    import unroll, z3
+    import logic_engine
+
+    class Unknown(z3.Solver):
+        def check(self, *a):
+            return z3.unknown
+
+        def reason_unknown(self):
+            return "forced by the test"
+    L = compile_model(os.path.join(M, "third_party", "lpc_mini.sysml"))
+    keys = [k for k in L.R if "REACH" not in k]
+    real = unroll.Solver
+    unroll.Solver = Unknown
+    try:
+        st_t = unroll.trace(L, keys, 3)[0]
+        st_l = unroll.lasso(L, keys, 4)[0]
+        st_e = unroll.earliest(L, keys, 3, lambda U, t: z3.BoolVal(True))[0]
+        k1 = [k for k in keys if "STAY_ON" in k][:2]
+        st_q = unroll.equivalent_over(L, k1[0], k1[1], 2)[0] if len(k1) == 2 else "unknown"
+        rc, unk = unroll.reachable_conflicts(L, keys, [k for k in keys if "_TO_" in k][:2], 1)
+    finally:
+        unroll.Solver = real
+    record("I", "UNKNOWN in unrolling: trace, lasso, earliest and equivalence report 'unknown', no conflict concluded",
+           (st_t, st_l, st_e, st_q) == ("unknown",) * 4 and rc == [] and len(unk) >= 1, str((st_t, st_l, st_e, st_q, rc)))
+    sys.path.insert(0, os.path.join(ROOT, "experiments", "third_party"))
+    import lpc
+    unroll.Solver = Unknown
+    try:
+        r = lpc.realizability(L, keys + [k for k in L.R if "REACH" in k][:1], 4, 4)
+    finally:
+        unroll.Solver = real
+    record("I", "UNKNOWN in the Lift+Cruise checks: realizability 'inconclusive', no finite refutation",
+           r["verdict"] == "inconclusive" and "no_trace_of_steps" not in r, str(r)[:200])
+    real_le = logic_engine.Solver
+    logic_engine.Solver = Unknown
+    try:
+        logic_engine.is_sat(z3.Bool("p"))
+        raised = False
+    except logic_engine.Inconclusive:
+        raised = True
+    finally:
+        logic_engine.Solver = real_le
+    record("I", "UNKNOWN in the static analyses raises Inconclusive (no SAT/UNSAT reading)", raised)
+    R = analysis.check_flowdown(compile_model(os.path.join(FX, "static_vs_reactive.sysml")))["f"]
+    record("I", "C = x and y, P = y: static refinement holds, reactive refinement fails (not input-total)",
+           R["static_refinement"] is True and R["input_total"] is False and R["reactive_refinement"] is False, str(R)[:200])
+    F = analysis.check_flowdown(compile_model(os.path.join(M, "firesat_flowdown.sysml")))
+    record("I", "FireSat flow-downs are static (no output attributes)", all(v["kind"] == "static" for v in F.values()))
+    G = analysis.check_output_groups(compile_model(os.path.join(FX, "unit_conflict.sysml")))
+    record("I", "unit conflict (y <= 0 and x -> y == 1) reported as a conflict of size one",
+           G["y"]["conflicts"] == [dict(requirements=["R1"], region="x")], str(G["y"]["conflicts"]))
+
+
 def test_all():
-    for f in (class_a, class_b, class_c, class_unknown, class_structure, class_duplicates, class_cross, class_ast):
+    for f in (class_a, class_b, class_c, class_unknown, class_structure, class_duplicates, class_cross, class_ast,
+              class_regressions):
         f()
     assert all(r["passed"] for r in RESULTS)
 
 
 if __name__ == "__main__":
-    for f in (class_a, class_b, class_c, class_unknown, class_structure, class_duplicates, class_cross, class_ast):
+    for f in (class_a, class_b, class_c, class_unknown, class_structure, class_duplicates, class_cross, class_ast,
+              class_regressions):
         try:
             f()
         except Exception as ex:

@@ -16,10 +16,31 @@ step t-k gives the bounded unrolling used by hardware model checkers. On it:
     situations at step t on traces where every requirement held before t.
 
     pre<k>_x at a step t < k is a fresh, unconstrained value; well-formed past-time requirements guard it with ftp.
+
+Every query has three outcomes, SAT, UNSAT and UNKNOWN, and the functions report them as such: an absence (no trace,
+no lasso, no difference) is concluded only from UNSAT, and an UNKNOWN answer is reported as inconclusive, with the
+solver's reason, never as a conclusion.
 """
 import re
 from z3 import (Solver, And, Or, Not, Bool, Real, Int, BoolVal, substitute, sat, unsat, is_bool, is_int, is_real,
                 is_implies, is_eq, is_const)
+
+
+SAT, UNSAT, UNKNOWN = "sat", "unsat", "unknown"
+
+
+def check(s):
+    """Status of a solver query: ('sat'|'unsat'|'unknown', reason or None)."""
+    r = s.check()
+    if r == sat:
+        return SAT, None
+    if r == unsat:
+        return UNSAT, None
+    return UNKNOWN, s.reason_unknown()
+
+
+class Inconclusive(Exception):
+    """Raised by callers that need a definite answer when the solver returned UNKNOWN."""
 
 
 def _mk(v, name):
@@ -77,21 +98,28 @@ def trace(S, keys, N, extra=None, show=()):
         s.add(U.reqs(keys, t))
     if extra is not None:
         s.add(extra(U))
-    r = s.check()
-    return (r == sat, _model_trace(U, s.model(), show, N) if r == sat else None)
+    st, why = check(s)
+    if st == SAT:
+        return st, _model_trace(U, s.model(), show, N)
+    return st, (dict(reason=why) if st == UNKNOWN else None)
 
 
 def earliest(S, keys, N, goal, show=()):
-    """First t <= N such that some trace satisfying keys at steps 0..t has goal at t."""
+    """First t <= N such that some trace satisfying keys at steps 0..t has goal at t.
+    Returns (status, t, trace): ('sat', t, trace) when found and every earlier step was UNSAT; ('unsat', None, None)
+    when every step up to N is UNSAT; ('unknown', t, reason) at the first step whose answer is UNKNOWN."""
     for t in range(N + 1):
         U = Unrolling(S, t)
         s = Solver()
         for u in range(t + 1):
             s.add(U.reqs(keys, u))
         s.add(goal(U, t))
-        if s.check() == sat:
-            return t, _model_trace(U, s.model(), show, t)
-    return None, None
+        st, why = check(s)
+        if st == SAT:
+            return SAT, t, _model_trace(U, s.model(), show, t)
+        if st == UNKNOWN:
+            return UNKNOWN, t, why
+    return UNSAT, None, None
 
 
 def lasso(S, keys, L, show=()):
@@ -103,13 +131,16 @@ def lasso(S, keys, L, show=()):
         s.add(U.reqs(keys, t))
     plain = list(U.at[0])
     s.add(Or(*[And(*[U.at[L][n] == U.at[j][n] for n in plain]) for j in range(1, L)]))
-    r = s.check()
-    return (r == sat, _model_trace(U, s.model(), show, L) if r == sat else None)
+    st, why = check(s)
+    if st == SAT:
+        return st, _model_trace(U, s.model(), show, L)
+    return st, (dict(reason=why) if st == UNKNOWN else None)
 
 
 def equivalent_over(S, a, b, N, context=()):
     """Do requirements a and b accept the same traces of up to N+1 steps (under the context requirements, e.g. the
-    monitor definitions)?  Returns (True, None) or (False, (t, which)) with the first step of a difference."""
+    monitor definitions)?  Returns ('equivalent', None) only when every query is UNSAT, ('differs', detail) with the
+    first step of a difference, or ('unknown', detail) when a query is inconclusive before any difference is found."""
     for t in range(N + 1):
         U = Unrolling(S, t)
         ctx = [U.reqs(context, u) for u in range(t + 1)]
@@ -119,9 +150,12 @@ def equivalent_over(S, a, b, N, context=()):
             s.add(*[U.step(S.R[x], u) for u in range(t + 1)])
             s.add(*[U.step(S.R[y], u) for u in range(t)])
             s.add(Not(U.step(S.R[y], t)))
-            if s.check() == sat:
-                return False, dict(step=t, holds=x, fails=y)
-    return True, None
+            st, why = check(s)
+            if st == SAT:
+                return "differs", dict(step=t, holds=x, fails=y)
+            if st == UNKNOWN:
+                return UNKNOWN, dict(step=t, holds=x, fails=y, reason=why)
+    return "equivalent", None
 
 
 def _antecedent_consequent(f):
@@ -132,9 +166,10 @@ def _antecedent_consequent(f):
 
 def reachable_conflicts(S, keys, group, N, context=None):
     """Pairs of requirements of 'group' (a -> y == e) whose antecedents hold together at some step t <= N, with
-    different values demanded, on a trace where every requirement of 'keys' held at the steps before t."""
+    different values demanded, on a trace where every requirement of 'keys' held at the steps before t.
+    Returns (conflicts, inconclusive): the second list holds the pair/step queries whose answer was UNKNOWN."""
     context = keys if context is None else context
-    out = []
+    out, unk = [], []
     g = [(k, _antecedent_consequent(S.R[k])) for k in group]
     for t in range(1, N + 1):
         U = Unrolling(S, t)
@@ -147,15 +182,18 @@ def reachable_conflicts(S, keys, group, N, context=None):
                 s.add(*pre, dom, U.step(ai, t), U.step(aj, t))
                 s.add(*[U.step(S.R[k], t) for k in context if k.startswith("GLO")])
                 s.add(Not(And(U.step(ci, t), U.step(cj, t))))
-                if s.check() == sat and not any(o["requirements"] == [ki, kj] for o in out):
+                st, why = check(s)
+                if st == SAT and not any(o["requirements"] == [ki, kj] for o in out):
                     out.append(dict(requirements=[ki, kj], step=t))
-    return out
+                elif st == UNKNOWN:
+                    unk.append(dict(requirements=[ki, kj], step=t, reason=why))
+    return out, unk
 
 
 def reachable_holes(S, keys, group, N, show=()):
     """Steps t <= N at which, on some trace where every requirement held before t (and the glossary at t), no
-    antecedent of 'group' holds: the output is undriven there."""
-    out = []
+    antecedent of 'group' holds: the output is undriven there.  Returns (holes, inconclusive steps)."""
+    out, unk = [], []
     g = [_antecedent_consequent(S.R[k])[0] for k in group]
     for t in range(1, N + 1):
         U = Unrolling(S, t)
@@ -163,6 +201,9 @@ def reachable_holes(S, keys, group, N, show=()):
         s.add(*[U.reqs(keys, u) for u in range(t)], U.step(S.domain, t))
         s.add(*[U.step(S.R[k], t) for k in keys if k.startswith("GLO")])
         s.add(*[Not(U.step(a, t)) for a in g])
-        if s.check() == sat:
+        st, why = check(s)
+        if st == SAT:
             out.append(dict(step=t, example=_model_trace(U, s.model(), show, t)))
-    return out
+        elif st == UNKNOWN:
+            unk.append(dict(step=t, reason=why))
+    return out, unk

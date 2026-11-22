@@ -30,6 +30,9 @@
    ],
    "valid": false,
    "children_consistent": true,
+   "static_refinement": false,
+   "kind": "static",
+   "input_total": "not applicable (no output attributes declared)",
    "bounded_quantity": "h*((61/25*21/5000000)/D + eps)",
    "worst_case": 31.090769254905545,
    "abduction": {
@@ -133,6 +136,9 @@
    ],
    "valid": true,
    "children_consistent": true,
+   "static_refinement": true,
+   "kind": "static",
+   "input_total": "not applicable (no output attributes declared)",
    "bounded_quantity": "h*((61/25*21/5000000)/D + eps)",
    "worst_case": 29.690769238815626,
    "abduction": {
@@ -156,7 +162,7 @@
      "vocabulary": [
       "eps"
      ],
-     "replacement": "Or(Not(eps >= 0), eps <= 783/227500000)",
+     "replacement": "eps <= 783/227500000",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -174,7 +180,7 @@
       "eps",
       "h"
      ],
-     "replacement": "Or(h*(1281/32500000 + eps) <= 30, h <= 0, Not(eps >= 0))",
+     "replacement": "Or(Not(eps >= 0), h <= 0, h*(1281/32500000 + eps) <= 30)",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -183,7 +189,7 @@
       "D",
       "eps"
      ],
-     "replacement": "Or(700000*(1281/125000000/D) + 700000*eps <= 30,\n   D <= 0,\n   Not(eps >= 0))",
+     "replacement": "And(Or(308094151366691831/440134816338*(1281/125000000/D) +\n       308094151366691831/440134816338*eps <=\n       30,\n       D <= 0,\n       Not(eps >= 0)),\n    Or(700000*(1281/125000000/D) + 700000*eps <= 30,\n       D <= 0,\n       Not(eps >= 0)))",
      "method": "quantifier elimination",
      "exists": true
     }
@@ -206,7 +212,7 @@
       "h"
      ],
      "strongest": "And(And(500000 <= h, 700000 >= h), And(0 < h))",
-     "weakest": "h <= 650000000/919",
+     "weakest": "And(h <= 8246337208320/11659033, h <= 650000000/919)",
      "strongest_bound": 700000.0001866624,
      "weakest_bound": 707290.5331878467,
      "margin": 7290.533001184231
@@ -245,6 +251,9 @@
    ],
    "valid": true,
    "children_consistent": true,
+   "static_refinement": true,
+   "kind": "static",
+   "input_total": "not applicable (no output attributes declared)",
    "bounded_quantity": "h*thetaK + dr",
    "worst_case": 466.52000014815724,
    "abduction": {
@@ -252,7 +261,7 @@
      "vocabulary": [
       "h"
      ],
-     "replacement": "Or(h <= 1000000000/1309, h <= 0)",
+     "replacement": "h <= 1000000000/1309",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -260,7 +269,7 @@
      "vocabulary": [
       "thetaK"
      ],
-     "replacement": "Or(thetaK <= 1/1750, Not(thetaK >= 0))",
+     "replacement": "thetaK <= 1/1750",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -277,7 +286,7 @@
       "h",
       "thetaK"
      ],
-     "replacement": "Or(h*thetaK <= 400, Not(thetaK >= 0))",
+     "replacement": "Or(Not(thetaK >= 0), h <= 0, h*thetaK <= 400)",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -286,7 +295,7 @@
       "dr",
       "h"
      ],
-     "replacement": "And(Or(h <= 0, Not(dr >= 0), -500 <= -1/2048*h + -1*dr),\n    Or(h <= 0,\n       -500 <= -1309/2500000*h + -1*dr,\n       Not(dr >= 0)))",
+     "replacement": "And(Or(Not(dr >= 0), h <= 0, -500 <= -1*dr + -1/2048*h),\n    Or(Not(dr >= 0),\n       h <= 0,\n       -500 <= -1*dr + -1309/2500000*h))",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -295,7 +304,7 @@
       "dr",
       "thetaK"
      ],
-     "replacement": "And(Or(Not(dr >= 0),\n       Not(thetaK >= 0),\n       -500 <= -500001*thetaK + -1*dr),\n    Or(Not(dr >= 0),\n       Not(thetaK >= 0),\n       -500 <= -700000*thetaK + -1*dr))",
+     "replacement": "And(Or(-500 <= -1*dr + -500001*thetaK,\n       Not(dr >= 0),\n       Not(thetaK >= 0)),\n    Or(-500 <= -1*dr + -700000*thetaK,\n       Not(dr >= 0),\n       Not(thetaK >= 0)))",
      "method": "quantifier elimination",
      "exists": true
     }
@@ -357,6 +366,9 @@
    ],
    "valid": false,
    "children_consistent": true,
+   "static_refinement": false,
+   "kind": "static",
+   "input_total": "not applicable (no output attributes declared)",
    "bounded_quantity": "h*((61/25*21/5000000)/D + eps)",
    "worst_case": 1517.876954335029,
    "abduction": {
@@ -389,7 +401,7 @@
       "D",
       "h"
      ],
-     "replacement": "Or(h*(3/1000000 + 1281/125000000/D) <= 30, D <= 0, h <= 0)",
+     "replacement": "Or(D <= 0, h*(3/1000000 + 1281/125000000/D) <= 30)",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -398,7 +410,7 @@
       "eps",
       "h"
      ],
-     "replacement": "Or(h*(1281/32500000 + eps) <= 30, h <= 0, Not(eps >= 0))",
+     "replacement": "Or(Not(eps >= 0), h <= 0, h*(1281/32500000 + eps) <= 30)",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -407,7 +419,7 @@
       "D",
       "eps"
      ],
-     "replacement": "Or(D <= 0,\n   Not(eps >= 0),\n   -3 <= -3578600*eps + -3578600*(1281/125000000/D))",
+     "replacement": "Or(-3 <= -3578600*eps + -3578600*(1281/125000000/D),\n   Not(eps >= 0),\n   D <= 0)",
      "method": "quantifier elimination",
      "exists": true
     }
@@ -471,5 +483,5 @@
   },
   "statements_recognized": 92
  },
- "seconds": 63.53793811798096
+ "seconds": 63.49995422363281
 }

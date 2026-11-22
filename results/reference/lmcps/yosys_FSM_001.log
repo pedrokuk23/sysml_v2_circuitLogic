@@ -351,6 +351,6 @@ SAT temporal induction proof finished - model found for base case: FAIL!
      1 \standby                  0         0             0
      1 \supported                1         1             1
 
-End of script. Logfile hash: 275adf1dec, time: 0.02s, user: 0.02s, system: 0.00s
+End of script. Logfile hash: 275adf1dec, time: 0.28s, user: 3.04s, system: 0.00s
 Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
-Time spent: 17% 1x sat (0 sec), 15% 2x read_verilog (0 sec), ...
+Time spent: 75% 6x opt_expr (0 sec), 7% 2x read_verilog (0 sec), ...

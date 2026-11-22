@@ -43,6 +43,8 @@ if [ -n "$SYSML_KERNEL_DIR" ]; then sh experiments/third_party/apollo11.sh $O; f
 echo "[5b] Defect-injection (mutation) experiment on the original and the revised set: miter vs IC3/PDR vs Kind 2"
 if command -v "${KIND2:-kind2}" >/dev/null 2>&1; then OUT=$O python3 experiments/mutation.py > $O/mutation.log
   python3 experiments/mutation.py --model models/lmcps_fsm_rev.sysml -o $O/mutation_rev > $O/mutation_rev.log
+  python3 experiments/mutation_regions.py --json $O/mutation/mutation.json > $O/mutation_regions.log
+  python3 experiments/mutation_regions.py --model models/lmcps_fsm_rev.sysml --json $O/mutation_rev/mutation.json >> $O/mutation_regions.log
 else echo "  Kind 2 not found: set KIND2 to run the mutation experiment"; fi
 echo "[6] Figures"
 mkdir -p $O/figures; (cd $O/figures && for f in fig_pla fig_act fig_scale; do python3 $ROOT/figures/$f.py; done \

@@ -29,7 +29,7 @@ oho -> tl; ohg -> tl; ohc -> tl; a1 -> tl; ohb -> cap; a1 -> cap;
 {rank=same; res; mass; tl; cap;}
 valid [shape=box, width=0.7, height=0.6, fixedsize=true, style="rounded", fillcolor=white, color="#0b0b0b", fontname="Helvetica-Bold", fontsize=22, label="&"];
 res -> valid; mass -> valid; tl -> valid; cap -> valid;
-out [shape=plaintext, fixedsize=false, style="", width=0, height=0, fontsize=22, label=<<b>valid:</b> 9 of 32 configurations>];
+out [shape=plaintext, fixedsize=false, style="", width=0, height=0, fontsize=22, label=<<b>C(sel) = ∃α valid(sel, α):</b><br/>9 of 32 configurations>];
 valid -> out [arrowsize=0.7];
 {rank=same; valid; out;}
 }

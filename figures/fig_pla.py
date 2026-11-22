@@ -50,13 +50,13 @@ SEN = dict(
            ("F", "6/8", "limits ∨ request")])
 
 
-FS = 8.0          # every text at 8 pt or more at print size (figure is drawn at the text width, 4.48 in)
+FS = 9.4          # about 8.5 pt or more at print size (the figure is scaled to about 0.92 of its drawn width)
 
 
 def panel(ax, M, x0=0.0, ytop=0.0):
     ni, no, nr = len(M["inputs"]), len(M["outputs"]), len(M["rows"])
     dx, dy = 1.0, 1.0
-    xin = [x0 + 3.6 + k * dx for k in range(ni)]
+    xin = [x0 + 4.1 + k * dx for k in range(ni)]
     xg = xin[-1] + 1.3
     xout = [xg + 1.4 + k * dx for k in range(no)]
     yrow = [ytop - 1.0 - r * dy for r in range(nr)]
@@ -69,7 +69,7 @@ def panel(ax, M, x0=0.0, ytop=0.0):
         ax.text(x, ytop + 0.2, f"next={n}", rotation=60, ha="left", va="bottom", fontsize=FS, color=INK)
         ax.plot([x, x], [ytop, ybot], color=BLUE, lw=0.8, alpha=0.45, zorder=1)
     for (name, lits, out), y in zip(M["rows"], yrow):
-        ax.text(x0 + 3.2, y, name, ha="right", va="center", fontsize=FS, color=INK)
+        ax.text(x0 + 3.5, y, name, ha="right", va="center", fontsize=FS, color=INK)
         ax.plot([xin[0] - 0.3, xg - 0.36], [y, y], color=INK2, lw=0.6, zorder=1)
         for x, n in zip(xin, M["inputs"]):
             if n in lits:
@@ -108,7 +108,7 @@ def short(M):
 fig = plt.figure(figsize=(4.48, 6.0))
 ax = fig.add_axes([0, 0, 1, 1]); ax.set_axis_off()
 b1 = panel(ax, short(AP), 0.0, 0.0)
-b2 = panel(ax, short(SEN), 0.0, b1 - 5.2)
+b2 = panel(ax, short(SEN), 0.0, b1 - 6.0)
 ky2 = b2 + 0.3
 x1, y0, y1 = 25.6, ky2 - 0.7, 5.6
 ax.set_xlim(-0.2, x1); ax.set_ylim(y0, y1); ax.set_aspect("equal")

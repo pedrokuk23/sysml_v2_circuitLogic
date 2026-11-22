@@ -1,7 +1,7 @@
 """IR -> z3 semantics: variables, KerML expressions (Boolean, enumerations, real arithmetic, if-then-else),
 variant selectors, allocation variables and state-machine next-state relations."""
 import os, re
-from z3 import Int, Real, Bool, BoolVal, RealVal, IntVal, If, And, Or, Not, Implies, Xor, ToReal, is_int
+from z3 import Int, Real, Bool, BoolVal, RealVal, IntVal, If, And, Or, Not, Implies, Xor, ToReal, is_int, is_bool
 
 TOK = re.compile(r"\s*(<=|>=|==|!=|<|>|\?|\(|\)|\+|-|\*|/|\d+\.?\d*(?:[eE][-+]?\d+)?|[A-Za-z_][\w.]*(?:::\w+)?)")
 
@@ -43,6 +43,9 @@ class _P:
         if self.pk() == "if":
             self.nx(); c = self.imp(); self.expect("then", "?"); a = self.imp(); self.expect("else")
             b = self.imp()
+            self._bool(c)
+            if is_bool(a) != is_bool(b):
+                raise TypeError("branches of a conditional mix a Boolean and a number")
             ea, eb = self._etype(a), self._etype(b)
             if ea != eb and (ea or eb):
                 raise TypeError(f"branches of a conditional have different types ({ea or 'number'} and {eb or 'number'})")
@@ -52,27 +55,41 @@ class _P:
             return r
         a = self.or_()
         if self.pk() == "implies":
-            self.nx(); return Implies(a, self.imp())
+            self.nx(); b = self.imp(); self._bool(a, b); return Implies(a, b)
         return a
 
     def or_(self):
         a = self.xor()
-        while self.pk() == "or": self.nx(); a = Or(a, self.xor())
+        while self.pk() == "or": self.nx(); b = self.xor(); self._bool(a, b); a = Or(a, b)
         return a
 
     def xor(self):
         a = self.and_()
-        while self.pk() == "xor": self.nx(); a = Xor(a, self.and_())
+        while self.pk() == "xor": self.nx(); b = self.and_(); self._bool(a, b); a = Xor(a, b)
         return a
 
     def and_(self):
         a = self.not_()
-        while self.pk() == "and": self.nx(); a = And(a, self.not_())
+        while self.pk() == "and": self.nx(); b = self.not_(); self._bool(a, b); a = And(a, b)
         return a
 
     def not_(self):
-        if self.pk() == "not": self.nx(); return Not(self.not_())
+        if self.pk() == "not": self.nx(); a = self.not_(); self._bool(a); return Not(a)
         return self.cmp()
+
+    @staticmethod
+    def _bool(*ts):
+        """Operands of and, or, xor, not, implies and conditions must be Boolean (no coercion from numbers)."""
+        for t in ts:
+            if not is_bool(t):
+                raise TypeError(f"'{t}' is a number where a Boolean is required")
+
+    @staticmethod
+    def _num(*ts):
+        """Operands of arithmetic and order comparisons must be numbers (no coercion of Booleans to 0/1)."""
+        for t in ts:
+            if is_bool(t):
+                raise TypeError(f"Boolean '{t}' used in arithmetic or in an order comparison")
 
     def _etype(self, t):
         """Enumeration type of a term, or None."""
@@ -94,8 +111,11 @@ class _P:
         if self.pk() in ("<=", ">=", "==", "!=", "<", ">"):
             op = self.nx(); b = self.add()
             if op not in ("==", "!="):
+                self._num(a, b)
                 self._enum(a, b)
             else:
+                if is_bool(a) != is_bool(b):
+                    raise TypeError(f"comparison of a Boolean with a number ('{a}' {op} '{b}')")
                 ea, eb = self._etype(a), self._etype(b)
                 if ea != eb and (ea or eb):
                     raise TypeError(f"comparison of {ea or 'a number'} with {eb or 'a number'}")
@@ -106,13 +126,13 @@ class _P:
     def add(self):
         a = self.mul()
         while self.pk() in ("+", "-"):
-            op = self.nx(); b = self.mul(); self._enum(a, b); a = a + b if op == "+" else a - b
+            op = self.nx(); b = self.mul(); self._num(a, b); self._enum(a, b); a = a + b if op == "+" else a - b
         return a
 
     def mul(self):
         a = self.una()
         while self.pk() in ("*", "/"):
-            op = self.nx(); b = self.una(); self._enum(a, b)
+            op = self.nx(); b = self.una(); self._num(a, b); self._enum(a, b)
             if op == "/" and is_int(a) and is_int(b):       # KerML: Integer / Integer is a Rational, not truncated
                 a = ToReal(a)
             a = a * b if op == "*" else a / b
@@ -120,7 +140,7 @@ class _P:
 
     def una(self):
         if self.pk() == "-":
-            self.nx(); a = self.una(); self._enum(a); return -a
+            self.nx(); a = self.una(); self._num(a); self._enum(a); return -a
         return self.atom()
 
     def expect(self, *ok):
@@ -154,6 +174,9 @@ class _P:
         return v
 
 
+BASIC_TYPES = ("Boolean", "Integer", "Real")
+
+
 class Semantics:
     def __init__(self, ir):
         self.ir = ir
@@ -167,6 +190,10 @@ class Semantics:
                     if self.vtype[n] != ty:
                         self.errors.append(f"attribute '{n}' declared with types {self.vtype[n]} and {ty} "
                                            "(names are global signals; use distinct names)")
+                    continue
+                if ty not in BASIC_TYPES and ty not in self.enums:
+                    self.errors.append(f"attribute '{n}' has type '{ty}', which is neither Boolean, Integer, Real "
+                                       "nor a declared enumeration")
                     continue
                 if ty == "Boolean":
                     self.vars[n] = Bool(n)
@@ -194,18 +221,30 @@ class Semantics:
             if n in self.vars:
                 self.errors.append(f"derived attribute '{n}' has the same name as a requirement attribute")
         self.E = Expr(self.resolve, self.enums, self._enum_of)
+        for n, ty in ir.get("part_attrs", {}).items():
+            if ty not in BASIC_TYPES and ty not in self.enums and ty not in ir.get("port_defs", {}) \
+                    and ty not in ir.get("variations", {}):
+                self.errors.append(f"part attribute '{n}' has type '{ty}', which is neither Boolean, Integer, Real "
+                                   "nor a declared enumeration")
         self.R = {}
         for k, v in ir["requirements"].items():
             try:
-                self.R[k] = self.E(v["expr"])
+                self.R[k] = self.boolean(v["expr"], "require constraint")
             except (SyntaxError, NameError, KeyError, ValueError, TypeError) as ex:
                 self.errors.append(f"requirement '{k}': {ex}")
         for m in ir["machines"].values():
             for t in m["transitions"]:
                 try:
-                    self.E(t["guard"])
+                    self.boolean(t["guard"], "guard")
                 except (SyntaxError, NameError, KeyError, ValueError, TypeError) as ex:
                     self.errors.append(f"transition '{t['id']}': {ex}")
+
+    def boolean(self, text, what):
+        """Translate an expression that must denote a Boolean (constraint, guard, assertion)."""
+        e = self.E(text)
+        if not is_bool(e):
+            raise TypeError(f"the {what} '{text}' is not a Boolean expression")
+        return e
 
     def _enum_of(self, name):
         ty = self.vtype.get(name.split(".")[-1])
@@ -257,13 +296,28 @@ class Semantics:
 
     # state machines <-> requirement variables: the enum whose literals are the machine states
     def machine_vars(self, mname):
+        """The enumeration whose literals are the machine's states, and the unique pair (current, next) of attributes
+        of that type: the current state is the only attribute of the type read as input and never written, the next
+        state the only one written as output. Any other situation (no such enumeration, two enumerations with the
+        same literals, two machines over one enumeration, or more than one candidate attribute) is ambiguous and
+        rejected; the binding is never guessed."""
         m = self.ir["machines"][mname]
-        enum = next(e for e, lits in self.enums.items() if set(lits) == set(m["states"]))
+        enums = [e for e, lits in self.enums.items() if set(lits) == set(m["states"])]
+        if len(enums) != 1:
+            raise TypeError(f"machine '{mname}': {'no' if not enums else 'more than one'} enumeration has exactly its "
+                            f"states as literals")
+        enum = enums[0]
+        others = [n for n, x in self.ir["machines"].items() if n != mname and set(x["states"]) == set(m["states"])]
+        if others:
+            raise TypeError(f"machines '{mname}' and '{others[0]}' have the same states, so their current/next "
+                            f"attributes of type {enum} cannot be bound unambiguously")
         attrs = [a for r in self.ir["requirements"].values() for a in r["attrs"] if a["type"] == enum]
-        outs = {a["name"] for a in attrs if a["dir"] == "out"}
-        cur = next(a["name"] for a in attrs if a["dir"] == "in" and a["name"] not in outs)
-        nxt = next(iter(sorted(outs)))
-        return enum, self.vars[cur], self.vars[nxt]
+        outs = sorted({a["name"] for a in attrs if a["dir"] == "out"})
+        ins = sorted({a["name"] for a in attrs if a["dir"] == "in" and a["name"] not in outs})
+        if len(ins) != 1 or len(outs) != 1:
+            raise TypeError(f"machine '{mname}': expected one current-state attribute (in) and one next-state "
+                            f"attribute (out) of type {enum}, found in={ins} out={outs}")
+        return enum, self.vars[ins[0]], self.vars[outs[0]]
 
     def machine_relation(self, mname, semantics=None):
         """Step relation of a state machine. 'priority' (default): the first enabled transition in textual order
@@ -312,16 +366,21 @@ def compile_model(path):
     S = Semantics(ir)
     for name, expr in ir["asserts"].items():            # port contracts are used later; parse them now, strictly
         try:
-            S.E(expr)
+            S.boolean(expr, "assert constraint")
         except Exception as ex:
             S.errors.append(f"assert constraint '{name}': {ex}")
     for aname, a in ir["actions"].items():               # decision guards of action flows
         for _, _, g in a["edges"]:
             if g:
                 try:
-                    S.E(g)
+                    S.boolean(g, "decision guard")
                 except Exception as ex:
                     S.errors.append(f"action '{aname}': guard '{g}': {ex}")
+    for mname in ir["machines"]:                          # unambiguous binding of every machine to its signals
+        try:
+            S.machine_vars(mname)
+        except TypeError as ex:
+            S.errors.append(str(ex))
     errs = list(S.errors) + [f"name '{n}' is used but not declared" for n in sorted(S.undeclared)]
     if errs:
         raise CompileError(path, errs)

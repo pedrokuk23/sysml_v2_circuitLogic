@@ -5,7 +5,8 @@
  "requirements": 57,
  "equivalent": 57,
  "differs": [],
- "seconds": 14.1,
+ "inconclusive": [],
+ "seconds": 13.3,
  "per_requirement": {
   "LPC_CR_STAY_OFF": "equivalent",
   "LPC_CR_STAY_ON": "equivalent",

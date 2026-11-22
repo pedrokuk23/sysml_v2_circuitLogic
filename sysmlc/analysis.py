@@ -56,6 +56,9 @@ def check_machines(S):
             c["region"] = finite_region(And(dom_cur, Not(Exists(all_next, And(S.domain, *fs)))), bools_in(And(*fs), S), en)
         # repairs by priority (antecedent of the loser gets the negated antecedent of the winner)
         for c in C:
+            if len(c["requirements"]) == 1:     # a single requirement against A: no priority repair applies
+                c["repairs"] = {}
+                continue
             a, b = c["requirements"]
             c["repairs"] = {f"{x} yields to {y}": str(Implies(And(g["reqs"][x].arg(0), Not(g["reqs"][y].arg(0))), g["reqs"][x].arg(1)))
                             for x, y in ((a, b), (b, a))}
@@ -565,6 +568,13 @@ def _interpolate_bounded(fa, fb, shared, ms=20000):
                 strongest_expr=st, weakest_expr=wk)
 
 
+def input_total(body, A, outputs):
+    """For every input valuation admitted by A (projected on the inputs), some output valuation satisfies body:
+    validity of  (exists outputs. A) -> (exists outputs. body)."""
+    from z3 import Exists as _Ex
+    return valid(Implies(_Ex(outputs, A), _Ex(outputs, body)))[0]
+
+
 def check_flowdown(S):
     """For each #refinement dependency (target <- sources): refinement as a tautology, worst case of the
     parent's bounded quantity, abduction by replacement of one or two children (vocabulary: the quantities of the
@@ -611,6 +621,19 @@ def check_flowdown(S):
         ref = refines(P, list(kids.values()), A)
         r["valid"] = ref["valid"]
         r["children_consistent"] = ref.get("children_consistent")
+        # static (design-space) refinement: the children are jointly satisfiable under A and imply the parent.
+        # Reactive (input/output) refinement additionally needs input-totality: for every admissible input there is
+        # an output meeting the children; it is checked only when the requirements declare outputs ('out').
+        attrs = [a_ for k in [d["original"]] + list(kids) for a_ in S.ir["requirements"][k]["attrs"]]
+        outs = sorted({a_["name"] for a_ in attrs if a_["dir"] == "out"})
+        r["static_refinement"] = bool(ref["valid"] and ref.get("children_consistent"))
+        if not outs:
+            r["kind"] = "static"
+            r["input_total"] = "not applicable (no output attributes declared)"
+        else:
+            r["kind"] = "reactive"
+            r["input_total"] = input_total(And(A, *kids.values()), A, [S.vars[n] for n in outs])
+            r["reactive_refinement"] = bool(ref["valid"] and r["input_total"])
         # worst case of the bounded quantity of the parent (parent of the form  q <= c  or  c >= q)
         q = None
         if is_le(P) or is_lt(P):
@@ -701,7 +724,8 @@ def check_flowdown(S):
 def check_output_groups(S):
     """Requirements of the form  a -> y == e  on an output y that is not the next state of a machine: the same
     circuit reading as for state machines, with y as the bus. Conflicts (two active gates that drive different
-    values; pairs suffice because the consequents are equalities), holes (situations where no antecedent holds,
+    values; pairs suffice because the consequents are equalities, and single requirements whose value the glossary
+    excludes are reported as conflicts of size one), holes (situations where no antecedent holds,
     i.e. the line is undriven), overlaps, and sub-formulas that are constant (vacuity)."""
     from z3 import is_eq as _iseq, is_const
     machine_next = {str(S.machine_vars(m)[2]) for m in S.ir["machines"]}

@@ -10,7 +10,8 @@ formula instead), and proves with Z3 that, on every trace of N+1 steps and at ev
     the SysML requirement has held at steps 0..t     <->     FRET's Lustre expression is true at t,
 
 with the monitor attributes of the SysML model constrained by their glossary axioms. A difference would be returned
-as a trace. The check is bounded by N; with N larger than every time bound of the requirements (14 ticks here), each
+as a trace. The verdict 'equivalent' is recorded only when Z3 returns UNSAT; an UNKNOWN answer is recorded as
+'inconclusive' with the solver's reason. The check is bounded by N; with N larger than every time bound of the requirements (14 ticks here), each
 register chain and window of the translation is exercised at its full length.
 
     python3 experiments/third_party/validate_translation.py FRET.json MODEL.sysml N [OUT.json]
@@ -217,7 +218,7 @@ def main(fret, model, N, out):
     keys = [k for k in S.R if not k.startswith("GLO")]
     U = unroll.Unrolling(S, N)
     ctx = [U.reqs(mon, t) for t in range(N + 1)]
-    res, bad = {}, []
+    res, bad, unk = {}, [], []
     for k in keys:
         code = reqs[k]["semantics"]["CoCoSpecCode"]
         ast = Parser(code).top()
@@ -228,12 +229,15 @@ def main(fret, model, N, out):
             held = And(held, U.step(S.R[k], t))
             diff.append(Xor(held, Lu.ev(ast, t)))
         s = Solver(); s.add(*ctx, Or(*diff))
-        r = s.check()
-        res[k] = "equivalent" if r != sat else "differs"
-        if r == sat:
+        st, why = unroll.check(s)        # equivalence only from UNSAT; UNKNOWN is inconclusive
+        res[k] = {"unsat": "equivalent", "sat": "differs", "unknown": "inconclusive"}[st]
+        if st == "sat":
             bad.append(k)
+        elif st == "unknown":
+            unk.append(dict(requirement=k, reason=why))
     rep = dict(fret=os.path.basename(fret), model=os.path.relpath(model, ROOT), steps=N + 1,
                requirements=len(keys), equivalent=sum(v == "equivalent" for v in res.values()), differs=bad,
+               inconclusive=unk,
                seconds=round(time.time() - T0, 1), per_requirement=res)
     if out and "kgs <= 20.0" in open(model).read():
         import tempfile

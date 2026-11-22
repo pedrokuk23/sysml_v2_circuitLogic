@@ -56,6 +56,10 @@ def report(R, files):
         wc = r.get("worst_case")
         L.append(f"- Refinement: {'valid' if r['valid'] else 'fails'}; worst case of {r.get('bounded_quantity')}: "
                  f"{wc:.6g}" if wc is not None else f"- Refinement: {'valid' if r['valid'] else 'fails'}")
+        L.append(f"- Kind: {r.get('kind')}; implication {'valid' if r['valid'] else 'fails'}, children jointly "
+                 f"satisfiable: {r.get('children_consistent')}; static refinement: {r.get('static_refinement')}; "
+                 f"input-total: {r.get('input_total')}"
+                 + (f"; reactive refinement: {r.get('reactive_refinement')}" if r.get("kind") == "reactive" else ""))
         for k, a in r["abduction"].items():
             L.append(f"- Replace {k} (over {', '.join(a['vocabulary'])}): `{a['replacement']}` "
                      f"[{a['method']}; {'exists' if a['exists'] else 'none exists' if a['exists'] is False else 'n/a'}]")

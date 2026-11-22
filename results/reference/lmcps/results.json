@@ -360,39 +360,37 @@
     },
     "FSM-001v3": {
      "result": "proved (IC3)",
-     "tail": "_|\\_)_____)\\____|_|\n\nEnd of script. Logfile hash: a689b5ec6a, time: 0.87s, user: 0.88s, system: 0.00s\nYosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)\nTime spent: 97% 1x sat (0 sec), 0% 5x opt_clean (0 sec), ...\n",
+     "tail": "_)_____)\\____|_|\n\nEnd of script. Logfile hash: a689b5ec6a, time: 0.76s, user: 0.77s, system: 0.00s\nYosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)\nTime spent: 96% 1x sat (0 sec), 1% 2x read_verilog (0 sec), ...\n",
      "ic3": {
       "result": "proved",
       "lemmas": [
-       "¬pre2_notLimits ∨ apState ∈ {T, N} ∨ ¬pre1_autopilot",
-       "senState ∈ {Tr, F} ∨ apState ∈ {T, N}",
-       "apState ∈ {T, N, S} ∨ senState ∈ {Tr}",
+       "¬pre1_notLimits ∨ apState ∈ {T, N} ∨ senState ∈ {Tr}",
+       "apState ∈ {T, M, S} ∨ senState ∈ {Nom, F}",
+       "¬pre2_notLimits ∨ ¬pre1_autopilot ∨ apState ∈ {T, N}",
        "¬pre1_notLimits ∨ senState ∈ {Nom, Tr}",
-       "apState ∈ {T, M, S} ∨ senState ∈ {F} ∨ senState ∈ {Nom}",
-       "¬pre2_notLimits ∨ ¬pre3_notLimits ∨ ¬pre2_autopilot ∨ apState ∈ {N, M, S} ∨ ¬pre1_autopilot",
-       "¬pre2_notLimits ∨ ¬pre3_notLimits ∨ ¬pre1_limits ∨ ¬pre2_autopilot ∨ ¬pre4_notLimits ∨ ¬pre3_autopilot ∨ senState ∈ {F}"
+       "¬pre2_notLimits ∨ ¬pre1_autopilot ∨ ¬pre2_autopilot ∨ apState ∈ {N, M, S} ∨ ¬pre3_notLimits",
+       "¬pre2_notLimits ∨ ¬pre1_limits ∨ ¬pre2_autopilot ∨ ¬pre4_notLimits ∨ senState ∈ {F} ∨ ¬pre3_notLimits ∨ ¬pre3_autopilot"
       ],
       "clauses_found": [
-       7,
-       9,
+       6,
+       6,
        8,
        8,
        6
       ],
       "clauses_minimal": [
-       6,
-       7,
-       7,
+       5,
+       5,
+       5,
        5,
        5
       ],
       "lemmas_minimal": [
-       "¬pre2_notLimits ∨ apState ∈ {T, N} ∨ ¬pre1_autopilot",
-       "senState ∈ {Tr, F} ∨ apState ∈ {T, N}",
+       "apState ∈ {T, M, S} ∨ senState ∈ {Nom, F}",
+       "¬pre2_notLimits ∨ ¬pre1_autopilot ∨ apState ∈ {T, N}",
        "¬pre1_notLimits ∨ senState ∈ {Nom, Tr}",
-       "apState ∈ {T, M, S} ∨ senState ∈ {F} ∨ senState ∈ {Nom}",
-       "¬pre2_notLimits ∨ ¬pre3_notLimits ∨ ¬pre2_autopilot ∨ apState ∈ {N, M, S} ∨ ¬pre1_autopilot",
-       "¬pre2_notLimits ∨ ¬pre3_notLimits ∨ ¬pre1_limits ∨ ¬pre2_autopilot ∨ ¬pre4_notLimits ∨ ¬pre3_autopilot ∨ senState ∈ {F}"
+       "¬pre2_notLimits ∨ ¬pre1_autopilot ∨ ¬pre2_autopilot ∨ apState ∈ {N, M, S} ∨ ¬pre3_notLimits",
+       "¬pre2_notLimits ∨ ¬pre1_limits ∨ ¬pre2_autopilot ∨ ¬pre4_notLimits ∨ senState ∈ {F} ∨ ¬pre3_notLimits ∨ ¬pre3_autopilot"
       ],
       "lemmas_in_every_minimal_set": []
      }
@@ -478,5 +476,5 @@
    ]
   }
  },
- "seconds": 9.158025979995728
+ "seconds": 15.467125654220581
 }

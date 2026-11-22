@@ -18,16 +18,27 @@ from z3 import (Solver, sat, unsat, unknown, And, Or, Not, Implies, ForAll, Exis
 import itertools
 
 
+class Inconclusive(Exception):
+    """The solver answered UNKNOWN to a query whose answer a result depends on. No result is reported from it: the
+    analysis stops with this diagnostic instead of reading UNKNOWN as SAT or as UNSAT."""
+
+
 def is_sat(*fs):
+    """Satisfiability: (True, model) on SAT, (False, None) on UNSAT; UNKNOWN raises Inconclusive."""
     s = Solver(); s.add(*fs)
     r = s.check()
+    if r == unknown:
+        raise Inconclusive(f"satisfiability query returned unknown ({s.reason_unknown()})")
     return (r == sat), (s.model() if r == sat else None)
 
 
 def valid(f, A=BoolVal(True)):
-    """Validity of f under A. An 'unknown' answer of the solver counts as not valid (no proof)."""
+    """Validity of f under A: (True, None) on UNSAT of A & not f, (False, counterexample) on SAT; UNKNOWN raises
+    Inconclusive (neither a proof nor a counterexample)."""
     s = Solver(); s.add(A, Not(f))
     r = s.check()
+    if r == unknown:
+        raise Inconclusive(f"validity query returned unknown ({s.reason_unknown()})")
     return (r == unsat), (s.model() if r == sat else None)
 
 
@@ -88,13 +99,15 @@ def refines(parent, children, A=BoolVal(True), inputs=None):
 
 
 # ---------------------------------------------------------------- unsat cores on situations
-def conflicts(reqs, A, inputs, max_size=3):
+def conflicts(reqs, A, inputs, max_size=3, min_size=1):
     """reqs: id -> formula. A situation (valuation of inputs) is in conflict for a set S if no assignment of the
-    remaining variables satisfies A & S. Returns minimal sets (by size) with the input region where they clash."""
+    remaining variables satisfies A & S. Returns minimal sets (by size) with the input region where they clash.
+    Sets of size one are included: a single requirement whose demanded value A excludes in some admissible situation
+    is a conflict by itself (and is then not repeated inside larger sets)."""
     ids = list(reqs)
     names = {str(i) for i in inputs}
     found = []
-    for k in range(2, max_size + 1):
+    for k in range(min_size, max_size + 1):
         for S in itertools.combinations(ids, k):
             if any(set(F) <= set(S) for F, _ in found):
                 continue                                  # not minimal

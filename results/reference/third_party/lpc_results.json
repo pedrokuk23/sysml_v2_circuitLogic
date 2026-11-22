@@ -22,9 +22,14 @@
    }
   ],
   "with_stay_requirements_WB_to_TB_within_12": false,
+  "statuses": [
+   "sat",
+   "unsat"
+  ],
   "seconds": 0.5
  },
  "B3_mini_earliest_TB": {
+  "status": "sat",
   "step": 11,
   "trace": [
    {
@@ -100,17 +105,19 @@
     "hover_control_mode": "True"
    }
   ],
-  "seconds": 10.3
+  "seconds": 2.6
  },
  "B3_mini_LPC_REACH_HOVER_06": {
-  "realizable": false,
+  "verdict": "unrealizable",
+  "lasso_status": "unsat",
   "no_trace_of_steps": 7,
-  "seconds": 5.4
+  "refutation_status": "unsat",
+  "seconds": 1.6
  },
  "B3_mini_LPC_REACH_HOVER_12": {
-  "realizable": true,
-  "no_trace_of_steps": null,
-  "seconds": 4.0
+  "verdict": "realizable",
+  "lasso_status": "sat",
+  "seconds": 0.9
  },
  "mini_mode_logic": {
   "requirements": [
@@ -127,7 +134,8 @@
   ],
   "reachable_conflicts_within_12": [],
   "reachable_holes_within_12": [],
-  "seconds": 64.4
+  "inconclusive_queries": [],
+  "seconds": 20.1
  },
  "full_whole_file": {
   "consistent": false,
@@ -137,96 +145,178 @@
    "LPC_KIAS_KGS",
    "LPC_KIAS_KGS_WIND_SPEED"
   ],
-  "seconds": 65.3
+  "statuses": {
+   "prefix_queries": [
+    "unsat"
+   ],
+   "deletion": [
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "sat",
+    "unsat",
+    "unsat",
+    "sat",
+    "sat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat",
+    "unsat"
+   ],
+   "core": "unsat"
+  },
+  "seconds": 27.0
  },
  "B2_full_stay_variants_equivalent_over_9_steps": {
   "pairs": {
-   "LPC_TB_STAY_ON_NEXT = LPC_TB_STAY_ON_pre": true,
-   "LPC_TB_STAY_ON_pre = LPC_TB_STAY_ON_until": true,
-   "LPC_STB_STAY_ON_NEXT = LPC_STB_STAY_ON_pre": true,
-   "LPC_STB_STAY_ON_pre = LPC_STB_STAY_ON_until": true,
-   "LPC_SWB_STAY_ON_NEXT = LPC_SWB_STAY_ON_pre": true,
-   "LPC_SWB_STAY_ON_pre = LPC_SWB_STAY_ON_until": true,
-   "LPC_WB_STAY_ON_NEXT = LPC_WB_STAY_ON_pre": true,
-   "LPC_WB_STAY_ON_pre = LPC_WB_STAY_ON_until": true
+   "LPC_TB_STAY_ON_NEXT = LPC_TB_STAY_ON_pre": "equivalent",
+   "LPC_TB_STAY_ON_pre = LPC_TB_STAY_ON_until": "equivalent",
+   "LPC_STB_STAY_ON_NEXT = LPC_STB_STAY_ON_pre": "equivalent",
+   "LPC_STB_STAY_ON_pre = LPC_STB_STAY_ON_until": "equivalent",
+   "LPC_SWB_STAY_ON_NEXT = LPC_SWB_STAY_ON_pre": "equivalent",
+   "LPC_SWB_STAY_ON_pre = LPC_SWB_STAY_ON_until": "equivalent",
+   "LPC_WB_STAY_ON_NEXT = LPC_WB_STAY_ON_pre": "equivalent",
+   "LPC_WB_STAY_ON_pre = LPC_WB_STAY_ON_until": "equivalent"
   },
-  "seconds": 147.2
+  "seconds": 138.3
  },
  "B3_full_nowind_LPC_REACH_HOVER_06": {
-  "realizable": false,
+  "verdict": "unrealizable",
+  "lasso_status": "unsat",
   "no_trace_of_steps": 7,
-  "seconds": 26.4
+  "refutation_status": "unsat",
+  "seconds": 27.3
  },
  "B3_full_nowind_LPC_REACH_HOVER_10": {
-  "realizable": false,
+  "verdict": "unrealizable",
+  "lasso_status": "unsat",
   "no_trace_of_steps": 11,
-  "seconds": 49.6
+  "refutation_status": "unsat",
+  "seconds": 45.3
  },
  "B3_full_nowind_LPC_REACH_HOVER_11": {
-  "realizable": true,
-  "no_trace_of_steps": null,
-  "seconds": 12.1
- },
- "B3_full_nowind_LPC_REACH_HOVER_12": {
-  "realizable": true,
-  "no_trace_of_steps": null,
+  "verdict": "realizable",
+  "lasso_status": "sat",
   "seconds": 11.8
  },
+ "B3_full_nowind_LPC_REACH_HOVER_12": {
+  "verdict": "realizable",
+  "lasso_status": "sat",
+  "seconds": 11.9
+ },
  "B3_full_nowind_LPC_REACH_HOVER_13": {
-  "realizable": true,
-  "no_trace_of_steps": null,
-  "seconds": 12.3
+  "verdict": "realizable",
+  "lasso_status": "sat",
+  "seconds": 11.4
  },
  "B3_full_nowind_LPC_REACH_HOVER_14": {
-  "realizable": true,
-  "no_trace_of_steps": null,
-  "seconds": 12.3
+  "verdict": "realizable",
+  "lasso_status": "sat",
+  "seconds": 12.4
  },
  "B3_full_nowind_LPC_REACH_HOVER_15": {
-  "realizable": true,
-  "no_trace_of_steps": null,
-  "seconds": 13.7
+  "verdict": "realizable",
+  "lasso_status": "sat",
+  "seconds": 12.7
  },
  "B3_full_nowind_LPC_REACH_HOVER_16": {
-  "realizable": true,
-  "no_trace_of_steps": null,
-  "seconds": 12.0
- },
- "B3_full_nowind_LPC_REACH_NOT_FCS_09": {
-  "realizable": false,
-  "no_trace_of_steps": 10,
-  "seconds": 40.4
- },
- "B3_full_nowind_LPC_REACH_NOT_FCS_10": {
-  "realizable": false,
-  "no_trace_of_steps": 11,
-  "seconds": 44.6
- },
- "B3_full_nowind_LPC_REACH_NOT_FCS_11": {
-  "realizable": true,
-  "no_trace_of_steps": null,
+  "verdict": "realizable",
+  "lasso_status": "sat",
   "seconds": 12.1
  },
+ "B3_full_nowind_LPC_REACH_NOT_FCS_09": {
+  "verdict": "unrealizable",
+  "lasso_status": "unsat",
+  "no_trace_of_steps": 10,
+  "refutation_status": "unsat",
+  "seconds": 38.9
+ },
+ "B3_full_nowind_LPC_REACH_NOT_FCS_10": {
+  "verdict": "unrealizable",
+  "lasso_status": "unsat",
+  "no_trace_of_steps": 11,
+  "refutation_status": "unsat",
+  "seconds": 43.8
+ },
+ "B3_full_nowind_LPC_REACH_NOT_FCS_11": {
+  "verdict": "realizable",
+  "lasso_status": "sat",
+  "seconds": 11.3
+ },
  "B4_wind_30_kias_nonneg_True": {
+  "status": "unsat",
   "earliest_TB_under_ramp_wind": null,
+  "no_trace_reaching_TB_by_step": 20,
+  "inconclusive": null,
   "last_step": null,
   "min_kias": null,
-  "seconds": 116.1
+  "seconds": 110.7
  },
  "B4_wind_30_kias_nonneg_False": {
+  "status": "sat",
   "earliest_TB_under_ramp_wind": 14,
+  "no_trace_reaching_TB_by_step": null,
+  "inconclusive": null,
   "last_step": {
    "lift_mode": "0",
-   "kias": "-15",
-   "kgs": "15",
+   "kias": "-20",
+   "kgs": "10",
    "hover_control_mode": "False",
    "wind_speed": "30"
   },
-  "min_kias": -15.0,
-  "seconds": 61.5
+  "min_kias": -20.0,
+  "seconds": 56.3
  },
  "B4_wind_20_kias_nonneg_True": {
+  "status": "sat",
   "earliest_TB_under_ramp_wind": 13,
+  "no_trace_reaching_TB_by_step": null,
+  "inconclusive": null,
   "last_step": {
    "lift_mode": "0",
    "kias": "0",
@@ -235,7 +325,7 @@
    "wind_speed": "20"
   },
   "min_kias": 0.0,
-  "seconds": 49.7
+  "seconds": 50.1
  },
- "total_seconds": 772.5
+ "total_seconds": 647.2
 }

@@ -1,6 +1,6 @@
 # sysmlc — lmcps_fsm.sysml
 
-Requirements read: 20. Time: 9 s.
+Requirements read: 20. Time: 15 s.
 Translation coverage: translated assert constraint 1, attribute 81, enum def 2, exhibit state 2, require constraint 20, requirement def 20, transition 12; structural only connect 2, doc 20, end 2, import 1, interface 1, interface def 1, package 1, part 2, part def 3, port 4, port def 2, requirement 1, satisfy 1, subject 20; unsupported none; 216 statements, all matched by the subset grammar.
 
 ## Machine `apMachine` (enum ApState)
@@ -57,13 +57,12 @@ Reachable composite states: 8 of 12.
 
 Inductive invariant found by IC3 for FSM-001v3 (lemmas the requirement relies on):
 
-- ¬pre2_notLimits ∨ apState ∈ {T, N} ∨ ¬pre1_autopilot
-- senState ∈ {Tr, F} ∨ apState ∈ {T, N}
-- apState ∈ {T, N, S} ∨ senState ∈ {Tr}
+- ¬pre1_notLimits ∨ apState ∈ {T, N} ∨ senState ∈ {Tr}
+- apState ∈ {T, M, S} ∨ senState ∈ {Nom, F}
+- ¬pre2_notLimits ∨ ¬pre1_autopilot ∨ apState ∈ {T, N}
 - ¬pre1_notLimits ∨ senState ∈ {Nom, Tr}
-- apState ∈ {T, M, S} ∨ senState ∈ {F} ∨ senState ∈ {Nom}
-- ¬pre2_notLimits ∨ ¬pre3_notLimits ∨ ¬pre2_autopilot ∨ apState ∈ {N, M, S} ∨ ¬pre1_autopilot
-- ¬pre2_notLimits ∨ ¬pre3_notLimits ∨ ¬pre1_limits ∨ ¬pre2_autopilot ∨ ¬pre4_notLimits ∨ ¬pre3_autopilot ∨ senState ∈ {F}
+- ¬pre2_notLimits ∨ ¬pre1_autopilot ∨ ¬pre2_autopilot ∨ apState ∈ {N, M, S} ∨ ¬pre3_notLimits
+- ¬pre2_notLimits ∨ ¬pre1_limits ∨ ¬pre2_autopilot ∨ ¬pre4_notLimits ∨ senState ∈ {F} ∨ ¬pre3_notLimits ∨ ¬pre3_autopilot
 
 And-inverter graph (AIG), as written → optimized (Yosys synth + freduce/fraig):
 - requirements (combinational): 204 AND / 369 NOT → 68 AND / 57 NOT
