@@ -85,6 +85,11 @@ def check(model):
         if x == y:
             same += 1
             continue
+        kind = lambda m: re.match(r"[a-z]+", m or "") and re.match(r"[a-z]+", m).group(0)
+        if k.endswith("/weakest") and {x, y} <= {None, True} and \
+                {kind(la.get(k[:-8] + "/method")), kind(lb.get(k[:-8] + "/method"))} == {"quantifier", "numerical"}:
+            method += 1            # 'weakest' is checked only for exact (QE) results
+            continue
         if k not in la or k not in lb or not isinstance(x, str) or not isinstance(y, str):
             fails.append(f"{k}: {x!r} vs {y!r}"); continue
         if x in qa and y in qb and equivalent(qa[x][0], qb[y][0]):
@@ -96,7 +101,7 @@ def check(model):
                 continue
         except Exception:
             pass
-        if k.endswith("/method") and {x.split()[0], y.split()[0]} == {"quantifier", "numerical"}:
+        if k.endswith("/method") and {kind(x), kind(y)} == {"quantifier", "numerical"}:
             method += 1            # QE finished within its time limit in one run and not in the other
             continue
         try:

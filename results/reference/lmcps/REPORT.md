@@ -1,6 +1,6 @@
 # sysmlc — lmcps_fsm.sysml
 
-Requirements read: 20. Time: 14 s.
+Requirements read: 20. Time: 9 s.
 Translation coverage: translated assert constraint 1, attribute 81, enum def 2, exhibit state 2, require constraint 20, requirement def 20, transition 12; structural only connect 2, doc 20, end 2, import 1, interface 1, interface def 1, package 1, part 2, part def 3, port 4, port def 2, requirement 1, satisfy 1, subject 20; unsupported none; 216 statements, all matched by the subset grammar.
 
 ## Machine `apMachine` (enum ApState)

@@ -43,22 +43,28 @@
      ],
      "replacement": "And(Or(h <= 0, h <= 7864320/11),\n    Or(h <= 0,\n       h <= 20100475060155015498810/28115020263762707),\n    Or(h <= 0,\n       h <=\n       6532654394550380037113250000000/9137393590836532401675889),\n    Or(h <= 0,\n       h <=\n       2123112678228873512061806250000000000000/2969656818688936317743999440604603),\n    Or(h <= 0, h <= 687194767360/961199),\n    Or(h <= 0, h <= 2061584302080/3052201),\n    Or(h <= 0, h <= 1950000000/2887))",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "PAY-2": {
      "vocabulary": [
       "D"
      ],
-     "replacement": "Or(D <= 0, 1281/125000000/D <= 53/1400000)",
+     "replacement": "Or(1281/125000000/D <= 53/1400000, D <= 0)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "ADCS-1": {
      "vocabulary": [
       "eps"
      ],
-     "replacement": "eps <= 783/227500000",
+     "replacement": "Or(eps <= 783/227500000, Not(eps >= 0))",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "ORB-1 + PAY-2": {
@@ -66,8 +72,10 @@
       "D",
       "h"
      ],
-     "replacement": "Or(D <= 0, h <= 0, h*(1/200000 + 1281/125000000/D) <= 30)",
+     "replacement": "Or(h*(1/200000 + 1281/125000000/D) <= 30, D <= 0, h <= 0)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "ORB-1 + ADCS-1": {
@@ -77,6 +85,8 @@
      ],
      "replacement": "Or(h*(1281/32500000 + eps) <= 30, Not(eps >= 0), h <= 0)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "PAY-2 + ADCS-1": {
@@ -84,8 +94,10 @@
       "D",
       "eps"
      ],
-     "replacement": "And(Or(D <= 0,\n       308094151366691831/440134816338*(1281/125000000/D) +\n       308094151366691831/440134816338*eps <=\n       30,\n       Not(eps >= 0)),\n    Or(D <= 0,\n       Not(eps >= 0),\n       700000*(1281/125000000/D) + 700000*eps <= 30))",
+     "replacement": "Or(700000*(1281/125000000/D) + 700000*eps <= 30,\n   Not(eps >= 0),\n   D <= 0)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     }
    },
@@ -148,8 +160,10 @@
      "vocabulary": [
       "h"
      ],
-     "replacement": "h <= 707290",
-     "method": "numerical (bisection; quantifier elimination exceeded the time limit)",
+     "replacement": "And(Or(h <= 0, h <= 5242880/7),\n    Or(h <= 0, h <= 2977847967734612974030/3975861198663081),\n    Or(h <= 0,\n       h <=\n       74446199193365324350750000000/99396660558325627241199),\n    Or(h <= 0,\n       h <=\n       1861154979834133108768750000000000000/2484919778756145173725577460921),\n    Or(h <= 0, h <= 1030792151040/1457381),\n    Or(h <= 0, h <= 8246337208320/11659049),\n    Or(h <= 0, h <= 650000000/919))",
+     "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "PAY-2": {
@@ -158,14 +172,18 @@
      ],
      "replacement": "Or(D <= 0, 1281/125000000/D <= 279/7000000)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "ADCS-1R": {
      "vocabulary": [
       "eps"
      ],
-     "replacement": "eps <= 783/227500000",
+     "replacement": "Or(Not(eps >= 0), eps <= 783/227500000)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "ORB-1 + PAY-2": {
@@ -173,8 +191,10 @@
       "D",
       "h"
      ],
-     "replacement": "Or(h*(3/1000000 + 1281/125000000/D) <= 30, h <= 0, D <= 0)",
+     "replacement": "Or(D <= 0, h*(3/1000000 + 1281/125000000/D) <= 30, h <= 0)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "ORB-1 + ADCS-1R": {
@@ -182,8 +202,10 @@
       "eps",
       "h"
      ],
-     "replacement": "Or(Not(eps >= 0), h*(1281/32500000 + eps) <= 30, h <= 0)",
+     "replacement": "Or(Not(eps >= 0), h <= 0, h*(1281/32500000 + eps) <= 30)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "PAY-2 + ADCS-1R": {
@@ -193,6 +215,8 @@
      ],
      "replacement": "Or(Not(eps >= 0),\n   D <= 0,\n   700000*(1281/125000000/D) + 700000*eps <= 30)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     }
    },
@@ -202,7 +226,7 @@
      "shared": [
       "eps"
      ],
-     "strongest": "And(eps >= 0, eps <= 3/1000000)",
+     "strongest": "And(eps <= 3/1000000, eps >= 0)",
      "weakest": "eps <= 783/227500000",
      "strongest_bound": 3.000190699174732e-06,
      "weakest_bound": 3.4417580681307406e-06,
@@ -264,24 +288,30 @@
      "vocabulary": [
       "h"
      ],
-     "replacement": "Or(h <= 1000000000/1309, h <= 0)",
+     "replacement": "h <= 1000000000/1309",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "ADCS-2": {
      "vocabulary": [
       "thetaK"
      ],
-     "replacement": "Or(thetaK <= 1/1750, Not(thetaK >= 0))",
+     "replacement": "thetaK <= 1/1750",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "NAV-1": {
      "vocabulary": [
       "dr"
      ],
-     "replacement": "Or(dr <= 3337/25, Not(dr >= 0))",
+     "replacement": "Or(Not(dr >= 0), dr <= 3337/25)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "ORB-1 + ADCS-2": {
@@ -289,8 +319,10 @@
       "h",
       "thetaK"
      ],
-     "replacement": "Or(h <= 0, h*thetaK <= 400)",
+     "replacement": "Or(h*thetaK <= 400, h <= 0)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "ORB-1 + NAV-1": {
@@ -298,8 +330,10 @@
       "dr",
       "h"
      ],
-     "replacement": "And(Or(Not(dr >= 0), h <= 0, -500 <= -1*dr + -1/2048*h),\n    Or(Not(dr >= 0),\n       h <= 0,\n       -500 <= -1*dr + -1309/2500000*h))",
+     "replacement": "And(Or(Not(dr >= 0), -500 <= -1*dr + -1/2048*h, h <= 0),\n    Or(-500 <= -1*dr + -1309/2500000*h,\n       Not(dr >= 0),\n       h <= 0))",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "ADCS-2 + NAV-1": {
@@ -307,8 +341,10 @@
       "dr",
       "thetaK"
      ],
-     "replacement": "And(Or(Not(dr >= 0),\n       Not(thetaK >= 0),\n       -500 <= -500001*thetaK + -1*dr),\n    Or(Not(dr >= 0),\n       Not(thetaK >= 0),\n       -500 <= -700000*thetaK + -1*dr))",
+     "replacement": "And(Or(-500 <= -500001*thetaK + -1*dr,\n       Not(thetaK >= 0),\n       Not(dr >= 0)),\n    Or(Not(thetaK >= 0),\n       Not(dr >= 0),\n       -500 <= -700000*thetaK + -1*dr))",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     }
    },
@@ -380,16 +416,20 @@
      "vocabulary": [
       "h"
      ],
-     "replacement": "And(Or(h <= 0, h <= 5242880/7),\n    Or(h <= 0, h <= 2977847967734612974030/3975861198663081),\n    Or(h <= 0,\n       h <=\n       74446199193365324350750000000/99396660558325627241199),\n    Or(h <= 0,\n       h <=\n       1861154979834133108768750000000000000/2484919778756145173725577460921),\n    Or(h <= 0, h <= 1030792151040/1457381),\n    Or(h <= 0, h <= 650000000/919))",
+     "replacement": "And(Or(h <= 0, h <= 5242880/7),\n    Or(h <= 0, h <= 2977847967734612974030/3975861198663081),\n    Or(h <= 0,\n       h <=\n       74446199193365324350750000000/99396660558325627241199),\n    Or(h <= 0,\n       h <=\n       1861154979834133108768750000000000000/2484919778756145173725577460921),\n    Or(h <= 0, h <= 1099511627776/1468013),\n    Or(h <= 0, h <= 1030792151040/1457381),\n    Or(h <= 0, h <= 650000000/919))",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "PAY-2": {
      "vocabulary": [
       "D"
      ],
-     "replacement": "D <= 0",
+     "replacement": "Or(D <= 0, 1281/125000000/D <= -38679/17893000000)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": false
     },
     "ADCS-1R": {
@@ -398,6 +438,8 @@
      ],
      "replacement": "Not(eps >= 0)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": false
     },
     "ORB-GEO + PAY-2": {
@@ -405,8 +447,10 @@
       "D",
       "h"
      ],
-     "replacement": "Or(h <= 0, D <= 0, h*(3/1000000 + 1281/125000000/D) <= 30)",
+     "replacement": "Or(D <= 0, h <= 0, h*(3/1000000 + 1281/125000000/D) <= 30)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "ORB-GEO + ADCS-1R": {
@@ -416,6 +460,8 @@
      ],
      "replacement": "Or(Not(eps >= 0), h <= 0, h*(1281/32500000 + eps) <= 30)",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     },
     "PAY-2 + ADCS-1R": {
@@ -423,8 +469,10 @@
       "D",
       "eps"
      ],
-     "replacement": "Or(-3 <= -3578600*eps + -3578600*(1281/125000000/D),\n   Not(eps >= 0),\n   D <= 0)",
+     "replacement": "Or(D <= 0,\n   -3 <= -3578600*eps + -3578600*(1281/125000000/D),\n   Not(eps >= 0))",
      "method": "quantifier elimination",
+     "certification": "sufficient",
+     "weakest": true,
      "exists": true
     }
    },
@@ -468,6 +516,7 @@
   }
  },
  "status": "complete",
+ "inconclusive": [],
  "coverage": {
   "translated": {
    "#refinement dependency": 4,
@@ -487,5 +536,5 @@
   },
   "statements_recognized": 92
  },
- "seconds": 42.92451071739197
+ "seconds": 22.53822922706604
 }

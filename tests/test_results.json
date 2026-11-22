@@ -1,6 +1,6 @@
 {
- "passed": 113,
- "total": 113,
+ "passed": 116,
+ "total": 116,
  "tests": [
   {
    "cls": "A",
@@ -228,7 +228,7 @@
    "cls": "B",
    "test": "CLI exits with status 2 and emits no proof",
    "passed": true,
-   "detail": "/tmp/tmpu5qpys39.sysml: 1 error(s)\n  ERROR: name 'godo' is used but not declared\n"
+   "detail": "/tmp/tmp8n6e87x5.sysml: 1 error(s)\n  ERROR: name 'godo' is used but not declared\n"
   },
   {
    "cls": "C",
@@ -550,13 +550,13 @@
   },
   {
    "cls": "H",
-   "test": "firesat_flowdown: every analysis gives the same results through the Pilot front end (268 result leaves; 24 equal up to formula printing or the QE time limit)",
+   "test": "firesat_flowdown: every analysis gives the same results through the Pilot front end (316 result leaves; 18 equal up to formula printing or the QE time limit)",
    "passed": true,
    "detail": ""
   },
   {
    "cls": "H",
-   "test": "lmcps_fsm: every analysis gives the same results through the Pilot front end (164 result leaves; 1 equal up to formula printing or the QE time limit)",
+   "test": "lmcps_fsm: every analysis gives the same results through the Pilot front end (164 result leaves; 2 equal up to formula printing or the QE time limit)",
    "passed": true,
    "detail": ""
   },
@@ -667,6 +667,24 @@
    "test": "UNKNOWN in a refinement: implication and consistency inconclusive (None), never 'fails'",
    "passed": true,
    "detail": "{'valid': None, 'children_consistent': None, 'consistency_reason': 'satisfiability query returned unknown (forced by the test)', 'solver': 'unknown', 'implication_reason': 'forced by the test'} inconclusive (raised)"
+  },
+  {
+   "cls": "I",
+   "test": "abduction with nothing to eliminate (P: w <= 1, C: w <= 2 or w <= 0): replacement w <= 1, certified sufficient and weakest, through the API and the models",
+   "passed": true,
+   "detail": "w <= 1 [{'vocabulary': ['w'], 'replacement': '1 >= w', 'method': 'no variable to eliminate', 'certification': 'sufficient', 'weakest': True, 'exists': True}, {'vocabulary': ['w'], 'replacement': '1 >= w', 'method': 'no variable to eliminate', 'certification': 'sufficient', 'weakest': True, 'exists': True}]"
+  },
+  {
+   "cls": "I",
+   "test": "numerical abduction: a threshold beyond the grid gives no candidate (True is rejected as insufficient); w <= 1/3 gives a certified conservative bound; a grid answered UNKNOWN gives no candidate and counts the inconclusive points",
+   "passed": true,
+   "detail": "numerical, conservative approximation (bisection; quantifier elimination exceeded the time limit); candidate True rejected: insufficient | w <= 333333/1000000 | not computed (numerical: no grid point certified, 163 inconclusive)"
+  },
+  {
+   "cls": "I",
+   "test": "command line: normal run 'complete' with exit 0; under UNKNOWN 'inconclusive' with a reason and exit 3",
+   "passed": true,
+   "detail": "(0, 'complete', False) (3, 'inconclusive', True)"
   },
   {
    "cls": "I",

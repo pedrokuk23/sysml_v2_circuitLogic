@@ -106,6 +106,7 @@
   }
  },
  "status": "complete",
+ "inconclusive": [],
  "coverage": {
   "translated": {
    "require constraint": 9,
@@ -120,5 +121,5 @@
   },
   "statements_recognized": 64
  },
- "seconds": 0.22655248641967773
+ "seconds": 0.26601338386535645
 }

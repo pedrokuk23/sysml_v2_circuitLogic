@@ -16,6 +16,9 @@ import analysis, verilog, views
 
 def report(R, files):
     L = [f"# sysmlc — {os.path.basename(R['model'])}", ""]
+    if R.get("status") == "inconclusive":
+        L += ["**Analysis status: inconclusive.** Undecided (solver answered UNKNOWN): "
+              + "; ".join(f"{u['flowdown']}.{u['field']} ({u['reason']})" for u in R.get("inconclusive", [])), ""]
     L.append(f"Requirements read: {len(R['requirements'])}. Time: {R['seconds']:.0f} s.")
     cov = R.get("coverage", {})
     L.append("Translation coverage: translated " + ", ".join(f"{k} {v}" for k, v in sorted(cov.get("translated", {}).items()))
@@ -147,7 +150,16 @@ def main():
         json.dump(dict(model=a.model, status="inconclusive", reason=str(ex)),
                   open(os.path.join(out, "results.json"), "w"), indent=1)
         sys.exit(3)
-    R["status"] = "complete"
+    # analysis status: 'inconclusive' when a decided field of a flow-down was left undecided by an UNKNOWN answer
+    # (optional fields that are legitimately empty are not counted); the run itself completed in either case
+    undecided = []
+    for n, r in (R.get("flowdown") or {}).items():
+        for f, why in (("valid", "implication_reason"), ("children_consistent", "consistency_reason"),
+                       ("input_total", "input_total_reason")):
+            if f in r and r[f] is None:
+                undecided.append(dict(flowdown=n, field=f, reason=r.get(why)))
+    R["status"] = "inconclusive" if undecided else "complete"
+    R["inconclusive"] = undecided
     R["coverage"] = ir["coverage"]
     if not a.no_eda:
         R["eda"] = {}
@@ -160,6 +172,10 @@ def main():
     json.dump(R, open(os.path.join(out, "results.json"), "w"), indent=1, ensure_ascii=False, default=str)
     open(os.path.join(out, "REPORT.md"), "w").write(report(R, files))
     print(report(R, files))
+    if undecided:
+        print(f"inconclusive: {len(undecided)} flow-down checks undecided (see 'inconclusive' in results.json)",
+              file=sys.stderr)
+        sys.exit(3)
 
 
 if __name__ == "__main__":

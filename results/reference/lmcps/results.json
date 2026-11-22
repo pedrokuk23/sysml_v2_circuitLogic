@@ -316,6 +316,7 @@
   }
  },
  "status": "complete",
+ "inconclusive": [],
  "coverage": {
   "translated": {
    "require constraint": 20,
@@ -360,7 +361,7 @@
     },
     "FSM-001v3": {
      "result": "proved (IC3)",
-     "tail": "_|\\_)_____)\\____|_|\n\nEnd of script. Logfile hash: a689b5ec6a, time: 0.79s, user: 0.79s, system: 0.00s\nYosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)\nTime spent: 97% 1x sat (0 sec), 0% 5x opt_clean (0 sec), ...\n",
+     "tail": "_)_____)\\____|_|\n\nEnd of script. Logfile hash: a689b5ec6a, time: 0.80s, user: 0.80s, system: 0.00s\nYosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)\nTime spent: 97% 1x sat (0 sec), 0% 2x read_verilog (0 sec), ...\n",
      "ic3": {
       "result": "proved",
       "lemmas": [
@@ -476,5 +477,5 @@
    ]
   }
  },
- "seconds": 14.29251742362976
+ "seconds": 9.494121551513672
 }

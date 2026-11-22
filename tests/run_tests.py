@@ -14,7 +14,7 @@ F  every name is declared once in its scope: a second, different declaration of 
 G  the three translations of each requirement (SMT for z3, Verilog for Yosys, Lustre for Kind 2) agree on every
    input valuation of the domain (exhaustive check, independent evaluators for the Verilog and Lustre text).
 H  the front end agrees with the AST of the SysML v2 Pilot Implementation;
-I  regressions for the semantic contract (17 tests): undeclared types, non-Boolean constraints and Boolean/number coercions are
+I  regressions for the semantic contract (20 tests): undeclared types, non-Boolean constraints and Boolean/number coercions are
    rejected; two machines over one enumeration are rejected rather than bound by guess; a solver answer UNKNOWN
    yields 'inconclusive' and never an equivalence, a refutation or an absence; static and reactive refinement are
    distinguished (C = x and y refines P = y statically, not reactively); a single requirement that the glossary
@@ -495,6 +495,61 @@ def class_regressions():
         logic_engine.Solver = real_le
     record("I", "UNKNOWN in a refinement: implication and consistency inconclusive (None), never 'fails'",
            ref["valid"] is None and ref["children_consistent"] is None and fd.startswith("inconclusive"), f"{ref} {fd}")
+    # abduction: every reported replacement is certified sufficient (A & rest & W & not P is UNSAT)
+    w_, x_ = z3.Reals("w x")
+    r1 = analysis._abduce_bounded(w_ <= 1, [], BoolVal(True), [w_])
+    s_ = z3.Solver(); s_.add(r1["W_expr"], Not(w_ <= 1))
+    ab = [analysis.check_flowdown(compile_model(os.path.join(FX, "abduction", n)))["f"]["abduction"]["C"]
+          for n in ("child_w_le_2.sysml", "child_w_le_0.sysml")]
+    record("I", "abduction with nothing to eliminate (P: w <= 1, C: w <= 2 or w <= 0): replacement w <= 1, "
+                "certified sufficient and weakest, through the API and the models",
+           s_.check() == z3.unsat and str(r1["W"]) == "w <= 1"
+           and all(a_["certification"] == "sufficient" and a_["weakest"] is True for a_ in ab), f"{r1['W']} {ab}")
+    real_tac = z3.Tactic
+
+    def no_qe(*a, **k):
+        raise z3.Z3Exception("quantifier elimination disabled by the test")
+    z3.Tactic = no_qe
+    try:
+        far = analysis._abduce_bounded(w_ <= 1e11, [x_ == w_], BoolVal(True), [w_])
+        third = analysis._abduce_bounded(3 * w_ <= 1, [x_ == w_], BoolVal(True), [w_])
+        logic_engine.Solver = Unknown
+        try:
+            allunk = analysis._abduce_bounded(w_ <= 1, [x_ == w_], BoolVal(True), [w_])
+        finally:
+            logic_engine.Solver = real_le
+    finally:
+        z3.Tactic = real_tac
+    record("I", "numerical abduction: a threshold beyond the grid gives no candidate (True is rejected as "
+                "insufficient); w <= 1/3 gives a certified conservative bound; a grid answered UNKNOWN gives no "
+                "candidate and counts the inconclusive points",
+           far["W"] is None and far.get("certification") == "insufficient"
+           and third["certification"] == "sufficient" and third["W"] == "w <= 333333/1000000"
+           and allunk["W"] is None and allunk.get("inconclusive_points", 0) > 100, f"{far['method']} | {third['W']} | {allunk['method']}")
+    # command line: an analysis that depends on UNKNOWN ends with status 'inconclusive' and exit code 3
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("sysmlc_main", os.path.join(ROOT, "sysmlc", "__main__.py"))
+    cli = importlib.util.module_from_spec(spec); spec.loader.exec_module(cli)
+
+    def run_cli(model, unknown):
+        out = tempfile.mkdtemp()
+        argv = sys.argv
+        sys.argv = ["sysmlc", model, "-o", out, "--no-eda"]
+        if unknown:
+            logic_engine.Solver = Unknown
+        try:
+            cli.main(); code = 0
+        except SystemExit as ex:
+            code = ex.code
+        finally:
+            sys.argv = argv
+            logic_engine.Solver = real_le
+        res = json.load(open(os.path.join(out, "results.json")))
+        return code, res.get("status"), bool(res.get("reason") or res.get("inconclusive"))
+    fx = os.path.join(FX, "static_vs_reactive.sysml")
+    c0, c1 = run_cli(fx, False), run_cli(fx, True)
+    record("I", "command line: normal run 'complete' with exit 0; under UNKNOWN 'inconclusive' with a reason and "
+                "exit 3", c0[:2] == (0, "complete") and c1 == (3, "inconclusive", True), f"{c0} {c1}")
     F = analysis.check_flowdown(compile_model(os.path.join(M, "firesat_flowdown.sysml")))
     record("I", "FireSat flow-downs are static (no output attributes)", all(v["kind"] == "static" for v in F.values()))
     G = analysis.check_output_groups(compile_model(os.path.join(FX, "unit_conflict.sysml")))

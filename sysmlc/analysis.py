@@ -493,19 +493,59 @@ def _sup(expr, hyp, lo=-1e12, hi=1e12, iters=200, rel=1e-9):
     return hi
 
 
+def _certify(P, rest, A, W, voc_body=None, ms=20000):
+    """Sufficiency of a candidate replacement W: the query  A & rest & W & not P  must be UNSAT. Returns
+    ('sufficient', None), ('insufficient', counterexample) or ('not certified', solver reason)."""
+    from z3 import Solver, sat, unsat
+    s = Solver(); s.set(timeout=ms); s.add(A, *rest, W, Not(P))
+    r = s.check()
+    if r == unsat:
+        return "sufficient", None
+    if r == sat:
+        m = s.model()
+        return "insufficient", {str(d): str(m[d]) for d in m.decls()}
+    return "not certified", s.reason_unknown()
+
+
+def _weakest(W, quantified, ms=20000):
+    """Whether W is implied by the quantified weakest condition (so W is the weakest replacement, not only a
+    sufficient one): UNSAT of  quantified & not W."""
+    from z3 import Solver, unsat
+    s = Solver(); s.set(timeout=ms); s.add(quantified, Not(W))
+    return s.check() == unsat
+
+
 def _abduce_bounded(P, rest, A, voc, ms=20000):
-    """Abduction with a time limit on quantifier elimination. Nonlinear real arithmetic can make QE very slow;
-    when it does not finish and the vocabulary is a single quantity v, the weakest replacement is computed
-    numerically as the set of values of v for which  A & rest -> P  is valid (bisection between valid and
-    invalid points of a logarithmic grid); the result is then marked 'numerical'."""
+    """Weakest replacement over the vocabulary voc of a child, i.e. forall (other variables). (A & rest -> P),
+    computed by quantifier elimination with a time limit. When no variable lies outside voc, nothing is
+    eliminated and the condition is the implication itself. When elimination does not finish and voc is a single
+    quantity v, a conservative approximation is computed numerically (bisection between valid and invalid points
+    of a logarithmic grid). Every candidate is certified before it is reported: A & rest & W & not P must be UNSAT;
+    SAT rejects the candidate, and UNKNOWN (at the final check, or at every grid point, or at the rounded bound)
+    leaves the replacement uncomputed. An exact result is also checked to be the weakest."""
     from z3 import Tactic, TryFor, ForAll, substitute, RealVal, simplify as _simp
     body = Implies(And(A, *rest), P)
     names = {str(v) for v in voc}
     others = [v for n, v in free_consts(body).items() if n not in names]
+    quantified = ForAll(others, body) if others else body
+
+    def report(W, method, **extra):
+        status, info = _certify(P, rest, A, W, ms=ms)
+        if status != "sufficient":
+            return dict(W=None, W_expr=None, method=f"{method}; candidate {W} rejected: {status}",
+                        certification=status, certification_detail=info, **extra)
+        return dict(W=str(W), W_expr=W, method=method, certification="sufficient", **extra)
+
+    if not others:                         # nothing to eliminate: the implication itself is the weakest condition
+        W = _simp(body)
+        r = report(W, "no variable to eliminate")
+        if r["W_expr"] is not None:
+            r["weakest"] = True
+        return r
     W = None
     for t in ("qe2", "qe"):
         try:
-            W = _simp(Tactic("ctx-solver-simplify")(TryFor(Tactic(t), ms)(ForAll(others, body) if others else body).as_expr()).as_expr())
+            W = _simp(Tactic("ctx-solver-simplify")(TryFor(Tactic(t), ms)(quantified).as_expr()).as_expr())
             if has_quantifier(W):          # elimination did not complete
                 W = None
                 continue
@@ -513,7 +553,10 @@ def _abduce_bounded(P, rest, A, voc, ms=20000):
         except Exception:
             continue
     if W is not None:
-        return dict(W=str(W), W_expr=W, method="quantifier elimination")
+        r = report(W, "quantifier elimination")
+        if r["W_expr"] is not None:
+            r["weakest"] = _weakest(W, quantified, ms)
+        return r
     if len(voc) != 1:
         return dict(W=None, W_expr=None, method=f"not computed (quantifier elimination exceeded {ms // 1000} s)")
     v = voc[0]
@@ -521,7 +564,7 @@ def _abduce_bounded(P, rest, A, voc, ms=20000):
 
     def ok(c):
         """A point is valid only when the validity query is UNSAT; an UNKNOWN point is counted and treated as not
-        certified, so every reported bound is a point proved valid (possibly conservative)."""
+        certified."""
         try:
             return valid(substitute(body, (v, RealVal(c))))[0]
         except Inconclusive:
@@ -530,8 +573,11 @@ def _abduce_bounded(P, rest, A, voc, ms=20000):
     grid = sorted({sg * 10 ** (e / 4) for sg in (-1, 1) for e in range(-40, 41)} | {0.0})
     flags = [ok(c) for c in grid]
     if not any(flags):
-        return dict(W="False", W_expr=BoolVal(False), method="numerical (no value of the grid)")
-    bounds = []
+        if unk[0]:
+            return dict(W=None, W_expr=None, inconclusive_points=unk[0],
+                        method=f"not computed (numerical: no grid point certified, {unk[0]} inconclusive)")
+        return report(BoolVal(False), "numerical (no value of the grid is valid)")
+    bounds, uncertified = [], False
     for (a, fa), (b, fb) in zip(zip(grid, flags), zip(grid[1:], flags[1:])):
         if fa != fb:
             lo, hi = a, b
@@ -549,12 +595,17 @@ def _abduce_bounded(P, rest, A, voc, ms=20000):
             while not ok_r and k < 20:          # move the rounded bound into the valid side
                 x = x - abs(x) * 1e-6 if (fa and a < b) else x + abs(x) * 1e-6
                 r = float(f"{x:.6g}"); ok_r = ok(r); k += 1
+            if not ok_r:
+                uncertified = True
             bounds.append((("<=" if fa else ">="), r))
-    expr = And(*[(v <= c) if op == "<=" else (v >= c) for op, c in bounds]) if bounds else BoolVal(True)
-    return dict(W=" and ".join(f"{v} {op} {c:g}" for op, c in bounds) or "True", W_expr=expr,
-                method="numerical (bisection; quantifier elimination exceeded the time limit)"
-                       + (f"; {unk[0]} inconclusive points treated as not certified" if unk[0] else ""),
-                inconclusive_points=unk[0])
+    if uncertified:
+        return dict(W=None, W_expr=None, inconclusive_points=unk[0],
+                    method="not computed (numerical: a rounded bound could not be certified)")
+    cs = [(v <= c) if op == "<=" else (v >= c) for op, c in bounds]
+    expr = (cs[0] if len(cs) == 1 else And(*cs)) if cs else BoolVal(True)
+    return report(expr, "numerical, conservative approximation (bisection; quantifier elimination exceeded the "
+                        "time limit)" + (f"; {unk[0]} inconclusive points treated as not certified" if unk[0] else ""),
+                  inconclusive_points=unk[0])
 
 
 def _interpolate_bounded(fa, fb, shared, ms=20000):
@@ -582,13 +633,13 @@ def _interpolate_bounded(fa, fb, shared, ms=20000):
 def input_total(body, A, outputs):
     """For every input valuation admitted by A (projected on the inputs), some output valuation satisfies body:
     validity of  (exists outputs. A) -> (exists outputs. body). Must be called on the original formulas (no
-    substitution of glossary definitions, which could eliminate an input). Returns True, False, or None when the
-    solver answers UNKNOWN."""
+    substitution of glossary definitions, which could eliminate an input). Returns (True | False | None, reason),
+    None with the solver's reason when it answers UNKNOWN."""
     from z3 import Exists as _Ex
     try:
-        return valid(Implies(_Ex(outputs, A), _Ex(outputs, body)))[0]
-    except Inconclusive:
-        return None
+        return valid(Implies(_Ex(outputs, A), _Ex(outputs, body)))[0], None
+    except Inconclusive as ex:
+        return None, str(ex)
 
 
 def check_flowdown(S):
@@ -653,7 +704,9 @@ def check_flowdown(S):
         else:
             r["kind"] = "reactive"
             A0 = And(S.domain, *gl_all.values())         # original relation: no definition is substituted
-            r["input_total"] = input_total(And(A0, *[S.R[k] for k in d["derived"]]), A0, [S.vars[n] for n in outs])
+            r["input_total"], why = input_total(And(A0, *[S.R[k] for k in d["derived"]]), A0, [S.vars[n] for n in outs])
+            if why:
+                r["input_total_reason"] = why
             r["reactive_refinement"] = tri_and(r["static_refinement"], r["input_total"])
         # worst case of the bounded quantity of the parent (parent of the form  q <= c  or  c >= q)
         q = None
@@ -673,7 +726,10 @@ def check_flowdown(S):
                 rest = [kids[k] for k in ids if k not in drop]
                 a = _abduce_bounded(P, rest, A, voc)
                 ab[" + ".join(drop)] = dict(vocabulary=[str(v) for v in voc], replacement=a["W"], method=a["method"],
+                                            certification=a.get("certification"), weakest=a.get("weakest"),
                                             exists=is_sat(A, *rest, a["W_expr"])[0] if a["W_expr"] is not None else None)
+                if a.get("certification_detail") is not None:
+                    ab[" + ".join(drop)]["certification_detail"] = a["certification_detail"]
         r["abduction"] = ab
         # interface contracts: one subsystem (subject type) against the rest and the negated parent
         groups = sorted({subj[k] for k in ids if subj[k]} - {subj[d["original"]]})
