@@ -1,0 +1,936 @@
+{
+ "FSM-012|stay": {
+  "reachable": 22318,
+  "holds": {
+   "v1": false,
+   "v2": false,
+   "v3": false
+  },
+  "counterexamples": {
+   "v1": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F",
+     "pullup": false,
+     "violates": "v1"
+    }
+   ],
+   "v2": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "M",
+     "sensor": "T",
+     "pullup": false,
+     "violates": "v2"
+    }
+   ],
+   "v3": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "N",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "N",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "M",
+     "sensor": "T",
+     "pullup": false,
+     "violates": "v3"
+    }
+   ]
+  }
+ },
+ "FSM-012|stay+glossario": {
+  "reachable": 22318,
+  "holds": {
+   "v1": false,
+   "v2": false,
+   "v3": false
+  },
+  "counterexamples": {
+   "v1": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F",
+     "pullup": false,
+     "violates": "v1"
+    }
+   ],
+   "v2": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 1
+     },
+     "ap": "T",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "T",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "F",
+     "pullup": false,
+     "violates": "v2"
+    }
+   ],
+   "v3": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 1
+     },
+     "ap": "T",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "T",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "F",
+     "pullup": false,
+     "violates": "v3"
+    }
+   ]
+  }
+ },
+ "FSM-012|free": {
+  "reachable": 65351,
+  "holds": {
+   "v1": false,
+   "v2": false,
+   "v3": false
+  },
+  "counterexamples": {
+   "v1": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F",
+     "pullup": false,
+     "violates": "v1"
+    }
+   ],
+   "v2": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "M",
+     "sensor": "T",
+     "pullup": false,
+     "violates": "v2"
+    }
+   ],
+   "v3": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "N",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "M",
+     "sensor": "T",
+     "pullup": false,
+     "violates": "v3"
+    }
+   ]
+  }
+ },
+ "FSM-012|free+glossario": {
+  "reachable": 65351,
+  "holds": {
+   "v1": false,
+   "v2": false,
+   "v3": false
+  },
+  "counterexamples": {
+   "v1": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F",
+     "pullup": false,
+     "violates": "v1"
+    }
+   ],
+   "v2": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "T"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N",
+     "pullup": false,
+     "violates": "v2"
+    }
+   ],
+   "v3": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "N",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "T"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N",
+     "pullup": false,
+     "violates": "v3"
+    }
+   ]
+  }
+ },
+ "FSM-012weak|stay": {
+  "reachable": 19599,
+  "holds": {
+   "v1": false,
+   "v2": false,
+   "v3": false
+  },
+  "counterexamples": {
+   "v1": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F",
+     "pullup": false,
+     "violates": "v1"
+    }
+   ],
+   "v2": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "M",
+     "sensor": "T",
+     "pullup": false,
+     "violates": "v2"
+    }
+   ],
+   "v3": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "N",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "N",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "M",
+     "sensor": "T",
+     "pullup": false,
+     "violates": "v3"
+    }
+   ]
+  }
+ },
+ "FSM-012weak|stay+glossario": {
+  "reachable": 19599,
+  "holds": {
+   "v1": false,
+   "v2": false,
+   "v3": true
+  },
+  "counterexamples": {
+   "v1": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F",
+     "pullup": false,
+     "violates": "v1"
+    }
+   ],
+   "v2": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 1
+     },
+     "ap": "T",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "T",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "T",
+     "pullup": false,
+     "violates": "v2"
+    }
+   ]
+  }
+ },
+ "FSM-012weak|free": {
+  "reachable": 65113,
+  "holds": {
+   "v1": false,
+   "v2": false,
+   "v3": false
+  },
+  "counterexamples": {
+   "v1": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F",
+     "pullup": false,
+     "violates": "v1"
+    }
+   ],
+   "v2": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "M",
+     "sensor": "T",
+     "pullup": false,
+     "violates": "v2"
+    }
+   ],
+   "v3": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "N",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "M",
+     "sensor": "T",
+     "pullup": false,
+     "violates": "v3"
+    }
+   ]
+  }
+ },
+ "FSM-012weak|free+glossario": {
+  "reachable": 65113,
+  "holds": {
+   "v1": false,
+   "v2": false,
+   "v3": false
+  },
+  "counterexamples": {
+   "v1": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "F",
+     "pullup": false,
+     "violates": "v1"
+    }
+   ],
+   "v2": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "T"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N",
+     "pullup": false,
+     "violates": "v2"
+    }
+   ],
+   "v3": [
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 0,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "N",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "T"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 1
+     },
+     "ap": "N",
+     "sensor": "N"
+    },
+    {
+     "step_in": {
+      "standby": 0,
+      "apfail": 0,
+      "supported": 1,
+      "limits": 0
+     },
+     "ap": "T",
+     "sensor": "N",
+     "pullup": false,
+     "violates": "v3"
+    }
+   ]
+  }
+ },
+ "espera_mutua_original": [
+  [
+   "T",
+   "F"
+  ],
+  [
+   "T",
+   "F"
+  ],
+  [
+   "T",
+   "F"
+  ],
+  [
+   "T",
+   "F"
+  ],
+  [
+   "T",
+   "F"
+  ],
+  [
+   "T",
+   "F"
+  ]
+ ],
+ "espera_mutua_weak": [
+  [
+   "T",
+   "T"
+  ],
+  [
+   "N",
+   "N"
+  ],
+  [
+   "N",
+   "N"
+  ],
+  [
+   "N",
+   "N"
+  ],
+  [
+   "N",
+   "N"
+  ],
+  [
+   "N",
+   "N"
+  ]
+ ]
+}

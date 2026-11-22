@@ -1,0 +1,414 @@
+{
+ "passed": 68,
+ "total": 68,
+ "tests": [
+  {
+   "cls": "A",
+   "test": "LM model accepted; conflicts 4 + 1",
+   "passed": true,
+   "detail": "{'apMachine': 4, 'senMachine': 1}"
+  },
+  {
+   "cls": "A",
+   "test": "LM holes 24 + 14",
+   "passed": true,
+   "detail": "{'apMachine': 24, 'senMachine': 14}"
+  },
+  {
+   "cls": "A",
+   "test": "revised LM set accepted and conflict-free",
+   "passed": true,
+   "detail": "{'apMachine': 0, 'senMachine': 0}"
+  },
+  {
+   "cls": "A",
+   "test": "FireSat: 9 of 32 configurations",
+   "passed": true,
+   "detail": "9/32"
+  },
+  {
+   "cls": "A",
+   "test": "FireSat: geo1 dead, leo2 core",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "A",
+   "test": "CLI exit status 0 on a valid model",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "B",
+   "test": "misspelled signal in a constraint",
+   "passed": true,
+   "detail": "name 'godo' is used but not declared"
+  },
+  {
+   "cls": "B",
+   "test": "duplicate requirement identifier",
+   "passed": true,
+   "detail": "duplicate requirement identifier 'FSM-002'; duplicate declaration of '<'FSM-002'>' in top 'package LMCPS_FSM': 'requirement def <'FSM-002'> ApTtoS' and 'requirement def <'FSM-002'> ApTtoN'"
+  },
+  {
+   "cls": "B",
+   "test": "C-style operator &&",
+   "passed": true,
+   "detail": "requirement 'FSM-003': unexpected character '&' at position 23 in '(apState == ApState::T && good and supported) implies nextState == ApState::N'"
+  },
+  {
+   "cls": "B",
+   "test": "stray character @",
+   "passed": true,
+   "detail": "requirement 'FSM-003': unexpected character '@' at position 32 in '(apState == ApState::T and good @ supported) implies nextState == ApState::N'"
+  },
+  {
+   "cls": "B",
+   "test": "unbalanced parenthesis",
+   "passed": true,
+   "detail": "requirement 'FSM-003': expected ), found None"
+  },
+  {
+   "cls": "B",
+   "test": "unknown enumeration literal",
+   "passed": true,
+   "detail": "requirement 'FSM-003': unknown enumeration literal ApState::X"
+  },
+  {
+   "cls": "B",
+   "test": "conditional without else",
+   "passed": true,
+   "detail": "requirement 'MR-TL': expected else, found None"
+  },
+  {
+   "cls": "B",
+   "test": "transition to an undeclared state",
+   "passed": true,
+   "detail": "machine 'apMachine': transition 't02' refers to undeclared state 'X'"
+  },
+  {
+   "cls": "B",
+   "test": "undeclared signal in a transition guard",
+   "passed": true,
+   "detail": "name 'standbyy' is used but not declared"
+  },
+  {
+   "cls": "B",
+   "test": "attribute declared with two types",
+   "passed": true,
+   "detail": "attribute 'good' declared with types Boolean and Real (names are global signals; use distinct names)"
+  },
+  {
+   "cls": "B",
+   "test": "two require constraints in one requirement",
+   "passed": true,
+   "detail": "requirement 'GLO-1' has 2 require constraints (exactly one is supported)"
+  },
+  {
+   "cls": "B",
+   "test": "duplicate enumeration literal",
+   "passed": true,
+   "detail": "duplicate literal in enum 'ApState'; duplicate declaration of 'T' in package 'enum def ApState': 'enum T' and 'enum T'"
+  },
+  {
+   "cls": "B",
+   "test": "missing initial state",
+   "passed": true,
+   "detail": "machine 'apMachine': missing or invalid initial state ('entry; then S;'); unrecognized statement in part 'exhibit state apMachine': 'T' (not in the supported subset)"
+  },
+  {
+   "cls": "B",
+   "test": "duplicate transition identifier",
+   "passed": true,
+   "detail": "machine 'apMachine': duplicate transition identifier; duplicate declaration of 't02' in part 'exhibit state apMachine': 'transition t02 first T if standby then S' and 'transition t02 first T if fromSensor.goo'"
+  },
+  {
+   "cls": "B",
+   "test": "variant with malformed attribute",
+   "passed": true,
+   "detail": "variation 'GroundChoice': variant not of the form 'variant part v : T { attribute redefines x = value; }'; unrecognized statement in package 'variation part def GroundChoice :> Groun': 'variant part gs4 : Ground attribute redefines maxGap = 100' (not in the supported subset)"
+  },
+  {
+   "cls": "B",
+   "test": "CLI exits with status 2 and emits no proof",
+   "passed": true,
+   "detail": "/tmp/tmpp_x0_ku6.sysml: 1 error(s)\n  ERROR: name 'godo' is used but not declared\n"
+  },
+  {
+   "cls": "C",
+   "test": "assume constraint in a requirement",
+   "passed": true,
+   "detail": "requirement 'GLO-1' has an assume constraint (not supported; write it as an antecedent); unsupported construct 'assume constraint' (1 occurrence(s)): its semantics is not translated; unrecognized statement in package 'requirement def <'GLO-1'> PullupMeaning': 'assume constraint {...}' (not in the supported subset)"
+  },
+  {
+   "cls": "C",
+   "test": "constraint definition",
+   "passed": true,
+   "detail": "unsupported construct 'constraint def' (1 occurrence(s)): its semantics is not translated; unrecognized statement in top 'package LMCPS_FSM': 'constraint def Lim {...}' (not in the supported subset)"
+  },
+  {
+   "cls": "C",
+   "test": "calculation definition",
+   "passed": true,
+   "detail": "unsupported construct 'calc def' (1 occurrence(s)): its semantics is not translated; unrecognized statement in top 'package LMCPS_FSM': 'calc def Twice {...}' (not in the supported subset)"
+  },
+  {
+   "cls": "C",
+   "test": "transition with an accept trigger",
+   "passed": true,
+   "detail": "machine 'apMachine': 1 transition(s) not of the form 'transition t first A if guard then B;' (triggers, effects and timed transitions are not supported); machine 'apMachine': entry/exit/do actions, accept/send or time triggers are not supported; unsupported construct 'accept' (1 occurrence(s)): its semantics is not translated; unrecognized statement in part 'exhibit state apMachine': 'transition t02 first T accept go if standby then S' (not in the supported subset)"
+  },
+  {
+   "cls": "C",
+   "test": "entry action in a state",
+   "passed": true,
+   "detail": "machine 'apMachine': entry/exit/do actions, accept/send or time triggers are not supported; machine 'apMachine': transition 't02' refers to undeclared state 'T'; machine 'apMachine': transition 't03' refers to undeclared state 'T'; machine 'apMachine': transition 't07' refers to undeclared state 'T'; machine 'apMachine': transition 't08' refers to undeclared state 'T'; machine 'apMachine': missing or invalid initial state ('entry; then S;'); unsupported construct 'entry action' (1 occurrence(s)): its semantics is not translated; unrecognized statement in part 'exhibit state apMachine': 'state T {...}' (not in the supported subset)"
+  },
+  {
+   "cls": "C",
+   "test": "flow connection",
+   "passed": true,
+   "detail": "unsupported construct 'flow' (1 occurrence(s)): its semantics is not translated; unrecognized statement in package 'part def FSM': 'flow sensor.toAp to autopilot.fromSensor' (not in the supported subset)"
+  },
+  {
+   "cls": "C",
+   "test": "succession",
+   "passed": true,
+   "detail": "unsupported construct 'succession' (1 occurrence(s)): its semantics is not translated; unrecognized statement in package 'action def DetectAndReport': 'succession s1 first archive then action notify {...}' (not in the supported subset)"
+  },
+  {
+   "cls": "D",
+   "test": "unknown statement at package level",
+   "passed": true,
+   "detail": "unrecognized statement in top 'package LMCPS_FSM': 'garbage blorp' (not in the supported subset)"
+  },
+  {
+   "cls": "D",
+   "test": "unknown statement inside a requirement",
+   "passed": true,
+   "detail": "unrecognized statement in package 'requirement def <'GLO-1'> PullupMeaning': 'garbage blorp' (not in the supported subset)"
+  },
+  {
+   "cls": "D",
+   "test": "unknown statement inside a state machine",
+   "passed": true,
+   "detail": "unrecognized statement in part 'exhibit state apMachine': 'garbage blorp' (not in the supported subset)"
+  },
+  {
+   "cls": "D",
+   "test": "unknown statement inside a part definition",
+   "passed": true,
+   "detail": "unrecognized statement in package 'part def FSM': 'garbage blorp' (not in the supported subset)"
+  },
+  {
+   "cls": "D",
+   "test": "unknown block inside a part definition",
+   "passed": true,
+   "detail": "unrecognized statement in package 'part def FSM': 'blorp zork {...}' (not in the supported subset)"
+  },
+  {
+   "cls": "D",
+   "test": "unknown statement inside an enumeration",
+   "passed": true,
+   "detail": "unrecognized statement in package 'enum def ApState': 'garbage blorp' (not in the supported subset)"
+  },
+  {
+   "cls": "D",
+   "test": "unknown statement inside a variant",
+   "passed": true,
+   "detail": "unrecognized statement in variation 'variant part gs4 : Ground': 'garbage blorp' (not in the supported subset)"
+  },
+  {
+   "cls": "D",
+   "test": "unknown statement inside an action definition",
+   "passed": true,
+   "detail": "unrecognized statement in package 'action def DetectAndReport': 'garbage blorp' (not in the supported subset)"
+  },
+  {
+   "cls": "D",
+   "test": "statement without terminator at the end of a body",
+   "passed": true,
+   "detail": "unrecognized statement in package 'enum def ApState': 'enum Z enum N' (not in the supported subset)"
+  },
+  {
+   "cls": "D",
+   "test": "an unknown statement inserted at each of 514 statement boundaries is rejected",
+   "passed": true,
+   "detail": "[]"
+  },
+  {
+   "cls": "E",
+   "test": "documentation removed (LM): same results",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "E",
+   "test": "documentation removed (FireSat): same results",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "E",
+   "test": "subjects removed (LM): same results",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "E",
+   "test": "unrelated parts, ports and a conjugate connection added (LM): same results",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "E",
+   "test": "interface usage renamed (LM): same results",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "E",
+   "test": "port definitions moved to the end of the package (LM): same results",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "E",
+   "test": "guard through an undeclared port is rejected",
+   "passed": true,
+   "detail": "transition 't03': 'fromSensr.good': 'fromSensr' is not a declared port, part usage or subject"
+  },
+  {
+   "cls": "E",
+   "test": "port attribute not in its port definition is rejected",
+   "passed": true,
+   "detail": "transition 't03': 'fromSensor.request': port 'fromSensor' (SensorToAp) has no attribute 'request'"
+  },
+  {
+   "cls": "E",
+   "test": "connection to an undeclared port is rejected",
+   "passed": true,
+   "detail": "connection end 'autopilot.fromSensr' is not a declared port of a part usage"
+  },
+  {
+   "cls": "E",
+   "test": "connection between non-conjugate ports is rejected",
+   "passed": true,
+   "detail": "connection 'sensor.toAp' to 'autopilot.toSensor' joins ports that are not conjugate (('SensorToAp', False) and ('ApToSensor', False))"
+  },
+  {
+   "cls": "F",
+   "test": "port definition declared twice with different attributes is rejected",
+   "passed": true,
+   "detail": "duplicate declaration of 'ApToSensor' in top 'package LMCPS_FSM': 'port def ApToSensor' and 'port def ApToSensor'"
+  },
+  {
+   "cls": "F",
+   "test": "part definition declared twice is rejected",
+   "passed": true,
+   "detail": "duplicate declaration of 'Sensor' in top 'package LMCPS_FSM': 'part def Sensor' and 'part def Sensor'"
+  },
+  {
+   "cls": "F",
+   "test": "enumeration declared twice is rejected",
+   "passed": true,
+   "detail": "duplicate enum identifier 'ApState'; duplicate declaration of 'ApState' in top 'package LMCPS_FSM': 'enum def ApState' and 'enum def ApState'"
+  },
+  {
+   "cls": "F",
+   "test": "interface definition declared twice is rejected",
+   "passed": true,
+   "detail": "duplicate declaration of 'ApSensorLink' in top 'package LMCPS_FSM': 'interface def ApSensorLink' and 'interface def ApSensorLink'"
+  },
+  {
+   "cls": "F",
+   "test": "requirement definition name reused under another identifier is rejected",
+   "passed": true,
+   "detail": "duplicate declaration of 'ApTtoS' in top 'package LMCPS_FSM': 'requirement def <'FSM-002'> ApTtoS' and 'requirement def <'FSM-003'> ApTtoS'"
+  },
+  {
+   "cls": "F",
+   "test": "attribute declared twice in a port definition is rejected",
+   "passed": true,
+   "detail": "duplicate declaration of 'mode' in package 'port def ApToSensor': 'out attribute mode : Boolean' and 'out attribute mode : Boolean'"
+  },
+  {
+   "cls": "F",
+   "test": "port declared twice in a part is rejected",
+   "passed": true,
+   "detail": "duplicate declaration of 'toSensor' in package 'part def Autopilot': 'port toSensor : ApToSensor' and 'port toSensor : SensorToAp'; connection 'autopilot.toSensor' to 'sensor.fromAp' joins ports that are not conjugate (('SensorToAp', False) and ('ApToSensor', True))"
+  },
+  {
+   "cls": "F",
+   "test": "port name reused in another part is rejected",
+   "passed": true,
+   "detail": "port name 'toSensor' is declared more than once (in part def 'Sensor'); port names must be unique in the model because signals are resolved by name"
+  },
+  {
+   "cls": "F",
+   "test": "state machine declared twice in a part is rejected",
+   "passed": true,
+   "detail": "duplicate machine identifier 'apMachine'"
+  },
+  {
+   "cls": "F",
+   "test": "state declared twice is rejected",
+   "passed": true,
+   "detail": "machine 'apMachine': duplicate state; duplicate declaration of 'T' in part 'exhibit state apMachine': 'state T' and 'state T'"
+  },
+  {
+   "cls": "F",
+   "test": "part usage declared twice in the system part is rejected",
+   "passed": true,
+   "detail": "duplicate declaration of 'comm' in package 'part def FireSatSystem': 'part comm : CommChoice' and 'part comm : BusChoice'"
+  },
+  {
+   "cls": "F",
+   "test": "attribute declared twice in a part definition is rejected",
+   "passed": true,
+   "detail": "duplicate declaration of 'h' in package 'part def Orbit': 'attribute h : Real' and 'attribute h : Integer'"
+  },
+  {
+   "cls": "F",
+   "test": "variation declared twice is rejected",
+   "passed": true,
+   "detail": "duplicate variation identifier 'BusChoice'; duplicate declaration of 'BusChoice' in top 'package FireSat': 'variation part def BusChoice :> Bus' and 'variation part def BusChoice :> Bus'"
+  },
+  {
+   "cls": "F",
+   "test": "variant declared twice in a variation is rejected",
+   "passed": true,
+   "detail": "duplicate declaration of 'smallBus' in package 'variation part def BusChoice :> Bus': 'variant part smallBus : Bus' and 'variant part smallBus : Bus'"
+  },
+  {
+   "cls": "F",
+   "test": "attribute redefined twice in a variant is rejected",
+   "passed": true,
+   "detail": "duplicate declaration of 'payloadCapacity' in variation 'variant part smallBus : Bus': 'attribute redefines payloadCapacity = 10' and 'attribute redefines payloadCapacity = 99'"
+  },
+  {
+   "cls": "F",
+   "test": "action definition declared twice is rejected",
+   "passed": true,
+   "detail": "duplicate action identifier 'DetectAndReport'; duplicate declaration of 'DetectAndReport' in top 'package FireSat': 'action def DetectAndReport' and 'action def DetectAndReport'"
+  },
+  {
+   "cls": "F",
+   "test": "two system parts is rejected",
+   "passed": true,
+   "detail": "two system parts ('Other' and 'FireSatSystem') hold satisfy or allocate relations; exactly one is supported"
+  },
+  {
+   "cls": "F",
+   "test": "a copy of each of the 483 declarations of the three models is rejected as a duplicate",
+   "passed": true,
+   "detail": "[]"
+  },
+  {
+   "cls": "G",
+   "test": "SMT, Verilog and Lustre agree on 1582 valuations of 20 requirements",
+   "passed": true,
+   "detail": "[]"
+  }
+ ]
+}

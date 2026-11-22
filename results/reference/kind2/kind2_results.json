@@ -1,0 +1,78 @@
+{
+ "ap_orig": {
+  "cores": [
+   {
+    "core": [
+     "FSM-008v1",
+     "FSM-009"
+    ],
+    "deadlocking_input": {
+     "apfail": "true",
+     "good": "false",
+     "standby": "false",
+     "state": "3",
+     "supported": "true"
+    }
+   },
+   {
+    "core": [
+     "FSM-004",
+     "FSM-005"
+    ],
+    "deadlocking_input": {
+     "apfail": "false",
+     "good": "false",
+     "standby": "true",
+     "state": "1",
+     "supported": "false"
+    }
+   },
+   {
+    "core": [
+     "FSM-006",
+     "FSM-007"
+    ],
+    "deadlocking_input": {
+     "apfail": "false",
+     "good": "true",
+     "standby": "true",
+     "state": "2",
+     "supported": "true"
+    }
+   },
+   {
+    "core": [
+     "FSM-002",
+     "FSM-003"
+    ],
+    "deadlocking_input": {
+     "apfail": "false",
+     "good": "true",
+     "standby": "true",
+     "state": "0",
+     "supported": "true"
+    }
+   }
+  ],
+  "runs": 5,
+  "seconds": 1.65
+ },
+ "sen_orig": {
+  "cores": [
+   {
+    "core": [
+     "FSM-010",
+     "FSM-011v1"
+    ],
+    "deadlocking_input": {
+     "limits": "true",
+     "request": "false",
+     "MODE": "false",
+     "senstate": "0"
+    }
+   }
+  ],
+  "runs": 2,
+  "seconds": 0.6
+ }
+}

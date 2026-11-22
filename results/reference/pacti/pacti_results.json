@@ -1,0 +1,8 @@
+{
+ "quotient": "InVars: [r]\nOutVars:[beta]\nA: [\n  -r <= -42.86\n  r <= 60\n]\nG: [\n  beta - r <= -3\n]",
+ "payload_D026_refines_quotient": true,
+ "seconds": 0.092,
+ "payload_beta_le_39.857_refines_quotient": true,
+ "payload_beta_le_39.858_refines_quotient": false,
+ "payload_beta_le_39.9_refines_quotient": false
+}

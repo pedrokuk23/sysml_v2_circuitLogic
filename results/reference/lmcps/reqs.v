@@ -1,0 +1,20 @@
+module reqs(input [1:0] apState, input apfail, input autopilot, input good, input limits, input mode, input [1:0] nextSenState, input [1:0] nextState, input notLimits, input pre1_autopilot, input pre1_limits, input pre2_autopilot, input pre2_notLimits, input pre3_autopilot, input pre3_notLimits, input pre4_notLimits, input pre5_notLimits, input pullup, input request, input [1:0] senState, input standby, input supported, output r_GLO_1, output r_GLO_2, output r_GLO_3, output r_GLO_4, output r_GLO_5, output r_FSM_001, output r_FSM_002, output r_FSM_003, output r_FSM_004, output r_FSM_005, output r_FSM_006, output r_FSM_007, output r_FSM_008, output r_FSM_009, output r_FSM_010, output r_FSM_011, output r_FSM_012, output r_FSM_013);
+  assign r_GLO_1 = (pullup == (2 == nextState));
+  assign r_GLO_2 = ((mode == (0 != nextState)) && (request == ((0 == nextState) || (1 == nextState))));
+  assign r_GLO_3 = (good == (2 != senState));
+  assign r_GLO_4 = (autopilot == ((!(standby) && supported) && !(apfail)));
+  assign r_GLO_5 = (notLimits == !(limits));
+  assign r_FSM_001 = (!((((limits && !(standby)) && !(apfail)) && supported)) || (pullup));
+  assign r_FSM_002 = (!(((0 == apState) && standby)) || ((3 == nextState)));
+  assign r_FSM_003 = (!((((0 == apState) && good) && supported)) || ((1 == nextState)));
+  assign r_FSM_004 = (!(((1 == apState) && !(good))) || ((2 == nextState)));
+  assign r_FSM_005 = (!(((1 == apState) && standby)) || ((3 == nextState)));
+  assign r_FSM_006 = (!((((2 == apState) && standby) && good)) || ((3 == nextState)));
+  assign r_FSM_007 = (!((((2 == apState) && supported) && good)) || ((0 == nextState)));
+  assign r_FSM_008 = (!(((3 == apState) && !(standby))) || ((0 == nextState)));
+  assign r_FSM_009 = (!(((3 == apState) && apfail)) || ((2 == nextState)));
+  assign r_FSM_010 = (!(((0 == senState) && limits)) || ((2 == nextSenState)));
+  assign r_FSM_011 = (!(((0 == senState) && !(request))) || ((1 == nextSenState)));
+  assign r_FSM_012 = (!((((2 == senState) && !(request)) && !(limits))) || ((1 == nextSenState)));
+  assign r_FSM_013 = (!((((1 == senState) && request) && mode)) || ((0 == nextSenState)));
+endmodule

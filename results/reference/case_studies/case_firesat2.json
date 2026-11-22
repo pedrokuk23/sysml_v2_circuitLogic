@@ -1,0 +1,49 @@
+{
+ "MR-RES": {
+  "valid": false,
+  "counterexample": {
+   "eps": "343597/68719476736",
+   "L": "0",
+   "X": "209095793648384084160027/6969859506176000000000",
+   "h": "675442",
+   "D": "2181039/8388608",
+   "dr": "0",
+   "theta_k": "0",
+   "/0": "[(432620601/62500000, 2181039/8388608) ->\n 5400423563264/202849609375,\n else -> 0]"
+  },
+  "worst_case": 31.091
+ },
+ "MR-LOC": {
+  "valid": true,
+  "worst_case": 466.52
+ },
+ "abduction": {
+  "replace ADCS-1 (over eps)": "Or(Not(eps >= 0), eps <= 783/227500000)",
+  "replace PAY-2 (over D)": "Or(D <= 0, 8967/1250/D <= 53/2)",
+  "replace ORB-1 (over h)": "And(Or(h <= 146250000000/213073, h <= 0),\n    Or(h <= 0, h <= 65812500000000/96908077),\n    Or(h <= 0, h <= 1950000000/2887))",
+  "trade D x eps": "Or(D <= 0,\n   Not(eps >= 0),\n   -30 <= -1*(8967/1250/D) + -700000*eps)"
+ },
+ "MR-RES_repaired": {
+  "valid": true,
+  "worst_case": 29.691
+ },
+ "interface": {
+  "strongest": "And(beta_dif <= 1281/32500000, Not(beta_dif <= 0))",
+  "weakest": "beta_dif <= 279/7000000",
+  "payload_guarantees_urad": 39.41538461538462,
+  "acs_tolerates_urad": 39.85714285714286,
+  "margin_urad": 0.44175824175824374
+ },
+ "discretisation": {
+  "feasible": 22,
+  "of": 32,
+  "lemmas": "(a_e5 | ~a_e3) & (a_D | a_e5 | a_h | ~a_X) & (a_X | ~a_D | ~a_e3 | ~a_h)"
+ },
+ "geo": {
+  "free_aperture_with_jitter_3urad": "1281/125000000/D_geo <= -38679/17893000000",
+  "possible": false,
+  "D_min_m_with_zero_jitter": 12.224497600000001,
+  "eps_max_urad_with_infinite_aperture": 0.838316660146426,
+  "jitter_term_m": 107.358
+ }
+}

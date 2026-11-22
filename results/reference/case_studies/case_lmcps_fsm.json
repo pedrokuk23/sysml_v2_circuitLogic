@@ -1,0 +1,270 @@
+{
+ "conflicts_original": [
+  {
+   "requirements": [
+    "FSM-002",
+    "FSM-003"
+   ],
+   "region": [
+    "[state=T] good ∧ standby ∧ supported"
+   ]
+  },
+  {
+   "requirements": [
+    "FSM-004",
+    "FSM-005"
+   ],
+   "region": [
+    "[state=N] standby ∧ ¬good"
+   ]
+  },
+  {
+   "requirements": [
+    "FSM-006",
+    "FSM-007"
+   ],
+   "region": [
+    "[state=M] good ∧ standby ∧ supported"
+   ]
+  },
+  {
+   "requirements": [
+    "FSM-008v1",
+    "FSM-009"
+   ],
+   "region": [
+    "[state=S] apfail ∧ ¬standby"
+   ]
+  },
+  {
+   "requirements": [
+    "FSM-010",
+    "FSM-011v1"
+   ],
+   "region": [
+    "[senstate=N] limits ∧ ¬request"
+   ]
+  }
+ ],
+ "repairs": [
+  {
+   "pair": [
+    "FSM-002",
+    "FSM-003"
+   ],
+   "candidates": {
+    "FSM-002 cede a FSM-003": "Implies(And(And(standby, state == 0),\n            Not(And(state == 0, good, supported))),\n        STATE == 3)",
+    "FSM-003 cede a FSM-002": "Implies(And(And(state == 0, good, supported),\n            Not(And(standby, state == 0))),\n        STATE == 1)"
+   },
+   "matches_history": [
+    {
+     "candidate": "FSM-003 cede a FSM-002",
+     "equals": "FSM-003v2"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "FSM-004",
+    "FSM-005"
+   ],
+   "candidates": {
+    "FSM-004 cede a FSM-005": "Implies(And(And(Not(good), state == 1),\n            Not(And(state == 1, standby))),\n        STATE == 2)",
+    "FSM-005 cede a FSM-004": "Implies(And(And(state == 1, standby),\n            Not(And(Not(good), state == 1))),\n        STATE == 3)"
+   },
+   "matches_history": [
+    {
+     "candidate": "FSM-004 cede a FSM-005",
+     "equals": "FSM-004v2"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "FSM-006",
+    "FSM-007"
+   ],
+   "candidates": {
+    "FSM-006 cede a FSM-007": "Implies(And(And(state == 2, standby, good),\n            Not(And(state == 2, supported, good))),\n        STATE == 3)",
+    "FSM-007 cede a FSM-006": "Implies(And(And(state == 2, supported, good),\n            Not(And(state == 2, standby, good))),\n        STATE == 0)"
+   },
+   "matches_history": [
+    {
+     "candidate": "FSM-007 cede a FSM-006",
+     "equals": "FSM-007v2"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "FSM-008v1",
+    "FSM-009"
+   ],
+   "candidates": {
+    "FSM-008v1 cede a FSM-009": "Implies(And(And(state == 3, Not(standby)),\n            Not(And(state == 3, apfail))),\n        STATE == 0)",
+    "FSM-009 cede a FSM-008v1": "Implies(And(And(state == 3, apfail),\n            Not(And(state == 3, Not(standby)))),\n        STATE == 2)"
+   },
+   "matches_history": [
+    {
+     "candidate": "FSM-008v1 cede a FSM-009",
+     "equals": "FSM-008v2"
+    }
+   ]
+  },
+  {
+   "pair": [
+    "FSM-010",
+    "FSM-011v1"
+   ],
+   "candidates": {
+    "FSM-010 cede a FSM-011v1": "Implies(And(And(senstate == 0, limits),\n            Not(And(senstate == 0, Not(request)))),\n        SENSTATE == 2)",
+    "FSM-011v1 cede a FSM-010": "Implies(And(And(senstate == 0, Not(request)),\n            Not(And(senstate == 0, limits))),\n        SENSTATE == 1)"
+   },
+   "matches_history": [
+    {
+     "candidate": "FSM-011v1 cede a FSM-010",
+     "equals": "FSM-011v2"
+    }
+   ]
+  }
+ ],
+ "history_recall": {
+  "revised_by_authors": [
+   "FSM-003",
+   "FSM-004",
+   "FSM-007",
+   "FSM-008v1",
+   "FSM-011v1"
+  ],
+  "revised_and_flagged": [
+   "FSM-003",
+   "FSM-004",
+   "FSM-007",
+   "FSM-008v1",
+   "FSM-011v1"
+  ],
+  "flagged_not_revised": [
+   "FSM-002",
+   "FSM-005",
+   "FSM-006",
+   "FSM-009",
+   "FSM-010"
+  ],
+  "repairs_matching_history": 5
+ },
+ "conflicts_revised": [],
+ "redundant_revised": [],
+ "vacuous_revised": [],
+ "coverage_revised": {
+  "AP:T": {
+   "cases": [
+    "FSM-002",
+    "FSM-003v2"
+   ],
+   "complete": false,
+   "n_situations": 16,
+   "n_holes": 6,
+   "hole": [
+    "[] (¬good ∧ ¬standby) ∨ (¬standby ∧ ¬supported)"
+   ],
+   "overlaps": []
+  },
+  "AP:N": {
+   "cases": [
+    "FSM-004v2",
+    "FSM-005"
+   ],
+   "complete": false,
+   "n_situations": 16,
+   "n_holes": 4,
+   "hole": [
+    "[] good ∧ ¬standby"
+   ],
+   "overlaps": []
+  },
+  "AP:M": {
+   "cases": [
+    "FSM-006",
+    "FSM-007v2"
+   ],
+   "complete": false,
+   "n_situations": 16,
+   "n_holes": 10,
+   "hole": [
+    "[] ¬good ∨ (¬standby ∧ ¬supported)"
+   ],
+   "overlaps": []
+  },
+  "AP:S": {
+   "cases": [
+    "FSM-008v2",
+    "FSM-009"
+   ],
+   "complete": false,
+   "n_situations": 16,
+   "n_holes": 4,
+   "hole": [
+    "[] standby ∧ ¬apfail"
+   ],
+   "overlaps": []
+  },
+  "SEN:N": {
+   "cases": [
+    "FSM-010",
+    "FSM-011v2"
+   ],
+   "complete": false,
+   "n_situations": 8,
+   "n_holes": 2,
+   "hole": [
+    "[] request ∧ ¬limits"
+   ],
+   "overlaps": []
+  },
+  "SEN:T": {
+   "cases": [
+    "FSM-013"
+   ],
+   "complete": false,
+   "n_situations": 8,
+   "n_holes": 6,
+   "hole": [
+    "[] ¬activeMode ∨ ¬request"
+   ],
+   "overlaps": []
+  },
+  "SEN:F": {
+   "cases": [
+    "FSM-012"
+   ],
+   "complete": false,
+   "n_situations": 8,
+   "n_holes": 6,
+   "hole": [
+    "[] limits ∨ request"
+   ],
+   "overlaps": []
+  }
+ },
+ "FSM-012_vs_weak": {
+  "weak_implies_original": true,
+  "original_implies_weak": false
+ },
+ "FSM-001v1_one_step": {
+  "valid": false,
+  "counterexample": {
+   "senstate": "0",
+   "state": "0",
+   "STATE": "1",
+   "SENSTATE": "2",
+   "activeMode": "True",
+   "request": "True",
+   "limits": "True",
+   "supported": "True",
+   "pullup": "False",
+   "standby": "False",
+   "apfail": "False"
+  }
+ },
+ "pullup_mentioned_by_children": false
+}

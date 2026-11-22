@@ -1,0 +1,46 @@
+digraph G {
+rankdir=LR; splines=spline; nodesep=0.25; ranksep=0.9;
+node [fontname="Helvetica", fontsize=11];
+fontname="Helvetica";
+label=<<b>Logic view — senMachine: requirements as next-state logic</b><br/><font point-size="10">&amp; = AND gate · ○ = negation · <font color="#c62828">contention = conflict</font> · <font color="#e08a00">floating line = hole</font></font>>; labelloc=t; fontsize=14;
+subgraph cluster_in { label="inputs"; style=dashed; color="#999999"; fontsize=10;
+"senState=Nom" [shape=plaintext, label="senState = Nom"];
+"senState=Tr" [shape=plaintext, label="senState = Tr"];
+"senState=F" [shape=plaintext, label="senState = F"];
+"limits" [shape=plaintext];
+"mode" [shape=plaintext];
+"request" [shape=plaintext];
+}
+subgraph cluster_bus { label="next-state bus"; style=dashed; color="#999999"; fontsize=10;
+"bus_Nom" [shape=cds, style=filled, fillcolor="#e8eef7", color="#1f5aa6", label="next = Nom"];
+"bus_Tr" [shape=cds, style=filled, fillcolor="#e8eef7", color="#1f5aa6", label="next = Tr"];
+"bus_F" [shape=cds, style=filled, fillcolor="#e8eef7", color="#1f5aa6", label="next = F"];
+}
+"g_FSM-010" [shape=box, width=0.55, height=0.75, fixedsize=true, label="&", fontsize=15, fontname="Helvetica-Bold", style="rounded,filled", fillcolor=white, xlabel=<<font point-size="10" color="#555555">FSM-010</font>>];
+"senState=Nom" -> "g_FSM-010" [arrowhead=none, color="#444444"];
+"limits" -> "g_FSM-010" [arrowhead=none, color="#444444"];
+"g_FSM-010" -> "bus_F" [color="#1f5aa6", penwidth=1.6];
+"g_FSM-011" [shape=box, width=0.55, height=0.75, fixedsize=true, label="&", fontsize=15, fontname="Helvetica-Bold", style="rounded,filled", fillcolor=white, xlabel=<<font point-size="10" color="#555555">FSM-011</font>>];
+"senState=Nom" -> "g_FSM-011" [arrowhead=none, color="#444444"];
+"request" -> "g_FSM-011" [arrowhead=odot, color="#444444"];
+"g_FSM-011" -> "bus_Tr" [color="#1f5aa6", penwidth=1.6];
+"g_FSM-012" [shape=box, width=0.55, height=0.75, fixedsize=true, label="&", fontsize=15, fontname="Helvetica-Bold", style="rounded,filled", fillcolor=white, xlabel=<<font point-size="10" color="#555555">FSM-012</font>>];
+"senState=F" -> "g_FSM-012" [arrowhead=none, color="#444444"];
+"request" -> "g_FSM-012" [arrowhead=odot, color="#444444"];
+"limits" -> "g_FSM-012" [arrowhead=odot, color="#444444"];
+"g_FSM-012" -> "bus_Tr" [color="#1f5aa6", penwidth=1.6];
+"g_FSM-013" [shape=box, width=0.55, height=0.75, fixedsize=true, label="&", fontsize=15, fontname="Helvetica-Bold", style="rounded,filled", fillcolor=white, xlabel=<<font point-size="10" color="#555555">FSM-013</font>>];
+"senState=Tr" -> "g_FSM-013" [arrowhead=none, color="#444444"];
+"request" -> "g_FSM-013" [arrowhead=none, color="#444444"];
+"mode" -> "g_FSM-013" [arrowhead=none, color="#444444"];
+"g_FSM-013" -> "bus_Nom" [color="#1f5aa6", penwidth=1.6];
+"c_FSM-010_FSM-011" [shape=note, style=filled, fillcolor="#fdecea", color="#c62828", fontcolor="#c62828", fontsize=10, label="CONTENTION FSM-010 × FSM-011\nsenState=Nom: limits ∧ ¬request"];
+"g_FSM-010" -> "c_FSM-010_FSM-011" [color="#c62828", style=dashed, arrowhead=none];
+"g_FSM-011" -> "c_FSM-010_FSM-011" [color="#c62828", style=dashed, arrowhead=none];
+"f_Nom" [shape=note, style=filled, fillcolor="#fff4e0", color="#e08a00", fontcolor="#8a5200", fontsize=10, label="in Nom: 2/8 unspecified\nrequest ∧ ¬limits\n→ SysML: stay"];
+"bus_Nom" -> "f_Nom" [color="#e08a00", style=dotted, arrowhead=none];
+"f_Tr" [shape=note, style=filled, fillcolor="#fff4e0", color="#e08a00", fontcolor="#8a5200", fontsize=10, label="in Tr: 6/8 unspecified\n¬mode ∨ ¬request\n→ SysML: stay"];
+"bus_Tr" -> "f_Tr" [color="#e08a00", style=dotted, arrowhead=none];
+"f_F" [shape=note, style=filled, fillcolor="#fff4e0", color="#e08a00", fontcolor="#8a5200", fontsize=10, label="in F: 6/8 unspecified\nlimits ∨ request\n→ SysML: stay"];
+"bus_F" -> "f_F" [color="#e08a00", style=dotted, arrowhead=none];
+}

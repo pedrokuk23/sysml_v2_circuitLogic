@@ -1,0 +1,105 @@
+{
+ "dead_parts": {
+  "AP-003A": [
+   [
+    "Or(TurnKnob <= 30, TurnKnob >= -30)",
+    "sempre verdadeira"
+   ]
+  ],
+  "AP-003B": [],
+  "AP-003C": [],
+  "AP-003D": [
+   [
+    "Or(TurnKnob <= 30, TurnKnob >= -30)",
+    "sempre verdadeira"
+   ]
+  ]
+ },
+ "conflicts": [
+  {
+   "requirements": [
+    "AP-003B",
+    "AP-003D"
+   ],
+   "region": "And(Not(roll_angle <= -6),\n    Not(6 <= roll_angle),\n    Not(And(TurnKnob <= 0, TurnKnob >= 0)),\n    Or(TurnKnob >= 3, TurnKnob <= -3),\n    Or(TurnKnob <= 30, TurnKnob >= -30),\n    Not(And(Not(And(Not(roll_angle <= -6),\n                    Not(6 <= roll_angle))),\n            Not(And(Or(TurnKnob >= 3, TurnKnob <= -3),\n                    Or(TurnKnob <= 30, TurnKnob >= -30))))),\n    Not(And(TurnKnob >= 0, TurnKnob <= 0)),\n    Not(And(Not(And(Not(roll_angle <= -6),\n                    Not(6 <= roll_angle))),\n            Or(Not(And(Or(TurnKnob >= 3, TurnKnob <= -3),\n                       Or(TurnKnob <= 30, TurnKnob >= -30))),\n               And(TurnKnob >= 0, Not(0 <= TurnKnob))))))"
+  },
+  {
+   "requirements": [
+    "AP-003C",
+    "AP-003D"
+   ],
+   "region": "And(If(roll_angle >= 0, roll_angle, -1*roll_angle) >= 30,\n    Or(TurnKnob >= 3, TurnKnob <= -3),\n    Or(TurnKnob <= 30, TurnKnob >= -30),\n    Not(And(Not(If(roll_angle >= 0,\n                   roll_angle,\n                   -1*roll_angle) >=\n                30),\n            Not(And(Or(TurnKnob >= 3, TurnKnob <= -3),\n                    Or(TurnKnob <= 30, TurnKnob >= -30))))),\n    Not(And(Not(If(roll_angle >= 0,\n                   roll_angle,\n                   -1*roll_angle) >=\n                30),\n            Or(Not(And(Or(TurnKnob >= 3, TurnKnob <= -3),\n                       Or(TurnKnob <= 30, TurnKnob >= -30))),\n               And(-1*TurnKnob +\n                   30*ToReal(If(roll_angle >= 0, 1, -1)) <=\n                   0,\n                   Not(0 <=\n                       TurnKnob +\n                       -30*\n                       ToReal(If(roll_angle >= 0, 1, -1))))))),\n    Not(And(Or(Not(If(roll_angle >= 0,\n                      roll_angle,\n                      -1*roll_angle) >=\n                   30),\n               And(-30*ToReal(If(roll_angle >= 0, 1, -1)) +\n                   TurnKnob <=\n                   0,\n                   Not(0 <=\n                       30*ToReal(If(roll_angle >= 0, 1, -1)) +\n                       -1*TurnKnob))),\n            Not(And(Or(TurnKnob >= 3, TurnKnob <= -3),\n                    Or(TurnKnob <= 30, TurnKnob >= -30))))),\n    Not(And(-30*ToReal(If(roll_angle >= 0, 1, -1)) +\n            TurnKnob <=\n            0,\n            30*ToReal(If(roll_angle >= 0, 1, -1)) +\n            -1*TurnKnob <=\n            0)),\n    Not(And(-1*TurnKnob +\n            30*ToReal(If(roll_angle >= 0, 1, -1)) <=\n            0,\n            TurnKnob +\n            -30*ToReal(If(roll_angle >= 0, 1, -1)) <=\n            0)))"
+  }
+ ],
+ "conflicts_with_and": [
+  {
+   "requirements": [
+    "AP-003B",
+    "AP-003D'"
+   ],
+   "region": "And(Not(And(TurnKnob >= 0, TurnKnob <= 0)),\n    Or(TurnKnob >= 3, TurnKnob <= -3),\n    TurnKnob <= 30,\n    TurnKnob >= -30,\n    Not(roll_angle <= -6),\n    Not(6 <= roll_angle),\n    Not(And(TurnKnob <= 0, TurnKnob >= 0)),\n    Not(And(Not(And(Not(roll_angle <= -6),\n                    Not(6 <= roll_angle))),\n            Not(And(Or(TurnKnob >= 3, TurnKnob <= -3),\n                    TurnKnob <= 30,\n                    TurnKnob >= -30)))))"
+  },
+  {
+   "requirements": [
+    "AP-003C",
+    "AP-003D'"
+   ],
+   "region": "And(Not(And(-1*TurnKnob +\n            30*ToReal(If(roll_angle >= 0, 1, -1)) <=\n            0,\n            TurnKnob +\n            -30*ToReal(If(roll_angle >= 0, 1, -1)) <=\n            0)),\n    Not(And(-30*ToReal(If(roll_angle >= 0, 1, -1)) +\n            TurnKnob <=\n            0,\n            30*ToReal(If(roll_angle >= 0, 1, -1)) +\n            -1*TurnKnob <=\n            0)),\n    If(roll_angle >= 0, roll_angle, -1*roll_angle) >= 30,\n    Or(TurnKnob >= 3, TurnKnob <= -3),\n    TurnKnob <= 30,\n    TurnKnob >= -30,\n    Not(And(Or(Not(If(roll_angle >= 0,\n                      roll_angle,\n                      -1*roll_angle) >=\n                   30),\n               And(-30*ToReal(If(roll_angle >= 0, 1, -1)) +\n                   TurnKnob <=\n                   0,\n                   Not(0 <=\n                       30*ToReal(If(roll_angle >= 0, 1, -1)) +\n                       -1*TurnKnob))),\n            Not(And(Or(TurnKnob >= 3, TurnKnob <= -3),\n                    TurnKnob <= 30,\n                    TurnKnob >= -30)))),\n    Not(And(Not(If(roll_angle >= 0,\n                   roll_angle,\n                   -1*roll_angle) >=\n                30),\n            Not(And(Or(TurnKnob >= 3, TurnKnob <= -3),\n                    TurnKnob <= 30,\n                    TurnKnob >= -30)))))"
+  }
+ ],
+ "coverage": {
+  "complete": true,
+  "overlaps": [
+   {
+    "cases": [
+     "B",
+     "D"
+    ],
+    "region": "And(Not(roll_angle <= -6),\n    Not(6 <= roll_angle),\n    Or(TurnKnob >= 3, TurnKnob <= -3),\n    Or(TurnKnob <= 30, TurnKnob >= -30))"
+   },
+   {
+    "cases": [
+     "C",
+     "D"
+    ],
+    "region": "And(If(roll_angle >= 0, roll_angle, -1*roll_angle) >= 30,\n    Or(TurnKnob >= 3, TurnKnob <= -3),\n    Or(TurnKnob <= 30, TurnKnob >= -30))"
+   }
+  ]
+ },
+ "B_D_compatible_region": "And(Or(TurnKnob >= -30,\n       roll_angle <= -6,\n       Not(TurnKnob <= -3),\n       Not(TurnKnob <= 30),\n       6 <= roll_angle),\n    Or(Not(TurnKnob >= -30),\n       roll_angle <= -6,\n       6 <= roll_angle,\n       Not(TurnKnob >= 3)),\n    Or(Not(TurnKnob >= -30),\n       roll_angle <= -6,\n       Not(TurnKnob <= -3),\n       And(Not(TurnKnob <= -3), Not(TurnKnob >= 3)),\n       6 <= roll_angle))",
+ "tsm_coverage": {
+  "complete": false,
+  "hole_region": "And(FC >= 0,\n    FC <= 7,\n    Not(no_fail),\n    Not(FC == 1),\n    Not(FC == 2),\n    Not(FC == 4))",
+  "hole_example": {
+   "FC": "0",
+   "no_fail": "False"
+  },
+  "overlaps": [
+   {
+    "cases": [
+     "TSM-002 (no_fail)",
+     "TSM-003a (FC=1)"
+    ],
+    "region": "And(FC <= 7, no_fail, FC == 1)"
+   },
+   {
+    "cases": [
+     "TSM-002 (no_fail)",
+     "TSM-003b (FC=2)"
+    ],
+    "region": "And(FC <= 7, no_fail, FC == 2)"
+   },
+   {
+    "cases": [
+     "TSM-002 (no_fail)",
+     "TSM-003c (FC=4)"
+    ],
+    "region": "And(FC <= 7, no_fail, FC == 4)"
+   }
+  ]
+ },
+ "tsm_coverage_with_glossary": {
+  "complete": true,
+  "overlaps": []
+ }
+}

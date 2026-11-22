@@ -1,0 +1,15 @@
+node imported ap_orig(apfail:bool; good:bool; standby:bool; state:int; supported:bool) returns (STATE:int);
+(*@contract
+  const ap_transition_state: int = 0; const ap_nominal_state: int = 1;
+  const ap_maneuver_state: int = 2; const ap_standby_state: int = 3;
+  assume 0 <= state and state <= 3;
+  guarantee 0 <= STATE and STATE <= 3;
+  guarantee "FSM-002" ( standby and state = ap_transition_state ) => STATE = ap_standby_state;
+  guarantee "FSM-003" ( state = ap_transition_state and good and supported ) => STATE = ap_nominal_state;
+  guarantee "FSM-004" ( not good and state = ap_nominal_state ) => STATE = ap_maneuver_state;
+  guarantee "FSM-005" ( state = ap_nominal_state and standby ) => STATE = ap_standby_state;
+  guarantee "FSM-006" ( state = ap_maneuver_state and standby and good ) => STATE = ap_standby_state;
+  guarantee "FSM-007" ( state = ap_maneuver_state and supported and good ) => STATE = ap_transition_state;
+  guarantee "FSM-008v1" ( state = ap_standby_state and not standby ) => STATE = ap_transition_state;
+  guarantee "FSM-009" ( state = ap_standby_state and apfail ) => STATE = ap_maneuver_state;
+*)

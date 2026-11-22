@@ -1,0 +1,32 @@
+{
+ "firesat_structure": {
+  "products": 128,
+  "dead": [],
+  "core": [
+   "FireSat",
+   "bus",
+   "comm",
+   "ground",
+   "orbit",
+   "payload"
+  ],
+  "seconds": 0.02
+ },
+ "firesat_folded": {
+  "products": 27,
+  "dead": [
+   "geo1"
+  ],
+  "core": [
+   "FireSat",
+   "bus",
+   "comm",
+   "ground",
+   "leo2",
+   "orbit",
+   "payload"
+  ],
+  "seconds": 0.03
+ },
+ "cnf_clauses": "~geo1 & (detectOnBoard | relayLink) & (gs12 | relayLink) & (midBus | ~largeIR) & (midBus | ~detectOnBoard | ~geolocateOnBoard)"
+}

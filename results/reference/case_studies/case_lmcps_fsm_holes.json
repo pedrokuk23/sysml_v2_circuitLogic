@@ -1,0 +1,41 @@
+{
+ "n_holes": 34,
+ "needed": [
+  [
+   "AP",
+   "N",
+   "False",
+   "False",
+   "True",
+   "True"
+  ],
+  [
+   "SEN",
+   "N",
+   "False",
+   "True",
+   "False"
+  ],
+  [
+   "SEN",
+   "N",
+   "True",
+   "True",
+   "False"
+  ],
+  [
+   "SEN",
+   "T",
+   "False",
+   "True",
+   "False"
+  ],
+  [
+   "SEN",
+   "T",
+   "True",
+   "False",
+   "False"
+  ]
+ ]
+}

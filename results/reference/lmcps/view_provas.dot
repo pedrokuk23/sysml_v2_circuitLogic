@@ -1,0 +1,17 @@
+digraph G {
+rankdir=LR; nodesep=0.3; ranksep=0.7;
+node [fontname="Helvetica", fontsize=11];
+fontname="Helvetica";
+label=<<b>Logic view — port contracts and proofs</b>>; labelloc=t; fontsize=14;
+subgraph cluster_portContract { label="portContract (Craig interpolant = projection)"; style=rounded; color="#1f5aa6";
+"portContract_mode" [shape=plaintext, label="mode"];
+"portContract_request" [shape=plaintext, label="request"];
+"portContract_g" [shape=box, width=0.55, height=0.75, fixedsize=true, label="≥1", fontsize=15, fontname="Helvetica-Bold", style="rounded,filled", fillcolor=white];
+"portContract_mode" -> "portContract_g";
+"portContract_request" -> "portContract_g";
+"portContract_n" [shape=note, style=filled, fillcolor="#e8eef7", color="#1f5aa6", label="apSide.mode or apSide.request\nexact projection: True\nholes senMachine: 14 → 11"];
+"portContract_g" -> "portContract_n"; }
+subgraph cluster_p { label="each requirement as an assertion on the sequential circuit"; style=rounded; color="#2e7d32";
+"tbl" [shape=plaintext, label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4"><tr><td bgcolor="#e8eef7"><b>requirement</b></td><td bgcolor="#e8eef7"><b>result</b></td></tr><tr><td align="left">FSM-001</td><td bgcolor="#fdecea">counterexample</td></tr><tr><td align="left">FSM-001v2</td><td bgcolor="#fdecea">counterexample</td></tr><tr><td align="left">FSM-001v3</td><td bgcolor="#eaf5ea">proved (IC3)</td></tr><tr><td align="left">FSM-002</td><td bgcolor="#eaf5ea">proved (k=1)</td></tr><tr><td align="left">FSM-003</td><td bgcolor="#fdecea">counterexample</td></tr><tr><td align="left">FSM-004</td><td bgcolor="#fdecea">counterexample</td></tr><tr><td align="left">FSM-005</td><td bgcolor="#eaf5ea">proved (k=1)</td></tr><tr><td align="left">FSM-006</td><td bgcolor="#eaf5ea">proved (k=1)</td></tr><tr><td align="left">FSM-007</td><td bgcolor="#fdecea">counterexample</td></tr><tr><td align="left">FSM-008</td><td bgcolor="#fdecea">counterexample</td></tr><tr><td align="left">FSM-009</td><td bgcolor="#eaf5ea">proved (k=1)</td></tr><tr><td align="left">FSM-010</td><td bgcolor="#eaf5ea">proved (k=1)</td></tr><tr><td align="left">FSM-011</td><td bgcolor="#fdecea">counterexample</td></tr><tr><td align="left">FSM-012</td><td bgcolor="#eaf5ea">proved (k=1)</td></tr><tr><td align="left">FSM-013</td><td bgcolor="#eaf5ea">proved (k=1)</td></tr></table>>]; }
+"lem_FSM-001v3" [shape=note, style=filled, fillcolor="#eaf5ea", color="#2e7d32", fontsize=10, label="FSM-001v3: inductive invariant (IC3/PDR)\n= lemmas the requirement relies on\l¬pre2_notLimits ∨ ¬pre1_autopilot ∨ senState ∈ {Nom, F} ∨ apState ∈ {T}\l¬pre3_notLimits ∨ ¬pre1_limits ∨ ¬pre2_autopilot ∨ ¬pre1_autopilot ∨ apState ∈ {N, M, S} ∨ senState ∈ {F}\l¬pre1_notLimits ∨ senState ∈ {Nom, Tr}\l¬pre3_notLimits ∨ ¬pre3_autopilot ∨ ¬pre1_limits ∨ ¬pre4_notLimits ∨ ¬pre2_notLimits ∨ ¬pre2_autopilot ∨ senState ∈ {F}\l¬pre2_notLimits ∨ ¬pre1_autopilot ∨ apState ∈ {T, N}\l¬pre3_notLimits ∨ ¬pre2_notLimits ∨ ¬pre2_autopilot ∨ ¬pre1_autopilot ∨ apState ∈ {N, M, S}\l"];
+}

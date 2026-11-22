@@ -1,0 +1,93 @@
+{
+ "old": "models/lmcps_fsm.sysml",
+ "new": "models/lmcps_fsm_rev.sysml",
+ "requirements": {
+  "FSM-003": {
+   "yosys": "different",
+   "differ_where": [
+    "[apState=T, senState=Nom] good ∧ standby ∧ supported",
+    "[apState=T, senState=Tr] good ∧ standby ∧ supported",
+    "[apState=T, senState=F] good ∧ standby ∧ supported"
+   ],
+   "order": "old ⇒ new"
+  },
+  "FSM-004": {
+   "yosys": "different",
+   "differ_where": [
+    "[apState=N, senState=Nom] standby ∧ ¬good",
+    "[apState=N, senState=Tr] standby ∧ ¬good",
+    "[apState=N, senState=F] standby ∧ ¬good"
+   ],
+   "order": "old ⇒ new"
+  },
+  "FSM-007": {
+   "yosys": "different",
+   "differ_where": [
+    "[apState=M, senState=Nom] good ∧ standby ∧ supported",
+    "[apState=M, senState=Tr] good ∧ standby ∧ supported",
+    "[apState=M, senState=F] good ∧ standby ∧ supported"
+   ],
+   "order": "old ⇒ new"
+  },
+  "FSM-008": {
+   "yosys": "different",
+   "differ_where": [
+    "[apState=S, senState=Nom] apfail ∧ ¬standby",
+    "[apState=S, senState=Tr] apfail ∧ ¬standby",
+    "[apState=S, senState=F] apfail ∧ ¬standby"
+   ],
+   "order": "old ⇒ new"
+  },
+  "FSM-011": {
+   "yosys": "different",
+   "differ_where": [
+    "[apState=T, senState=Nom] limits ∧ ¬request",
+    "[apState=N, senState=Nom] limits ∧ ¬request",
+    "[apState=M, senState=Nom] limits ∧ ¬request",
+    "[apState=S, senState=Nom] limits ∧ ¬request"
+   ],
+   "order": "old ⇒ new"
+  },
+  "FSM-012": {
+   "yosys": "different",
+   "differ_where": [
+    "[apState=T, senState=F] (limits ∧ ¬request) ∨ (request ∧ ¬limits)",
+    "[apState=N, senState=F] (limits ∧ ¬request) ∨ (request ∧ ¬limits)",
+    "[apState=M, senState=F] (limits ∧ ¬request) ∨ (request ∧ ¬limits)",
+    "[apState=S, senState=F] (limits ∧ ¬request) ∨ (request ∧ ¬limits)"
+   ],
+   "order": "new ⇒ old"
+  }
+ },
+ "sets": {
+  "apMachine": {
+   "conditionally_equivalent_where_old_satisfiable": true,
+   "differ_where": [
+    "[apState=T] good ∧ standby ∧ supported",
+    "[apState=N] standby ∧ ¬good",
+    "[apState=M] good ∧ standby ∧ supported",
+    "[apState=S] apfail ∧ ¬standby"
+   ],
+   "old_conflict_region": [
+    "[apState=T] good ∧ standby ∧ supported",
+    "[apState=N] standby ∧ ¬good",
+    "[apState=M] good ∧ standby ∧ supported",
+    "[apState=S] apfail ∧ ¬standby"
+   ],
+   "difference_equals_old_conflicts": true
+  },
+  "senMachine": {
+   "conditionally_equivalent_where_old_satisfiable": false,
+   "differ_where": [
+    "[senState=Nom] limits ∧ ¬request",
+    "[senState=F] (limits ∧ ¬request) ∨ (request ∧ ¬limits)"
+   ],
+   "old_conflict_region": [
+    "[senState=Nom] limits ∧ ¬request"
+   ],
+   "difference_equals_old_conflicts": false
+  }
+ },
+ "added": [],
+ "removed": []
+}

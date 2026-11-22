@@ -1,0 +1,10 @@
+node imported sen_orig(limits:bool; request:bool; MODE:bool; senstate:int) returns (SENSTATE:int);
+(*@contract
+  const sen_nominal_state: int = 0; const sen_transition_state: int = 1; const sen_fault_state: int = 2;
+  assume 0 <= senstate and senstate <= 2;
+  guarantee 0 <= SENSTATE and SENSTATE <= 2;
+  guarantee "FSM-010" ( senstate = sen_nominal_state and limits ) => SENSTATE = sen_fault_state;
+  guarantee "FSM-011v1" ( senstate = sen_nominal_state and not request ) => SENSTATE = sen_transition_state;
+  guarantee "FSM-012" ( senstate = sen_fault_state and not request and not limits ) => SENSTATE = sen_transition_state;
+  guarantee "FSM-013" ( senstate = sen_transition_state and request and MODE ) => SENSTATE = sen_nominal_state;
+*)

@@ -1,0 +1,26 @@
+features
+    FireSat
+        mandatory
+            payload
+                alternative
+                    smallIR
+                    largeIR
+            orbit
+                alternative
+                    leo2
+                    geo1
+            bus
+                alternative
+                    smallBus
+                    midBus
+            ground
+                alternative
+                    gs4
+                    gs12
+            comm
+                alternative
+                    direct
+                    relayLink
+        optional
+            detectOnBoard
+            geolocateOnBoard

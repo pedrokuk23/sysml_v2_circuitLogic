@@ -1,0 +1,62 @@
+digraph G {
+rankdir=LR; nodesep=0.22; ranksep=1.0;
+node [fontname="Helvetica", fontsize=11];
+fontname="Helvetica";
+label=<<b>Logic view — variability as a configuration circuit</b><br/><font point-size="10">=1 = exactly one · <font color="#c62828">red = dead variant</font> · <font color="#2e7d32">green = core variant</font> · (Y) = proved in Yosys</font>>; labelloc=t; fontsize=14;
+subgraph cluster_payload { label="payload"; style=dashed; color="#999999"; fontsize=10;
+"payload.smallIR" [shape=plaintext, label="smallIR", fontcolor="black"];
+"payload.largeIR" [shape=plaintext, label="largeIR", fontcolor="black"];
+}
+"oh_payload" [shape=box, width=0.55, height=0.75, fixedsize=true, label="=1", fontsize=15, fontname="Helvetica-Bold", style="rounded,filled", fillcolor=white];
+"payload.smallIR" -> "oh_payload" [arrowhead=none];
+"payload.largeIR" -> "oh_payload" [arrowhead=none];
+subgraph cluster_orbit { label="orbit"; style=dashed; color="#999999"; fontsize=10;
+"orbit.leo2" [shape=plaintext, label="leo2 (Y)", fontcolor="#2e7d32"];
+"orbit.geo1" [shape=plaintext, label="geo1 (Y)", fontcolor="#c62828"];
+}
+"oh_orbit" [shape=box, width=0.55, height=0.75, fixedsize=true, label="=1", fontsize=15, fontname="Helvetica-Bold", style="rounded,filled", fillcolor=white];
+"orbit.leo2" -> "oh_orbit" [arrowhead=none];
+"orbit.geo1" -> "oh_orbit" [arrowhead=none];
+subgraph cluster_bus { label="bus"; style=dashed; color="#999999"; fontsize=10;
+"bus.smallBus" [shape=plaintext, label="smallBus", fontcolor="black"];
+"bus.midBus" [shape=plaintext, label="midBus", fontcolor="black"];
+}
+"oh_bus" [shape=box, width=0.55, height=0.75, fixedsize=true, label="=1", fontsize=15, fontname="Helvetica-Bold", style="rounded,filled", fillcolor=white];
+"bus.smallBus" -> "oh_bus" [arrowhead=none];
+"bus.midBus" -> "oh_bus" [arrowhead=none];
+subgraph cluster_ground { label="ground"; style=dashed; color="#999999"; fontsize=10;
+"ground.gs4" [shape=plaintext, label="gs4", fontcolor="black"];
+"ground.gs12" [shape=plaintext, label="gs12", fontcolor="black"];
+}
+"oh_ground" [shape=box, width=0.55, height=0.75, fixedsize=true, label="=1", fontsize=15, fontname="Helvetica-Bold", style="rounded,filled", fillcolor=white];
+"ground.gs4" -> "oh_ground" [arrowhead=none];
+"ground.gs12" -> "oh_ground" [arrowhead=none];
+subgraph cluster_comm { label="comm"; style=dashed; color="#999999"; fontsize=10;
+"comm.direct" [shape=plaintext, label="direct", fontcolor="black"];
+"comm.relayLink" [shape=plaintext, label="relayLink", fontcolor="black"];
+}
+"oh_comm" [shape=box, width=0.55, height=0.75, fixedsize=true, label="=1", fontsize=15, fontname="Helvetica-Bold", style="rounded,filled", fillcolor=white];
+"comm.direct" -> "oh_comm" [arrowhead=none];
+"comm.relayLink" -> "oh_comm" [arrowhead=none];
+"MR-RES" [shape=box, style="rounded,filled", fillcolor="#e8eef7", color="#1f5aa6", label="MR-RES"];
+"oh_orbit" -> "MR-RES" [color="#666666"];
+"oh_payload" -> "MR-RES" [color="#666666"];
+"MR-TL" [shape=box, style="rounded,filled", fillcolor="#e8eef7", color="#1f5aa6", label="MR-TL"];
+"oh_comm" -> "MR-TL" [color="#666666"];
+"oh_ground" -> "MR-TL" [color="#666666"];
+"oh_orbit" -> "MR-TL" [color="#666666"];
+"MR-MASS" [shape=box, style="rounded,filled", fillcolor="#e8eef7", color="#1f5aa6", label="MR-MASS"];
+"oh_bus" -> "MR-MASS" [color="#666666"];
+"oh_payload" -> "MR-MASS" [color="#666666"];
+"CAP" [shape=box, style="rounded,filled", fillcolor="#e8eef7", color="#1f5aa6", label="CAP"];
+"oh_bus" -> "CAP" [color="#666666"];
+"valid" [shape=box, width=0.55, height=0.75, fixedsize=true, label="&", fontsize=15, fontname="Helvetica-Bold", style="rounded,filled", fillcolor=white];
+"MR-RES" -> "valid" [color="#1f5aa6"];
+"MR-TL" -> "valid" [color="#1f5aa6"];
+"MR-MASS" -> "valid" [color="#1f5aa6"];
+"CAP" -> "valid" [color="#1f5aa6"];
+"out" [shape=note, style=filled, fillcolor="#eaf5ea", color="#2e7d32", label="valid: 9 of 32"];
+"valid" -> "out";
+"dn_orbit.geo1" [shape=note, style=filled, fillcolor="#fdecea", color="#c62828", fontcolor="#c62828", fontsize=10, label="orbit.geo1 dead by MR-RES\nrevive via payload.D: impossible"];
+"orbit.geo1" -> "dn_orbit.geo1" [color="#c62828", style=dashed, arrowhead=none];
+}

@@ -1,0 +1,567 @@
+{
+ "model": "models/firesat.sysml",
+ "requirements": [
+  "MR-RES",
+  "MR-TL",
+  "MR-MASS"
+ ],
+ "variability": {
+  "variations": {
+   "payload": [
+    "smallIR",
+    "largeIR"
+   ],
+   "orbit": [
+    "leo2",
+    "geo1"
+   ],
+   "bus": [
+    "smallBus",
+    "midBus"
+   ],
+   "ground": [
+    "gs4",
+    "gs12"
+   ],
+   "comm": [
+    "direct",
+    "relayLink"
+   ]
+  },
+  "n_configs": 32,
+  "n_valid": 9,
+  "valid_configs": [
+   {
+    "payload": "smallIR",
+    "orbit": "leo2",
+    "bus": "smallBus",
+    "ground": "gs4",
+    "comm": "relayLink"
+   },
+   {
+    "payload": "smallIR",
+    "orbit": "leo2",
+    "bus": "smallBus",
+    "ground": "gs12",
+    "comm": "direct"
+   },
+   {
+    "payload": "smallIR",
+    "orbit": "leo2",
+    "bus": "smallBus",
+    "ground": "gs12",
+    "comm": "relayLink"
+   },
+   {
+    "payload": "smallIR",
+    "orbit": "leo2",
+    "bus": "midBus",
+    "ground": "gs4",
+    "comm": "relayLink"
+   },
+   {
+    "payload": "smallIR",
+    "orbit": "leo2",
+    "bus": "midBus",
+    "ground": "gs12",
+    "comm": "direct"
+   },
+   {
+    "payload": "smallIR",
+    "orbit": "leo2",
+    "bus": "midBus",
+    "ground": "gs12",
+    "comm": "relayLink"
+   },
+   {
+    "payload": "largeIR",
+    "orbit": "leo2",
+    "bus": "midBus",
+    "ground": "gs4",
+    "comm": "relayLink"
+   },
+   {
+    "payload": "largeIR",
+    "orbit": "leo2",
+    "bus": "midBus",
+    "ground": "gs12",
+    "comm": "direct"
+   },
+   {
+    "payload": "largeIR",
+    "orbit": "leo2",
+    "bus": "midBus",
+    "ground": "gs12",
+    "comm": "relayLink"
+   }
+  ],
+  "invalid_by_core": {
+   "MR-TL": 3,
+   "MR-RES": 12,
+   "MR-MASS": 8
+  },
+  "eliminated_alone": {
+   "MR-TL": 4,
+   "MR-RES": 16,
+   "MR-MASS": 8
+  },
+  "dead_variants": [
+   "orbit.geo1"
+  ],
+  "core_variants": [
+   "orbit.leo2"
+  ],
+  "dead_because": {
+   "orbit.geo1": [
+    "MR-RES"
+   ]
+  },
+  "revive": {
+   "orbit.geo1 / MR-RES": {
+    "free": [
+     "payload.D"
+    ],
+    "condition": "1281/125000000/payload.D <= -38679/17893000000",
+    "possible": false
+   }
+  },
+  "allocation": [
+   {
+    "config": {
+     "payload": "smallIR",
+     "orbit": "leo2",
+     "bus": "smallBus",
+     "ground": "gs4",
+     "comm": "relayLink"
+    },
+    "feasible_allocations": 3,
+    "forced": {},
+    "fixed": [
+     "downlink"
+    ],
+    "declared_feasible": false
+   },
+   {
+    "config": {
+     "payload": "smallIR",
+     "orbit": "leo2",
+     "bus": "smallBus",
+     "ground": "gs12",
+     "comm": "direct"
+    },
+    "feasible_allocations": 1,
+    "forced": {
+     "detect": "OBC",
+     "geolocate": "solo"
+    },
+    "fixed": [
+     "downlink"
+    ],
+    "declared_feasible": false
+   },
+   {
+    "config": {
+     "payload": "smallIR",
+     "orbit": "leo2",
+     "bus": "smallBus",
+     "ground": "gs12",
+     "comm": "relayLink"
+    },
+    "feasible_allocations": 3,
+    "forced": {},
+    "fixed": [
+     "downlink"
+    ],
+    "declared_feasible": false
+   },
+   {
+    "config": {
+     "payload": "smallIR",
+     "orbit": "leo2",
+     "bus": "midBus",
+     "ground": "gs4",
+     "comm": "relayLink"
+    },
+    "feasible_allocations": 4,
+    "forced": {},
+    "fixed": [
+     "downlink"
+    ],
+    "declared_feasible": true
+   },
+   {
+    "config": {
+     "payload": "smallIR",
+     "orbit": "leo2",
+     "bus": "midBus",
+     "ground": "gs12",
+     "comm": "direct"
+    },
+    "feasible_allocations": 2,
+    "forced": {
+     "detect": "OBC"
+    },
+    "fixed": [
+     "downlink"
+    ],
+    "declared_feasible": true
+   },
+   {
+    "config": {
+     "payload": "smallIR",
+     "orbit": "leo2",
+     "bus": "midBus",
+     "ground": "gs12",
+     "comm": "relayLink"
+    },
+    "feasible_allocations": 4,
+    "forced": {},
+    "fixed": [
+     "downlink"
+    ],
+    "declared_feasible": true
+   },
+   {
+    "config": {
+     "payload": "largeIR",
+     "orbit": "leo2",
+     "bus": "midBus",
+     "ground": "gs4",
+     "comm": "relayLink"
+    },
+    "feasible_allocations": 4,
+    "forced": {},
+    "fixed": [
+     "downlink"
+    ],
+    "declared_feasible": true
+   },
+   {
+    "config": {
+     "payload": "largeIR",
+     "orbit": "leo2",
+     "bus": "midBus",
+     "ground": "gs12",
+     "comm": "direct"
+    },
+    "feasible_allocations": 2,
+    "forced": {
+     "detect": "OBC"
+    },
+    "fixed": [
+     "downlink"
+    ],
+    "declared_feasible": true
+   },
+   {
+    "config": {
+     "payload": "largeIR",
+     "orbit": "leo2",
+     "bus": "midBus",
+     "ground": "gs12",
+     "comm": "relayLink"
+    },
+    "feasible_allocations": 4,
+    "forced": {},
+    "fixed": [
+     "downlink"
+    ],
+    "declared_feasible": true
+   }
+  ],
+  "allocation_functions": [
+   "detect",
+   "geolocate",
+   "downlink"
+  ]
+ },
+ "actions": {
+  "DetectAndReport": {
+   "nodes": {
+    "start": "start",
+    "observe": "action",
+    "detect": "action",
+    "fireCheck": "decide",
+    "geolocate": "action",
+    "done": "final",
+    "split": "fork",
+    "retryMerge": "merge",
+    "archive": "action",
+    "downlink": "action",
+    "linkCheck": "decide",
+    "sync": "join",
+    "retry": "action",
+    "notify": "action"
+   },
+   "edges": [
+    [
+     "start",
+     "observe",
+     null
+    ],
+    [
+     "observe",
+     "detect",
+     null
+    ],
+    [
+     "detect",
+     "fireCheck",
+     null
+    ],
+    [
+     "fireCheck",
+     "geolocate",
+     "fire"
+    ],
+    [
+     "fireCheck",
+     "done",
+     "not fire"
+    ],
+    [
+     "geolocate",
+     "split",
+     null
+    ],
+    [
+     "split",
+     "retryMerge",
+     null
+    ],
+    [
+     "split",
+     "archive",
+     null
+    ],
+    [
+     "retryMerge",
+     "downlink",
+     null
+    ],
+    [
+     "downlink",
+     "linkCheck",
+     null
+    ],
+    [
+     "linkCheck",
+     "sync",
+     "linkUp"
+    ],
+    [
+     "linkCheck",
+     "retry",
+     "linkUp and backlog"
+    ],
+    [
+     "retry",
+     "retryMerge",
+     null
+    ],
+    [
+     "archive",
+     "sync",
+     null
+    ],
+    [
+     "sync",
+     "notify",
+     null
+    ],
+    [
+     "notify",
+     "done",
+     null
+    ]
+   ],
+   "decisions": {
+    "fireCheck": {
+     "guards": {
+      "geolocate": "fire",
+      "done": "not fire"
+     },
+     "complete": true,
+     "hole": null,
+     "overlaps": []
+    },
+    "linkCheck": {
+     "guards": {
+      "sync": "linkUp",
+      "retry": "linkUp and backlog"
+     },
+     "complete": false,
+     "hole": "And(Not(linkUp), Not(And(linkUp, backlog)))",
+     "overlaps": [
+      [
+       "sync",
+       "retry"
+      ]
+     ]
+    }
+   },
+   "flows": [
+    {
+     "inputs": {
+      "fire": false,
+      "linkUp": false,
+      "backlog": false
+     },
+     "markings": 5,
+     "terminates": true,
+     "deadlocks": [],
+     "loop_possible": false
+    },
+    {
+     "inputs": {
+      "fire": false,
+      "linkUp": false,
+      "backlog": true
+     },
+     "markings": 5,
+     "terminates": true,
+     "deadlocks": [],
+     "loop_possible": false
+    },
+    {
+     "inputs": {
+      "fire": false,
+      "linkUp": true,
+      "backlog": false
+     },
+     "markings": 5,
+     "terminates": true,
+     "deadlocks": [],
+     "loop_possible": false
+    },
+    {
+     "inputs": {
+      "fire": false,
+      "linkUp": true,
+      "backlog": true
+     },
+     "markings": 5,
+     "terminates": true,
+     "deadlocks": [],
+     "loop_possible": false
+    },
+    {
+     "inputs": {
+      "fire": true,
+      "linkUp": false,
+      "backlog": false
+     },
+     "markings": 11,
+     "terminates": false,
+     "deadlocks": [
+      [
+       "downlink→linkCheck",
+       "archive→sync"
+      ]
+     ],
+     "loop_possible": false
+    },
+    {
+     "inputs": {
+      "fire": true,
+      "linkUp": false,
+      "backlog": true
+     },
+     "markings": 11,
+     "terminates": false,
+     "deadlocks": [
+      [
+       "downlink→linkCheck",
+       "archive→sync"
+      ]
+     ],
+     "loop_possible": false
+    },
+    {
+     "inputs": {
+      "fire": true,
+      "linkUp": true,
+      "backlog": false
+     },
+     "markings": 16,
+     "terminates": true,
+     "deadlocks": [],
+     "loop_possible": false
+    },
+    {
+     "inputs": {
+      "fire": true,
+      "linkUp": true,
+      "backlog": true
+     },
+     "markings": 20,
+     "terminates": true,
+     "deadlocks": [],
+     "loop_possible": true
+    }
+   ],
+   "nominal_cycle_min": 6.0,
+   "loops": {
+    "retryMerge": 4.0,
+    "downlink": 4.0,
+    "linkCheck": 4.0,
+    "retry": 4.0
+   }
+  }
+ },
+ "status": "complete",
+ "coverage": {
+  "translated": {
+   "require constraint": 3,
+   "variation part def": 5,
+   "requirement def": 3,
+   "variant part": 10,
+   "action def": 1,
+   "attribute": 44,
+   "allocate": 3,
+   "decide": 2,
+   "merge": 1,
+   "fork": 1,
+   "join": 1
+  },
+  "structural": {
+   "perform action": 1,
+   "requirement": 3,
+   "part def": 6,
+   "package": 1,
+   "satisfy": 3,
+   "subject": 3,
+   "import": 1,
+   "part": 8,
+   "doc": 3
+  },
+  "statements_recognized": 120
+ },
+ "eda": {
+  "cfg": {
+   "proved": {
+    "core:orbit.leo2": "proved",
+    "dead:orbit.geo1": "proved"
+   },
+   "aig_cfg": {
+    "as_written": {
+     "AND": 9,
+     "NOT": 19,
+     "FF": 0
+    },
+    "optimized": {
+     "AND": 9,
+     "NOT": 7,
+     "FF": 0
+    }
+   },
+   "truth_table_ones": {
+    "MR-RES": 64,
+    "MR-TL": 104,
+    "MR-MASS": 96,
+    "CAP": 112
+   }
+  }
+ },
+ "seconds": 5.268992900848389
+}
