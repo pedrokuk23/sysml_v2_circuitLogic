@@ -3,7 +3,7 @@ import itertools, os, sys
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from z3 import (And, Or, Not, Implies, Exists, ForAll, BoolVal, RealVal, Real, If, simplify, substitute, is_true,
                 is_implies, is_eq, is_int_value)
-from logic_engine import conflicts, is_sat, valid, qe, finite_region, coverage, free_consts, refines, abduce, interpolate, has_quantifier, dead_parts
+from logic_engine import conflicts, is_sat, valid, qe, finite_region, coverage, free_consts, refines, abduce, interpolate, has_quantifier, dead_parts, decide, tri_and, Inconclusive
 
 
 def bools_in(f, S):
@@ -403,7 +403,7 @@ def reachable_situations(S, res):
     while frontier:
         st = frontier.pop()
         s = Solver(); s.add(Z, *[vars_[m][1] == v for m, v in zip(machines, st)])
-        while s.check() == sat:
+        while decide(s):                  # UNKNOWN raises Inconclusive: no claim that the enumeration is complete
             mdl = s.model()
             nx = tuple(mdl.eval(vars_[m][2], model_completion=True).as_long() for m in machines)
             if nx not in seen:
@@ -418,9 +418,9 @@ def reachable_situations(S, res):
     ren = [(v, _const(str(v) + "__2", v.sort())) for v in outs]
     Z2 = _sub(Z, *ren)
     s = Solver(); s.add(Z, Z2, reach, Or(*[vars_[m][2] != _sub(vars_[m][2], *ren) for m in machines]))
-    unique = s.check() != sat
+    unique = not decide(s)              # proved only by UNSAT; UNKNOWN raises Inconclusive
     s = Solver(); s.add(S.domain, reach, _forall(outs, Not(Z)) if outs else Not(Z))
-    total = s.check() != sat
+    total = not decide(s)
     out = dict(composition_deterministic=unique, composition_total=total, states=sorted([{m: lits[m][v] for m, v in zip(machines, st)} for st in seen], key=str),
                n_states=len(seen), n_states_total=1)
     for m in machines:
@@ -517,7 +517,16 @@ def _abduce_bounded(P, rest, A, voc, ms=20000):
     if len(voc) != 1:
         return dict(W=None, W_expr=None, method=f"not computed (quantifier elimination exceeded {ms // 1000} s)")
     v = voc[0]
-    ok = lambda c: valid(substitute(body, (v, RealVal(c))))[0]
+    unk = [0]
+
+    def ok(c):
+        """A point is valid only when the validity query is UNSAT; an UNKNOWN point is counted and treated as not
+        certified, so every reported bound is a point proved valid (possibly conservative)."""
+        try:
+            return valid(substitute(body, (v, RealVal(c))))[0]
+        except Inconclusive:
+            unk[0] += 1
+            return False
     grid = sorted({sg * 10 ** (e / 4) for sg in (-1, 1) for e in range(-40, 41)} | {0.0})
     flags = [ok(c) for c in grid]
     if not any(flags):
@@ -543,7 +552,9 @@ def _abduce_bounded(P, rest, A, voc, ms=20000):
             bounds.append((("<=" if fa else ">="), r))
     expr = And(*[(v <= c) if op == "<=" else (v >= c) for op, c in bounds]) if bounds else BoolVal(True)
     return dict(W=" and ".join(f"{v} {op} {c:g}" for op, c in bounds) or "True", W_expr=expr,
-                method="numerical (bisection; quantifier elimination exceeded the time limit)")
+                method="numerical (bisection; quantifier elimination exceeded the time limit)"
+                       + (f"; {unk[0]} inconclusive points treated as not certified" if unk[0] else ""),
+                inconclusive_points=unk[0])
 
 
 def _interpolate_bounded(fa, fb, shared, ms=20000):
@@ -570,9 +581,14 @@ def _interpolate_bounded(fa, fb, shared, ms=20000):
 
 def input_total(body, A, outputs):
     """For every input valuation admitted by A (projected on the inputs), some output valuation satisfies body:
-    validity of  (exists outputs. A) -> (exists outputs. body)."""
+    validity of  (exists outputs. A) -> (exists outputs. body). Must be called on the original formulas (no
+    substitution of glossary definitions, which could eliminate an input). Returns True, False, or None when the
+    solver answers UNKNOWN."""
     from z3 import Exists as _Ex
-    return valid(Implies(_Ex(outputs, A), _Ex(outputs, body)))[0]
+    try:
+        return valid(Implies(_Ex(outputs, A), _Ex(outputs, body)))[0]
+    except Inconclusive:
+        return None
 
 
 def check_flowdown(S):
@@ -619,21 +635,26 @@ def check_flowdown(S):
         P, kids = expand(S.R[d["original"]]), {k: expand(S.R[k]) for k in d["derived"]}
         r = dict(original=d["original"], derived=list(kids))
         ref = refines(P, list(kids.values()), A)
-        r["valid"] = ref["valid"]
+        r["valid"] = ref["valid"]                       # implication: True, False or None (inconclusive)
+        r["implication"] = {True: "valid", False: "fails", None: "inconclusive"}[ref["valid"]]
         r["children_consistent"] = ref.get("children_consistent")
+        for k_ in ("implication_reason", "consistency_reason"):
+            if k_ in ref:
+                r[k_] = ref[k_]
         # static (design-space) refinement: the children are jointly satisfiable under A and imply the parent.
         # Reactive (input/output) refinement additionally needs input-totality: for every admissible input there is
         # an output meeting the children; it is checked only when the requirements declare outputs ('out').
         attrs = [a_ for k in [d["original"]] + list(kids) for a_ in S.ir["requirements"][k]["attrs"]]
         outs = sorted({a_["name"] for a_ in attrs if a_["dir"] == "out"})
-        r["static_refinement"] = bool(ref["valid"] and ref.get("children_consistent"))
+        r["static_refinement"] = tri_and(ref["valid"], ref.get("children_consistent"))
         if not outs:
             r["kind"] = "static"
             r["input_total"] = "not applicable (no output attributes declared)"
         else:
             r["kind"] = "reactive"
-            r["input_total"] = input_total(And(A, *kids.values()), A, [S.vars[n] for n in outs])
-            r["reactive_refinement"] = bool(ref["valid"] and r["input_total"])
+            A0 = And(S.domain, *gl_all.values())         # original relation: no definition is substituted
+            r["input_total"] = input_total(And(A0, *[S.R[k] for k in d["derived"]]), A0, [S.vars[n] for n in outs])
+            r["reactive_refinement"] = tri_and(r["static_refinement"], r["input_total"])
         # worst case of the bounded quantity of the parent (parent of the form  q <= c  or  c >= q)
         q = None
         if is_le(P) or is_lt(P):

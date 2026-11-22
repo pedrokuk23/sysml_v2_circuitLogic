@@ -4565,6 +4565,6 @@ Reached maximum number of time steps -> proof failed.
   | |   | |  | |_| | |_| || |       | |  / ___ | | || ____( (_| |_ 
   |_|   |_|   \___/ \___/ |_|       |_|  \_____|_|\_)_____)\____|_|
 
-End of script. Logfile hash: a689b5ec6a, time: 0.76s, user: 0.77s, system: 0.00s
+End of script. Logfile hash: a689b5ec6a, time: 0.79s, user: 0.79s, system: 0.00s
 Yosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)
-Time spent: 96% 1x sat (0 sec), 1% 2x read_verilog (0 sec), ...
+Time spent: 97% 1x sat (0 sec), 0% 5x opt_clean (0 sec), ...

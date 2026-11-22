@@ -54,12 +54,12 @@ def report(R, files):
     for n, r in (R.get("flowdown") or {}).items():
         L += ["", f"## Refinement `{n}`: {r['original']} ⇐ {', '.join(r['derived'])}", ""]
         wc = r.get("worst_case")
-        L.append(f"- Refinement: {'valid' if r['valid'] else 'fails'}; worst case of {r.get('bounded_quantity')}: "
-                 f"{wc:.6g}" if wc is not None else f"- Refinement: {'valid' if r['valid'] else 'fails'}")
-        L.append(f"- Kind: {r.get('kind')}; implication {'valid' if r['valid'] else 'fails'}, children jointly "
-                 f"satisfiable: {r.get('children_consistent')}; static refinement: {r.get('static_refinement')}; "
-                 f"input-total: {r.get('input_total')}"
-                 + (f"; reactive refinement: {r.get('reactive_refinement')}" if r.get("kind") == "reactive" else ""))
+        L.append(f"- Implication: {r['implication']}; worst case of {r.get('bounded_quantity')}: "
+                 f"{wc:.6g}" if wc is not None else f"- Implication: {r['implication']}")
+        L.append(f"- Kind: {r.get('kind')}; children jointly satisfiable: {r.get('children_consistent')}; "
+                 f"static refinement: {r.get('static_refinement')}; input-total: {r.get('input_total')}"
+                 + (f"; reactive refinement: {r.get('reactive_refinement')}" if r.get("kind") == "reactive" else "")
+                 + " (None = inconclusive: the solver answered UNKNOWN)")
         for k, a in r["abduction"].items():
             L.append(f"- Replace {k} (over {', '.join(a['vocabulary'])}): `{a['replacement']}` "
                      f"[{a['method']}; {'exists' if a['exists'] else 'none exists' if a['exists'] is False else 'n/a'}]")
@@ -140,7 +140,13 @@ def main():
         json.dump(dict(model=a.model, status="rejected", errors=ex.errors), open(os.path.join(out, "results.json"), "w"), indent=1)
         sys.exit(2)
     ir = S.ir
-    R = analysis.run_all(S)
+    try:
+        R = analysis.run_all(S)
+    except analysis.Inconclusive as ex:      # a result depended on an UNKNOWN answer: nothing is reported as decided
+        print(f"inconclusive: {ex}", file=sys.stderr)
+        json.dump(dict(model=a.model, status="inconclusive", reason=str(ex)),
+                  open(os.path.join(out, "results.json"), "w"), indent=1)
+        sys.exit(3)
     R["status"] = "complete"
     R["coverage"] = ir["coverage"]
     if not a.no_eda:

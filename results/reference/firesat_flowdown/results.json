@@ -29,6 +29,7 @@
     "ADCS-1"
    ],
    "valid": false,
+   "implication": "fails",
    "children_consistent": true,
    "static_refinement": false,
    "kind": "static",
@@ -135,6 +136,7 @@
     "ADCS-1R"
    ],
    "valid": true,
+   "implication": "valid",
    "children_consistent": true,
    "static_refinement": true,
    "kind": "static",
@@ -154,7 +156,7 @@
      "vocabulary": [
       "D"
      ],
-     "replacement": "Or(1281/125000000/D <= 279/7000000, D <= 0)",
+     "replacement": "Or(D <= 0, 1281/125000000/D <= 279/7000000)",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -171,7 +173,7 @@
       "D",
       "h"
      ],
-     "replacement": "Or(D <= 0, h <= 0, h*(3/1000000 + 1281/125000000/D) <= 30)",
+     "replacement": "Or(h*(3/1000000 + 1281/125000000/D) <= 30, h <= 0, D <= 0)",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -180,7 +182,7 @@
       "eps",
       "h"
      ],
-     "replacement": "Or(Not(eps >= 0), h <= 0, h*(1281/32500000 + eps) <= 30)",
+     "replacement": "Or(Not(eps >= 0), h*(1281/32500000 + eps) <= 30, h <= 0)",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -189,7 +191,7 @@
       "D",
       "eps"
      ],
-     "replacement": "And(Or(308094151366691831/440134816338*(1281/125000000/D) +\n       308094151366691831/440134816338*eps <=\n       30,\n       D <= 0,\n       Not(eps >= 0)),\n    Or(700000*(1281/125000000/D) + 700000*eps <= 30,\n       D <= 0,\n       Not(eps >= 0)))",
+     "replacement": "Or(Not(eps >= 0),\n   D <= 0,\n   700000*(1281/125000000/D) + 700000*eps <= 30)",
      "method": "quantifier elimination",
      "exists": true
     }
@@ -200,7 +202,7 @@
      "shared": [
       "eps"
      ],
-     "strongest": "And(eps <= 3/1000000, eps >= 0)",
+     "strongest": "And(eps >= 0, eps <= 3/1000000)",
      "weakest": "eps <= 783/227500000",
      "strongest_bound": 3.000190699174732e-06,
      "weakest_bound": 3.4417580681307406e-06,
@@ -212,7 +214,7 @@
       "h"
      ],
      "strongest": "And(And(500000 <= h, 700000 >= h), And(0 < h))",
-     "weakest": "And(h <= 8246337208320/11659033, h <= 650000000/919)",
+     "weakest": "h <= 650000000/919",
      "strongest_bound": 700000.0001866624,
      "weakest_bound": 707290.5331878467,
      "margin": 7290.533001184231
@@ -250,6 +252,7 @@
     "NAV-1"
    ],
    "valid": true,
+   "implication": "valid",
    "children_consistent": true,
    "static_refinement": true,
    "kind": "static",
@@ -261,7 +264,7 @@
      "vocabulary": [
       "h"
      ],
-     "replacement": "h <= 1000000000/1309",
+     "replacement": "Or(h <= 1000000000/1309, h <= 0)",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -269,7 +272,7 @@
      "vocabulary": [
       "thetaK"
      ],
-     "replacement": "thetaK <= 1/1750",
+     "replacement": "Or(thetaK <= 1/1750, Not(thetaK >= 0))",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -286,7 +289,7 @@
       "h",
       "thetaK"
      ],
-     "replacement": "Or(Not(thetaK >= 0), h <= 0, h*thetaK <= 400)",
+     "replacement": "Or(h <= 0, h*thetaK <= 400)",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -304,7 +307,7 @@
       "dr",
       "thetaK"
      ],
-     "replacement": "And(Or(-500 <= -1*dr + -500001*thetaK,\n       Not(dr >= 0),\n       Not(thetaK >= 0)),\n    Or(-500 <= -1*dr + -700000*thetaK,\n       Not(dr >= 0),\n       Not(thetaK >= 0)))",
+     "replacement": "And(Or(Not(dr >= 0),\n       Not(thetaK >= 0),\n       -500 <= -500001*thetaK + -1*dr),\n    Or(Not(dr >= 0),\n       Not(thetaK >= 0),\n       -500 <= -700000*thetaK + -1*dr))",
      "method": "quantifier elimination",
      "exists": true
     }
@@ -315,7 +318,7 @@
      "shared": [
       "thetaK"
      ],
-     "strongest": "And(thetaK >= 0, thetaK <= 1309/2500000)",
+     "strongest": "And(thetaK <= 1309/2500000, thetaK >= 0)",
      "weakest": "thetaK <= 1/1750",
      "strongest_bound": 0.0005236001926088238,
      "weakest_bound": 0.0005714285713859274,
@@ -365,6 +368,7 @@
     "ADCS-1R"
    ],
    "valid": false,
+   "implication": "fails",
    "children_consistent": true,
    "static_refinement": false,
    "kind": "static",
@@ -376,15 +380,15 @@
      "vocabulary": [
       "h"
      ],
-     "replacement": "h <= 707290",
-     "method": "numerical (bisection; quantifier elimination exceeded the time limit)",
+     "replacement": "And(Or(h <= 0, h <= 5242880/7),\n    Or(h <= 0, h <= 2977847967734612974030/3975861198663081),\n    Or(h <= 0,\n       h <=\n       74446199193365324350750000000/99396660558325627241199),\n    Or(h <= 0,\n       h <=\n       1861154979834133108768750000000000000/2484919778756145173725577460921),\n    Or(h <= 0, h <= 1030792151040/1457381),\n    Or(h <= 0, h <= 650000000/919))",
+     "method": "quantifier elimination",
      "exists": true
     },
     "PAY-2": {
      "vocabulary": [
       "D"
      ],
-     "replacement": "Or(D <= 0, 1281/125000000/D <= -38679/17893000000)",
+     "replacement": "D <= 0",
      "method": "quantifier elimination",
      "exists": false
     },
@@ -392,7 +396,7 @@
      "vocabulary": [
       "eps"
      ],
-     "replacement": "Or(Not(eps >= 0), eps <= -3/128063776021400)",
+     "replacement": "Not(eps >= 0)",
      "method": "quantifier elimination",
      "exists": false
     },
@@ -401,7 +405,7 @@
       "D",
       "h"
      ],
-     "replacement": "Or(D <= 0, h*(3/1000000 + 1281/125000000/D) <= 30)",
+     "replacement": "Or(h <= 0, D <= 0, h*(3/1000000 + 1281/125000000/D) <= 30)",
      "method": "quantifier elimination",
      "exists": true
     },
@@ -483,5 +487,5 @@
   },
   "statements_recognized": 92
  },
- "seconds": 63.49995422363281
+ "seconds": 42.92451071739197
 }

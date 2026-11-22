@@ -1,7 +1,7 @@
 cff-version: 1.2.0
 message: "If you use this software, please cite the article and this archive."
 title: "sysmlc: compiling SysML v2 models into digital logic (code and data)"
-version: 1.1.0
+version: 1.2.0
 date-released: 2026-11-22
 license: MIT
 authors:

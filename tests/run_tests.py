@@ -14,7 +14,7 @@ F  every name is declared once in its scope: a second, different declaration of 
 G  the three translations of each requirement (SMT for z3, Verilog for Yosys, Lustre for Kind 2) agree on every
    input valuation of the domain (exhaustive check, independent evaluators for the Verilog and Lustre text).
 H  the front end agrees with the AST of the SysML v2 Pilot Implementation;
-I  regressions for the semantic contract: undeclared types, non-Boolean constraints and Boolean/number coercions are
+I  regressions for the semantic contract (17 tests): undeclared types, non-Boolean constraints and Boolean/number coercions are
    rejected; two machines over one enumeration are rejected rather than bound by guess; a solver answer UNKNOWN
    yields 'inconclusive' and never an equivalence, a refutation or an absence; static and reactive refinement are
    distinguished (C = x and y refines P = y statically, not reactively); a single requirement that the glossary
@@ -461,6 +461,40 @@ def class_regressions():
     R = analysis.check_flowdown(compile_model(os.path.join(FX, "static_vs_reactive.sysml")))["f"]
     record("I", "C = x and y, P = y: static refinement holds, reactive refinement fails (not input-total)",
            R["static_refinement"] is True and R["input_total"] is False and R["reactive_refinement"] is False, str(R)[:200])
+    # reactive refinement against an independent oracle, on the original relation (no substitution of definitions)
+    expected = dict(a_true=(True, True, True), b_none=(True, False, False), c_x_eq_y=(True, False, False),
+                    d_y_eq_x=(True, False, False), e_false=(False, True, False))
+    got = {}
+    for n in sorted(expected):
+        r = analysis.check_flowdown(compile_model(os.path.join(FX, "refinement_controls", n + ".sysml")))["f"]
+        got[n] = (r["static_refinement"], r["input_total"], r["reactive_refinement"])
+    record("I", "five refinement controls (A = true, none, x == y, y == x, false; C = y or x and y; P = y): static, "
+                "input-total and reactive refinement as the oracle; the form of an equality does not matter",
+           got == expected, str(got))
+    import z3 as _z3
+    _real = _z3.Solver
+    _z3.Solver = Unknown
+    try:
+        analysis.reachable_situations(compile_model(os.path.join(M, "lmcps_fsm.sysml")), {})
+        comp = "decided"
+    except logic_engine.Inconclusive:
+        comp = "inconclusive"
+    finally:
+        _z3.Solver = _real
+    record("I", "UNKNOWN in the reachable-state enumeration and the composition checks gives Inconclusive, "
+                "not a deterministic or total composition", comp == "inconclusive", comp)
+    logic_engine.Solver = Unknown
+    try:
+        x_, y_ = z3.Bools("x y")
+        ref = logic_engine.refines(y_, [And(x_, y_)])
+        try:
+            fd = analysis.check_flowdown(compile_model(os.path.join(FX, "static_vs_reactive.sysml")))["f"]["implication"]
+        except logic_engine.Inconclusive:
+            fd = "inconclusive (raised)"
+    finally:
+        logic_engine.Solver = real_le
+    record("I", "UNKNOWN in a refinement: implication and consistency inconclusive (None), never 'fails'",
+           ref["valid"] is None and ref["children_consistent"] is None and fd.startswith("inconclusive"), f"{ref} {fd}")
     F = analysis.check_flowdown(compile_model(os.path.join(M, "firesat_flowdown.sysml")))
     record("I", "FireSat flow-downs are static (no output attributes)", all(v["kind"] == "static" for v in F.values()))
     G = analysis.check_output_groups(compile_model(os.path.join(FX, "unit_conflict.sysml")))

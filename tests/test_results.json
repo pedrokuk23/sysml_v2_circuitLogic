@@ -1,6 +1,6 @@
 {
- "passed": 110,
- "total": 110,
+ "passed": 113,
+ "total": 113,
  "tests": [
   {
    "cls": "A",
@@ -228,7 +228,7 @@
    "cls": "B",
    "test": "CLI exits with status 2 and emits no proof",
    "passed": true,
-   "detail": "/tmp/tmp89co3yzr.sysml: 1 error(s)\n  ERROR: name 'godo' is used but not declared\n"
+   "detail": "/tmp/tmpu5qpys39.sysml: 1 error(s)\n  ERROR: name 'godo' is used but not declared\n"
   },
   {
    "cls": "C",
@@ -550,19 +550,19 @@
   },
   {
    "cls": "H",
-   "test": "firesat_flowdown: every analysis gives the same results through the Pilot front end (264 result leaves; 21 equal up to formula printing or the QE time limit)",
+   "test": "firesat_flowdown: every analysis gives the same results through the Pilot front end (268 result leaves; 24 equal up to formula printing or the QE time limit)",
    "passed": true,
    "detail": ""
   },
   {
    "cls": "H",
-   "test": "lmcps_fsm: every analysis gives the same results through the Pilot front end (164 result leaves; 2 equal up to formula printing or the QE time limit)",
+   "test": "lmcps_fsm: every analysis gives the same results through the Pilot front end (164 result leaves; 1 equal up to formula printing or the QE time limit)",
    "passed": true,
    "detail": ""
   },
   {
    "cls": "H",
-   "test": "lmcps_fsm_rev: every analysis gives the same results through the Pilot front end (119 result leaves; 2 equal up to formula printing or the QE time limit)",
+   "test": "lmcps_fsm_rev: every analysis gives the same results through the Pilot front end (119 result leaves; 1 equal up to formula printing or the QE time limit)",
    "passed": true,
    "detail": ""
   },
@@ -648,7 +648,25 @@
    "cls": "I",
    "test": "C = x and y, P = y: static refinement holds, reactive refinement fails (not input-total)",
    "passed": true,
-   "detail": "{'original': 'P', 'derived': ['C'], 'valid': True, 'children_consistent': True, 'static_refinement': True, 'kind': 'reactive', 'input_total': False, 'reactive_refinement': False, 'abduction': {'C': {'"
+   "detail": "{'original': 'P', 'derived': ['C'], 'valid': True, 'implication': 'valid', 'children_consistent': True, 'static_refinement': True, 'kind': 'reactive', 'input_total': False, 'reactive_refinement': Fals"
+  },
+  {
+   "cls": "I",
+   "test": "five refinement controls (A = true, none, x == y, y == x, false; C = y or x and y; P = y): static, input-total and reactive refinement as the oracle; the form of an equality does not matter",
+   "passed": true,
+   "detail": "{'a_true': (True, True, True), 'b_none': (True, False, False), 'c_x_eq_y': (True, False, False), 'd_y_eq_x': (True, False, False), 'e_false': (False, True, False)}"
+  },
+  {
+   "cls": "I",
+   "test": "UNKNOWN in the reachable-state enumeration and the composition checks gives Inconclusive, not a deterministic or total composition",
+   "passed": true,
+   "detail": "inconclusive"
+  },
+  {
+   "cls": "I",
+   "test": "UNKNOWN in a refinement: implication and consistency inconclusive (None), never 'fails'",
+   "passed": true,
+   "detail": "{'valid': None, 'children_consistent': None, 'consistency_reason': 'satisfiability query returned unknown (forced by the test)', 'solver': 'unknown', 'implication_reason': 'forced by the test'} inconclusive (raised)"
   },
   {
    "cls": "I",

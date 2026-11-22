@@ -120,17 +120,24 @@ def main(out):
         if sts[-1] == unroll.UNSAT:
             break
     N = len(sts) - 1
-    core, deletion = list(req), []
-    for k in list(core):
-        trial = [x for x in core if x != k]
-        st = unroll.trace(S, glo + trial, N)[0]
-        deletion.append(st)
-        if st == unroll.UNSAT:          # still refuted without k: k is not needed
-            core = trial                # (SAT or UNKNOWN: k is kept, so the core stays a refuted set)
-    st_core = unroll.trace(S, glo + core, N)[0]
-    res["full_whole_file"] = dict(consistent=False, first_failing_prefix_steps=N + 1, minimal_conflict=core,
-                                  statuses=dict(prefix_queries=sts, deletion=deletion, core=st_core),
-                                  seconds=round(time.time() - t0, 1))
+    if sts[-1] != unroll.UNSAT:          # every prefix up to 6 steps has a trace: no inconsistency found
+        res["full_whole_file"] = dict(consistent_up_to_steps=len(sts), statuses=dict(prefix_queries=sts),
+                                      seconds=round(time.time() - t0, 1))
+    else:
+        core, deletion = list(req), []
+        for k in list(core):
+            trial = [x for x in core if x != k]
+            st = unroll.trace(S, glo + trial, N)[0]
+            deletion.append(st)
+            if st == unroll.UNSAT:          # still refuted without k: k is not needed
+                core = trial                # (SAT or UNKNOWN: k is kept, so the core stays a refuted set)
+        st_core = unroll.trace(S, glo + core, N)[0]
+        res["full_whole_file"] = dict(
+            consistent=False, first_failing_prefix_steps=N + 1, minimal_conflict=core,
+            minimality=("irreducible by deletion" if unroll.UNKNOWN not in deletion
+                        else "refuted set; irreducibility not established (a deletion query returned UNKNOWN)"),
+            statuses=dict(prefix_queries=sts, deletion=deletion, core=st_core),
+            seconds=round(time.time() - t0, 1))
     eqs = {}
     t0 = time.time()
     for fam in ("TB", "STB", "SWB", "WB"):

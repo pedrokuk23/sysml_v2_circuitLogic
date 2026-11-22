@@ -23,7 +23,7 @@
     "SMT",
     "equivalence checking"
   ],
-  "version": "1.1.0",
+  "version": "1.2.0",
   "related_identifiers": [
     {
       "identifier": "https://github.com/pedrokuk23/sysml_v2_circuitLogic",

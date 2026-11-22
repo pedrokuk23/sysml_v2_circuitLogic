@@ -1,6 +1,6 @@
 # sysmlc — firesat.sysml
 
-Requirements read: 3. Time: 4 s.
+Requirements read: 3. Time: 5 s.
 Translation coverage: translated action def 1, allocate 3, attribute 44, decide 2, fork 1, join 1, merge 1, require constraint 3, requirement def 3, variant part 10, variation part def 5; structural only doc 3, import 1, package 1, part 8, part def 6, perform action 1, requirement 3, satisfy 3, subject 3; unsupported none; 120 statements, all matched by the subset grammar.
 
 ## Variability

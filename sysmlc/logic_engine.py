@@ -23,6 +23,23 @@ class Inconclusive(Exception):
     analysis stops with this diagnostic instead of reading UNKNOWN as SAT or as UNSAT."""
 
 
+def decide(s):
+    """Three-valued reading of a solver: True on SAT, False on UNSAT; UNKNOWN raises Inconclusive."""
+    r = s.check()
+    if r == unknown:
+        raise Inconclusive(f"query returned unknown ({s.reason_unknown()})")
+    return r == sat
+
+
+def tri_and(*xs):
+    """Conjunction over True / False / None (None = inconclusive): False if any is False, else None if any is None."""
+    if any(x is False for x in xs):
+        return False
+    if any(x is None for x in xs):
+        return None
+    return True
+
+
 def is_sat(*fs):
     """Satisfiability: (True, model) on SAT, (False, None) on UNSAT; UNKNOWN raises Inconclusive."""
     s = Solver(); s.add(*fs)
@@ -83,12 +100,20 @@ def free_consts(f):
 
 # ---------------------------------------------------------------- deduction theorem
 def refines(parent, children, A=BoolVal(True), inputs=None):
+    """Implication A & children -> parent and joint satisfiability of A & children, each True, False or None
+    (None: the solver answered UNKNOWN; the reason is kept and nothing is concluded from it)."""
     hyp = And(A, *children)
     s_ = Solver(); s_.add(hyp, Not(parent)); r_ = s_.check()
     ok, m = (r_ != unsat), (s_.model() if r_ == sat else None)
-    res = dict(valid=not ok, children_consistent=is_sat(hyp)[0])
+    res = dict(valid=None if r_ == unknown else not ok)
+    try:
+        res["children_consistent"] = is_sat(hyp)[0]
+    except Inconclusive as ex:
+        res["children_consistent"] = None
+        res["consistency_reason"] = str(ex)
     if r_ == unknown:
         res["solver"] = "unknown"
+        res["implication_reason"] = s_.reason_unknown()
         return res
     if ok:
         res["counterexample"] = {str(d): str(m[d]) for d in m.decls()}
