@@ -1,0 +1,44 @@
+{
+ "firesat": {
+  "comparisons": 32,
+  "expressions": 9,
+  "failures": [],
+  "perturbed": 24,
+  "perturbed_detected": 18
+ },
+ "firesat_flowdown": {
+  "comparisons": 67,
+  "expressions": 14,
+  "failures": [],
+  "perturbed": 60,
+  "perturbed_detected": 60
+ },
+ "lmcps_fsm": {
+  "comparisons": 105,
+  "expressions": 33,
+  "failures": [],
+  "perturbed": 110,
+  "perturbed_detected": 110
+ },
+ "lmcps_fsm_rev": {
+  "comparisons": 105,
+  "expressions": 33,
+  "failures": [],
+  "perturbed": 115,
+  "perturbed_detected": 115
+ },
+ "lmcps_roll_tsm": {
+  "comparisons": 47,
+  "expressions": 9,
+  "failures": [],
+  "perturbed": 114,
+  "perturbed_detected": 104
+ },
+ "lmcps_roll_tsm_glossary": {
+  "comparisons": 47,
+  "expressions": 9,
+  "failures": [],
+  "perturbed": 118,
+  "perturbed_detected": 108
+ }
+}

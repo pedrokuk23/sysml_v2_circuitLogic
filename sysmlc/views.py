@@ -5,31 +5,12 @@ import os, subprocess, re
 RED, GREEN, ORANGE, BLUE, GREY = "#c62828", "#2e7d32", "#e08a00", "#1f5aa6", "#555555"
 
 
-EN = [("fluxo de ações", "action flow"), ("laço possível em", "possible loop in"), ("impasse em", "deadlock in"), ("Vista lógica — ", "Logic view — "), ("requisitos como lógica de próximo estado", "requirements as next-state logic"),
-      ("&amp; = porta E", "&amp; = AND gate"), ("○ = negação", "○ = negation"), ("contenção = conflito", "contention = conflict"),
-      ("linha flutuante = lacuna", "floating line = hole"), ("entradas", "inputs"), ("barramento do próximo estado", "next-state bus"),
-      ("próximo = ", "next = "), ("CONTENÇÃO", "CONTENTION"), ("estando em ", "in "), (" sem requisito", " unspecified"),
-      ("→ SysML: permanece", "→ SysML: stay"), ("contratos de porta e provas (Yosys, indução temporal)", "port contracts and proofs"),
-      ("interpolante de Craig = projeção", "Craig interpolant = projection"), ("projeção exata", "exact projection"),
-      ("lacunas ", "holes "), ("cada requisito como assert no circuito sequencial (k-indução)", "each requirement as an assertion on the sequential circuit"),
-      ("requisito", "requirement"), ("Yosys sat -tempinduct", "result"), ("counterexample", "counterexample"), ("proved", "proved"),
-      ("invariante indutivo (IC3/PDR)", "inductive invariant (IC3/PDR)"), ("= lemas que o requirement pressupõe", "= lemmas the requirement relies on"),
-      ("variabilidade como circuito de configuração", "variability as a configuration circuit"), ("=1 = exatamente um", "=1 = exactly one"),
-      ("vermelho = variante morta", "red = dead variant"), ("verde = variante núcleo", "green = core variant"), ("(Y) = provado no Yosys", "(Y) = proved by SAT in Yosys"),
-      (" morta por ", " dead by "), ("reviver via", "revive via"), ("impossível", "impossible"), ("possível", "possible"),
-      ("válidas: ", "valid: "), (" de ", " of "), ("valorações", "input valuations"),
-      ("ciclo nominal", "nominal cycle (min)"), ("cada laço", "each loop"),
-      ("seleção incompleta: And(Not(linkUp), Not(And(linkUp, backlog)))", "incomplete selection: ¬linkUp"),
-      ("guardas sobrepostas", "overlapping guards"), ("alocação: espinha dorsal por configuração válida", "allocation backbone per valid configuration"),
-      ("viáveis", "feasible"), ("declarada", "declared"), ("livre", "free"), ("(premissa)", "(assumed)"), ("(forçado)", "(forced)"), ("solo ", "ground ")]
+
 
 
 def render(outdir, name, lines):
     p = os.path.join(outdir, name)
     txt = "\n".join(lines)
-    if os.environ.get("SYSMLC_LANG", "en") == "en":
-        for a, b in EN:
-            txt = txt.replace(a, b)
     lines = [txt]
     open(p + ".dot", "w").write("\n".join(lines))
     for fmt, dpi in (("svg", 72), ("png", 160)):
@@ -51,18 +32,18 @@ def machine_view(S, R, outdir, mname):
     lits = S.enums[M["enum"]]
     cur = M["cur"]
     L = ['digraph G {', 'rankdir=LR; splines=spline; nodesep=0.25; ranksep=0.9;', *HEAD,
-         f'label=<<b>Vista lógica — {mname}: requisitos como lógica de próximo estado</b><br/><font point-size="10">'
-         f'&amp; = porta E · ○ = negação · <font color="{RED}">contenção = conflito</font> · '
-         f'<font color="{ORANGE}">linha flutuante = lacuna</font></font>>; labelloc=t; fontsize=14;']
-    L.append('subgraph cluster_in { label="entradas"; style=dashed; color="#999999"; fontsize=10;')
+         f'label=<<b>Logic view — {mname}: requirements as next-state logic</b><br/><font point-size="10">'
+         f'&amp; = AND gate · ○ = negation · <font color="{RED}">contention = conflict</font> · '
+         f'<font color="{ORANGE}">floating line = hole</font></font>>; labelloc=t; fontsize=14;']
+    L.append('subgraph cluster_in { label="inputs"; style=dashed; color="#999999"; fontsize=10;')
     for l in lits:
         L.append(f'"{cur}={l}" [shape=plaintext, label="{cur} = {l}"];')
     for s in M["inputs"]:
         L.append(f'"{s}" [shape=plaintext];')
     L.append('}')
-    L.append('subgraph cluster_bus { label="barramento do próximo estado"; style=dashed; color="#999999"; fontsize=10;')
+    L.append('subgraph cluster_bus { label="next-state bus"; style=dashed; color="#999999"; fontsize=10;')
     for l in lits:
-        L.append(f'"bus_{l}" [shape=cds, style=filled, fillcolor="#e8eef7", color="{BLUE}", label="próximo = {l}"];')
+        L.append(f'"bus_{l}" [shape=cds, style=filled, fillcolor="#e8eef7", color="{BLUE}", label="next = {l}"];')
     L.append('}')
     for k in M["requirements"]:
         f = S.R[k]
@@ -88,7 +69,7 @@ def machine_view(S, R, outdir, mname):
         n = f"c_{a}_{b}"
         reg = c["region"][0].replace("[", "").replace("]", ":")
         L.append(f'"{n}" [shape=note, style=filled, fillcolor="#fdecea", color="{RED}", fontcolor="{RED}", fontsize=10, '
-                 f'label="CONTENÇÃO {a} × {b}\\n{reg}"];')
+                 f'label="CONTENTION {a} × {b}\\n{reg}"];')
         L += [f'"g_{a}" -> "{n}" [color="{RED}", style=dashed, arrowhead=none];',
               f'"g_{b}" -> "{n}" [color="{RED}", style=dashed, arrowhead=none];']
     for l, h in M["holes"].items():
@@ -96,7 +77,7 @@ def machine_view(S, R, outdir, mname):
             continue
         reg = h["region"][0].replace("[] ", "")
         L.append(f'"f_{l}" [shape=note, style=filled, fillcolor="#fff4e0", color="{ORANGE}", fontcolor="#8a5200", fontsize=10, '
-                 f'label="estando em {l}: {h["n"]}/{h["of"]} sem requisito\\n{reg}\\n→ SysML: permanece"];')
+                 f'label="in {l}: {h["n"]}/{h["of"]} unspecified\\n{reg}\\n→ SysML: stay"];')
         L.append(f'"bus_{l}" -> "f_{l}" [color="{ORANGE}", style=dotted, arrowhead=none];')
     L.append("}")
     return render(outdir, f"view_{mname}", L)
@@ -107,10 +88,10 @@ def proofs_view(S, R, outdir):
     props = E.get("properties", {})
     pc = R.get("port_contracts", {})
     L = ['digraph G {', 'rankdir=LR; nodesep=0.3; ranksep=0.7;', *HEAD,
-         '''label=<<b>Vista lógica — contratos de porta e provas (Yosys, indução temporal)</b>>; labelloc=t; fontsize=14;''']
+         '''label=<<b>Logic view — port contracts and proofs</b>>; labelloc=t; fontsize=14;''']
     for name, c in pc.items():
         holes = {k: v for k, v in c.items() if k.startswith("holes_")}
-        L.append(f'subgraph cluster_{name} {{ label="{name} (interpolante de Craig = projeção)"; style=rounded; color="{BLUE}";')
+        L.append(f'subgraph cluster_{name} {{ label="{name} (Craig interpolant = projection)"; style=rounded; color="{BLUE}";')
         sig = sorted({t.split(".")[-1] for t in re.findall(r"[A-Za-z_][\w.]*", c["asserted"])} - {"or", "and", "not"})
         for s in sig:
             L.append(f'"{name}_{s}" [shape=plaintext, label="{s}"];')
@@ -118,22 +99,22 @@ def proofs_view(S, R, outdir):
         for s in sig:
             L.append(f'"{name}_{s}" -> "{name}_g";')
         txt = "\\n".join(f"{k.replace('holes_', 'holes ')}: {v['without_contract']} → {v['with_contract']}" for k, v in holes.items())
-        L.append(f'"{name}_n" [shape=note, style=filled, fillcolor="#e8eef7", color="{BLUE}", label="{c["asserted"]}\\nprojeção exata: {c["equivalent"]}\\n{txt}"];')
+        L.append(f'"{name}_n" [shape=note, style=filled, fillcolor="#e8eef7", color="{BLUE}", label="{c["asserted"]}\\nexact projection: {c["equivalent"]}\\n{txt}"];')
         L.append(f'"{name}_g" -> "{name}_n"; }}')
-    L.append(f'subgraph cluster_p {{ label="cada requisito como assert no circuito sequencial (k-indução)"; style=rounded; color="{GREEN}";')
+    L.append(f'subgraph cluster_p {{ label="each requirement as an assertion on the sequential circuit"; style=rounded; color="{GREEN}";')
     rows = "".join(f'<tr><td align="left">{k}</td><td bgcolor="{"#eaf5ea" if v["result"].startswith("proved") else "#fdecea"}">'
                    f'{v["result"]}{" (k=" + str(v.get("induction_length")) + ")" if v.get("induction_length") else ""}</td></tr>'
                    for k, v in props.items())
     L.append(f'"tbl" [shape=plaintext, label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="4">'
-             f'<tr><td bgcolor="#e8eef7"><b>requisito</b></td><td bgcolor="#e8eef7"><b>Yosys sat -tempinduct</b></td></tr>{rows}</table>>]; }}')
+             f'<tr><td bgcolor="#e8eef7"><b>requirement</b></td><td bgcolor="#e8eef7"><b>result</b></td></tr>{rows}</table>>]; }}')
     for k, v in props.items():
         lem = v.get("ic3", {}).get("lemmas")
         if lem:
             txt = "\\l".join(lem) + "\\l"
             L.append(f'"lem_{k}" [shape=note, style=filled, fillcolor="#eaf5ea", color="{GREEN}", fontsize=10, '
-                     f'label="{k}: invariante indutivo (IC3/PDR)\\n= lemas que o requisito pressupõe\\l{txt}"];')
+                     f'label="{k}: inductive invariant (IC3/PDR)\\n= lemmas the requirement relies on\\l{txt}"];')
     L.append("}")
-    return render(outdir, "view_provas", L)
+    return render(outdir, "view_proofs", L)
 
 
 def variability_view(S, R, outdir):
@@ -147,8 +128,8 @@ def variability_view(S, R, outdir):
     if V["allocation_functions"]:
         reads["CAP"] = ["bus"] if "bus" in S.usages else []
     L = ['digraph G {', 'rankdir=LR; nodesep=0.22; ranksep=1.0;', *HEAD,
-         f'label=<<b>Vista lógica — variabilidade como circuito de configuração</b><br/><font point-size="10">=1 = exatamente um · '
-         f'<font color="{RED}">vermelho = variante morta</font> · <font color="{GREEN}">verde = variante núcleo</font> · '
+         f'label=<<b>Logic view — variability as a configuration circuit</b><br/><font point-size="10">=1 = exactly one · '
+         f'<font color="{RED}">red = dead variant</font> · <font color="{GREEN}">green = core variant</font> · '
          f'(Y) = proved in Yosys</font>>; labelloc=t; fontsize=14;']
     for u, vs in V["variations"].items():
         L.append(f'subgraph cluster_{u} {{ label="{u}"; style=dashed; color="#999999"; fontsize=10;')
@@ -165,22 +146,22 @@ def variability_view(S, R, outdir):
         L += [f'"oh_{u}" -> "{r}" [color="#666666"];' for u in us]
     L.append(gate("valid", "&"))
     L += [f'"{r}" -> "valid" [color="{BLUE}"];' for r in reads]
-    L.append(f'"out" [shape=note, style=filled, fillcolor="#eaf5ea", color="{GREEN}", label="válidas: {V["n_valid"]} de {V["n_configs"]}"];')
+    L.append(f'"out" [shape=note, style=filled, fillcolor="#eaf5ea", color="{GREEN}", label="valid: {V["n_valid"]} of {V["n_configs"]}"];')
     L.append('"valid" -> "out";')
     for dv, core in V["dead_because"].items():
         rv = [v for k, v in V["revive"].items() if k.startswith(dv)]
-        extra = "\\n".join(f"reviver via {', '.join(x['free'])}: {'possível' if x['possible'] else 'impossível'}" for x in rv)
+        extra = "\\n".join(f"revive via {', '.join(x['free'])}: {'possible' if x['possible'] else 'impossible'}" for x in rv)
         L.append(f'"dn_{dv}" [shape=note, style=filled, fillcolor="#fdecea", color="{RED}", fontcolor="{RED}", fontsize=10, '
-                 f'label="{dv} morta por {" + ".join(core)}\\n{extra}"];')
+                 f'label="{dv} dead by {" + ".join(core)}\\n{extra}"];')
         L.append(f'"{dv}" -> "dn_{dv}" [color="{RED}", style=dashed, arrowhead=none];')
     L.append("}")
-    return render(outdir, "view_variabilidade", L)
+    return render(outdir, "view_variability", L)
 
 
 def action_view(S, R, outdir, aname):
     A = R["actions"][aname]
     L = ['digraph G {', 'rankdir=LR; nodesep=0.35; ranksep=0.55;', *HEAD,
-         f'label=<<b>Vista lógica — fluxo de ações {aname}</b><br/><font point-size="10">decide = MUX · join = &amp; · merge = ≥1</font>>; labelloc=t; fontsize=14;']
+         f'label=<<b>Logic view — action flow {aname}</b><br/><font point-size="10">decide = MUX · join = &amp; · merge = ≥1</font>>; labelloc=t; fontsize=14;']
     bad_dec = {n for n, d in A["decisions"].items() if not d["complete"] or d["overlaps"]}
     for n, k in A["nodes"].items():
         if k == "start":
@@ -201,41 +182,41 @@ def action_view(S, R, outdir, aname):
     for n, d in A["decisions"].items():
         msg = []
         if not d["complete"]:
-            msg.append(f"seleção incompleta: {d['hole']}")
+            msg.append(f"incomplete selection: {d['hole']}")
         if d["overlaps"]:
-            msg.append("guardas sobrepostas: " + "; ".join(" & ".join(o) for o in d["overlaps"]))
+            msg.append("overlapping guards: " + "; ".join(" & ".join(o) for o in d["overlaps"]))
         if msg:
             L.append(f'"note_{n}" [shape=note, style=filled, fillcolor="#fdecea", color="{RED}", fontcolor="{RED}", fontsize=10, label="{n}\\n' + "\\n".join(msg) + '"];')
             L.append(f'"{n}" -> "note_{n}" [color="{RED}", style=dashed, arrowhead=none];')
     dl = [f for f in A["flows"] if f["deadlocks"]]
     lp = [f for f in A["flows"] if f["loop_possible"]]
-    txt = f"impasse em {len(dl)} de {len(A['flows'])} valorações\\nlaço possível em {len(lp)}\\nciclo nominal: {A['nominal_cycle_min']:.0f}; cada laço: +{max(A['loops'].values()) if A['loops'] else 0:.0f}"
+    txt = f"deadlock in {len(dl)} of {len(A['flows'])} input valuations\\npossible loop in {len(lp)}\\nnominal cycle (min): {A['nominal_cycle_min']:.0f}; each loop: +{max(A['loops'].values()) if A['loops'] else 0:.0f}"
     L.append(f'"summary" [shape=note, style=filled, fillcolor="#fff4e0", color="{ORANGE}", label="{txt}"];')
     L.append("}")
-    return render(outdir, f"view_acoes_{aname}", L)
+    return render(outdir, f"view_actions_{aname}", L)
 
 
 def allocation_view(S, R, outdir):
     V = R["variability"]
     funs = V["allocation_functions"]
     keys = list(V["variations"])
-    hdr = "".join(f'<td bgcolor="#e8eef7"><b>{h}</b></td>' for h in keys + funs + ["viáveis", "declarada"])
+    hdr = "".join(f'<td bgcolor="#e8eef7"><b>{h}</b></td>' for h in keys + funs + ["feasible", "declared"])
     rows = []
     for a in V["allocation"]:
         cells = "".join(f"<td>{a['config'][k]}</td>" for k in keys)
         for f in funs:
             if f in a["fixed"]:
-                cells += '<td bgcolor="#eeeeee">OBC (premissa)</td>'
+                cells += '<td bgcolor="#eeeeee">OBC (assumed)</td>'
             elif f in a["forced"]:
-                cells += f'<td bgcolor="#eaf5ea"><b>{a["forced"][f]} (forçado)</b></td>'
+                cells += f'<td bgcolor="#eaf5ea"><b>{a["forced"][f]} (forced)</b></td>'
             else:
-                cells += "<td>livre</td>"
+                cells += "<td>free</td>"
         cells += f"<td>{a['feasible_allocations']}</td>"
         cells += f'<td bgcolor="{"#eaf5ea" if a["declared_feasible"] else "#fdecea"}">{"✓" if a["declared_feasible"] else "✗"}</td>'
         rows.append(f"<tr>{cells}</tr>")
-    L = ['digraph G {', *HEAD, '''label=<<b>Vista lógica — alocação: espinha dorsal por configuração válida</b>>; labelloc=t; fontsize=14;''',
+    L = ['digraph G {', *HEAD, '''label=<<b>Logic view — allocation backbone per valid configuration</b>>; labelloc=t; fontsize=14;''',
          f'"t" [shape=plaintext, label=<<table border="0" cellborder="1" cellspacing="0" cellpadding="5"><tr>{hdr}</tr>{"".join(rows)}</table>>];', "}"]
-    return render(outdir, "view_alocacao", L)
+    return render(outdir, "view_allocation", L)
 
 
 def all_views(S, R, outdir):

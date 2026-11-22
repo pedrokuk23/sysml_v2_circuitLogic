@@ -1,11 +1,16 @@
 #!/usr/bin/env python3
 """Defect-injection (mutation) experiment on the Lockheed Martin requirement set.
 
-Each mutant changes ONE requirement constraint of models/lmcps_fsm.sysml (FSM-002 .. FSM-013) with one of three
-operators that mimic editing errors:
+Each mutant changes ONE requirement constraint (FSM-002 .. FSM-013) of the original set (models/lmcps_fsm.sysml) or
+of the revised set (--model models/lmcps_fsm_rev.sysml). Three operators mimic editing errors and change the meaning:
   drop     remove one conjunct of the antecedent;
   negate   negate one literal of the antecedent;
   retarget change the target state literal of the consequent.
+Three operators rewrite the text without changing the meaning (refactorings), so a textual diff flags them while the
+miter must report equivalence:
+  reorder  reverse the order of the conjuncts of the antecedent;
+  demorgan write the antecedent  a and b and ...  as  not (not a or not b or ...);
+  dneg     write one literal  c  as  not (not c).
 For each mutant we record:
   miter    sysmlc semantic difference against the original: equivalent or not, the number of valuations where the
            two versions differ (exact), and the logical order (weaker / stronger / incomparable);
@@ -56,6 +61,12 @@ def mutants(text, enums):
         for other in enums[enum]:
             if other != lit:
                 put(ante, other, "retarget", f"{enum}::{lit} -> {enum}::{other}")
+        if len(conj) > 1:
+            put(" and ".join(reversed(conj)), lit, "reorder", "reverse conjuncts")
+            put("not (" + " or ".join(f"not ({c})" if " " in c else f"not {c}" for c in conj) + ")", lit, "demorgan",
+                "De Morgan")
+        for i, c in enumerate(conj):
+            put(" and ".join(conj[:i] + [f"not (not ({c}))"] + conj[i + 1:]), lit, "dneg", f"'{c}' -> 'not (not ({c}))'")
     return out
 
 
@@ -87,9 +98,10 @@ def circuit_summary(S):
 
 def main():
     ap = argparse.ArgumentParser(); ap.add_argument("-o", "--out", default=os.path.join(os.environ.get("OUT", "results/out"), "mutation"))
+    ap.add_argument("--model", default=MODEL)
     a = ap.parse_args(); os.makedirs(a.out, exist_ok=True)
-    text = open(MODEL).read()
-    So = compile_model(MODEL)
+    text = open(a.model).read()
+    So = compile_model(a.model)
     base = circuit_summary(So)
     have_kind2 = os.path.exists(lustre.KIND2) or bool(os.environ.get("KIND2"))
     kbase = {}
@@ -127,8 +139,21 @@ def main():
               f"+conf={len(row['conflicts_added'])} -conf={len(row['conflicts_removed'])} dholes={row['holes_delta']:+d} "
               f"ic3={row['ic3_before']}->{row['ic3_after']} kind2={row.get('kind2_before')}->{row.get('kind2_after')}")
         os.remove(path)
+    PRES = ("reorder", "demorgan", "dneg")
+    pres = [r for r in rows if r["op"] in PRES]
+    rows_all, rows = rows, [r for r in rows if r["op"] not in PRES]
     nonEq = [r for r in rows if not r["miter_equivalent"]]
-    summ = dict(mutants=len(rows), by_operator={op: sum(r["op"] == op for r in rows) for op in ("drop", "negate", "retarget")},
+    sat_before = [r for r in nonEq if r["ic3_before"] == "proved"]
+    summ = dict(model=os.path.relpath(a.model, ROOT), mutants=len(rows),
+                by_operator={op: sum(r["op"] == op for r in rows) for op in ("drop", "negate", "retarget")},
+                meaning_preserving=dict(mutants=len(pres), by_operator={op: sum(r["op"] == op for r in pres) for op in PRES},
+                                        miter_equivalent=sum(r["miter_equivalent"] for r in pres),
+                                        ic3_verdict_changed=sum(r["ic3_before"] != r["ic3_after"] for r in pres),
+                                        circuit_conflict_or_hole_change=sum(bool(r["conflicts_added"] or r["conflicts_removed"] or r["holes_delta"]) for r in pres)),
+                mutants_of_requirements_the_design_satisfies=len(sat_before),
+                of_those_verdict_unchanged=sum(r["ic3_before"] == r["ic3_after"] for r in sat_before),
+                mutants_of_requirements_the_design_violates=len(nonEq) - len(sat_before),
+                of_those_verdict_unchanged_=sum(r["ic3_before"] == r["ic3_after"] for r in nonEq if r not in sat_before),
                 equivalent_mutants=len(rows) - len(nonEq),
                 miter_detected=len(nonEq), miter_localized_to_requirement=len(nonEq),
                 circuit_conflict_or_hole_change=sum(bool(r["conflicts_added"] or r["conflicts_removed"] or r["holes_delta"]) for r in nonEq),
@@ -136,12 +161,12 @@ def main():
     summ["ic3_verdict_changed"] = sum(r["ic3_before"] != r["ic3_after"] for r in nonEq)
     summ["one_step_violation_unreachable"] = sum(r["design_violates_after"] and r["ic3_after"] == "proved" for r in rows)
     if have_kind2:
-        summ["kind2_agrees_with_ic3"] = sum((r["kind2_after"] == "valid") == (r["ic3_after"] == "proved") for r in rows)
+        summ["kind2_agrees_with_ic3"] = f"{sum((r['kind2_after'] == 'valid') == (r['ic3_after'] == 'proved') for r in rows_all)}/{len(rows_all)}"
         summ["kind2_verdict_changed"] = sum(r["kind2_before"] != r["kind2_after"] for r in nonEq)
         summ["kind2_agrees_with_circuit_design_check"] = sum((r["kind2_after"] == "invalid") == r["design_violates_after"] for r in rows)
     summ["detected_by_any_circuit_check"] = sum(bool(r["conflicts_added"] or r["conflicts_removed"] or r["holes_delta"]
                                                      or r["design_violates_before"] != r["design_violates_after"]) for r in nonEq)
-    json.dump(dict(summary=summ, mutants=rows), open(os.path.join(a.out, "mutation.json"), "w"), indent=1, ensure_ascii=False)
+    json.dump(dict(summary=summ, mutants=rows_all), open(os.path.join(a.out, "mutation.json"), "w"), indent=1, ensure_ascii=False)
     print(json.dumps(summ, indent=1))
 
 

@@ -23,6 +23,6 @@ Translation coverage: translated action def 1, allocate 3, attribute 44, decide 
 
 ## Files
 
-- `view_variabilidade.png`
-- `view_alocacao.png`
-- `view_acoes_DetectAndReport.png`
+- `view_variability.png`
+- `view_allocation.png`
+- `view_actions_DetectAndReport.png`

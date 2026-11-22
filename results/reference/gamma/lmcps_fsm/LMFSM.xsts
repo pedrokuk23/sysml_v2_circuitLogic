@@ -1,0 +1,99 @@
+type RapMachine_LMFSM : { __Inactive__, T_apMachine, N_apMachine, M_apMachine, S_apMachine }
+type RsenMachine_LMFSM : { __Inactive__, Nom_senMachine, Tr_senMachine, F_senMachine }
+var env_step_In_LMFSM : boolean = false
+ var env_step_In_apfail_LMFSM : boolean = false
+ var env_step_In_limits_LMFSM : boolean = false
+ var env_step_In_standby_LMFSM : boolean = false
+ var env_step_In_supported_LMFSM : boolean = false
+ctrl var rapMachine_LMFSM : RapMachine_LMFSM = __Inactive__
+ctrl var rsenMachine_LMFSM : RsenMachine_LMFSM = __Inactive__
+
+trans {
+	if (((rapMachine_LMFSM == T_apMachine) && env_step_In_LMFSM && env_step_In_standby_LMFSM)) {
+		rapMachine_LMFSM := S_apMachine;
+	}
+	else {
+		if (((rapMachine_LMFSM == N_apMachine) && env_step_In_LMFSM && env_step_In_standby_LMFSM)) {
+			rapMachine_LMFSM := S_apMachine;
+		}
+		else {
+			if (((rapMachine_LMFSM == M_apMachine) && env_step_In_LMFSM && env_step_In_standby_LMFSM && (!((rsenMachine_LMFSM == F_senMachine))))) {
+				rapMachine_LMFSM := S_apMachine;
+			}
+			else {
+				if (((rapMachine_LMFSM == S_apMachine) && env_step_In_LMFSM && env_step_In_apfail_LMFSM)) {
+					rapMachine_LMFSM := M_apMachine;
+				}
+				else {
+					if (((rapMachine_LMFSM == T_apMachine) && env_step_In_LMFSM && (!(env_step_In_standby_LMFSM)) && (!((rsenMachine_LMFSM == F_senMachine))) && env_step_In_supported_LMFSM)) {
+						rapMachine_LMFSM := N_apMachine;
+					}
+					else {
+						if (((rapMachine_LMFSM == N_apMachine) && env_step_In_LMFSM && (!((!((rsenMachine_LMFSM == F_senMachine))))) && (!(env_step_In_standby_LMFSM)))) {
+							rapMachine_LMFSM := M_apMachine;
+						}
+						else {
+							if (((rapMachine_LMFSM == M_apMachine) && env_step_In_LMFSM && (!(env_step_In_standby_LMFSM)) && env_step_In_supported_LMFSM && (!((rsenMachine_LMFSM == F_senMachine))))) {
+								rapMachine_LMFSM := T_apMachine;
+							}
+							else {
+								if (((rapMachine_LMFSM == S_apMachine) && env_step_In_LMFSM && (!(env_step_In_standby_LMFSM)) && (!(env_step_In_apfail_LMFSM)))) {
+									rapMachine_LMFSM := T_apMachine;
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+	if (((rsenMachine_LMFSM == Nom_senMachine) && env_step_In_LMFSM && env_step_In_limits_LMFSM)) {
+		rsenMachine_LMFSM := F_senMachine;
+	}
+	else {
+		if (((rsenMachine_LMFSM == Nom_senMachine) && env_step_In_LMFSM && (!(((rapMachine_LMFSM == T_apMachine) || (rapMachine_LMFSM == N_apMachine)))) && (!(env_step_In_limits_LMFSM)))) {
+			rsenMachine_LMFSM := Tr_senMachine;
+		}
+		else {
+			if (((rsenMachine_LMFSM == Tr_senMachine) && env_step_In_LMFSM && ((rapMachine_LMFSM == T_apMachine) || (rapMachine_LMFSM == N_apMachine)) && (!((rapMachine_LMFSM == T_apMachine))))) {
+				rsenMachine_LMFSM := Nom_senMachine;
+			}
+			else {
+				if (((rsenMachine_LMFSM == F_senMachine) && env_step_In_LMFSM && ((!(((rapMachine_LMFSM == T_apMachine) || (rapMachine_LMFSM == N_apMachine)))) || (!(env_step_In_limits_LMFSM))))) {
+					rsenMachine_LMFSM := Tr_senMachine;
+				}
+			}
+		}
+	}
+	env_step_In_standby_LMFSM := false;
+	env_step_In_apfail_LMFSM := false;
+	env_step_In_supported_LMFSM := false;
+	env_step_In_LMFSM := false;
+	env_step_In_limits_LMFSM := false;
+}
+init {
+	rapMachine_LMFSM := __Inactive__;
+	rsenMachine_LMFSM := __Inactive__;
+	env_step_In_LMFSM := false;
+	rapMachine_LMFSM := T_apMachine;
+	rsenMachine_LMFSM := Nom_senMachine;
+}
+env {
+	havoc env_step_In_LMFSM;
+	env_step_In_apfail_LMFSM := false;
+	if (env_step_In_LMFSM) {
+		havoc env_step_In_apfail_LMFSM;
+	}
+	env_step_In_limits_LMFSM := false;
+	if (env_step_In_LMFSM) {
+		havoc env_step_In_limits_LMFSM;
+	}
+	env_step_In_standby_LMFSM := false;
+	if (env_step_In_LMFSM) {
+		havoc env_step_In_standby_LMFSM;
+	}
+	env_step_In_supported_LMFSM := false;
+	if (env_step_In_LMFSM) {
+		havoc env_step_In_supported_LMFSM;
+	}
+}

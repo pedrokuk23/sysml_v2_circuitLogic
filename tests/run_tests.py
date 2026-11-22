@@ -5,12 +5,12 @@ A  supported, valid models are accepted and give the published results;
 B  invalid models (realistic editing errors) are rejected with a diagnostic, before any analysis;
 C  valid SysML v2 that uses constructs the compiler does not translate is rejected, not silently ignored;
 D  every statement must be consumed by a rule of the subset grammar: an unknown statement inserted at any
-   statement boundary of the three models (outside comments) is rejected;
+   statement boundary of every model (outside comments) is rejected;
 E  statements read only for structure (documentation, subjects, imports, ports, connections, interface usages)
    do not change any analysis result when removed, added or reordered, and inconsistent structure is rejected;
 F  every name is declared once in its scope: a second, different declaration of a port definition, part
    definition, variant, state, attribute, ... is rejected, and so is a copy of each of the declarations of the
-   three models inserted next to the original;
+   models inserted next to the original;
 G  the three translations of each requirement (SMT for z3, Verilog for Yosys, Lustre for Kind 2) agree on every
    input valuation of the domain (exhaustive check, independent evaluators for the Verilog and Lustre text).
 
@@ -29,6 +29,7 @@ M = os.path.join(ROOT, "models")
 LM = open(os.path.join(M, "lmcps_fsm.sysml")).read()
 FS = open(os.path.join(M, "firesat.sysml")).read()
 RESULTS = []
+MODELS = sorted(f for f in os.listdir(M) if f.endswith(".sysml"))
 
 
 def record(cls, name, ok, detail=""):
@@ -73,8 +74,36 @@ def class_a():
     V = analysis.check_variability(F)
     record("A", "FireSat: 9 of 32 configurations", (V["n_valid"], V["n_configs"]) == (9, 32), f"{V['n_valid']}/{V['n_configs']}")
     record("A", "FireSat: geo1 dead, leo2 core", V["dead_variants"] == ["orbit.geo1"] and V["core_variants"] == ["orbit.leo2"])
+    G = analysis.check_output_groups(compile_model(os.path.join(M, "lmcps_roll_tsm.sysml")))
+    ap, ts = G["rollHoldReference"], G["setVal"]
+    record("A", "AP-003: conflicts B×D and C×D, vacuous limit clause in A and D",
+           sorted(c["requirements"] for c in ap["conflicts"]) == [["AP-003B", "AP-003D"], ["AP-003C", "AP-003D"]]
+           and set(ap["constant_subformulas"]) == {"AP-003A", "AP-003D"}, str([c["requirements"] for c in ap["conflicts"]]))
+    record("A", "TSM: TSM-002 conflicts with each TSM-003 case; holes for unlisted fault codes",
+           len(ts["conflicts"]) == 3 and not ts["coverage"]["complete"])
+    G2 = analysis.check_output_groups(compile_model(os.path.join(M, "lmcps_roll_tsm_glossary.sysml")))["setVal"]
+    record("A", "TSM with the glossary axiom noFail <=> FC = 0: no conflicts, holes remain", not G2["conflicts"] and not G2["coverage"]["complete"])
+    Q = analysis.check_flowdown(compile_model(os.path.join(M, "firesat_flowdown.sysml")))
+    r0, r1, rg = Q["resFlow"], Q["resFlowRevised"], Q["geoFlow"]
+    record("A", "FireSat flow-down: refinement fails, worst case 31.09 m", (not r0["valid"]) and abs(r0["worst_case"] - 31.09) < 0.01,
+           str(r0.get("worst_case")))
+    record("A", "FireSat flow-down: revised allocation valid, payload/attitude margin 0.44 urad",
+           r1["valid"] and abs(r1["interfaces"]["Payload"]["margin"] - 4.41e-7) < 0.01e-6, str(r1["interfaces"]["Payload"].get("margin")))
+    record("A", "FireSat flow-down: no aperture alone and no jitter alone rescues the geostationary concept",
+           rg["abduction"]["PAY-2"]["exists"] is False and rg["abduction"]["ADCS-1R"]["exists"] is False)
     p = subprocess.run([sys.executable, os.path.join(ROOT, "sysmlc", "__main__.py"), os.path.join(M, "firesat.sysml"),
                         "-o", tempfile.mkdtemp(), "--no-eda"], capture_output=True, text=True)
+    # third-party requirements: NASA Lift+Cruise (mini set), unrolled over time
+    import unroll
+    from z3 import And as _And
+    L = compile_model(os.path.join(ROOT, "models", "third_party", "lpc_mini.sysml"))
+    reach = [k for k in L.R if "REACH" in k]; base = [k for k in L.R if k not in reach]
+    TB = L.enums["LiftModeKind"].index("thrust_borne")
+    t_tb, _ = unroll.earliest(L, base, 14, lambda U, t: U.var("lift_mode", t) == TB)
+    r06 = unroll.lasso(L, base + ["LPC_REACH_HOVER_06"], 20)[0]
+    r12 = unroll.lasso(L, base + ["LPC_REACH_HOVER_12"], 20)[0]
+    record("A", "NASA Lift+Cruise mini set: thrust-borne first at step 11; within 6 ticks unrealizable, within 12 realizable",
+           (t_tb, r06, r12) == (11, False, True), str((t_tb, r06, r12)))
     record("A", "CLI exit status 0 on a valid model", p.returncode == 0, p.stderr[-200:])
 
 
@@ -94,6 +123,15 @@ B_CASES = [
     ("duplicate enumeration literal", LM, "enum T;", "enum T; enum T;"),
     ("missing initial state", LM, "entry; then", "entry; "),
     ("duplicate transition identifier", LM, "transition t03 first T", "transition t02 first T"),
+    ("order comparison on an enumeration", LM, "(apState == ApState::T and good and supported)", "(apState < ApState::N and good and supported)"),
+    ("comparison of two enumerations", LM, "(apState == ApState::T and good and supported)", "(apState == SenState::F and good and supported)"),
+    ("comparison of an enumeration with a number", LM, "(apState == ApState::T and good and supported)", "(apState == 2 and good and supported)"),
+    ("comparison of literals of two enumerations", LM, "(apState == ApState::T and good and supported)", "(ApState::M == SenState::F and good and supported)"),
+    ("enumeration compared with a literal of another enumeration", LM, "(apState == ApState::T and good and supported)", "(apState != ApState::M and apState == SenState::F and good and supported)"),
+    ("comparison of two enumeration attributes of different types", LM, "(apState == ApState::T and good and supported)", "(apState == senState and good and supported)"),
+    ("order comparison on an enumeration-valued conditional", LM, "(apState == ApState::T and good and supported)", "((if supported ? ApState::N else ApState::S) < 2 and good and supported)"),
+    ("conditional mixing an enumeration and a number", LM, "(apState == ApState::T and good and supported)", "((if supported ? apState else 2) == 2 and good and supported)"),
+    ("arithmetic on an enumeration", LM, "(apState == ApState::T and good and supported)", "(apState + 1 == 1 and good and supported)"),
     ("variant with malformed attribute", FS, "variant part gs4 : Ground { attribute redefines maxGap = 100; }", "variant part gs4 : Ground attribute redefines maxGap = 100;"),
 ]
 
@@ -165,14 +203,14 @@ def class_unknown():
         ok, why = rejected(once(base, old, new))
         record("D", name, ok and ("unrecognized" in why or "unterminated" in why), why)
     total, missed = 0, []
-    for fn in ("lmcps_fsm.sysml", "lmcps_fsm_rev.sysml", "firesat.sysml"):
+    for fn in MODELS:
         text = open(os.path.join(M, fn)).read()
         for p in boundaries(text):
             total += 1
             ok, why = rejected(text[:p] + " blorp zork; " + text[p:])
             if not ok:
                 missed.append((fn, p, why))
-    record("D", f"an unknown statement inserted at each of {total} statement boundaries is rejected", not missed,
+    record("D", f"an unknown statement inserted at each of {total} statement boundaries of the {len(MODELS)} models is rejected", not missed,
            str(missed[:3]))
 
 
@@ -263,7 +301,7 @@ def class_duplicates():
         record("F", name + " is rejected", ok and ("duplicate" in why or "more than once" in why or "two system" in why), why)
     import parser as P
     total, missed = 0, []
-    for fn in ("lmcps_fsm.sysml", "lmcps_fsm_rev.sysml", "firesat.sysml"):
+    for fn in MODELS:
         text = open(os.path.join(M, fn)).read()
         _, _, decls = P.walk_model(text)
         for s0, s1, ctx, nm in decls:
@@ -271,7 +309,7 @@ def class_duplicates():
             ok, why = rejected(text[:s1] + text[s0:s1] + text[s1:])
             if not ok or "duplicate" not in why:
                 missed.append((fn, ctx, nm, why[:80]))
-    record("F", f"a copy of each of the {total} declarations of the three models is rejected as a duplicate", not missed,
+    record("F", f"a copy of each of the {total} declarations of the {len(MODELS)} models is rejected as a duplicate", not missed,
            str(missed[:3]))
 
 
@@ -323,14 +361,31 @@ def class_cross():
     record("G", f"SMT, Verilog and Lustre agree on {total} valuations of {len(S.R)} requirements", not bad, str(bad[:3]))
 
 
+# ------------------------------------------------------------------ H: front end = Pilot Implementation AST
+def class_ast():
+    import ast_check
+    d = ast_check.AST
+    if not os.path.isdir(d):
+        record("H", "Pilot AST dumps present", False, "run validation/dump_ast.sh"); return
+    for m in sorted(f[:-5] for f in os.listdir(d) if f.endswith(".json") and f not in ("ast_check.json", "frontend_check.json")):
+        n, ne, fails = ast_check.check(m)
+        record("H", f"{m}: sysmlc IR = Pilot AST ({n} comparisons, {ne} expressions equivalent)", not fails, "; ".join(fails[:3]))
+    import frontend_check
+    for m in sorted(f[:-5] for f in os.listdir(d) if f.endswith(".json") and f not in ("ast_check.json", "frontend_check.json")):
+        r = frontend_check.check(m)
+        record("H", f"{m}: every analysis gives the same results through the Pilot front end ({r['leaves']} result "
+               f"leaves; {r['leaves'] - r['identical']} equal up to formula printing or the QE time limit)",
+               not r["failures"], "; ".join(r["failures"][:3]))
+
+
 def test_all():
-    for f in (class_a, class_b, class_c, class_unknown, class_structure, class_duplicates, class_cross):
+    for f in (class_a, class_b, class_c, class_unknown, class_structure, class_duplicates, class_cross, class_ast):
         f()
     assert all(r["passed"] for r in RESULTS)
 
 
 if __name__ == "__main__":
-    for f in (class_a, class_b, class_c, class_unknown, class_structure, class_duplicates, class_cross):
+    for f in (class_a, class_b, class_c, class_unknown, class_structure, class_duplicates, class_cross, class_ast):
         try:
             f()
         except Exception as ex:

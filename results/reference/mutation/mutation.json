@@ -1,11 +1,27 @@
 {
  "summary": {
+  "model": "models/lmcps_fsm.sysml",
   "mutants": 90,
   "by_operator": {
    "drop": 29,
    "negate": 29,
    "retarget": 32
   },
+  "meaning_preserving": {
+   "mutants": 53,
+   "by_operator": {
+    "reorder": 12,
+    "demorgan": 12,
+    "dneg": 29
+   },
+   "miter_equivalent": 53,
+   "ic3_verdict_changed": 0,
+   "circuit_conflict_or_hole_change": 0
+  },
+  "mutants_of_requirements_the_design_satisfies": 52,
+  "of_those_verdict_unchanged": 8,
+  "mutants_of_requirements_the_design_violates": 38,
+  "of_those_verdict_unchanged_": 36,
   "equivalent_mutants": 0,
   "miter_detected": 90,
   "miter_localized_to_requirement": 90,
@@ -13,7 +29,7 @@
   "design_verdict_changed_circuit": 47,
   "ic3_verdict_changed": 46,
   "one_step_violation_unreachable": 3,
-  "kind2_agrees_with_ic3": 90,
+  "kind2_agrees_with_ic3": "143/143",
   "kind2_verdict_changed": 46,
   "kind2_agrees_with_circuit_design_check": 87,
   "detected_by_any_circuit_check": 72
@@ -55,14 +71,14 @@
     "[apState=M] standby ∧ ¬good",
     "[apState=S] apfail ∧ standby"
    ],
-   "circuit_seconds": 0.95,
+   "circuit_seconds": 0.84,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.03,
+   "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.19
+   "kind2_seconds": 4.06
   },
   {
    "id": "FSM-002:drop:1",
@@ -86,14 +102,14 @@
    "violation_region": [
     "[apState=T] ¬standby"
    ],
-   "circuit_seconds": 0.99,
+   "circuit_seconds": 0.93,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.97
+   "kind2_seconds": 2.34
   },
   {
    "id": "FSM-002:negate:2",
@@ -136,14 +152,14 @@
     "[apState=M] standby ∧ ¬good",
     "[apState=S] apfail ∧ standby"
    ],
-   "circuit_seconds": 0.99,
+   "circuit_seconds": 1.03,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.03,
+   "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.02
+   "kind2_seconds": 1.17
   },
   {
    "id": "FSM-002:negate:3",
@@ -167,14 +183,14 @@
    "violation_region": [
     "[apState=T] ¬standby"
    ],
-   "circuit_seconds": 0.98,
+   "circuit_seconds": 0.89,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 0.65
+   "kind2_seconds": 1.51
   },
   {
    "id": "FSM-002:retarget:4",
@@ -198,14 +214,14 @@
    "violation_region": [
     "[apState=T] standby"
    ],
-   "circuit_seconds": 1.08,
+   "circuit_seconds": 0.94,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.02,
+   "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.88
+   "kind2_seconds": 2.81
   },
   {
    "id": "FSM-002:retarget:5",
@@ -234,14 +250,14 @@
    "violation_region": [
     "[apState=T] standby"
    ],
-   "circuit_seconds": 1.0,
+   "circuit_seconds": 0.8,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.64
+   "kind2_seconds": 1.86
   },
   {
    "id": "FSM-002:retarget:6",
@@ -265,17 +281,133 @@
    "violation_region": [
     "[apState=T] standby"
    ],
-   "circuit_seconds": 1.0,
+   "circuit_seconds": 0.86,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 3.73
+   "kind2_seconds": 1.02
   },
   {
-   "id": "FSM-003:drop:7",
+   "id": "FSM-002:reorder:7",
+   "req": "FSM-002",
+   "op": "reorder",
+   "change": "reverse conjuncts",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.82,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 1.88
+  },
+  {
+   "id": "FSM-002:demorgan:8",
+   "req": "FSM-002",
+   "op": "demorgan",
+   "change": "De Morgan",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.88,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.03,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 3.15
+  },
+  {
+   "id": "FSM-002:dneg:9",
+   "req": "FSM-002",
+   "op": "dneg",
+   "change": "'apState == ApState::T' -> 'not (not (apState == ApState::T))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.89,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 3.05
+  },
+  {
+   "id": "FSM-002:dneg:10",
+   "req": "FSM-002",
+   "op": "dneg",
+   "change": "'standby' -> 'not (not (standby))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.93,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 2.93
+  },
+  {
+   "id": "FSM-003:drop:11",
    "req": "FSM-003",
    "op": "drop",
    "change": "drop 'apState == ApState::T'",
@@ -321,17 +453,17 @@
     "[apState=M] good ∧ supported",
     "[apState=S] good ∧ supported"
    ],
-   "circuit_seconds": 1.17,
+   "circuit_seconds": 1.05,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.65
+   "kind2_seconds": 2.4
   },
   {
-   "id": "FSM-003:drop:8",
+   "id": "FSM-003:drop:12",
    "req": "FSM-003",
    "op": "drop",
    "change": "drop 'good'",
@@ -360,10 +492,10 @@
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.58
+   "kind2_seconds": 0.77
   },
   {
-   "id": "FSM-003:drop:9",
+   "id": "FSM-003:drop:13",
    "req": "FSM-003",
    "op": "drop",
    "change": "drop 'supported'",
@@ -385,17 +517,17 @@
    "violation_region": [
     "[apState=T] (good ∧ standby) ∨ (good ∧ ¬supported)"
    ],
-   "circuit_seconds": 0.94,
+   "circuit_seconds": 0.91,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.22
+   "kind2_seconds": 4.47
   },
   {
-   "id": "FSM-003:negate:10",
+   "id": "FSM-003:negate:14",
    "req": "FSM-003",
    "op": "negate",
    "change": "'apState == ApState::T' -> 'apState != ApState::T'",
@@ -445,17 +577,17 @@
     "[apState=M] good ∧ supported",
     "[apState=S] good ∧ supported"
    ],
-   "circuit_seconds": 1.04,
+   "circuit_seconds": 1.0,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.02,
+   "ic3_seconds": 0.03,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 3.28
+   "kind2_seconds": 3.49
   },
   {
-   "id": "FSM-003:negate:11",
+   "id": "FSM-003:negate:15",
    "req": "FSM-003",
    "op": "negate",
    "change": "'good' -> 'not good'",
@@ -477,17 +609,17 @@
    "violation_region": [
     "[apState=T] supported ∧ ¬good"
    ],
-   "circuit_seconds": 0.92,
+   "circuit_seconds": 0.88,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.72
+   "kind2_seconds": 2.12
   },
   {
-   "id": "FSM-003:negate:12",
+   "id": "FSM-003:negate:16",
    "req": "FSM-003",
    "op": "negate",
    "change": "'supported' -> 'not supported'",
@@ -509,17 +641,17 @@
    "violation_region": [
     "[apState=T] good ∧ ¬supported"
    ],
-   "circuit_seconds": 0.93,
+   "circuit_seconds": 0.86,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.27
+   "kind2_seconds": 3.47
   },
   {
-   "id": "FSM-003:retarget:13",
+   "id": "FSM-003:retarget:17",
    "req": "FSM-003",
    "op": "retarget",
    "change": "ApState::N -> ApState::T",
@@ -541,17 +673,17 @@
    "violation_region": [
     "[apState=T] good ∧ supported"
    ],
-   "circuit_seconds": 1.09,
+   "circuit_seconds": 0.97,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.37
+   "kind2_seconds": 3.44
   },
   {
-   "id": "FSM-003:retarget:14",
+   "id": "FSM-003:retarget:18",
    "req": "FSM-003",
    "op": "retarget",
    "change": "ApState::N -> ApState::M",
@@ -573,17 +705,17 @@
    "violation_region": [
     "[apState=T] good ∧ supported"
    ],
-   "circuit_seconds": 1.03,
+   "circuit_seconds": 0.87,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.35
+   "kind2_seconds": 1.09
   },
   {
-   "id": "FSM-003:retarget:15",
+   "id": "FSM-003:retarget:19",
    "req": "FSM-003",
    "op": "retarget",
    "change": "ApState::N -> ApState::S",
@@ -610,17 +742,177 @@
    "violation_region": [
     "[apState=T] good ∧ supported ∧ ¬standby"
    ],
-   "circuit_seconds": 0.93,
+   "circuit_seconds": 0.88,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.03,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 1.31
+  },
+  {
+   "id": "FSM-003:reorder:20",
+   "req": "FSM-003",
+   "op": "reorder",
+   "change": "reverse conjuncts",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "supported"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=T] good ∧ standby ∧ supported"
+   ],
+   "circuit_seconds": 1.0,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 0.92
+   "kind2_seconds": 2.63
   },
   {
-   "id": "FSM-004:drop:16",
+   "id": "FSM-003:demorgan:21",
+   "req": "FSM-003",
+   "op": "demorgan",
+   "change": "De Morgan",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "supported"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=T] good ∧ standby ∧ supported"
+   ],
+   "circuit_seconds": 0.85,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 4.03
+  },
+  {
+   "id": "FSM-003:dneg:22",
+   "req": "FSM-003",
+   "op": "dneg",
+   "change": "'apState == ApState::T' -> 'not (not (apState == ApState::T))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "supported"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=T] good ∧ standby ∧ supported"
+   ],
+   "circuit_seconds": 0.92,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 1.06
+  },
+  {
+   "id": "FSM-003:dneg:23",
+   "req": "FSM-003",
+   "op": "dneg",
+   "change": "'good' -> 'not (not (good))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "supported"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=T] good ∧ standby ∧ supported"
+   ],
+   "circuit_seconds": 0.83,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 2.97
+  },
+  {
+   "id": "FSM-003:dneg:24",
+   "req": "FSM-003",
+   "op": "dneg",
+   "change": "'supported' -> 'not (not (supported))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "supported"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=T] good ∧ standby ∧ supported"
+   ],
+   "circuit_seconds": 0.98,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 3.34
+  },
+  {
+   "id": "FSM-004:drop:25",
    "req": "FSM-004",
    "op": "drop",
    "change": "drop 'apState == ApState::N'",
@@ -652,17 +944,17 @@
     "[apState=N] standby ∧ ¬good",
     "[apState=S] ¬apfail ∧ ¬good"
    ],
-   "circuit_seconds": 0.96,
+   "circuit_seconds": 0.91,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.1
+   "kind2_seconds": 3.66
   },
   {
-   "id": "FSM-004:drop:17",
+   "id": "FSM-004:drop:26",
    "req": "FSM-004",
    "op": "drop",
    "change": "drop 'not good'",
@@ -683,17 +975,17 @@
    "violation_region": [
     "[apState=N] good ∨ standby"
    ],
-   "circuit_seconds": 0.94,
+   "circuit_seconds": 0.91,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.02,
+   "ic3_seconds": 0.07,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.54
+   "kind2_seconds": 4.5
   },
   {
-   "id": "FSM-004:negate:18",
+   "id": "FSM-004:negate:27",
    "req": "FSM-004",
    "op": "negate",
    "change": "'apState == ApState::N' -> 'apState != ApState::N'",
@@ -729,17 +1021,17 @@
     "[apState=T] ¬good",
     "[apState=S] ¬apfail ∧ ¬good"
    ],
-   "circuit_seconds": 1.03,
+   "circuit_seconds": 0.95,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.16
+   "kind2_seconds": 2.53
   },
   {
-   "id": "FSM-004:negate:19",
+   "id": "FSM-004:negate:28",
    "req": "FSM-004",
    "op": "negate",
    "change": "'not good' -> 'good'",
@@ -760,51 +1052,20 @@
    "violation_region": [
     "[apState=N] good"
    ],
-   "circuit_seconds": 0.95,
+   "circuit_seconds": 0.82,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.96
+   "kind2_seconds": 4.58
   },
   {
-   "id": "FSM-004:retarget:20",
+   "id": "FSM-004:retarget:29",
    "req": "FSM-004",
    "op": "retarget",
    "change": "ApState::M -> ApState::T",
-   "miter_equivalent": false,
-   "differing_valuations": 2,
-   "valuations": 32,
-   "variables": [
-    "apState",
-    "good",
-    "nextState"
-   ],
-   "order": "incomparable",
-   "conflicts_added": [],
-   "conflicts_removed": [],
-   "holes_delta": 0,
-   "design_violates_before": true,
-   "design_violates_after": true,
-   "violation_region": [
-    "[apState=N] ¬good"
-   ],
-   "circuit_seconds": 1.09,
-   "ic3_before": "counterexample",
-   "ic3_after": "counterexample",
-   "ic3_invariant": null,
-   "ic3_seconds": 0.02,
-   "kind2_before": "invalid",
-   "kind2_after": "invalid",
-   "kind2_seconds": 2.47
-  },
-  {
-   "id": "FSM-004:retarget:21",
-   "req": "FSM-004",
-   "op": "retarget",
-   "change": "ApState::M -> ApState::N",
    "miter_equivalent": false,
    "differing_valuations": 2,
    "valuations": 32,
@@ -829,10 +1090,41 @@
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.18
+   "kind2_seconds": 1.69
   },
   {
-   "id": "FSM-004:retarget:22",
+   "id": "FSM-004:retarget:30",
+   "req": "FSM-004",
+   "op": "retarget",
+   "change": "ApState::M -> ApState::N",
+   "miter_equivalent": false,
+   "differing_valuations": 2,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "good",
+    "nextState"
+   ],
+   "order": "incomparable",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=N] ¬good"
+   ],
+   "circuit_seconds": 1.0,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 3.19
+  },
+  {
+   "id": "FSM-004:retarget:31",
    "req": "FSM-004",
    "op": "retarget",
    "change": "ApState::M -> ApState::S",
@@ -858,17 +1150,141 @@
    "violation_region": [
     "[apState=N] ¬good ∧ ¬standby"
    ],
-   "circuit_seconds": 0.99,
+   "circuit_seconds": 0.78,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 3.72
+   "kind2_seconds": 3.07
   },
   {
-   "id": "FSM-005:drop:23",
+   "id": "FSM-004:reorder:32",
+   "req": "FSM-004",
+   "op": "reorder",
+   "change": "reverse conjuncts",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "good",
+    "nextState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=N] standby ∧ ¬good"
+   ],
+   "circuit_seconds": 0.92,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 1.56
+  },
+  {
+   "id": "FSM-004:demorgan:33",
+   "req": "FSM-004",
+   "op": "demorgan",
+   "change": "De Morgan",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "good",
+    "nextState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=N] standby ∧ ¬good"
+   ],
+   "circuit_seconds": 0.88,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 2.69
+  },
+  {
+   "id": "FSM-004:dneg:34",
+   "req": "FSM-004",
+   "op": "dneg",
+   "change": "'apState == ApState::N' -> 'not (not (apState == ApState::N))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "good",
+    "nextState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=N] standby ∧ ¬good"
+   ],
+   "circuit_seconds": 0.84,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 1.64
+  },
+  {
+   "id": "FSM-004:dneg:35",
+   "req": "FSM-004",
+   "op": "dneg",
+   "change": "'not good' -> 'not (not (not good))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "good",
+    "nextState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=N] standby ∧ ¬good"
+   ],
+   "circuit_seconds": 0.88,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 3.81
+  },
+  {
+   "id": "FSM-005:drop:36",
    "req": "FSM-005",
    "op": "drop",
    "change": "drop 'apState == ApState::N'",
@@ -903,17 +1319,17 @@
     "[apState=M] standby ∧ ¬good",
     "[apState=S] apfail ∧ standby"
    ],
-   "circuit_seconds": 1.02,
+   "circuit_seconds": 0.94,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.39
+   "kind2_seconds": 3.84
   },
   {
-   "id": "FSM-005:drop:24",
+   "id": "FSM-005:drop:37",
    "req": "FSM-005",
    "op": "drop",
    "change": "drop 'standby'",
@@ -934,17 +1350,17 @@
    "violation_region": [
     "[apState=N] ¬standby"
    ],
-   "circuit_seconds": 0.98,
+   "circuit_seconds": 0.97,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.02,
+   "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.0
+   "kind2_seconds": 2.87
   },
   {
-   "id": "FSM-005:negate:25",
+   "id": "FSM-005:negate:38",
    "req": "FSM-005",
    "op": "negate",
    "change": "'apState == ApState::N' -> 'apState != ApState::N'",
@@ -984,17 +1400,17 @@
     "[apState=M] standby ∧ ¬good",
     "[apState=S] apfail ∧ standby"
    ],
-   "circuit_seconds": 1.06,
+   "circuit_seconds": 0.92,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 3.13
+   "kind2_seconds": 0.95
   },
   {
-   "id": "FSM-005:negate:26",
+   "id": "FSM-005:negate:39",
    "req": "FSM-005",
    "op": "negate",
    "change": "'standby' -> 'not standby'",
@@ -1015,17 +1431,17 @@
    "violation_region": [
     "[apState=N] ¬standby"
    ],
-   "circuit_seconds": 0.96,
+   "circuit_seconds": 0.98,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.03
+   "kind2_seconds": 2.74
   },
   {
-   "id": "FSM-005:retarget:27",
+   "id": "FSM-005:retarget:40",
    "req": "FSM-005",
    "op": "retarget",
    "change": "ApState::S -> ApState::T",
@@ -1046,17 +1462,17 @@
    "violation_region": [
     "[apState=N] standby"
    ],
-   "circuit_seconds": 0.99,
+   "circuit_seconds": 0.87,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 4.16
+   "kind2_seconds": 3.37
   },
   {
-   "id": "FSM-005:retarget:28",
+   "id": "FSM-005:retarget:41",
    "req": "FSM-005",
    "op": "retarget",
    "change": "ApState::S -> ApState::N",
@@ -1077,17 +1493,17 @@
    "violation_region": [
     "[apState=N] standby"
    ],
-   "circuit_seconds": 0.96,
+   "circuit_seconds": 0.9,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 4.27
+   "kind2_seconds": 1.6
   },
   {
-   "id": "FSM-005:retarget:29",
+   "id": "FSM-005:retarget:42",
    "req": "FSM-005",
    "op": "retarget",
    "change": "ApState::S -> ApState::M",
@@ -1113,17 +1529,133 @@
    "violation_region": [
     "[apState=N] standby"
    ],
-   "circuit_seconds": 0.99,
+   "circuit_seconds": 0.84,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.33
+   "kind2_seconds": 2.02
   },
   {
-   "id": "FSM-006:drop:30",
+   "id": "FSM-005:reorder:43",
+   "req": "FSM-005",
+   "op": "reorder",
+   "change": "reverse conjuncts",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.87,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 2.39
+  },
+  {
+   "id": "FSM-005:demorgan:44",
+   "req": "FSM-005",
+   "op": "demorgan",
+   "change": "De Morgan",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.83,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 1.48
+  },
+  {
+   "id": "FSM-005:dneg:45",
+   "req": "FSM-005",
+   "op": "dneg",
+   "change": "'apState == ApState::N' -> 'not (not (apState == ApState::N))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 1.04,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 1.73
+  },
+  {
+   "id": "FSM-005:dneg:46",
+   "req": "FSM-005",
+   "op": "dneg",
+   "change": "'standby' -> 'not (not (standby))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.98,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 4.28
+  },
+  {
+   "id": "FSM-006:drop:47",
    "req": "FSM-006",
    "op": "drop",
    "change": "drop 'apState == ApState::M'",
@@ -1154,17 +1686,17 @@
    "violation_region": [
     "[apState=S] apfail ∧ good ∧ standby"
    ],
-   "circuit_seconds": 1.01,
+   "circuit_seconds": 0.95,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 3.09
+   "kind2_seconds": 1.3
   },
   {
-   "id": "FSM-006:drop:31",
+   "id": "FSM-006:drop:48",
    "req": "FSM-006",
    "op": "drop",
    "change": "drop 'standby'",
@@ -1186,17 +1718,17 @@
    "violation_region": [
     "[apState=M] good ∧ ¬standby"
    ],
-   "circuit_seconds": 1.0,
+   "circuit_seconds": 0.92,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.03,
+   "ic3_seconds": 0.04,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 5.17
+   "kind2_seconds": 2.94
   },
   {
-   "id": "FSM-006:drop:32",
+   "id": "FSM-006:drop:49",
    "req": "FSM-006",
    "op": "drop",
    "change": "drop 'good'",
@@ -1218,17 +1750,17 @@
    "violation_region": [
     "[apState=M] standby ∧ ¬good"
    ],
-   "circuit_seconds": 1.03,
+   "circuit_seconds": 0.84,
    "ic3_before": "proved",
    "ic3_after": "proved",
-   "ic3_invariant": "And(Or(Not(senState >= 2), Not(apState == 2)),\n    Or(Not(senState <= 0), Not(apState >= 2)))",
-   "ic3_seconds": 0.07,
+   "ic3_invariant": "And(Or(Not(apState == 2), Not(senState >= 2)),\n    Or(Not(apState >= 2), Not(senState <= 0)))",
+   "ic3_seconds": 0.06,
    "kind2_before": "valid",
    "kind2_after": "valid",
-   "kind2_seconds": 1.41
+   "kind2_seconds": 1.19
   },
   {
-   "id": "FSM-006:negate:33",
+   "id": "FSM-006:negate:50",
    "req": "FSM-006",
    "op": "negate",
    "change": "'apState == ApState::M' -> 'apState != ApState::M'",
@@ -1264,17 +1796,17 @@
    "violation_region": [
     "[apState=S] apfail ∧ good ∧ standby"
    ],
-   "circuit_seconds": 0.99,
+   "circuit_seconds": 0.94,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 3.83
+   "kind2_seconds": 1.37
   },
   {
-   "id": "FSM-006:negate:34",
+   "id": "FSM-006:negate:51",
    "req": "FSM-006",
    "op": "negate",
    "change": "'standby' -> 'not standby'",
@@ -1296,17 +1828,17 @@
    "violation_region": [
     "[apState=M] good ∧ ¬standby"
    ],
-   "circuit_seconds": 1.03,
+   "circuit_seconds": 0.91,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.21
+   "kind2_seconds": 3.74
   },
   {
-   "id": "FSM-006:negate:35",
+   "id": "FSM-006:negate:52",
    "req": "FSM-006",
    "op": "negate",
    "change": "'good' -> 'not good'",
@@ -1336,14 +1868,14 @@
    "circuit_seconds": 0.92,
    "ic3_before": "proved",
    "ic3_after": "proved",
-   "ic3_invariant": "And(Or(Not(apState == 2), Not(senState >= 2)),\n    Or(Not(senState <= 0), Not(apState >= 2)))",
+   "ic3_invariant": "And(Or(Not(apState == 2), Not(senState >= 2)),\n    Or(Not(apState >= 2), Not(senState <= 0)))",
    "ic3_seconds": 0.05,
    "kind2_before": "valid",
    "kind2_after": "valid",
-   "kind2_seconds": 2.41
+   "kind2_seconds": 3.55
   },
   {
-   "id": "FSM-006:retarget:36",
+   "id": "FSM-006:retarget:53",
    "req": "FSM-006",
    "op": "retarget",
    "change": "ApState::S -> ApState::T",
@@ -1370,17 +1902,17 @@
    "violation_region": [
     "[apState=M] good ∧ standby"
    ],
-   "circuit_seconds": 1.03,
+   "circuit_seconds": 0.91,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.03,
+   "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.74
+   "kind2_seconds": 1.56
   },
   {
-   "id": "FSM-006:retarget:37",
+   "id": "FSM-006:retarget:54",
    "req": "FSM-006",
    "op": "retarget",
    "change": "ApState::S -> ApState::N",
@@ -1402,17 +1934,17 @@
    "violation_region": [
     "[apState=M] good ∧ standby"
    ],
-   "circuit_seconds": 0.98,
+   "circuit_seconds": 0.97,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.39
+   "kind2_seconds": 1.47
   },
   {
-   "id": "FSM-006:retarget:38",
+   "id": "FSM-006:retarget:55",
    "req": "FSM-006",
    "op": "retarget",
    "change": "ApState::S -> ApState::M",
@@ -1434,17 +1966,167 @@
    "violation_region": [
     "[apState=M] good ∧ standby"
    ],
-   "circuit_seconds": 0.96,
+   "circuit_seconds": 0.94,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.03,
+   "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.65
+   "kind2_seconds": 2.6
   },
   {
-   "id": "FSM-007:drop:39",
+   "id": "FSM-006:reorder:56",
+   "req": "FSM-006",
+   "op": "reorder",
+   "change": "reverse conjuncts",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.83,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 2.78
+  },
+  {
+   "id": "FSM-006:demorgan:57",
+   "req": "FSM-006",
+   "op": "demorgan",
+   "change": "De Morgan",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.9,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.03,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 1.01
+  },
+  {
+   "id": "FSM-006:dneg:58",
+   "req": "FSM-006",
+   "op": "dneg",
+   "change": "'apState == ApState::M' -> 'not (not (apState == ApState::M))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 1.08,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 3.17
+  },
+  {
+   "id": "FSM-006:dneg:59",
+   "req": "FSM-006",
+   "op": "dneg",
+   "change": "'standby' -> 'not (not (standby))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 1.1,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 3.06
+  },
+  {
+   "id": "FSM-006:dneg:60",
+   "req": "FSM-006",
+   "op": "dneg",
+   "change": "'good' -> 'not (not (good))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.97,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 2.29
+  },
+  {
+   "id": "FSM-007:drop:61",
    "req": "FSM-007",
    "op": "drop",
    "change": "drop 'apState == ApState::M'",
@@ -1486,17 +2168,17 @@
     "[apState=M] good ∧ standby ∧ supported",
     "[apState=S] (apfail ∧ good ∧ supported) ∨ (good ∧ standby ∧ supported)"
    ],
-   "circuit_seconds": 1.06,
+   "circuit_seconds": 1.08,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 3.48
+   "kind2_seconds": 4.45
   },
   {
-   "id": "FSM-007:drop:40",
+   "id": "FSM-007:drop:62",
    "req": "FSM-007",
    "op": "drop",
    "change": "drop 'supported'",
@@ -1525,10 +2207,10 @@
    "ic3_seconds": 0.03,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.09
+   "kind2_seconds": 1.59
   },
   {
-   "id": "FSM-007:drop:41",
+   "id": "FSM-007:drop:63",
    "req": "FSM-007",
    "op": "drop",
    "change": "drop 'good'",
@@ -1550,17 +2232,17 @@
    "violation_region": [
     "[apState=M] (standby ∧ supported) ∨ (supported ∧ ¬good)"
    ],
-   "circuit_seconds": 1.08,
+   "circuit_seconds": 0.91,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.03,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.53
+   "kind2_seconds": 2.62
   },
   {
-   "id": "FSM-007:negate:42",
+   "id": "FSM-007:negate:64",
    "req": "FSM-007",
    "op": "negate",
    "change": "'apState == ApState::M' -> 'apState != ApState::M'",
@@ -1606,17 +2288,17 @@
     "[apState=N] good ∧ supported",
     "[apState=S] (apfail ∧ good ∧ supported) ∨ (good ∧ standby ∧ supported)"
    ],
-   "circuit_seconds": 1.04,
+   "circuit_seconds": 0.94,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.42
+   "kind2_seconds": 2.96
   },
   {
-   "id": "FSM-007:negate:43",
+   "id": "FSM-007:negate:65",
    "req": "FSM-007",
    "op": "negate",
    "change": "'supported' -> 'not supported'",
@@ -1638,17 +2320,17 @@
    "violation_region": [
     "[apState=M] good ∧ ¬supported"
    ],
-   "circuit_seconds": 0.93,
+   "circuit_seconds": 0.88,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.03,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.43
+   "kind2_seconds": 2.85
   },
   {
-   "id": "FSM-007:negate:44",
+   "id": "FSM-007:negate:66",
    "req": "FSM-007",
    "op": "negate",
    "change": "'good' -> 'not good'",
@@ -1675,17 +2357,17 @@
    "violation_region": [
     "[apState=M] supported ∧ ¬good"
    ],
-   "circuit_seconds": 0.97,
+   "circuit_seconds": 0.89,
    "ic3_before": "counterexample",
    "ic3_after": "proved",
-   "ic3_invariant": "And(Or(Not(senState <= 0), Not(apState >= 2)),\n    Or(Not(senState >= 2), Not(apState == 2)))",
-   "ic3_seconds": 0.05,
+   "ic3_invariant": "And(Or(Not(apState >= 2), Not(senState <= 0)),\n    Or(Not(senState >= 2), Not(apState == 2)))",
+   "ic3_seconds": 0.06,
    "kind2_before": "invalid",
    "kind2_after": "valid",
-   "kind2_seconds": 1.34
+   "kind2_seconds": 1.06
   },
   {
-   "id": "FSM-007:retarget:45",
+   "id": "FSM-007:retarget:67",
    "req": "FSM-007",
    "op": "retarget",
    "change": "ApState::T -> ApState::N",
@@ -1707,17 +2389,17 @@
    "violation_region": [
     "[apState=M] good ∧ supported"
    ],
-   "circuit_seconds": 0.94,
+   "circuit_seconds": 0.87,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.03,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.43
+   "kind2_seconds": 2.14
   },
   {
-   "id": "FSM-007:retarget:46",
+   "id": "FSM-007:retarget:68",
    "req": "FSM-007",
    "op": "retarget",
    "change": "ApState::T -> ApState::M",
@@ -1739,17 +2421,17 @@
    "violation_region": [
     "[apState=M] good ∧ supported"
    ],
-   "circuit_seconds": 0.96,
+   "circuit_seconds": 0.98,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.04,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.41
+   "kind2_seconds": 3.47
   },
   {
-   "id": "FSM-007:retarget:47",
+   "id": "FSM-007:retarget:69",
    "req": "FSM-007",
    "op": "retarget",
    "change": "ApState::T -> ApState::S",
@@ -1776,17 +2458,177 @@
    "violation_region": [
     "[apState=M] good ∧ supported ∧ ¬standby"
    ],
-   "circuit_seconds": 0.96,
+   "circuit_seconds": 0.9,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.04,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 2.3
+  },
+  {
+   "id": "FSM-007:reorder:70",
+   "req": "FSM-007",
+   "op": "reorder",
+   "change": "reverse conjuncts",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "supported"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=M] good ∧ standby ∧ supported"
+   ],
+   "circuit_seconds": 1.03,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.04,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 3.26
+  },
+  {
+   "id": "FSM-007:demorgan:71",
+   "req": "FSM-007",
+   "op": "demorgan",
+   "change": "De Morgan",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "supported"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=M] good ∧ standby ∧ supported"
+   ],
+   "circuit_seconds": 0.82,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.03,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.98
+   "kind2_seconds": 2.64
   },
   {
-   "id": "FSM-008:drop:48",
+   "id": "FSM-007:dneg:72",
+   "req": "FSM-007",
+   "op": "dneg",
+   "change": "'apState == ApState::M' -> 'not (not (apState == ApState::M))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "supported"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=M] good ∧ standby ∧ supported"
+   ],
+   "circuit_seconds": 0.93,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.03,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 3.51
+  },
+  {
+   "id": "FSM-007:dneg:73",
+   "req": "FSM-007",
+   "op": "dneg",
+   "change": "'supported' -> 'not (not (supported))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "supported"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=M] good ∧ standby ∧ supported"
+   ],
+   "circuit_seconds": 0.89,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.03,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 2.86
+  },
+  {
+   "id": "FSM-007:dneg:74",
+   "req": "FSM-007",
+   "op": "dneg",
+   "change": "'good' -> 'not (not (good))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 64,
+   "variables": [
+    "apState",
+    "good",
+    "nextState",
+    "supported"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=M] good ∧ standby ∧ supported"
+   ],
+   "circuit_seconds": 0.87,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.03,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 1.77
+  },
+  {
+   "id": "FSM-008:drop:75",
    "req": "FSM-008",
    "op": "drop",
    "change": "drop 'apState == ApState::S'",
@@ -1826,10 +2668,10 @@
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.49
+   "kind2_seconds": 3.47
   },
   {
-   "id": "FSM-008:drop:49",
+   "id": "FSM-008:drop:76",
    "req": "FSM-008",
    "op": "drop",
    "change": "drop 'not standby'",
@@ -1850,17 +2692,17 @@
    "violation_region": [
     "[apState=S] apfail ∨ standby"
    ],
-   "circuit_seconds": 0.88,
+   "circuit_seconds": 1.0,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.03,
+   "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 3.33
+   "kind2_seconds": 2.18
   },
   {
-   "id": "FSM-008:negate:50",
+   "id": "FSM-008:negate:77",
    "req": "FSM-008",
    "op": "negate",
    "change": "'apState == ApState::S' -> 'apState != ApState::S'",
@@ -1897,17 +2739,17 @@
     "[apState=N] ¬standby",
     "[apState=M] (¬good ∧ ¬standby) ∨ (¬standby ∧ ¬supported)"
    ],
-   "circuit_seconds": 0.97,
+   "circuit_seconds": 0.87,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.15
+   "kind2_seconds": 3.3
   },
   {
-   "id": "FSM-008:negate:51",
+   "id": "FSM-008:negate:78",
    "req": "FSM-008",
    "op": "negate",
    "change": "'not standby' -> 'standby'",
@@ -1928,17 +2770,17 @@
    "violation_region": [
     "[apState=S] standby"
    ],
-   "circuit_seconds": 0.99,
+   "circuit_seconds": 1.06,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.57
+   "kind2_seconds": 3.2
   },
   {
-   "id": "FSM-008:retarget:52",
+   "id": "FSM-008:retarget:79",
    "req": "FSM-008",
    "op": "retarget",
    "change": "ApState::T -> ApState::N",
@@ -1966,10 +2808,10 @@
    "ic3_seconds": 0.03,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.58
+   "kind2_seconds": 2.61
   },
   {
-   "id": "FSM-008:retarget:53",
+   "id": "FSM-008:retarget:80",
    "req": "FSM-008",
    "op": "retarget",
    "change": "ApState::T -> ApState::M",
@@ -1995,17 +2837,17 @@
    "violation_region": [
     "[apState=S] ¬apfail ∧ ¬standby"
    ],
-   "circuit_seconds": 0.95,
+   "circuit_seconds": 0.96,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.03,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 0.79
+   "kind2_seconds": 1.31
   },
   {
-   "id": "FSM-008:retarget:54",
+   "id": "FSM-008:retarget:81",
    "req": "FSM-008",
    "op": "retarget",
    "change": "ApState::T -> ApState::S",
@@ -2026,17 +2868,141 @@
    "violation_region": [
     "[apState=S] ¬standby"
    ],
-   "circuit_seconds": 0.98,
+   "circuit_seconds": 0.87,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.25
+   "kind2_seconds": 3.58
   },
   {
-   "id": "FSM-009:drop:55",
+   "id": "FSM-008:reorder:82",
+   "req": "FSM-008",
+   "op": "reorder",
+   "change": "reverse conjuncts",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=S] apfail ∧ ¬standby"
+   ],
+   "circuit_seconds": 0.94,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.04,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 2.54
+  },
+  {
+   "id": "FSM-008:demorgan:83",
+   "req": "FSM-008",
+   "op": "demorgan",
+   "change": "De Morgan",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=S] apfail ∧ ¬standby"
+   ],
+   "circuit_seconds": 1.23,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 1.15
+  },
+  {
+   "id": "FSM-008:dneg:84",
+   "req": "FSM-008",
+   "op": "dneg",
+   "change": "'apState == ApState::S' -> 'not (not (apState == ApState::S))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=S] apfail ∧ ¬standby"
+   ],
+   "circuit_seconds": 1.11,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.04,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 1.43
+  },
+  {
+   "id": "FSM-008:dneg:85",
+   "req": "FSM-008",
+   "op": "dneg",
+   "change": "'not standby' -> 'not (not (not standby))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "nextState",
+    "standby"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[apState=S] apfail ∧ ¬standby"
+   ],
+   "circuit_seconds": 1.11,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.03,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 2.86
+  },
+  {
+   "id": "FSM-009:drop:86",
    "req": "FSM-009",
    "op": "drop",
    "change": "drop 'apState == ApState::S'",
@@ -2080,17 +3046,17 @@
     "[apState=N] (apfail ∧ good) ∨ (apfail ∧ standby)",
     "[apState=M] (apfail ∧ good ∧ standby) ∨ (apfail ∧ good ∧ supported)"
    ],
-   "circuit_seconds": 1.05,
+   "circuit_seconds": 1.09,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.07
+   "kind2_seconds": 2.76
   },
   {
-   "id": "FSM-009:drop:56",
+   "id": "FSM-009:drop:87",
    "req": "FSM-009",
    "op": "drop",
    "change": "drop 'apfail'",
@@ -2111,17 +3077,17 @@
    "violation_region": [
     "[apState=S] qualquer"
    ],
-   "circuit_seconds": 0.79,
+   "circuit_seconds": 0.76,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.06
+   "kind2_seconds": 2.68
   },
   {
-   "id": "FSM-009:negate:57",
+   "id": "FSM-009:negate:88",
    "req": "FSM-009",
    "op": "negate",
    "change": "'apState == ApState::S' -> 'apState != ApState::S'",
@@ -2170,17 +3136,17 @@
     "[apState=N] (apfail ∧ good) ∨ (apfail ∧ standby)",
     "[apState=M] (apfail ∧ good ∧ standby) ∨ (apfail ∧ good ∧ supported)"
    ],
-   "circuit_seconds": 1.1,
+   "circuit_seconds": 1.13,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 0.94
+   "kind2_seconds": 5.44
   },
   {
-   "id": "FSM-009:negate:58",
+   "id": "FSM-009:negate:89",
    "req": "FSM-009",
    "op": "negate",
    "change": "'apfail' -> 'not apfail'",
@@ -2201,7 +3167,7 @@
    "violation_region": [
     "[apState=S] ¬apfail"
    ],
-   "circuit_seconds": 1.02,
+   "circuit_seconds": 0.91,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
@@ -2211,7 +3177,7 @@
    "kind2_seconds": 2.69
   },
   {
-   "id": "FSM-009:retarget:59",
+   "id": "FSM-009:retarget:90",
    "req": "FSM-009",
    "op": "retarget",
    "change": "ApState::M -> ApState::T",
@@ -2237,17 +3203,17 @@
    "violation_region": [
     "[apState=S] apfail"
    ],
-   "circuit_seconds": 0.99,
+   "circuit_seconds": 0.97,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.02,
+   "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 3.99
+   "kind2_seconds": 0.96
   },
   {
-   "id": "FSM-009:retarget:60",
+   "id": "FSM-009:retarget:91",
    "req": "FSM-009",
    "op": "retarget",
    "change": "ApState::M -> ApState::N",
@@ -2268,17 +3234,17 @@
    "violation_region": [
     "[apState=S] apfail"
    ],
-   "circuit_seconds": 0.99,
+   "circuit_seconds": 0.96,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.03,
+   "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.19
+   "kind2_seconds": 3.67
   },
   {
-   "id": "FSM-009:retarget:61",
+   "id": "FSM-009:retarget:92",
    "req": "FSM-009",
    "op": "retarget",
    "change": "ApState::M -> ApState::S",
@@ -2299,17 +3265,133 @@
    "violation_region": [
     "[apState=S] apfail"
    ],
-   "circuit_seconds": 1.05,
+   "circuit_seconds": 0.93,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.03,
+   "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 0.72
+   "kind2_seconds": 4.58
   },
   {
-   "id": "FSM-010:drop:62",
+   "id": "FSM-009:reorder:93",
+   "req": "FSM-009",
+   "op": "reorder",
+   "change": "reverse conjuncts",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "apfail",
+    "nextState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 1.17,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.03,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 1.27
+  },
+  {
+   "id": "FSM-009:demorgan:94",
+   "req": "FSM-009",
+   "op": "demorgan",
+   "change": "De Morgan",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "apfail",
+    "nextState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.89,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 1.02
+  },
+  {
+   "id": "FSM-009:dneg:95",
+   "req": "FSM-009",
+   "op": "dneg",
+   "change": "'apState == ApState::S' -> 'not (not (apState == ApState::S))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "apfail",
+    "nextState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.91,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 2.04
+  },
+  {
+   "id": "FSM-009:dneg:96",
+   "req": "FSM-009",
+   "op": "dneg",
+   "change": "'apfail' -> 'not (not (apfail))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 32,
+   "variables": [
+    "apState",
+    "apfail",
+    "nextState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.94,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 2.22
+  },
+  {
+   "id": "FSM-010:drop:97",
    "req": "FSM-010",
    "op": "drop",
    "change": "drop 'senState == SenState::Nom'",
@@ -2336,17 +3418,17 @@
     "[senState=Tr] limits",
     "[senState=F] limits ∧ ¬request"
    ],
-   "circuit_seconds": 0.97,
+   "circuit_seconds": 0.98,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.02,
+   "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.91
+   "kind2_seconds": 4.42
   },
   {
-   "id": "FSM-010:drop:63",
+   "id": "FSM-010:drop:98",
    "req": "FSM-010",
    "op": "drop",
    "change": "drop 'limits'",
@@ -2367,17 +3449,17 @@
    "violation_region": [
     "[senState=Nom] ¬limits"
    ],
-   "circuit_seconds": 0.9,
+   "circuit_seconds": 0.94,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.89
+   "kind2_seconds": 2.81
   },
   {
-   "id": "FSM-010:negate:64",
+   "id": "FSM-010:negate:99",
    "req": "FSM-010",
    "op": "negate",
    "change": "'senState == SenState::Nom' -> 'senState != SenState::Nom'",
@@ -2409,17 +3491,17 @@
     "[senState=Tr] limits",
     "[senState=F] limits ∧ ¬request"
    ],
-   "circuit_seconds": 0.97,
+   "circuit_seconds": 1.12,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 3.44
+   "kind2_seconds": 2.38
   },
   {
-   "id": "FSM-010:negate:65",
+   "id": "FSM-010:negate:100",
    "req": "FSM-010",
    "op": "negate",
    "change": "'limits' -> 'not limits'",
@@ -2440,17 +3522,17 @@
    "violation_region": [
     "[senState=Nom] ¬limits"
    ],
-   "circuit_seconds": 0.99,
+   "circuit_seconds": 0.88,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.21
+   "kind2_seconds": 2.45
   },
   {
-   "id": "FSM-010:retarget:66",
+   "id": "FSM-010:retarget:101",
    "req": "FSM-010",
    "op": "retarget",
    "change": "SenState::F -> SenState::Nom",
@@ -2471,17 +3553,17 @@
    "violation_region": [
     "[senState=Nom] limits"
    ],
-   "circuit_seconds": 0.99,
+   "circuit_seconds": 0.88,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.53
+   "kind2_seconds": 1.3
   },
   {
-   "id": "FSM-010:retarget:67",
+   "id": "FSM-010:retarget:102",
    "req": "FSM-010",
    "op": "retarget",
    "change": "SenState::F -> SenState::Tr",
@@ -2507,17 +3589,133 @@
    "violation_region": [
     "[senState=Nom] limits"
    ],
-   "circuit_seconds": 0.98,
+   "circuit_seconds": 0.92,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.7
+   "kind2_seconds": 3.32
   },
   {
-   "id": "FSM-011:drop:68",
+   "id": "FSM-010:reorder:103",
+   "req": "FSM-010",
+   "op": "reorder",
+   "change": "reverse conjuncts",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 18,
+   "variables": [
+    "limits",
+    "nextSenState",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.94,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 1.23
+  },
+  {
+   "id": "FSM-010:demorgan:104",
+   "req": "FSM-010",
+   "op": "demorgan",
+   "change": "De Morgan",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 18,
+   "variables": [
+    "limits",
+    "nextSenState",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.88,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 2.3
+  },
+  {
+   "id": "FSM-010:dneg:105",
+   "req": "FSM-010",
+   "op": "dneg",
+   "change": "'senState == SenState::Nom' -> 'not (not (senState == SenState::Nom))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 18,
+   "variables": [
+    "limits",
+    "nextSenState",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.85,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 1.04
+  },
+  {
+   "id": "FSM-010:dneg:106",
+   "req": "FSM-010",
+   "op": "dneg",
+   "change": "'limits' -> 'not (not (limits))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 18,
+   "variables": [
+    "limits",
+    "nextSenState",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 1.06,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 4.07
+  },
+  {
+   "id": "FSM-011:drop:107",
    "req": "FSM-011",
    "op": "drop",
    "change": "drop 'senState == SenState::Nom'",
@@ -2538,17 +3736,17 @@
    "violation_region": [
     "[senState=Nom] limits ∧ ¬request"
    ],
-   "circuit_seconds": 1.0,
+   "circuit_seconds": 0.9,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.97
+   "kind2_seconds": 1.23
   },
   {
-   "id": "FSM-011:drop:69",
+   "id": "FSM-011:drop:108",
    "req": "FSM-011",
    "op": "drop",
    "change": "drop 'not request'",
@@ -2569,17 +3767,17 @@
    "violation_region": [
     "[senState=Nom] limits ∨ request"
    ],
-   "circuit_seconds": 0.96,
+   "circuit_seconds": 0.92,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.45
+   "kind2_seconds": 1.77
   },
   {
-   "id": "FSM-011:negate:70",
+   "id": "FSM-011:negate:109",
    "req": "FSM-011",
    "op": "negate",
    "change": "'senState == SenState::Nom' -> 'senState != SenState::Nom'",
@@ -2603,17 +3801,17 @@
    "design_violates_before": true,
    "design_violates_after": false,
    "violation_region": null,
-   "circuit_seconds": 0.83,
+   "circuit_seconds": 0.78,
    "ic3_before": "counterexample",
    "ic3_after": "proved",
    "ic3_invariant": "True",
    "ic3_seconds": 0.03,
    "kind2_before": "invalid",
    "kind2_after": "valid",
-   "kind2_seconds": 1.55
+   "kind2_seconds": 2.08
   },
   {
-   "id": "FSM-011:negate:71",
+   "id": "FSM-011:negate:110",
    "req": "FSM-011",
    "op": "negate",
    "change": "'not request' -> 'request'",
@@ -2634,17 +3832,17 @@
    "violation_region": [
     "[senState=Nom] request"
    ],
-   "circuit_seconds": 1.03,
+   "circuit_seconds": 0.89,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 3.83
+   "kind2_seconds": 4.08
   },
   {
-   "id": "FSM-011:retarget:72",
+   "id": "FSM-011:retarget:111",
    "req": "FSM-011",
    "op": "retarget",
    "change": "SenState::Tr -> SenState::Nom",
@@ -2665,17 +3863,17 @@
    "violation_region": [
     "[senState=Nom] ¬request"
    ],
-   "circuit_seconds": 1.01,
+   "circuit_seconds": 0.89,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.05
+   "kind2_seconds": 2.16
   },
   {
-   "id": "FSM-011:retarget:73",
+   "id": "FSM-011:retarget:112",
    "req": "FSM-011",
    "op": "retarget",
    "change": "SenState::Tr -> SenState::F",
@@ -2701,6 +3899,99 @@
    "violation_region": [
     "[senState=Nom] ¬limits ∧ ¬request"
    ],
+   "circuit_seconds": 0.84,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 2.8
+  },
+  {
+   "id": "FSM-011:reorder:113",
+   "req": "FSM-011",
+   "op": "reorder",
+   "change": "reverse conjuncts",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 18,
+   "variables": [
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[senState=Nom] limits ∧ ¬request"
+   ],
+   "circuit_seconds": 0.92,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 1.1
+  },
+  {
+   "id": "FSM-011:demorgan:114",
+   "req": "FSM-011",
+   "op": "demorgan",
+   "change": "De Morgan",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 18,
+   "variables": [
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[senState=Nom] limits ∧ ¬request"
+   ],
+   "circuit_seconds": 0.98,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 2.9
+  },
+  {
+   "id": "FSM-011:dneg:115",
+   "req": "FSM-011",
+   "op": "dneg",
+   "change": "'senState == SenState::Nom' -> 'not (not (senState == SenState::Nom))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 18,
+   "variables": [
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[senState=Nom] limits ∧ ¬request"
+   ],
    "circuit_seconds": 1.0,
    "ic3_before": "counterexample",
    "ic3_after": "counterexample",
@@ -2708,10 +3999,41 @@
    "ic3_seconds": 0.02,
    "kind2_before": "invalid",
    "kind2_after": "invalid",
-   "kind2_seconds": 0.79
+   "kind2_seconds": 3.24
   },
   {
-   "id": "FSM-012:drop:74",
+   "id": "FSM-011:dneg:116",
+   "req": "FSM-011",
+   "op": "dneg",
+   "change": "'not request' -> 'not (not (not request))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 18,
+   "variables": [
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": true,
+   "design_violates_after": true,
+   "violation_region": [
+    "[senState=Nom] limits ∧ ¬request"
+   ],
+   "circuit_seconds": 0.92,
+   "ic3_before": "counterexample",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.02,
+   "kind2_before": "invalid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 3.02
+  },
+  {
+   "id": "FSM-012:drop:117",
    "req": "FSM-012",
    "op": "drop",
    "change": "drop 'senState == SenState::F'",
@@ -2731,17 +4053,17 @@
    "design_violates_before": false,
    "design_violates_after": false,
    "violation_region": null,
-   "circuit_seconds": 0.9,
+   "circuit_seconds": 0.94,
    "ic3_before": "proved",
    "ic3_after": "proved",
    "ic3_invariant": "True",
    "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "valid",
-   "kind2_seconds": 2.31
+   "kind2_seconds": 3.06
   },
   {
-   "id": "FSM-012:drop:75",
+   "id": "FSM-012:drop:118",
    "req": "FSM-012",
    "op": "drop",
    "change": "drop 'not request'",
@@ -2761,17 +4083,17 @@
    "design_violates_before": false,
    "design_violates_after": false,
    "violation_region": null,
-   "circuit_seconds": 1.03,
+   "circuit_seconds": 0.92,
    "ic3_before": "proved",
    "ic3_after": "proved",
    "ic3_invariant": "True",
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "valid",
-   "kind2_seconds": 2.75
+   "kind2_seconds": 1.81
   },
   {
-   "id": "FSM-012:drop:76",
+   "id": "FSM-012:drop:119",
    "req": "FSM-012",
    "op": "drop",
    "change": "drop 'not limits'",
@@ -2791,17 +4113,17 @@
    "design_violates_before": false,
    "design_violates_after": false,
    "violation_region": null,
-   "circuit_seconds": 1.0,
+   "circuit_seconds": 1.06,
    "ic3_before": "proved",
    "ic3_after": "proved",
    "ic3_invariant": "True",
-   "ic3_seconds": 0.02,
+   "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "valid",
-   "kind2_seconds": 3.69
+   "kind2_seconds": 1.34
   },
   {
-   "id": "FSM-012:negate:77",
+   "id": "FSM-012:negate:120",
    "req": "FSM-012",
    "op": "negate",
    "change": "'senState == SenState::F' -> 'senState != SenState::F'",
@@ -2821,17 +4143,17 @@
    "design_violates_before": false,
    "design_violates_after": false,
    "violation_region": null,
-   "circuit_seconds": 1.03,
+   "circuit_seconds": 0.91,
    "ic3_before": "proved",
    "ic3_after": "proved",
    "ic3_invariant": "True",
    "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "valid",
-   "kind2_seconds": 3.48
+   "kind2_seconds": 2.94
   },
   {
-   "id": "FSM-012:negate:78",
+   "id": "FSM-012:negate:121",
    "req": "FSM-012",
    "op": "negate",
    "change": "'not request' -> 'request'",
@@ -2851,17 +4173,17 @@
    "design_violates_before": false,
    "design_violates_after": false,
    "violation_region": null,
-   "circuit_seconds": 0.96,
+   "circuit_seconds": 0.89,
    "ic3_before": "proved",
    "ic3_after": "proved",
    "ic3_invariant": "True",
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "valid",
-   "kind2_seconds": 2.6
+   "kind2_seconds": 2.21
   },
   {
-   "id": "FSM-012:negate:79",
+   "id": "FSM-012:negate:122",
    "req": "FSM-012",
    "op": "negate",
    "change": "'not limits' -> 'limits'",
@@ -2881,17 +4203,17 @@
    "design_violates_before": false,
    "design_violates_after": false,
    "violation_region": null,
-   "circuit_seconds": 1.06,
+   "circuit_seconds": 0.92,
    "ic3_before": "proved",
    "ic3_after": "proved",
    "ic3_invariant": "True",
-   "ic3_seconds": 0.02,
+   "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "valid",
-   "kind2_seconds": 2.22
+   "kind2_seconds": 3.32
   },
   {
-   "id": "FSM-012:retarget:80",
+   "id": "FSM-012:retarget:123",
    "req": "FSM-012",
    "op": "retarget",
    "change": "SenState::Tr -> SenState::Nom",
@@ -2913,17 +4235,17 @@
    "violation_region": [
     "[senState=F] ¬limits ∧ ¬request"
    ],
-   "circuit_seconds": 0.99,
+   "circuit_seconds": 0.92,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.03,
+   "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.9
+   "kind2_seconds": 2.67
   },
   {
-   "id": "FSM-012:retarget:81",
+   "id": "FSM-012:retarget:124",
    "req": "FSM-012",
    "op": "retarget",
    "change": "SenState::Tr -> SenState::F",
@@ -2945,17 +4267,167 @@
    "violation_region": [
     "[senState=F] ¬limits ∧ ¬request"
    ],
-   "circuit_seconds": 0.94,
+   "circuit_seconds": 0.93,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.02,
+   "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.61
+   "kind2_seconds": 3.78
   },
   {
-   "id": "FSM-013:drop:82",
+   "id": "FSM-012:reorder:125",
+   "req": "FSM-012",
+   "op": "reorder",
+   "change": "reverse conjuncts",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 36,
+   "variables": [
+    "limits",
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 1.05,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 2.54
+  },
+  {
+   "id": "FSM-012:demorgan:126",
+   "req": "FSM-012",
+   "op": "demorgan",
+   "change": "De Morgan",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 36,
+   "variables": [
+    "limits",
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.95,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 3.32
+  },
+  {
+   "id": "FSM-012:dneg:127",
+   "req": "FSM-012",
+   "op": "dneg",
+   "change": "'senState == SenState::F' -> 'not (not (senState == SenState::F))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 36,
+   "variables": [
+    "limits",
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.99,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 2.94
+  },
+  {
+   "id": "FSM-012:dneg:128",
+   "req": "FSM-012",
+   "op": "dneg",
+   "change": "'not request' -> 'not (not (not request))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 36,
+   "variables": [
+    "limits",
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 1.01,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 3.27
+  },
+  {
+   "id": "FSM-012:dneg:129",
+   "req": "FSM-012",
+   "op": "dneg",
+   "change": "'not limits' -> 'not (not (not limits))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 36,
+   "variables": [
+    "limits",
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.88,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 1.1
+  },
+  {
+   "id": "FSM-013:drop:130",
    "req": "FSM-013",
    "op": "drop",
    "change": "drop 'senState == SenState::Tr'",
@@ -2983,17 +4455,17 @@
     "[senState=Nom] limits ∧ mode ∧ request",
     "[senState=F] mode ∧ request"
    ],
-   "circuit_seconds": 1.0,
+   "circuit_seconds": 1.01,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.79
+   "kind2_seconds": 4.07
   },
   {
-   "id": "FSM-013:drop:83",
+   "id": "FSM-013:drop:131",
    "req": "FSM-013",
    "op": "drop",
    "change": "drop 'request'",
@@ -3015,17 +4487,17 @@
    "violation_region": [
     "[senState=Tr] mode ∧ ¬request"
    ],
-   "circuit_seconds": 1.01,
+   "circuit_seconds": 0.95,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.0
+   "kind2_seconds": 0.9
   },
   {
-   "id": "FSM-013:drop:84",
+   "id": "FSM-013:drop:132",
    "req": "FSM-013",
    "op": "drop",
    "change": "drop 'mode'",
@@ -3047,17 +4519,17 @@
    "violation_region": [
     "[senState=Tr] request"
    ],
-   "circuit_seconds": 0.98,
+   "circuit_seconds": 0.81,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.03,
+   "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.92
+   "kind2_seconds": 3.35
   },
   {
-   "id": "FSM-013:negate:85",
+   "id": "FSM-013:negate:133",
    "req": "FSM-013",
    "op": "negate",
    "change": "'senState == SenState::Tr' -> 'senState != SenState::Tr'",
@@ -3085,17 +4557,17 @@
     "[senState=Nom] limits ∧ mode ∧ request",
     "[senState=F] mode ∧ request"
    ],
-   "circuit_seconds": 1.06,
+   "circuit_seconds": 1.07,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.02,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 2.75
+   "kind2_seconds": 3.33
   },
   {
-   "id": "FSM-013:negate:86",
+   "id": "FSM-013:negate:134",
    "req": "FSM-013",
    "op": "negate",
    "change": "'request' -> 'not request'",
@@ -3117,17 +4589,17 @@
    "violation_region": [
     "[senState=Tr] mode ∧ ¬request"
    ],
-   "circuit_seconds": 0.96,
+   "circuit_seconds": 0.98,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.02,
+   "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.98
+   "kind2_seconds": 0.84
   },
   {
-   "id": "FSM-013:negate:87",
+   "id": "FSM-013:negate:135",
    "req": "FSM-013",
    "op": "negate",
    "change": "'mode' -> 'not mode'",
@@ -3149,52 +4621,20 @@
    "violation_region": [
     "[senState=Tr] request ∧ ¬mode"
    ],
-   "circuit_seconds": 0.99,
+   "circuit_seconds": 1.14,
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
    "ic3_seconds": 0.03,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.25
+   "kind2_seconds": 3.52
   },
   {
-   "id": "FSM-013:retarget:88",
+   "id": "FSM-013:retarget:136",
    "req": "FSM-013",
    "op": "retarget",
    "change": "SenState::Nom -> SenState::Tr",
-   "miter_equivalent": false,
-   "differing_valuations": 2,
-   "valuations": 36,
-   "variables": [
-    "mode",
-    "nextSenState",
-    "request",
-    "senState"
-   ],
-   "order": "incomparable",
-   "conflicts_added": [],
-   "conflicts_removed": [],
-   "holes_delta": 0,
-   "design_violates_before": false,
-   "design_violates_after": true,
-   "violation_region": [
-    "[senState=Tr] mode ∧ request"
-   ],
-   "circuit_seconds": 0.97,
-   "ic3_before": "proved",
-   "ic3_after": "counterexample",
-   "ic3_invariant": null,
-   "ic3_seconds": 0.03,
-   "kind2_before": "valid",
-   "kind2_after": "invalid",
-   "kind2_seconds": 1.36
-  },
-  {
-   "id": "FSM-013:retarget:89",
-   "req": "FSM-013",
-   "op": "retarget",
-   "change": "SenState::Nom -> SenState::F",
    "miter_equivalent": false,
    "differing_valuations": 2,
    "valuations": 36,
@@ -3217,10 +4657,192 @@
    "ic3_before": "proved",
    "ic3_after": "counterexample",
    "ic3_invariant": null,
-   "ic3_seconds": 0.03,
+   "ic3_seconds": 0.04,
    "kind2_before": "valid",
    "kind2_after": "invalid",
-   "kind2_seconds": 1.24
+   "kind2_seconds": 3.47
+  },
+  {
+   "id": "FSM-013:retarget:137",
+   "req": "FSM-013",
+   "op": "retarget",
+   "change": "SenState::Nom -> SenState::F",
+   "miter_equivalent": false,
+   "differing_valuations": 2,
+   "valuations": 36,
+   "variables": [
+    "mode",
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "incomparable",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": true,
+   "violation_region": [
+    "[senState=Tr] mode ∧ request"
+   ],
+   "circuit_seconds": 0.99,
+   "ic3_before": "proved",
+   "ic3_after": "counterexample",
+   "ic3_invariant": null,
+   "ic3_seconds": 0.04,
+   "kind2_before": "valid",
+   "kind2_after": "invalid",
+   "kind2_seconds": 1.57
+  },
+  {
+   "id": "FSM-013:reorder:138",
+   "req": "FSM-013",
+   "op": "reorder",
+   "change": "reverse conjuncts",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 36,
+   "variables": [
+    "mode",
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.9,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.03,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 2.1
+  },
+  {
+   "id": "FSM-013:demorgan:139",
+   "req": "FSM-013",
+   "op": "demorgan",
+   "change": "De Morgan",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 36,
+   "variables": [
+    "mode",
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.95,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 3.62
+  },
+  {
+   "id": "FSM-013:dneg:140",
+   "req": "FSM-013",
+   "op": "dneg",
+   "change": "'senState == SenState::Tr' -> 'not (not (senState == SenState::Tr))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 36,
+   "variables": [
+    "mode",
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 1.04,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.03,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 2.13
+  },
+  {
+   "id": "FSM-013:dneg:141",
+   "req": "FSM-013",
+   "op": "dneg",
+   "change": "'request' -> 'not (not (request))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 36,
+   "variables": [
+    "mode",
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.98,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 1.62
+  },
+  {
+   "id": "FSM-013:dneg:142",
+   "req": "FSM-013",
+   "op": "dneg",
+   "change": "'mode' -> 'not (not (mode))'",
+   "miter_equivalent": true,
+   "differing_valuations": 0,
+   "valuations": 36,
+   "variables": [
+    "mode",
+    "nextSenState",
+    "request",
+    "senState"
+   ],
+   "order": "equivalent",
+   "conflicts_added": [],
+   "conflicts_removed": [],
+   "holes_delta": 0,
+   "design_violates_before": false,
+   "design_violates_after": false,
+   "violation_region": null,
+   "circuit_seconds": 0.88,
+   "ic3_before": "proved",
+   "ic3_after": "proved",
+   "ic3_invariant": "True",
+   "ic3_seconds": 0.02,
+   "kind2_before": "valid",
+   "kind2_after": "valid",
+   "kind2_seconds": 1.76
   }
  ]
 }

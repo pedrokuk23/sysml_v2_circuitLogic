@@ -62,8 +62,10 @@ def parse(path):
         names = [a["name"] for a in attrs]
         if len(set(names)) != len(names):
             err.append(f"requirement '{r.group(1)}' declares an attribute twice")
+        subj = re.search(r"\bsubject (\w+)(?:\s*:\s*(\w+))?\s*;", body)
         put("requirements", r.group(1), dict(name=r.group(2), doc=norm(doc.group(1)) if doc else "",
-                                             expr=norm(e), attrs=attrs))
+                                             expr=norm(e), attrs=attrs,
+                                             subject=(subj.group(1), subj.group(2)) if subj else None))
     for s in re.finditer(r"exhibit state (\w+)", t):
         body, _ = block(t, s.end())
         states = re.findall(r"\bstate (\w+);", body)
@@ -136,6 +138,30 @@ def parse(path):
         if e.group(3) not in ir["port_defs"]:
             ir["errors"].append(f"interface end '{e.group(1)}' is typed by undeclared port definition '{e.group(3)}'")
     ir["subjects"] = sorted(set(re.findall(r"\bsubject (\w+)", t)))
+    # attributes declared in part definitions (not redefinitions): global quantities, resolved by name
+    ir["part_attrs"] = {}
+    for p in re.finditer(r"(?<!variation )part def (\w+)[^{;]*\{", t):
+        body, _ = block(t, p.start())
+        for m in re.finditer(r"(?<!redefines )\battribute (\w+)\s*:\s*(\w+)\s*;", body):
+            old = ir["part_attrs"].get(m.group(1))
+            if old and old != m.group(2):
+                err.append(f"attribute '{m.group(1)}' is declared with types {old} and {m.group(2)} in part definitions")
+            ir["part_attrs"][m.group(1)] = m.group(2)
+    # requirement usages
+    ir["req_usages"] = dict(re.findall(r"(?m)^\s*requirement (\w+)\s*:\s*(\w+)\s*;", t))
+    # refinements: '#refinement dependency n from c1, c2 to p;' (ModelingMetadata) — the sources refine the target
+    ir["derivations"] = {}
+    names = {r["name"]: k for k, r in ir["requirements"].items()}
+    for d in re.finditer(r"#refinement dependency (\w+) from ([\w\s,]+?) to (\w+)\s*;", t):
+        der = [u.strip() for u in d.group(2).split(",")]
+        ids = []
+        for u in [d.group(3)] + der:
+            if u not in ir["req_usages"] or ir["req_usages"][u] not in names:
+                err.append(f"refinement '{d.group(1)}': '{u}' is not a usage of a declared requirement definition")
+            else:
+                ids.append(names[ir["req_usages"][u]])
+        if len(ids) == len(der) + 1:
+            ir["derivations"][d.group(1)] = dict(original=ids[0], derived=ids[1:])
     ir["connections"] = re.findall(r"\bconnect ([\w.]+) to ([\w.]+);", t)
     for a in re.finditer(r"action def (\w+)", t):
         body, _ = block(t, a.end())
@@ -188,6 +214,7 @@ GRAMMAR = {
         (rf"interface def {_D}", "interface", "required"),
         (rf"variation part def {_D}( :> {_I})?", "variation", "required"),
         (rf"action def {_D}", "action", "required"),
+        (rf"#refinement dependency {_D} from {_I}(, {_I})* to {_I}", None, "none"),
         (rf"satisfy (requirement )?{_I}( : {_I})? by {_P}", None, "none")],
     "enum": [(rf"enum {_D}", None, "none")],
     "requirement": [
@@ -310,7 +337,7 @@ def consumed(text, ir):
 
 # Constructs the compiler translates, constructs it reads but that carry no behavior for the analysis, and
 # constructs that would change the meaning of the model but are not translated (these make the compilation fail).
-TRANSLATED = ["enum def", "requirement def", "require constraint", "exhibit state", "transition", "variation part def",
+TRANSLATED = ["#refinement dependency", "enum def", "requirement def", "require constraint", "exhibit state", "transition", "variation part def",
               "variant part", "assert constraint", "action def", "decide", "fork", "merge", "join", "allocate",
               "attribute"]
 STRUCTURAL = ["package", "import", "part def", "part", "satisfy", "subject", "doc", "port def", "port", "interface def",

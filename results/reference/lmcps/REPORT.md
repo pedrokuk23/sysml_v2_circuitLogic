@@ -1,24 +1,30 @@
 # sysmlc — lmcps_fsm.sysml
 
-Requirements read: 20. Time: 10 s.
+Requirements read: 20. Time: 9 s.
 Translation coverage: translated assert constraint 1, attribute 81, enum def 2, exhibit state 2, require constraint 20, requirement def 20, transition 12; structural only connect 2, doc 20, end 2, import 1, interface 1, interface def 1, package 1, part 2, part def 3, port 4, port def 2, requirement 1, satisfy 1, subject 20; unsupported none; 216 statements, all matched by the subset grammar.
 
 ## Machine `apMachine` (enum ApState)
 
 - Conflicts (contention): 4
-  - FSM-002 × FSM-003: [apState=T] good ∧ standby ∧ supported
-  - FSM-004 × FSM-005: [apState=N] standby ∧ ¬good
-  - FSM-006 × FSM-007: [apState=M] good ∧ standby ∧ supported
-  - FSM-008 × FSM-009: [apState=S] apfail ∧ ¬standby
-- Design violates: FSM-003, FSM-004, FSM-007, FSM-008
-- Holes per state: T 6/16, N 4/16, M 10/16, S 4/16
+  - FSM-002 × FSM-003: [apState=T] good ∧ standby ∧ supported (2 situations, 2 reachable)
+  - FSM-004 × FSM-005: [apState=N] standby ∧ ¬good (4 situations, 4 reachable)
+  - FSM-006 × FSM-007: [apState=M] good ∧ standby ∧ supported (2 situations, 2 reachable)
+  - FSM-008 × FSM-009: [apState=S] apfail ∧ ¬standby (4 situations, 4 reachable)
+- Transitions with overlapping guards (where the textual priority matters): none
+- Design violates: FSM-003, FSM-004, FSM-007, FSM-008 (reachable: FSM-003, FSM-004, FSM-007, FSM-008)
+- Holes per state (one step): T 6/16, N 4/16, M 10/16, S 4/16
+- Holes per state (reachable situations only, 56 of 64 situations reachable): T 6, N 4, M 2, S 4
 
 ## Machine `senMachine` (enum SenState)
 
 - Conflicts (contention): 1
-  - FSM-010 × FSM-011: [senState=Nom] limits ∧ ¬request
-- Design violates: FSM-011
-- Holes per state: Nom 2/8, Tr 6/8, F 6/8
+  - FSM-010 × FSM-011: [senState=Nom] limits ∧ ¬request (2 situations, 1 reachable)
+- Transitions with overlapping guards (where the textual priority matters): none
+- Design violates: FSM-011 (reachable: FSM-011)
+- Holes per state (one step): Nom 2/8, Tr 6/8, F 6/8
+- Holes per state (reachable situations only, 16 of 24 situations reachable): Nom 2, Tr 4, F 3
+
+Reachable composite states: 8 of 12.
 
 ## Contract `portContract`
 
@@ -51,12 +57,13 @@ Translation coverage: translated assert constraint 1, attribute 81, enum def 2, 
 
 Inductive invariant found by IC3 for FSM-001v3 (lemmas the requirement relies on):
 
-- ¬pre2_notLimits ∨ ¬pre1_autopilot ∨ senState ∈ {Nom, F} ∨ apState ∈ {T}
-- ¬pre3_notLimits ∨ ¬pre1_limits ∨ ¬pre2_autopilot ∨ ¬pre1_autopilot ∨ apState ∈ {N, M, S} ∨ senState ∈ {F}
+- ¬pre2_notLimits ∨ apState ∈ {T, N} ∨ ¬pre1_autopilot
+- senState ∈ {Tr, F} ∨ apState ∈ {T, N}
+- apState ∈ {T, N, S} ∨ senState ∈ {Tr}
 - ¬pre1_notLimits ∨ senState ∈ {Nom, Tr}
-- ¬pre3_notLimits ∨ ¬pre3_autopilot ∨ ¬pre1_limits ∨ ¬pre4_notLimits ∨ ¬pre2_notLimits ∨ ¬pre2_autopilot ∨ senState ∈ {F}
-- ¬pre2_notLimits ∨ ¬pre1_autopilot ∨ apState ∈ {T, N}
-- ¬pre3_notLimits ∨ ¬pre2_notLimits ∨ ¬pre2_autopilot ∨ ¬pre1_autopilot ∨ apState ∈ {N, M, S}
+- apState ∈ {T, M, S} ∨ senState ∈ {F} ∨ senState ∈ {Nom}
+- ¬pre2_notLimits ∨ ¬pre3_notLimits ∨ ¬pre2_autopilot ∨ apState ∈ {N, M, S} ∨ ¬pre1_autopilot
+- ¬pre2_notLimits ∨ ¬pre3_notLimits ∨ ¬pre1_limits ∨ ¬pre2_autopilot ∨ ¬pre4_notLimits ∨ ¬pre3_autopilot ∨ senState ∈ {F}
 
 And-inverter graph (AIG), as written → optimized (Yosys synth + freduce/fraig):
 - requirements (combinational): 204 AND / 369 NOT → 68 AND / 57 NOT
@@ -66,4 +73,4 @@ And-inverter graph (AIG), as written → optimized (Yosys synth + freduce/fraig)
 
 - `view_apMachine.png`
 - `view_senMachine.png`
-- `view_provas.png`
+- `view_proofs.png`

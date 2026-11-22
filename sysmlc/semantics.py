@@ -1,7 +1,7 @@
 """IR -> z3 semantics: variables, KerML expressions (Boolean, enumerations, real arithmetic, if-then-else),
 variant selectors, allocation variables and state-machine next-state relations."""
-import re
-from z3 import Int, Real, Bool, BoolVal, RealVal, IntVal, If, And, Or, Not, Implies, Xor
+import os, re
+from z3 import Int, Real, Bool, BoolVal, RealVal, IntVal, If, And, Or, Not, Implies, Xor, ToReal, is_int
 
 TOK = re.compile(r"\s*(<=|>=|==|!=|<|>|\?|\(|\)|\+|-|\*|/|\d+\.?\d*(?:[eE][-+]?\d+)?|[A-Za-z_][\w.]*(?:::\w+)?)")
 
@@ -20,8 +20,8 @@ def tokenize(s):
 
 
 class Expr:
-    def __init__(self, resolve, enums):
-        self.resolve, self.enums = resolve, enums
+    def __init__(self, resolve, enums, is_enum=lambda name: None):
+        self.resolve, self.enums, self.is_enum = resolve, enums, is_enum
 
     def __call__(self, s):
         p = _P(self, tokenize(s))
@@ -34,6 +34,7 @@ class Expr:
 class _P:
     def __init__(self, ctx, toks):
         self.c, self.t, self.i = ctx, toks, 0
+        self.enum_terms = []
 
     def pk(self): return self.t[self.i] if self.i < len(self.t) else None
     def nx(self): self.i += 1; return self.t[self.i - 1]
@@ -41,7 +42,14 @@ class _P:
     def imp(self):
         if self.pk() == "if":
             self.nx(); c = self.imp(); self.expect("then", "?"); a = self.imp(); self.expect("else")
-            return If(c, a, self.imp())
+            b = self.imp()
+            ea, eb = self._etype(a), self._etype(b)
+            if ea != eb and (ea or eb):
+                raise TypeError(f"branches of a conditional have different types ({ea or 'number'} and {eb or 'number'})")
+            r = If(c, a, b)
+            if ea:
+                self.enum_terms.append((r, ea))
+            return r
         a = self.or_()
         if self.pk() == "implies":
             self.nx(); return Implies(a, self.imp())
@@ -66,10 +74,31 @@ class _P:
         if self.pk() == "not": self.nx(); return Not(self.not_())
         return self.cmp()
 
+    def _etype(self, t):
+        """Enumeration type of a term, or None."""
+        for e, en in self.enum_terms:
+            if t is e:                  # the same parsed term, not a structurally equal one (indices coincide)
+                return en
+        return None
+
+    def _enum(self, *ts):
+        """Enumeration values admit only == and != between values of the same enumeration (KerML enumerations are
+        unordered); order comparisons, arithmetic and comparisons with numbers or other enumerations are rejected,
+        so that the translation to integer indices preserves the meaning."""
+        for t in ts:
+            if self._etype(t):
+                raise TypeError(f"enumeration value {t} used with an order comparison or arithmetic")
+
     def cmp(self):
         a = self.add()
         if self.pk() in ("<=", ">=", "==", "!=", "<", ">"):
             op = self.nx(); b = self.add()
+            if op not in ("==", "!="):
+                self._enum(a, b)
+            else:
+                ea, eb = self._etype(a), self._etype(b)
+                if ea != eb and (ea or eb):
+                    raise TypeError(f"comparison of {ea or 'a number'} with {eb or 'a number'}")
             import operator as o
             return {"<=": o.le, ">=": o.ge, "==": o.eq, "!=": o.ne, "<": o.lt, ">": o.gt}[op](a, b)
         return a
@@ -77,17 +106,21 @@ class _P:
     def add(self):
         a = self.mul()
         while self.pk() in ("+", "-"):
-            op = self.nx(); b = self.mul(); a = a + b if op == "+" else a - b
+            op = self.nx(); b = self.mul(); self._enum(a, b); a = a + b if op == "+" else a - b
         return a
 
     def mul(self):
         a = self.una()
         while self.pk() in ("*", "/"):
-            op = self.nx(); b = self.una(); a = a * b if op == "*" else a / b
+            op = self.nx(); b = self.una(); self._enum(a, b)
+            if op == "/" and is_int(a) and is_int(b):       # KerML: Integer / Integer is a Rational, not truncated
+                a = ToReal(a)
+            a = a * b if op == "*" else a / b
         return a
 
     def una(self):
-        if self.pk() == "-": self.nx(); return -self.una()
+        if self.pk() == "-":
+            self.nx(); a = self.una(); self._enum(a); return -a
         return self.atom()
 
     def expect(self, *ok):
@@ -110,10 +143,15 @@ class _P:
             en, lit = x.split("::")
             if en not in self.c.enums or lit not in self.c.enums[en]:
                 raise NameError(f"unknown enumeration literal {x}")
-            return IntVal(self.c.enums[en].index(lit))
+            v = IntVal(self.c.enums[en].index(lit)); self.enum_terms.append((v, en))
+            return v
         if x in ("and", "or", "xor", "not", "implies", "then", "else", "if", ")", "?"):
             raise SyntaxError(f"unexpected {x!r}")
-        return self.c.resolve(x)
+        v = self.c.resolve(x)
+        en = self.c.is_enum(x)
+        if en:
+            self.enum_terms.append((v, en))
+        return v
 
 
 class Semantics:
@@ -134,6 +172,8 @@ class Semantics:
                     self.vars[n] = Bool(n)
                 elif ty in self.enums:
                     self.vars[n] = Int(n); dom.append(And(self.vars[n] >= 0, self.vars[n] < len(self.enums[ty])))
+                elif ty == "Integer":
+                    self.vars[n] = Int(n)
                 else:
                     self.vars[n] = Real(n)
                 self.vtype[n] = ty
@@ -153,26 +193,30 @@ class Semantics:
         for n in sysd0.get("derived", {}):
             if n in self.vars:
                 self.errors.append(f"derived attribute '{n}' has the same name as a requirement attribute")
-        self.E = Expr(self.resolve, self.enums)
+        self.E = Expr(self.resolve, self.enums, self._enum_of)
         self.R = {}
         for k, v in ir["requirements"].items():
             try:
                 self.R[k] = self.E(v["expr"])
-            except (SyntaxError, NameError, KeyError, ValueError) as ex:
+            except (SyntaxError, NameError, KeyError, ValueError, TypeError) as ex:
                 self.errors.append(f"requirement '{k}': {ex}")
         for m in ir["machines"].values():
             for t in m["transitions"]:
                 try:
                     self.E(t["guard"])
-                except (SyntaxError, NameError, KeyError, ValueError) as ex:
+                except (SyntaxError, NameError, KeyError, ValueError, TypeError) as ex:
                     self.errors.append(f"transition '{t['id']}': {ex}")
+
+    def _enum_of(self, name):
+        ty = self.vtype.get(name.split(".")[-1])
+        return ty if ty in self.enums else None
 
     # name resolution: derived attribute > variant feature chain > allocation flag > signal (last chain segment)
     def resolve(self, name):
         sysd = self.ir["system"] or dict(derived={})
         parts = name.split(".")
         if parts[-1] in sysd["derived"] and (len(parts) == 1 or parts[0] not in self.usages):
-            return Expr(self.resolve, self.enums)(sysd["derived"][parts[-1]])
+            return Expr(self.resolve, self.enums, self._enum_of)(sysd["derived"][parts[-1]])
         for i, seg in enumerate(parts[:-1]):          # skip a subject prefix such as 'sys.'
             if seg in self.usages:
                 return self.variant_attr(seg, parts[i + 1])
@@ -189,6 +233,11 @@ class Semantics:
                 raise NameError(f"'{name}': '{head}' is not a declared port, part usage or subject")
         last = name.split(".")[-1]
         if last in self.vars:
+            return self.vars[last]
+        pty = self.ir.get("part_attrs", {}).get(last)
+        if pty and len(parts) > 1:                     # an attribute of a part definition, reached by a chain
+            self.vars[last] = Bool(last) if pty == "Boolean" else Int(last) if pty == "Integer" else Real(last)
+            self.vtype[last] = pty
             return self.vars[last]
         mpre = re.match(r"pre\d+_(\w+)$", last)
         if not (mpre and (mpre.group(1) in self.vars or mpre.group(1) in self.declared)):
@@ -216,11 +265,24 @@ class Semantics:
         nxt = next(iter(sorted(outs)))
         return enum, self.vars[cur], self.vars[nxt]
 
-    def machine_relation(self, mname):
-        """First enabled transition in textual order; none enabled -> stay (SysML semantics)."""
+    def machine_relation(self, mname, semantics=None):
+        """Step relation of a state machine. 'priority' (default): the first enabled transition in textual order
+        fires; 'nondet': any enabled transition may fire. In both, a state with no enabled transition persists
+        (SysML). Select with the environment variable SYSMLC_MACHINE_SEMANTICS or the argument."""
+        semantics = semantics or os.environ.get("SYSMLC_MACHINE_SEMANTICS", "priority")
         m = self.ir["machines"][mname]
         enum, cur, nxt = self.machine_vars(mname)
         lits = self.enums[enum]
+        if semantics == "nondet":
+            cl = []
+            for s in m["states"]:
+                ts = [t for t in m["transitions"] if t["src"] == s]
+                gs = [self.E(t["guard"]) for t in ts]
+                here = cur == lits.index(s)
+                if ts:
+                    cl.append(Implies(And(here, Or(*gs)), Or(*[And(g, nxt == lits.index(t["dst"])) for g, t in zip(gs, ts)])))
+                cl.append(Implies(And(here, Not(Or(*gs)) if gs else BoolVal(True)), nxt == lits.index(s)))
+            return And(*cl)
         cl = []
         for s in m["states"]:
             none = BoolVal(True)

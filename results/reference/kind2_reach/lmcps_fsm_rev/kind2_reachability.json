@@ -1,0 +1,93 @@
+{
+ "model": "lmcps_fsm_rev.sysml",
+ "composite_states": 12,
+ "reachable_compiler": [
+  {
+   "apMachine": "M",
+   "senMachine": "Tr"
+  },
+  {
+   "apMachine": "N",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "N",
+   "senMachine": "Nom"
+  },
+  {
+   "apMachine": "S",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "S",
+   "senMachine": "Tr"
+  },
+  {
+   "apMachine": "T",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "T",
+   "senMachine": "Nom"
+  },
+  {
+   "apMachine": "T",
+   "senMachine": "Tr"
+  }
+ ],
+ "reachable_kind2": [
+  {
+   "apMachine": "M",
+   "senMachine": "Tr"
+  },
+  {
+   "apMachine": "N",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "N",
+   "senMachine": "Nom"
+  },
+  {
+   "apMachine": "S",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "S",
+   "senMachine": "Tr"
+  },
+  {
+   "apMachine": "T",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "T",
+   "senMachine": "Nom"
+  },
+  {
+   "apMachine": "T",
+   "senMachine": "Tr"
+  }
+ ],
+ "unreachable_kind2": [
+  {
+   "apMachine": "M",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "M",
+   "senMachine": "Nom"
+  },
+  {
+   "apMachine": "N",
+   "senMachine": "Tr"
+  },
+  {
+   "apMachine": "S",
+   "senMachine": "Nom"
+  }
+ ],
+ "unknown": [],
+ "agree": true,
+ "seconds": 0.56
+}

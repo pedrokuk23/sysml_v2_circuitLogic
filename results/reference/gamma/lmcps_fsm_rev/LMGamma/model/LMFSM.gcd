@@ -1,0 +1,45 @@
+package lmgamma
+// Generated from lmcps_fsm_rev.sysml by baselines/gamma/gamma_baseline.py
+interface Env {
+	in event step(apfail : boolean, limits : boolean, standby : boolean, supported : boolean)
+}
+@OrthogonalRegionSchedule = sequential
+@GuardEvaluation = on-the-fly
+@TransitionPriority = order-based
+statechart LMFSM [
+	port env : provides Env
+] {
+	region rapMachine {
+		initial init_apMachine
+		state T_apMachine
+		state N_apMachine
+		state M_apMachine
+		state S_apMachine
+	}
+	region rsenMachine {
+		initial init_senMachine
+		state Nom_senMachine
+		state Tr_senMachine
+		state F_senMachine
+	}
+	transition from init_senMachine to Nom_senMachine
+	transition from init_apMachine to T_apMachine
+	transition from T_apMachine to S_apMachine when env.step [env.step::standby]
+	transition from T_apMachine to N_apMachine when env.step [(((not in-state(rsenMachine.F_senMachine)) and env.step::supported) and (not env.step::standby))]
+	transition from N_apMachine to S_apMachine when env.step [env.step::standby]
+	transition from N_apMachine to M_apMachine when env.step [((not (not in-state(rsenMachine.F_senMachine))) and (not env.step::standby))]
+	transition from M_apMachine to S_apMachine when env.step [(env.step::standby and (not in-state(rsenMachine.F_senMachine)))]
+	transition from M_apMachine to T_apMachine when env.step [((env.step::supported and (not in-state(rsenMachine.F_senMachine))) and (not env.step::standby))]
+	transition from S_apMachine to M_apMachine when env.step [env.step::apfail]
+	transition from S_apMachine to T_apMachine when env.step [((not env.step::standby) and (not env.step::apfail))]
+	transition from Nom_senMachine to F_senMachine when env.step [env.step::limits]
+	transition from Nom_senMachine to Tr_senMachine when env.step [((not (in-state(rapMachine.T_apMachine) or in-state(rapMachine.N_apMachine))) and (not env.step::limits))]
+	transition from F_senMachine to Tr_senMachine when env.step [((not (in-state(rapMachine.T_apMachine) or in-state(rapMachine.N_apMachine))) or (not env.step::limits))]
+	transition from Tr_senMachine to Nom_senMachine when env.step [((in-state(rapMachine.T_apMachine) or in-state(rapMachine.N_apMachine)) and (not in-state(rapMachine.T_apMachine)))]
+}
+cascade LMSystem [
+	port env : provides Env
+] {
+	component lmfsm : LMFSM
+	bind env -> lmfsm.env
+}

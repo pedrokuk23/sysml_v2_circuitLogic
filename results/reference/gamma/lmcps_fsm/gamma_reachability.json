@@ -1,0 +1,92 @@
+{
+ "model": "lmcps_fsm.sysml",
+ "composite_states": 12,
+ "reachable_gamma_theta": [
+  {
+   "apMachine": "M",
+   "senMachine": "Tr"
+  },
+  {
+   "apMachine": "N",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "N",
+   "senMachine": "Nom"
+  },
+  {
+   "apMachine": "S",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "S",
+   "senMachine": "Tr"
+  },
+  {
+   "apMachine": "T",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "T",
+   "senMachine": "Nom"
+  },
+  {
+   "apMachine": "T",
+   "senMachine": "Tr"
+  }
+ ],
+ "unreachable_gamma_theta": [
+  {
+   "apMachine": "M",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "M",
+   "senMachine": "Nom"
+  },
+  {
+   "apMachine": "N",
+   "senMachine": "Tr"
+  },
+  {
+   "apMachine": "S",
+   "senMachine": "Nom"
+  }
+ ],
+ "reachable_compiler": [
+  {
+   "apMachine": "M",
+   "senMachine": "Tr"
+  },
+  {
+   "apMachine": "N",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "N",
+   "senMachine": "Nom"
+  },
+  {
+   "apMachine": "S",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "S",
+   "senMachine": "Tr"
+  },
+  {
+   "apMachine": "T",
+   "senMachine": "F"
+  },
+  {
+   "apMachine": "T",
+   "senMachine": "Nom"
+  },
+  {
+   "apMachine": "T",
+   "senMachine": "Tr"
+  }
+ ],
+ "agree": true,
+ "seconds": 14.6
+}

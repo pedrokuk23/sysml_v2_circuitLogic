@@ -1,0 +1,196 @@
+ kind2 v2.2.0
+
+
+
+================================================================================
+Analyzing design
+  with First top: 'design' (no subsystems)
+
+<Failure> Property FSM-001 is invalid by property directed reachability (QE) for k=0 after 0.135s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false
+    v_limits        true
+    v_standby      false
+    v_supported     true
+    == Outputs ==
+    ok_FSM_001     false
+    == Locals ==
+    v_pullup       false
+    v_nextState        1
+    v_apState          0
+    v_good          true
+    v_senState         0
+    v_nextSenState     2
+    v_mode          true
+    v_request       true
+    
+  
+<Failure> Property FSM-003 is invalid by property directed reachability (QE) for k=0 after 0.135s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false
+    v_limits       false
+    v_standby       true
+    v_supported     true
+    == Outputs ==
+    ok_FSM_003     false
+    == Locals ==
+    v_apState          0
+    v_nextState        3
+    v_good          true
+    v_senState         0
+    v_nextSenState     1
+    v_mode          true
+    v_request      false
+    
+  
+<Failure> Property FSM-011 is invalid by property directed reachability (QE) for k=0 after 0.135s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false
+    v_limits        true
+    v_standby       true
+    v_supported     true
+    == Outputs ==
+    ok_FSM_011     false
+    == Locals ==
+    v_senState         0
+    v_nextSenState     2
+    v_mode          true
+    v_nextState        3
+    v_apState          0
+    v_good          true
+    v_request      false
+    
+  
+<Failure> Property FSM-008 is invalid by bounded model checking for k=1 after 0.186s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false  true
+    v_limits        true  true
+    v_standby       true false
+    v_supported     true false
+    == Outputs ==
+    ok_FSM_008      true false
+    == Locals ==
+    v_apState          0     3
+    v_nextState        3     2
+    v_good          true false
+    v_senState         0     2
+    v_nextSenState     2     1
+    v_mode          true  true
+    v_request      false false
+    
+  
+<Failure> Property FSM-004 is invalid by bounded model checking for k=1 after 0.186s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false  true
+    v_limits        true  true
+    v_standby      false  true
+    v_supported     true false
+    == Outputs ==
+    ok_FSM_004      true false
+    == Locals ==
+    v_apState          0     1
+    v_nextState        1     3
+    v_good          true false
+    v_senState         0     2
+    v_nextSenState     2     1
+    v_mode          true  true
+    v_request       true false
+    
+  
+<Failure> Property FSM-001v2 is invalid by bounded model checking for k=2 after 0.186s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail         false false false
+    v_limits          true  true false
+    v_standby        false false false
+    v_supported       true  true  true
+    == Outputs ==
+    ok_FSM_001v2      true  true false
+    == Locals ==
+    v_pullup         false  true false
+    v_nextState          1     2     0
+    v_apState            0     1     2
+    v_good            true false  true
+    v_senState           0     2     1
+    v_nextSenState       2     1     1
+    v_mode            true  true false
+    v_request         true false  true
+    v_autopilot       true  true  true
+    v_pre1_autopilot false  true  true
+    v_pre1_limits    false  true  true
+    
+  
+<Failure> Property FSM-007 is invalid by bounded model checking for k=2 after 0.186s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false false false
+    v_limits        true false false
+    v_standby      false false  true
+    v_supported     true  true  true
+    == Outputs ==
+    ok_FSM_007      true  true false
+    == Locals ==
+    v_apState          0     1     2
+    v_nextState        1     2     3
+    v_good          true false  true
+    v_senState         0     2     1
+    v_nextSenState     2     1     1
+    v_mode          true  true  true
+    v_request       true false false
+    
+  
+<Success> Property FSM-013 is valid by inductive step after 0.442s.
+
+<Success> Property FSM-012 is valid by inductive step after 0.442s.
+
+<Success> Property FSM-010 is valid by inductive step after 0.442s.
+
+<Success> Property FSM-009 is valid by inductive step after 0.442s.
+
+<Success> Property FSM-006 is valid by inductive step after 0.442s.
+
+<Success> Property FSM-005 is valid by inductive step after 0.442s.
+
+<Success> Property FSM-002 is valid by inductive step after 0.442s.
+
+<Success> Property FSM-001v3 is valid by 2-induction after 2.984s.
+
+--------------------------------------------------------------------------------
+Summary of properties:
+--------------------------------------------------------------------------------
+FSM-013: valid (k=1)
+FSM-012: valid (k=1)
+FSM-011: invalid after 0 steps
+FSM-010: valid (k=1)
+FSM-009: valid (k=1)
+FSM-008: invalid after 1 steps
+FSM-007: invalid after 2 steps
+FSM-006: valid (k=1)
+FSM-005: valid (k=1)
+FSM-004: invalid after 1 steps
+FSM-003: invalid after 0 steps
+FSM-002: valid (k=1)
+FSM-001v3: valid (k=1)
+FSM-001v2: invalid after 2 steps
+FSM-001: invalid after 0 steps
+================================================================================
+

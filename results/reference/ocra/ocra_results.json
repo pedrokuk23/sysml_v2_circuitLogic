@@ -1,0 +1,87 @@
+{
+ "firesat_resFlow": {
+  "checks": {
+   "implementation:parent": "NOT OK",
+   "environment:payload.c": "OK",
+   "environment:adcs.c": "OK",
+   "environment:orbit.c": "OK"
+  },
+  "seconds": 0.04
+ },
+ "firesat_resFlowRevised": {
+  "checks": {
+   "implementation:parent": "OK",
+   "environment:payload.c": "OK",
+   "environment:adcs.c": "OK",
+   "environment:orbit.c": "OK"
+  },
+  "seconds": 0.02
+ },
+ "firesat_geoFlow": {
+  "checks": {
+   "implementation:parent": "NOT OK",
+   "environment:payload.c": "OK",
+   "environment:adcs.c": "OK",
+   "environment:orbit.c": "OK"
+  },
+  "seconds": 0.03
+ },
+ "lmcps_fsm": {
+  "checks": {
+   "implementation:parent": "NOT OK",
+   "environment:ap.c": "OK",
+   "environment:sen.c": "OK"
+  },
+  "seconds": 0.03,
+  "autopilot": [
+   "GLO-1",
+   "GLO-2",
+   "GLO-4",
+   "FSM-002",
+   "FSM-003",
+   "FSM-004",
+   "FSM-005",
+   "FSM-006",
+   "FSM-007",
+   "FSM-008",
+   "FSM-009"
+  ],
+  "sensor": [
+   "GLO-3",
+   "GLO-5",
+   "FSM-010",
+   "FSM-011",
+   "FSM-012",
+   "FSM-013"
+  ]
+ },
+ "lmcps_fsm_rev": {
+  "checks": {
+   "implementation:parent": "NOT OK",
+   "environment:ap.c": "OK",
+   "environment:sen.c": "OK"
+  },
+  "seconds": 0.03,
+  "autopilot": [
+   "GLO-1",
+   "GLO-2",
+   "GLO-4",
+   "FSM-002",
+   "FSM-003",
+   "FSM-004",
+   "FSM-005",
+   "FSM-006",
+   "FSM-007",
+   "FSM-008",
+   "FSM-009"
+  ],
+  "sensor": [
+   "GLO-3",
+   "GLO-5",
+   "FSM-010",
+   "FSM-011",
+   "FSM-012",
+   "FSM-013"
+  ]
+ }
+}

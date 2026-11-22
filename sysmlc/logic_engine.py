@@ -13,7 +13,7 @@ Each operation is one theorem of logic used as an engineering check:
   region       quantifier elimination: the input region (formula over inputs) where a property holds
 Quantifier elimination uses z3's qe2 (works for nonlinear real arithmetic) and falls back to qe.
 """
-from z3 import (Solver, sat, unsat, And, Or, Not, Implies, ForAll, Exists, Tactic, BoolVal, simplify,
+from z3 import (Solver, sat, unsat, unknown, And, Or, Not, Implies, ForAll, Exists, Tactic, BoolVal, simplify,
                 is_bool, is_quantifier, is_and, is_or, is_not, is_implies, is_const, is_true, is_false, substitute, Z3_OP_UNINTERPRETED)
 import itertools
 
@@ -25,8 +25,10 @@ def is_sat(*fs):
 
 
 def valid(f, A=BoolVal(True)):
-    ok, m = is_sat(A, Not(f))
-    return (not ok), m
+    """Validity of f under A. An 'unknown' answer of the solver counts as not valid (no proof)."""
+    s = Solver(); s.add(A, Not(f))
+    r = s.check()
+    return (r == unsat), (s.model() if r == sat else None)
 
 
 def has_quantifier(e):
@@ -71,8 +73,12 @@ def free_consts(f):
 # ---------------------------------------------------------------- deduction theorem
 def refines(parent, children, A=BoolVal(True), inputs=None):
     hyp = And(A, *children)
-    ok, m = is_sat(hyp, Not(parent))
-    res = dict(valid=not ok)
+    s_ = Solver(); s_.add(hyp, Not(parent)); r_ = s_.check()
+    ok, m = (r_ != unsat), (s_.model() if r_ == sat else None)
+    res = dict(valid=not ok, children_consistent=is_sat(hyp)[0])
+    if r_ == unknown:
+        res["solver"] = "unknown"
+        return res
     if ok:
         res["counterexample"] = {str(d): str(m[d]) for d in m.decls()}
         if inputs is not None:
@@ -135,9 +141,9 @@ def dead_parts(f, A=BoolVal(True)):
         seen.add(e.get_id())
         if is_bool(e) and (is_and(e) or is_or(e) or is_not(e) or is_implies(e)):
             if valid(e, A)[0]:
-                out.append((str(e), "sempre verdadeira"))
+                out.append((str(e), "always true"))
             elif not is_sat(A, e)[0]:
-                out.append((str(e), "sempre falsa"))
+                out.append((str(e), "always false"))
         for c in e.children():
             walk(c)
     walk(f)

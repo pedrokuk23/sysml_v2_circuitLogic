@@ -6,7 +6,7 @@ Parents (FireSat top-level mission requirements, CC0 gist by capsulecorplab afte
 Physics (first order, nadir):
   X = h (2.44 lambda / D + eps)       diffraction-limited spot diameter + line-of-sight JITTER during integration
   L = h theta_k + dr                  attitude-KNOWLEDGE error projected on ground + orbit position error
-Children: an ILLUSTRATIVE allocation written by us, with one planted shortfall (jitter 5 urad).
+Children: an ILLUSTRATIVE allocation written by us, in which the jitter allocation (5 urad) misses the budget.
 Operations: deduction (valid / counterexample), worst case, abduction by REPLACEMENT of one child, Craig interpolants
 (payload / attitude-control interface and its margin), discretisation into Boolean lemmas, and the GEO revival bounds.
 """
@@ -24,7 +24,7 @@ PARENT = {"MR-RES": X <= 30, "MR-LOC": L <= 500}
 CHILD = {
     "ORB-1":  And(h >= 500e3, h <= 700e3),
     "PAY-2":  D >= Q(13, 50),             # aperture >= 0.26 m
-    "ADCS-1": eps <= Q(5, 10**6),         # jitter <= 5 urad (planted shortfall)
+    "ADCS-1": eps <= Q(5, 10**6),         # jitter <= 5 urad
     "ADCS-2": thk <= Q(5236, 10**7),      # attitude knowledge <= 0.03 deg
     "NAV-1":  dr <= 100,
 }

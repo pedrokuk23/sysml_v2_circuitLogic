@@ -5,6 +5,10 @@
   "MR-TL",
   "MR-MASS"
  ],
+ "division_hypothesis": {
+  "divisions": 1,
+  "denominator_may_be_zero": []
+ },
  "variability": {
   "variations": {
    "payload": [
@@ -152,7 +156,7 @@
     "feasible_allocations": 1,
     "forced": {
      "detect": "OBC",
-     "geolocate": "solo"
+     "geolocate": "ground"
     },
     "fixed": [
      "downlink"
@@ -563,5 +567,5 @@
    }
   }
  },
- "seconds": 5.268992900848389
+ "seconds": 4.910145044326782
 }

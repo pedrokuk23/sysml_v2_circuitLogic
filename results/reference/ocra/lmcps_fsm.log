@@ -1,0 +1,72 @@
+*** This is ocra 2.1.0 (compiled on Fri Jul  2 09:11:08 2021)
+*** For more information on ocra see <https://ocra.fbk.eu>
+*** For bug reports, or any comment, please send an email to <ocra@fbk.eu>.
+*** Copyright (c) 2013, Fondazione Bruno Kessler
+
+*** This version of ocra is linked to NuSMV 2.6.0.
+*** For more information on NuSMV see <http://nusmv.fbk.eu>
+*** or email to <nusmv-users@fbk.eu>.
+*** Copyright (C) 2010-2021, Fondazione Bruno Kessler
+
+*** This version of ocra is linked to the CUDD library version 2.4.1
+*** Copyright (c) 1995-2004, Regents of the University of Colorado
+
+*** This version of ocra is linked to the MiniSat SAT solver. 
+*** See http://minisat.se/MiniSat.html
+*** Copyright (c) 2003-2006, Niklas Een, Niklas Sorensson
+*** Copyright (c) 2007-2010, Niklas Sorensson
+
+
+Checking refinement of component: FSM
+  Checking "CONTRACT parent REFINEDBY ap.c, sen.c;"
+    Checking the correct implementation of "parent"... 
+Trace Description: LTL Counterexample 
+Trace Type: Counterexample 
+  
+  -> State Ports: 1.1 <-
+    FSM_inst.v_apState = 2
+    FSM_inst.v_apfail = FALSE
+    FSM_inst.v_limits = TRUE
+    FSM_inst.v_senState = 2
+    FSM_inst.v_standby = FALSE
+    FSM_inst.v_supported = TRUE
+    FSM_inst.sen.v_good = FALSE
+    FSM_inst.sen.v_nextSenState = 2
+    FSM_inst.sen.v_notLimits = FALSE
+    FSM_inst.ap.v_autopilot = TRUE
+    FSM_inst.ap.v_mode = TRUE
+    FSM_inst.ap.v_nextState = 2
+    FSM_inst.ap.v_pullup = TRUE
+    FSM_inst.ap.v_request = FALSE
+  
+  -> State Ports: 1.2 <-
+    FSM_inst.v_apState = 0
+    FSM_inst.v_senState = 1
+    FSM_inst.sen.v_good = TRUE
+    FSM_inst.sen.v_nextSenState = 0
+    FSM_inst.ap.v_nextState = 1
+    FSM_inst.ap.v_pullup = FALSE
+    FSM_inst.ap.v_request = TRUE
+  
+  -- Loop starts here
+  -> State Ports: 1.3 <-
+    FSM_inst.v_apState = 2
+    FSM_inst.v_senState = 2
+    FSM_inst.sen.v_good = FALSE
+    FSM_inst.sen.v_nextSenState = 2
+    FSM_inst.ap.v_nextState = 2
+    FSM_inst.ap.v_pullup = TRUE
+    FSM_inst.ap.v_request = FALSE
+  
+  -> State Ports: 1.4 <-
+  
+[NOT OK, and trace 1 is a ctx]
+    Checking the correct environment of "ap.c"... [OK]
+    Checking the correct environment of "sen.c"... [OK]
+
+Checking refinement of component: Autopilot
+
+Checking refinement of component: Sensor
+  
+  Summary: some checks failed.
+Warning: in the refinement of component FSM the following ports are not connected:

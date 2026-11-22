@@ -1,0 +1,475 @@
+{
+ "model": "models/firesat_flowdown.sysml",
+ "requirements": [
+  "GLO-PAY",
+  "GLO-ADCS",
+  "GLO-ORB",
+  "GLO-NAV",
+  "GLO-SYS",
+  "MR-RES",
+  "MR-LOC",
+  "ORB-1",
+  "ORB-GEO",
+  "PAY-2",
+  "ADCS-1",
+  "ADCS-1R",
+  "ADCS-2",
+  "NAV-1"
+ ],
+ "division_hypothesis": {
+  "divisions": 1,
+  "denominator_may_be_zero": []
+ },
+ "flowdown": {
+  "resFlow": {
+   "original": "MR-RES",
+   "derived": [
+    "ORB-1",
+    "PAY-2",
+    "ADCS-1"
+   ],
+   "valid": false,
+   "children_consistent": true,
+   "bounded_quantity": "h*((61/25*21/5000000)/D + eps)",
+   "worst_case": 31.090769254905545,
+   "abduction": {
+    "ORB-1": {
+     "vocabulary": [
+      "h"
+     ],
+     "replacement": "And(Or(h <= 0, h <= 7864320/11),\n    Or(h <= 0,\n       h <= 20100475060155015498810/28115020263762707),\n    Or(h <= 0,\n       h <=\n       6532654394550380037113250000000/9137393590836532401675889),\n    Or(h <= 0,\n       h <=\n       2123112678228873512061806250000000000000/2969656818688936317743999440604603),\n    Or(h <= 0, h <= 687194767360/961199),\n    Or(h <= 0, h <= 2061584302080/3052201),\n    Or(h <= 0, h <= 1950000000/2887))",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "PAY-2": {
+     "vocabulary": [
+      "D"
+     ],
+     "replacement": "Or(D <= 0, 1281/125000000/D <= 53/1400000)",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "ADCS-1": {
+     "vocabulary": [
+      "eps"
+     ],
+     "replacement": "eps <= 783/227500000",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "ORB-1 + PAY-2": {
+     "vocabulary": [
+      "D",
+      "h"
+     ],
+     "replacement": "Or(D <= 0, h <= 0, h*(1/200000 + 1281/125000000/D) <= 30)",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "ORB-1 + ADCS-1": {
+     "vocabulary": [
+      "eps",
+      "h"
+     ],
+     "replacement": "Or(h*(1281/32500000 + eps) <= 30, Not(eps >= 0), h <= 0)",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "PAY-2 + ADCS-1": {
+     "vocabulary": [
+      "D",
+      "eps"
+     ],
+     "replacement": "And(Or(D <= 0,\n       308094151366691831/440134816338*(1281/125000000/D) +\n       308094151366691831/440134816338*eps <=\n       30,\n       Not(eps >= 0)),\n    Or(D <= 0,\n       Not(eps >= 0),\n       700000*(1281/125000000/D) + 700000*eps <= 30))",
+     "method": "quantifier elimination",
+     "exists": true
+    }
+   },
+   "interfaces": {
+    "Adcs": {
+     "subsystem": "Adcs",
+     "shared": [
+      "eps"
+     ],
+     "contract": null,
+     "note": "no interface contract exists: the subsystem's requirements and the rest of the allocation admit a violation of the parent"
+    },
+    "Orbit": {
+     "subsystem": "Orbit",
+     "shared": [
+      "h"
+     ],
+     "contract": null,
+     "note": "no interface contract exists: the subsystem's requirements and the rest of the allocation admit a violation of the parent"
+    },
+    "Payload": {
+     "subsystem": "Payload",
+     "shared": [
+      "blur"
+     ],
+     "contract": null,
+     "note": "no interface contract exists: the subsystem's requirements and the rest of the allocation admit a violation of the parent"
+    }
+   },
+   "discretisation": {
+    "atoms": {
+     "a0": "500000 <= h",
+     "a1": "700000 >= h",
+     "a2": "13/50 <= D",
+     "a3": "1/200000 >= eps",
+     "a4": "30 >= h*((61/25*21/5000000)/D + eps)"
+    },
+    "feasible": 22,
+    "of": 32,
+    "lemmas": "(a0 | a1) & (a1 | a2 | a3 | ~a4) & (a0 | a4 | ~a2 | ~a3)"
+   }
+  },
+  "resFlowRevised": {
+   "original": "MR-RES",
+   "derived": [
+    "ORB-1",
+    "PAY-2",
+    "ADCS-1R"
+   ],
+   "valid": true,
+   "children_consistent": true,
+   "bounded_quantity": "h*((61/25*21/5000000)/D + eps)",
+   "worst_case": 29.690769238815626,
+   "abduction": {
+    "ORB-1": {
+     "vocabulary": [
+      "h"
+     ],
+     "replacement": "h <= 707290",
+     "method": "numerical (bisection; quantifier elimination exceeded the time limit)",
+     "exists": true
+    },
+    "PAY-2": {
+     "vocabulary": [
+      "D"
+     ],
+     "replacement": "Or(1281/125000000/D <= 279/7000000, D <= 0)",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "ADCS-1R": {
+     "vocabulary": [
+      "eps"
+     ],
+     "replacement": "Or(Not(eps >= 0), eps <= 783/227500000)",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "ORB-1 + PAY-2": {
+     "vocabulary": [
+      "D",
+      "h"
+     ],
+     "replacement": "Or(D <= 0, h <= 0, h*(3/1000000 + 1281/125000000/D) <= 30)",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "ORB-1 + ADCS-1R": {
+     "vocabulary": [
+      "eps",
+      "h"
+     ],
+     "replacement": "Or(h*(1281/32500000 + eps) <= 30, h <= 0, Not(eps >= 0))",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "PAY-2 + ADCS-1R": {
+     "vocabulary": [
+      "D",
+      "eps"
+     ],
+     "replacement": "Or(700000*(1281/125000000/D) + 700000*eps <= 30,\n   D <= 0,\n   Not(eps >= 0))",
+     "method": "quantifier elimination",
+     "exists": true
+    }
+   },
+   "interfaces": {
+    "Adcs": {
+     "subsystem": "Adcs",
+     "shared": [
+      "eps"
+     ],
+     "strongest": "And(eps <= 3/1000000, eps >= 0)",
+     "weakest": "eps <= 783/227500000",
+     "strongest_bound": 3.000190699174732e-06,
+     "weakest_bound": 3.4417580681307406e-06,
+     "margin": 4.4156736895600875e-07
+    },
+    "Orbit": {
+     "subsystem": "Orbit",
+     "shared": [
+      "h"
+     ],
+     "strongest": "And(And(500000 <= h, 700000 >= h), And(0 < h))",
+     "weakest": "h <= 650000000/919",
+     "strongest_bound": 700000.0001866624,
+     "weakest_bound": 707290.5331878467,
+     "margin": 7290.533001184231
+    },
+    "Payload": {
+     "subsystem": "Payload",
+     "shared": [
+      "blur"
+     ],
+     "strongest": null,
+     "weakest": "blur <= 279/7000000",
+     "strongest_bound": 3.941583116753161e-05,
+     "weakest_bound": 3.9857142666763394e-05,
+     "margin": 4.413114992317819e-07
+    }
+   },
+   "discretisation": {
+    "atoms": {
+     "a0": "500000 <= h",
+     "a1": "700000 >= h",
+     "a2": "13/50 <= D",
+     "a3": "3/1000000 >= eps",
+     "a4": "30 >= h*((61/25*21/5000000)/D + eps)"
+    },
+    "feasible": 22,
+    "of": 32,
+    "lemmas": "(a0 | a1) & (a4 | ~a1 | ~a2 | ~a3)"
+   }
+  },
+  "locFlow": {
+   "original": "MR-LOC",
+   "derived": [
+    "ORB-1",
+    "ADCS-2",
+    "NAV-1"
+   ],
+   "valid": true,
+   "children_consistent": true,
+   "bounded_quantity": "h*thetaK + dr",
+   "worst_case": 466.52000014815724,
+   "abduction": {
+    "ORB-1": {
+     "vocabulary": [
+      "h"
+     ],
+     "replacement": "Or(h <= 1000000000/1309, h <= 0)",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "ADCS-2": {
+     "vocabulary": [
+      "thetaK"
+     ],
+     "replacement": "Or(thetaK <= 1/1750, Not(thetaK >= 0))",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "NAV-1": {
+     "vocabulary": [
+      "dr"
+     ],
+     "replacement": "Or(dr <= 3337/25, Not(dr >= 0))",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "ORB-1 + ADCS-2": {
+     "vocabulary": [
+      "h",
+      "thetaK"
+     ],
+     "replacement": "Or(h*thetaK <= 400, Not(thetaK >= 0))",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "ORB-1 + NAV-1": {
+     "vocabulary": [
+      "dr",
+      "h"
+     ],
+     "replacement": "And(Or(h <= 0, Not(dr >= 0), -500 <= -1/2048*h + -1*dr),\n    Or(h <= 0,\n       -500 <= -1309/2500000*h + -1*dr,\n       Not(dr >= 0)))",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "ADCS-2 + NAV-1": {
+     "vocabulary": [
+      "dr",
+      "thetaK"
+     ],
+     "replacement": "And(Or(Not(dr >= 0),\n       Not(thetaK >= 0),\n       -500 <= -500001*thetaK + -1*dr),\n    Or(Not(dr >= 0),\n       Not(thetaK >= 0),\n       -500 <= -700000*thetaK + -1*dr))",
+     "method": "quantifier elimination",
+     "exists": true
+    }
+   },
+   "interfaces": {
+    "Adcs": {
+     "subsystem": "Adcs",
+     "shared": [
+      "thetaK"
+     ],
+     "strongest": "And(thetaK >= 0, thetaK <= 1309/2500000)",
+     "weakest": "thetaK <= 1/1750",
+     "strongest_bound": 0.0005236001926088238,
+     "weakest_bound": 0.0005714285713859274,
+     "margin": 4.7828378777103626e-05
+    },
+    "Nav": {
+     "subsystem": "Nav",
+     "shared": [
+      "dr"
+     ],
+     "strongest": "And(100 >= dr, And(0 <= dr))",
+     "weakest": "dr <= 3337/25",
+     "strongest_bound": 100.0000000341006,
+     "weakest_bound": 133.47999999992203,
+     "margin": 33.479999965821435
+    },
+    "Orbit": {
+     "subsystem": "Orbit",
+     "shared": [
+      "h"
+     ],
+     "strongest": "And(And(500000 <= h, 700000 >= h), And(0 < h))",
+     "weakest": "h <= 1000000000/1309",
+     "strongest_bound": 700000.0001866624,
+     "weakest_bound": 763941.9404121534,
+     "margin": 63941.94022549095
+    }
+   },
+   "discretisation": {
+    "atoms": {
+     "a0": "500000 <= h",
+     "a1": "700000 >= h",
+     "a2": "1309/2500000 >= thetaK",
+     "a3": "100 >= dr",
+     "a4": "500 >= h*thetaK + dr"
+    },
+    "feasible": 22,
+    "of": 32,
+    "lemmas": "(a0 | a1) & (a4 | ~a1 | ~a2 | ~a3)"
+   }
+  },
+  "geoFlow": {
+   "original": "MR-RES",
+   "derived": [
+    "ORB-GEO",
+    "PAY-2",
+    "ADCS-1R"
+   ],
+   "valid": false,
+   "children_consistent": true,
+   "bounded_quantity": "h*((61/25*21/5000000)/D + eps)",
+   "worst_case": 1517.876954335029,
+   "abduction": {
+    "ORB-GEO": {
+     "vocabulary": [
+      "h"
+     ],
+     "replacement": "h <= 707290",
+     "method": "numerical (bisection; quantifier elimination exceeded the time limit)",
+     "exists": true
+    },
+    "PAY-2": {
+     "vocabulary": [
+      "D"
+     ],
+     "replacement": "Or(D <= 0, 1281/125000000/D <= -38679/17893000000)",
+     "method": "quantifier elimination",
+     "exists": false
+    },
+    "ADCS-1R": {
+     "vocabulary": [
+      "eps"
+     ],
+     "replacement": "Or(Not(eps >= 0), eps <= -3/128063776021400)",
+     "method": "quantifier elimination",
+     "exists": false
+    },
+    "ORB-GEO + PAY-2": {
+     "vocabulary": [
+      "D",
+      "h"
+     ],
+     "replacement": "Or(h*(3/1000000 + 1281/125000000/D) <= 30, D <= 0, h <= 0)",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "ORB-GEO + ADCS-1R": {
+     "vocabulary": [
+      "eps",
+      "h"
+     ],
+     "replacement": "Or(h*(1281/32500000 + eps) <= 30, h <= 0, Not(eps >= 0))",
+     "method": "quantifier elimination",
+     "exists": true
+    },
+    "PAY-2 + ADCS-1R": {
+     "vocabulary": [
+      "D",
+      "eps"
+     ],
+     "replacement": "Or(D <= 0,\n   Not(eps >= 0),\n   -3 <= -3578600*eps + -3578600*(1281/125000000/D))",
+     "method": "quantifier elimination",
+     "exists": true
+    }
+   },
+   "interfaces": {
+    "Adcs": {
+     "subsystem": "Adcs",
+     "shared": [
+      "eps"
+     ],
+     "contract": null,
+     "note": "no interface contract exists: the subsystem's requirements and the rest of the allocation admit a violation of the parent"
+    },
+    "Orbit": {
+     "subsystem": "Orbit",
+     "shared": [
+      "h"
+     ],
+     "contract": null,
+     "note": "no interface contract exists: the subsystem's requirements and the rest of the allocation admit a violation of the parent"
+    },
+    "Payload": {
+     "subsystem": "Payload",
+     "shared": [
+      "blur"
+     ],
+     "contract": null,
+     "note": "no interface contract exists: the subsystem's requirements and the rest of the allocation admit a violation of the parent"
+    }
+   },
+   "discretisation": {
+    "atoms": {
+     "a0": "35786000 == h",
+     "a1": "13/50 <= D",
+     "a2": "3/1000000 >= eps",
+     "a3": "30 >= h*((61/25*21/5000000)/D + eps)"
+    },
+    "feasible": 13,
+    "of": 16,
+    "lemmas": "(a1 | ~a0 | ~a3) & (a2 | ~a0 | ~a3)"
+   }
+  }
+ },
+ "status": "complete",
+ "coverage": {
+  "translated": {
+   "#refinement dependency": 4,
+   "require constraint": 14,
+   "requirement def": 14,
+   "attribute": 8
+  },
+  "structural": {
+   "requirement": 9,
+   "part def": 5,
+   "package": 1,
+   "satisfy": 2,
+   "subject": 14,
+   "import": 2,
+   "part": 5,
+   "doc": 14
+  },
+  "statements_recognized": 92
+ },
+ "seconds": 63.53793811798096
+}

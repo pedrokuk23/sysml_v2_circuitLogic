@@ -1,0 +1,185 @@
+ kind2 v2.2.0
+
+
+
+================================================================================
+Analyzing design
+  with First top: 'design' (no subsystems)
+
+<Failure> Property reach_T_Nom is invalid by bounded model checking for k=0 after 0.076s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false
+    v_limits        true
+    v_standby      false
+    v_supported     true
+    == Locals ==
+    v_apState          0
+    v_nextState        1
+    v_good          true
+    v_senState         0
+    v_nextSenState     2
+    v_mode          true
+    v_request       true
+    
+  
+<Failure> Property reach_T_F is invalid by bounded model checking for k=1 after 0.111s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false  true
+    v_limits        true false
+    v_standby      false  true
+    v_supported    false false
+    == Locals ==
+    v_apState          0     0
+    v_nextState        0     3
+    v_good          true false
+    v_senState         0     2
+    v_nextSenState     2     1
+    v_mode         false  true
+    v_request       true false
+    
+  
+<Failure> Property reach_S_Tr is invalid by bounded model checking for k=1 after 0.111s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false false
+    v_limits       false false
+    v_standby       true  true
+    v_supported    false false
+    == Locals ==
+    v_apState          0     3
+    v_nextState        3     3
+    v_good          true  true
+    v_senState         0     1
+    v_nextSenState     1     1
+    v_mode          true  true
+    v_request      false false
+    
+  
+<Failure> Property reach_S_F is invalid by bounded model checking for k=1 after 0.111s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false  true
+    v_limits        true  true
+    v_standby       true false
+    v_supported    false false
+    == Locals ==
+    v_apState          0     3
+    v_nextState        3     2
+    v_good          true false
+    v_senState         0     2
+    v_nextSenState     2     1
+    v_mode          true  true
+    v_request      false false
+    
+  
+<Failure> Property reach_N_F is invalid by bounded model checking for k=1 after 0.111s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false  true
+    v_limits        true  true
+    v_standby      false false
+    v_supported     true false
+    == Locals ==
+    v_apState          0     1
+    v_nextState        1     2
+    v_good          true false
+    v_senState         0     2
+    v_nextSenState     2     1
+    v_mode          true  true
+    v_request       true false
+    
+  
+<Failure> Property reach_N_Nom is invalid by bounded model checking for k=1 after 0.111s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false  true
+    v_limits       false  true
+    v_standby      false  true
+    v_supported     true false
+    == Locals ==
+    v_apState          0     1
+    v_nextState        1     3
+    v_good          true  true
+    v_senState         0     0
+    v_nextSenState     0     2
+    v_mode          true  true
+    v_request       true false
+    
+  
+<Success> Property reach_N_Tr is valid by 2-induction after 0.190s.
+
+<Success> Property reach_M_Nom is valid by 2-induction after 0.190s.
+
+<Success> Property reach_M_F is valid by 2-induction after 0.190s.
+
+<Success> Property reach_S_Nom is valid by 2-induction after 0.190s.
+
+<Failure> Property reach_T_Tr is invalid by bounded model checking for k=2 after 0.190s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false false false
+    v_limits       false false false
+    v_standby       true false false
+    v_supported    false false false
+    == Locals ==
+    v_apState          0     3     0
+    v_nextState        3     0     0
+    v_good          true  true  true
+    v_senState         0     1     1
+    v_nextSenState     1     1     1
+    v_mode          true false false
+    v_request      false  true  true
+    
+  
+<Failure> Property reach_M_Tr is invalid by bounded model checking for k=2 after 0.190s.
+
+Counterexample:
+  Node design ()
+    == Inputs ==
+    v_apfail       false  true false
+    v_limits       false false false
+    v_standby       true  true false
+    v_supported    false false false
+    == Locals ==
+    v_apState          0     3     2
+    v_nextState        3     2     2
+    v_good          true  true  true
+    v_senState         0     1     1
+    v_nextSenState     1     1     1
+    v_mode          true  true  true
+    v_request      false false false
+    
+  
+--------------------------------------------------------------------------------
+Summary of properties:
+--------------------------------------------------------------------------------
+reach_S_F: invalid after 1 steps
+reach_S_Tr: invalid after 1 steps
+reach_S_Nom: valid (k=2)
+reach_M_F: valid (k=2)
+reach_M_Tr: invalid after 2 steps
+reach_M_Nom: valid (k=2)
+reach_N_F: invalid after 1 steps
+reach_N_Tr: valid (k=2)
+reach_N_Nom: invalid after 1 steps
+reach_T_F: invalid after 1 steps
+reach_T_Tr: invalid after 2 steps
+reach_T_Nom: invalid after 0 steps
+================================================================================
+

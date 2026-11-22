@@ -1,6 +1,6 @@
 {
- "passed": 68,
- "total": 68,
+ "passed": 96,
+ "total": 96,
  "tests": [
   {
    "cls": "A",
@@ -31,6 +31,48 @@
    "test": "FireSat: geo1 dead, leo2 core",
    "passed": true,
    "detail": ""
+  },
+  {
+   "cls": "A",
+   "test": "AP-003: conflicts B\u00d7D and C\u00d7D, vacuous limit clause in A and D",
+   "passed": true,
+   "detail": "[['AP-003B', 'AP-003D'], ['AP-003C', 'AP-003D']]"
+  },
+  {
+   "cls": "A",
+   "test": "TSM: TSM-002 conflicts with each TSM-003 case; holes for unlisted fault codes",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "A",
+   "test": "TSM with the glossary axiom noFail <=> FC = 0: no conflicts, holes remain",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "A",
+   "test": "FireSat flow-down: refinement fails, worst case 31.09 m",
+   "passed": true,
+   "detail": "31.090769254905545"
+  },
+  {
+   "cls": "A",
+   "test": "FireSat flow-down: revised allocation valid, payload/attitude margin 0.44 urad",
+   "passed": true,
+   "detail": "4.413114992317819e-07"
+  },
+  {
+   "cls": "A",
+   "test": "FireSat flow-down: no aperture alone and no jitter alone rescues the geostationary concept",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "A",
+   "test": "NASA Lift+Cruise mini set: thrust-borne first at step 11; within 6 ticks unrealizable, within 12 realizable",
+   "passed": true,
+   "detail": "(11, False, True)"
   },
   {
    "cls": "A",
@@ -124,6 +166,60 @@
   },
   {
    "cls": "B",
+   "test": "order comparison on an enumeration",
+   "passed": true,
+   "detail": "requirement 'FSM-003': enumeration value apState used with an order comparison or arithmetic"
+  },
+  {
+   "cls": "B",
+   "test": "comparison of two enumerations",
+   "passed": true,
+   "detail": "requirement 'FSM-003': comparison of ApState with SenState"
+  },
+  {
+   "cls": "B",
+   "test": "comparison of an enumeration with a number",
+   "passed": true,
+   "detail": "requirement 'FSM-003': comparison of ApState with a number"
+  },
+  {
+   "cls": "B",
+   "test": "comparison of literals of two enumerations",
+   "passed": true,
+   "detail": "requirement 'FSM-003': comparison of ApState with SenState"
+  },
+  {
+   "cls": "B",
+   "test": "enumeration compared with a literal of another enumeration",
+   "passed": true,
+   "detail": "requirement 'FSM-003': comparison of ApState with SenState"
+  },
+  {
+   "cls": "B",
+   "test": "comparison of two enumeration attributes of different types",
+   "passed": true,
+   "detail": "requirement 'FSM-003': comparison of ApState with SenState"
+  },
+  {
+   "cls": "B",
+   "test": "order comparison on an enumeration-valued conditional",
+   "passed": true,
+   "detail": "requirement 'FSM-003': enumeration value If(supported, 1, 3) used with an order comparison or arithmetic"
+  },
+  {
+   "cls": "B",
+   "test": "conditional mixing an enumeration and a number",
+   "passed": true,
+   "detail": "requirement 'FSM-003': branches of a conditional have different types (ApState and number)"
+  },
+  {
+   "cls": "B",
+   "test": "arithmetic on an enumeration",
+   "passed": true,
+   "detail": "requirement 'FSM-003': enumeration value apState used with an order comparison or arithmetic"
+  },
+  {
+   "cls": "B",
    "test": "variant with malformed attribute",
    "passed": true,
    "detail": "variation 'GroundChoice': variant not of the form 'variant part v : T { attribute redefines x = value; }'; unrecognized statement in package 'variation part def GroundChoice :> Groun': 'variant part gs4 : Ground attribute redefines maxGap = 100' (not in the supported subset)"
@@ -132,7 +228,7 @@
    "cls": "B",
    "test": "CLI exits with status 2 and emits no proof",
    "passed": true,
-   "detail": "/tmp/tmpp_x0_ku6.sysml: 1 error(s)\n  ERROR: name 'godo' is used but not declared\n"
+   "detail": "/tmp/tmp97onijex.sysml: 1 error(s)\n  ERROR: name 'godo' is used but not declared\n"
   },
   {
    "cls": "C",
@@ -232,7 +328,7 @@
   },
   {
    "cls": "D",
-   "test": "an unknown statement inserted at each of 514 statement boundaries is rejected",
+   "test": "an unknown statement inserted at each of 701 statement boundaries of the 6 models is rejected",
    "passed": true,
    "detail": "[]"
   },
@@ -366,7 +462,7 @@
    "cls": "F",
    "test": "attribute declared twice in a part definition is rejected",
    "passed": true,
-   "detail": "duplicate declaration of 'h' in package 'part def Orbit': 'attribute h : Real' and 'attribute h : Integer'"
+   "detail": "attribute 'h' is declared with types Real and Integer in part definitions; duplicate declaration of 'h' in package 'part def Orbit': 'attribute h : Real' and 'attribute h : Integer'"
   },
   {
    "cls": "F",
@@ -400,7 +496,7 @@
   },
   {
    "cls": "F",
-   "test": "a copy of each of the 483 declarations of the three models is rejected as a duplicate",
+   "test": "a copy of each of the 664 declarations of the 6 models is rejected as a duplicate",
    "passed": true,
    "detail": "[]"
   },
@@ -409,6 +505,78 @@
    "test": "SMT, Verilog and Lustre agree on 1582 valuations of 20 requirements",
    "passed": true,
    "detail": "[]"
+  },
+  {
+   "cls": "H",
+   "test": "firesat: sysmlc IR = Pilot AST (32 comparisons, 9 expressions equivalent)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "H",
+   "test": "firesat_flowdown: sysmlc IR = Pilot AST (67 comparisons, 14 expressions equivalent)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "H",
+   "test": "lmcps_fsm: sysmlc IR = Pilot AST (105 comparisons, 33 expressions equivalent)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "H",
+   "test": "lmcps_fsm_rev: sysmlc IR = Pilot AST (105 comparisons, 33 expressions equivalent)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "H",
+   "test": "lmcps_roll_tsm: sysmlc IR = Pilot AST (47 comparisons, 9 expressions equivalent)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "H",
+   "test": "lmcps_roll_tsm_glossary: sysmlc IR = Pilot AST (47 comparisons, 9 expressions equivalent)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "H",
+   "test": "firesat: every analysis gives the same results through the Pilot front end (281 result leaves; 4 equal up to formula printing or the QE time limit)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "H",
+   "test": "firesat_flowdown: every analysis gives the same results through the Pilot front end (252 result leaves; 24 equal up to formula printing or the QE time limit)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "H",
+   "test": "lmcps_fsm: every analysis gives the same results through the Pilot front end (164 result leaves; 1 equal up to formula printing or the QE time limit)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "H",
+   "test": "lmcps_fsm_rev: every analysis gives the same results through the Pilot front end (119 result leaves; 1 equal up to formula printing or the QE time limit)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "H",
+   "test": "lmcps_roll_tsm: every analysis gives the same results through the Pilot front end (65 result leaves; 2 equal up to formula printing or the QE time limit)",
+   "passed": true,
+   "detail": ""
+  },
+  {
+   "cls": "H",
+   "test": "lmcps_roll_tsm_glossary: every analysis gives the same results through the Pilot front end (47 result leaves; 2 equal up to formula printing or the QE time limit)",
+   "passed": true,
+   "detail": ""
   }
  ]
 }

@@ -1,0 +1,5447 @@
+{
+ "summary": {
+  "requirement_elements": 590,
+  "requirement_definitions": 296,
+  "requirements_with_constraints": 56,
+  "gates": 56,
+  "gates_translated": 56,
+  "gate_values": {
+   "open": 56
+  },
+  "lines": 170,
+  "lines_by_state": {
+   "undriven": 95,
+   "tied": 75
+  },
+  "gates_all_variable_inputs_undriven": 56,
+  "shared_lines": 0,
+  "refinement_dependencies": 369,
+  "refinements_by_verdict": {
+   "source is not a requirement (ActionDefinition)": 52,
+   "source is not a requirement (PartDefinition)": 42,
+   "no require constraint on the source": 78,
+   "no require constraint on either side": 123,
+   "target is not a requirement (PartDefinition)": 61,
+   "no require constraint on the target": 13
+  },
+  "satisfy_relations": 272,
+  "satisfy_binding_inputs": 0,
+  "units_in_gates": []
+ },
+ "gates": [
+  {
+   "requirement": "HLR-R001",
+   "qn": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "inputs": [
+    "MissionRequirementsPackage::CrewReturnSafetyRequirement::crewInjuryCount",
+    "MissionRequirementsPackage::CrewReturnSafetyRequirement::maxAcceptableInjuries"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R002",
+   "qn": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "inputs": [
+    "MissionRequirementsPackage::LunarLanderSoftLandingRequirement::actualHorizontalVelocity",
+    "MissionRequirementsPackage::LunarLanderSoftLandingRequirement::actualLandingZoneDeviation",
+    "MissionRequirementsPackage::LunarLanderSoftLandingRequirement::actualVerticalVelocity",
+    "MissionRequirementsPackage::LunarLanderSoftLandingRequirement::maxHorizontalVelocity",
+    "MissionRequirementsPackage::LunarLanderSoftLandingRequirement::maxLandingZoneDeviation",
+    "MissionRequirementsPackage::LunarLanderSoftLandingRequirement::maxVerticalVelocity"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 3,
+   "driven_inputs": 0,
+   "tied_inputs": 3
+  },
+  {
+   "requirement": "HLR-R003",
+   "qn": "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement",
+   "inputs": [
+    "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement::actualDeltaVAccuracy",
+    "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement::actualTimeToLunarOrbitInsertion",
+    "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement::maxDeltaVAccuracy",
+    "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement::maxTimeToLunarOrbitInsertion"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "HLR-R004",
+   "qn": "MissionRequirementsPackage::CommunicationUptimeRequirement",
+   "inputs": [
+    "MissionRequirementsPackage::CommunicationUptimeRequirement::actualCommunicationUptimePercentage",
+    "MissionRequirementsPackage::CommunicationUptimeRequirement::allowedSingleBlackoutDuration",
+    "MissionRequirementsPackage::CommunicationUptimeRequirement::maxSingleBlackoutDuration",
+    "MissionRequirementsPackage::CommunicationUptimeRequirement::minCommunicationUptimePercentage"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "HLR-R006",
+   "qn": "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement",
+   "inputs": [
+    "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement::actualSampleMass",
+    "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement::contaminationPercentage",
+    "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement::maxContaminationPercentage",
+    "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement::minRequiredSampleMass"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "HLR-R007",
+   "qn": "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement",
+   "inputs": [
+    "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement::actualDataTransmissionDuration",
+    "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement::actualDeployedSciencePackages",
+    "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement::actualDeployedVisualSystems",
+    "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement::minDataTransmissionDuration",
+    "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement::minRequiredSciencePackages",
+    "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement::minRequiredVisualSystems"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 3,
+   "driven_inputs": 0,
+   "tied_inputs": 3
+  },
+  {
+   "requirement": "HLR-R008",
+   "qn": "MissionRequirementsPackage::LunarVisualDocumentationRequirement",
+   "inputs": [
+    "MissionRequirementsPackage::LunarVisualDocumentationRequirement::actualMotionPictureDuration",
+    "MissionRequirementsPackage::LunarVisualDocumentationRequirement::actualStillPhotosCount",
+    "MissionRequirementsPackage::LunarVisualDocumentationRequirement::minMotionPictureDuration",
+    "MissionRequirementsPackage::LunarVisualDocumentationRequirement::minStillPhotosCount"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "HLR-R009",
+   "qn": "MissionRequirementsPackage::NationalSymbolDeploymentRequirement",
+   "inputs": [
+    "MissionRequirementsPackage::NationalSymbolDeploymentRequirement::symbolRemainsUpright",
+    "MissionRequirementsPackage::NationalSymbolDeploymentRequirement::symbolSuccessfullyPlanted",
+    "MissionRequirementsPackage::NationalSymbolDeploymentRequirement::symbolVisibility"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 3,
+   "driven_inputs": 0,
+   "tied_inputs": 0
+  },
+  {
+   "requirement": "HLR-R010",
+   "qn": "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement",
+   "inputs": [
+    "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement::actualQuarantineLevel",
+    "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement::biologicalContaminationDetected",
+    "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement::contaminationThresholdExceeded",
+    "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement::requiredQuarantineLevel"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 3,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R026",
+   "qn": "MissionRequirementsPackage::WasteManagementEffectiveness",
+   "inputs": [
+    "MissionRequirementsPackage::WasteManagementEffectiveness::wasteContaminationDetected"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 0
+  },
+  {
+   "requirement": "HLR-R028",
+   "qn": "MissionRequirementsPackage::CrewSleepEnvironmentQuality",
+   "inputs": [
+    "MissionRequirementsPackage::CrewSleepEnvironmentQuality::actualNoiseLevelMax",
+    "MissionRequirementsPackage::CrewSleepEnvironmentQuality::actualUndisturbedSleepDuration",
+    "MissionRequirementsPackage::CrewSleepEnvironmentQuality::maxNoiseLevelReqd",
+    "MissionRequirementsPackage::CrewSleepEnvironmentQuality::minUndisturbedSleepDuration"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "HLR-R030",
+   "qn": "MissionRequirementsPackage::CrewAlarmResponseTime",
+   "inputs": [
+    "MissionRequirementsPackage::CrewAlarmResponseTime::actualAlarmResponseTime",
+    "MissionRequirementsPackage::CrewAlarmResponseTime::maxAlarmResponseTime"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R032",
+   "qn": "MissionRequirementsPackage::LunarLanderToOrbiterVoiceComm",
+   "inputs": [
+    "MissionRequirementsPackage::LunarLanderToOrbiterVoiceComm::actualSignalClarity",
+    "MissionRequirementsPackage::LunarLanderToOrbiterVoiceComm::minSignalClarity"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R033",
+   "qn": "MissionRequirementsPackage::ExtravehicularMobilityUnitLifeSupportDuration",
+   "inputs": [
+    "MissionRequirementsPackage::ExtravehicularMobilityUnitLifeSupportDuration::actualEMULifeSupportDuration",
+    "MissionRequirementsPackage::ExtravehicularMobilityUnitLifeSupportDuration::minEMULifeSupportDuration"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R035",
+   "qn": "MissionRequirementsPackage::ExtravehicularMobilityUnitDexterityForTasks",
+   "inputs": [
+    "MissionRequirementsPackage::ExtravehicularMobilityUnitDexterityForTasks::actualTaskCompletionSuccessRate",
+    "MissionRequirementsPackage::ExtravehicularMobilityUnitDexterityForTasks::minTaskCompletionSuccessRate"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R036",
+   "qn": "MissionRequirementsPackage::LunarSurfaceMobilityRange",
+   "inputs": [
+    "MissionRequirementsPackage::LunarSurfaceMobilityRange::actualFatigueImpact",
+    "MissionRequirementsPackage::LunarSurfaceMobilityRange::actualTraverseDistanceCapability",
+    "MissionRequirementsPackage::LunarSurfaceMobilityRange::maxFatigueImpact",
+    "MissionRequirementsPackage::LunarSurfaceMobilityRange::minTraverseDistanceCapability"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "HLR-R037",
+   "qn": "MissionRequirementsPackage::ExtravehicularActivityToolSecurity",
+   "inputs": [
+    "MissionRequirementsPackage::ExtravehicularActivityToolSecurity::maxToolsLost",
+    "MissionRequirementsPackage::ExtravehicularActivityToolSecurity::toolsLostDuringEVA",
+    "MissionRequirementsPackage::ExtravehicularActivityToolSecurity::toolsMeetContactRequirement"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R038",
+   "qn": "MissionRequirementsPackage::SamplePristinePreservation",
+   "inputs": [
+    "MissionRequirementsPackage::SamplePristinePreservation::actualTerrestrialContamination",
+    "MissionRequirementsPackage::SamplePristinePreservation::maxTerrestrialContamination"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R040",
+   "qn": "MissionRequirementsPackage::SampleGeologicalContext",
+   "inputs": [
+    "MissionRequirementsPackage::SampleGeologicalContext::actualSampleCorrelationPercentage",
+    "MissionRequirementsPackage::SampleGeologicalContext::minSampleCorrelationPercentage",
+    "MissionRequirementsPackage::SampleGeologicalContext::photosHaveScaleReferences"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R045",
+   "qn": "MissionRequirementsPackage::CriticalComponentRedundancy",
+   "inputs": [
+    "MissionRequirementsPackage::CriticalComponentRedundancy::singleFailureCausesOperationalLoss"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 0
+  },
+  {
+   "requirement": "HLR-R046",
+   "qn": "MissionRequirementsPackage::AbortSequenceExecutionTime",
+   "inputs": [
+    "MissionRequirementsPackage::AbortSequenceExecutionTime::actualAbortExecutionTime",
+    "MissionRequirementsPackage::AbortSequenceExecutionTime::maxAbortExecutionTime"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R047",
+   "qn": "MissionRequirementsPackage::ManualOverrideResponseTime",
+   "inputs": [
+    "MissionRequirementsPackage::ManualOverrideResponseTime::actualOverrideResponseTime",
+    "MissionRequirementsPackage::ManualOverrideResponseTime::maxOverrideResponseTime"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R048",
+   "qn": "MissionRequirementsPackage::GroundSegmentDataUpdateFrequency",
+   "inputs": [
+    "MissionRequirementsPackage::GroundSegmentDataUpdateFrequency::actualUpdateInterval",
+    "MissionRequirementsPackage::GroundSegmentDataUpdateFrequency::maxUpdateInterval"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R049",
+   "qn": "MissionRequirementsPackage::LunarLanderAscentReadinessTime",
+   "inputs": [
+    "MissionRequirementsPackage::LunarLanderAscentReadinessTime::actualTimeFromLandingToAscentLaunch",
+    "MissionRequirementsPackage::LunarLanderAscentReadinessTime::maxTimeToAscentLaunch"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R050",
+   "qn": "MissionRequirementsPackage::FlightSoftwareUpdateTime",
+   "inputs": [
+    "MissionRequirementsPackage::FlightSoftwareUpdateTime::actualSoftwareUpdateDuration",
+    "MissionRequirementsPackage::FlightSoftwareUpdateTime::maxSoftwareUpdateDuration"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R052",
+   "qn": "MissionRequirementsPackage::CrewEmergencyMedicalProficiency",
+   "inputs": [
+    "MissionRequirementsPackage::CrewEmergencyMedicalProficiency::externalAssistanceRequiredBeforeTime",
+    "MissionRequirementsPackage::CrewEmergencyMedicalProficiency::medicalProficiencyScore",
+    "MissionRequirementsPackage::CrewEmergencyMedicalProficiency::minMedicalProficiencyScore",
+    "MissionRequirementsPackage::CrewEmergencyMedicalProficiency::minSelfSufficiencyDuration"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "HLR-R053",
+   "qn": "MissionRequirementsPackage::InFlightProcedureErrorRate",
+   "inputs": [
+    "MissionRequirementsPackage::InFlightProcedureErrorRate::actualProcedureErrorRate",
+    "MissionRequirementsPackage::InFlightProcedureErrorRate::maxProcedureErrorRate"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R054",
+   "qn": "MissionRequirementsPackage::CrewNutritionAndHydration",
+   "inputs": [
+    "MissionRequirementsPackage::CrewNutritionAndHydration::nutrientDeficienciesObserved",
+    "MissionRequirementsPackage::CrewNutritionAndHydration::significantGIIssuesExperienced"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 0
+  },
+  {
+   "requirement": "HLR-R055",
+   "qn": "MissionRequirementsPackage::CrewPsychologicalState",
+   "inputs": [
+    "MissionRequirementsPackage::CrewPsychologicalState::actualPsychologicalStateScore",
+    "MissionRequirementsPackage::CrewPsychologicalState::minPsychologicalStateScore"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R057",
+   "qn": "MissionRequirementsPackage::MicrometeoroidPenetrationRisk",
+   "inputs": [
+    "MissionRequirementsPackage::MicrometeoroidPenetrationRisk::actualPenetrationProbabilityPerMission",
+    "MissionRequirementsPackage::MicrometeoroidPenetrationRisk::maxAcceptablePenetrationProbability"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "HLR-R059",
+   "qn": "MissionRequirementsPackage::LunarElementEnvironmentalResistance",
+   "inputs": [
+    "MissionRequirementsPackage::LunarElementEnvironmentalResistance::structuralIntegrityMaintained"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 0
+  },
+  {
+   "requirement": "HLR-R060",
+   "qn": "MissionRequirementsPackage::PostFlightDataArchiving",
+   "inputs": [
+    "MissionRequirementsPackage::PostFlightDataArchiving::actualArchivalDuration",
+    "MissionRequirementsPackage::PostFlightDataArchiving::actualDataAvailabilityPercentage",
+    "MissionRequirementsPackage::PostFlightDataArchiving::minArchivalDuration",
+    "MissionRequirementsPackage::PostFlightDataArchiving::minDataAvailabilityPercentage"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "CLR-R052",
+   "qn": "TechnicalRequirementsPackage::GNCGuidancePrecision",
+   "inputs": [
+    "TechnicalRequirementsPackage::GNCGuidancePrecision::actualDeltaVcalcAccuracy",
+    "TechnicalRequirementsPackage::GNCGuidancePrecision::maxDeltaVcalcAccuracy",
+    "TechnicalRequirementsPackage::GNCGuidancePrecision::trajectoryWithinCorridor"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "CLR-R053",
+   "qn": "TechnicalRequirementsPackage::RCSControlStability",
+   "inputs": [
+    "TechnicalRequirementsPackage::RCSControlStability::actualAttitudeDeviation",
+    "TechnicalRequirementsPackage::RCSControlStability::maxAttitudeDeviation"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "CLR-R054",
+   "qn": "TechnicalRequirementsPackage::LMDSRadarPrecision",
+   "inputs": [
+    "TechnicalRequirementsPackage::LMDSRadarPrecision::actualAltitudeAccuracy",
+    "TechnicalRequirementsPackage::LMDSRadarPrecision::actualVelocityAccuracy",
+    "TechnicalRequirementsPackage::LMDSRadarPrecision::maxAltitudeAccuracy",
+    "TechnicalRequirementsPackage::LMDSRadarPrecision::maxVelocityAccuracy"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "CLR-R051",
+   "qn": "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement",
+   "inputs": [
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::actualCabinTemperatureMax",
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::actualCabinTemperatureMin",
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::actualOxygenPressureMax",
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::actualOxygenPressureMin",
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::maxCabinTemperatureReqd",
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::maxOxygenPressureReqd",
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::minCabinTemperatureReqd",
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::minOxygenPressureReqd"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 4,
+   "driven_inputs": 0,
+   "tied_inputs": 4
+  },
+  {
+   "requirement": "CLR-R055",
+   "qn": "TechnicalRequirementsPackage::SICThrustMagnitude",
+   "inputs": [
+    "TechnicalRequirementsPackage::SICThrustMagnitude::actualLiftoffThrust",
+    "TechnicalRequirementsPackage::SICThrustMagnitude::minLiftoffThrust"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "CLR-R056",
+   "qn": "TechnicalRequirementsPackage::SPSIgnitionReliability",
+   "inputs": [
+    "TechnicalRequirementsPackage::SPSIgnitionReliability::actualIgnitionSuccessRate",
+    "TechnicalRequirementsPackage::SPSIgnitionReliability::actualMajorBurnCount",
+    "TechnicalRequirementsPackage::SPSIgnitionReliability::minIgnitionSuccessRate",
+    "TechnicalRequirementsPackage::SPSIgnitionReliability::minMajorBurnCount"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "CLR-R057",
+   "qn": "TechnicalRequirementsPackage::DPSThrottlingRange",
+   "inputs": [
+    "TechnicalRequirementsPackage::DPSThrottlingRange::actualMaxThrottlePercentage",
+    "TechnicalRequirementsPackage::DPSThrottlingRange::actualMinThrottlePercentage",
+    "TechnicalRequirementsPackage::DPSThrottlingRange::maxRequiredThrottlePercentage",
+    "TechnicalRequirementsPackage::DPSThrottlingRange::minRequiredThrottlePercentage"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "CLR-R058",
+   "qn": "TechnicalRequirementsPackage::LMASBurnDuration",
+   "inputs": [
+    "TechnicalRequirementsPackage::LMASBurnDuration::actualAscentBurnDuration",
+    "TechnicalRequirementsPackage::LMASBurnDuration::maxAscentBurnDuration"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "CLR-R059",
+   "qn": "TechnicalRequirementsPackage::PrimaryStructureLoadLimit",
+   "inputs": [
+    "TechnicalRequirementsPackage::PrimaryStructureLoadLimit::actualMaxLaunchLoadWithstood",
+    "TechnicalRequirementsPackage::PrimaryStructureLoadLimit::permanentDeformationObserved",
+    "TechnicalRequirementsPackage::PrimaryStructureLoadLimit::requiredMaxLaunchLoadWithstood",
+    "TechnicalRequirementsPackage::PrimaryStructureLoadLimit::structuralFailureObserved"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 3,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "CLR-R060",
+   "qn": "TechnicalRequirementsPackage::CMHeatShieldThermalPerf",
+   "inputs": [
+    "TechnicalRequirementsPackage::CMHeatShieldThermalPerf::actualInternalTemperatureRise",
+    "TechnicalRequirementsPackage::CMHeatShieldThermalPerf::heatShieldAblationAsDesigned",
+    "TechnicalRequirementsPackage::CMHeatShieldThermalPerf::maxInternalTemperatureRise"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "CLR-R061",
+   "qn": "TechnicalRequirementsPackage::PyrotechnicInitiationReliability",
+   "inputs": [
+    "TechnicalRequirementsPackage::PyrotechnicInitiationReliability::actualInitiationReliability",
+    "TechnicalRequirementsPackage::PyrotechnicInitiationReliability::minInitiationReliability"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "CLR-R062",
+   "qn": "TechnicalRequirementsPackage::DockingMechanismReliability",
+   "inputs": [
+    "TechnicalRequirementsPackage::DockingMechanismReliability::actualCaptureLatchingSuccessRate",
+    "TechnicalRequirementsPackage::DockingMechanismReliability::connectionRigidityMaintained",
+    "TechnicalRequirementsPackage::DockingMechanismReliability::minCaptureLatchingSuccessRate",
+    "TechnicalRequirementsPackage::DockingMechanismReliability::withstandsDynamicLoads"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 3,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "CLR-R063",
+   "qn": "TechnicalRequirementsPackage::LMDSLandingGearEnergy",
+   "inputs": [
+    "TechnicalRequirementsPackage::LMDSLandingGearEnergy::maxImpactHorizontalVelocityAbsorbed",
+    "TechnicalRequirementsPackage::LMDSLandingGearEnergy::maxImpactVerticalVelocityAbsorbed",
+    "TechnicalRequirementsPackage::LMDSLandingGearEnergy::minImpactHorizontalVelocityRequired",
+    "TechnicalRequirementsPackage::LMDSLandingGearEnergy::minImpactVerticalVelocityRequired",
+    "TechnicalRequirementsPackage::LMDSLandingGearEnergy::structuralFailureOccurred"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 3,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "CLR-R064",
+   "qn": "TechnicalRequirementsPackage::ECSWaterSupplyRate",
+   "inputs": [
+    "TechnicalRequirementsPackage::ECSWaterSupplyRate::actualWaterProvidedPerCrewPerDay",
+    "TechnicalRequirementsPackage::ECSWaterSupplyRate::minWaterRequiredPerCrewPerDay"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "CLR-R065",
+   "qn": "TechnicalRequirementsPackage::ECSFilterEfficiency",
+   "inputs": [
+    "TechnicalRequirementsPackage::ECSFilterEfficiency::actualCO2LevelMax",
+    "TechnicalRequirementsPackage::ECSFilterEfficiency::actualParticulateRemovalEfficiency",
+    "TechnicalRequirementsPackage::ECSFilterEfficiency::maxCO2LevelReqd",
+    "TechnicalRequirementsPackage::ECSFilterEfficiency::minParticulateRemovalEfficiency"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "CLR-R066",
+   "qn": "TechnicalRequirementsPackage::DataHandlingIntegrity",
+   "inputs": [
+    "TechnicalRequirementsPackage::DataHandlingIntegrity::actualDataIntegrityPercentage",
+    "TechnicalRequirementsPackage::DataHandlingIntegrity::minDataIntegrityPercentage"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "CLR-R067",
+   "qn": "TechnicalRequirementsPackage::CommVideoBandwidth",
+   "inputs": [
+    "TechnicalRequirementsPackage::CommVideoBandwidth::actualFrameRate",
+    "TechnicalRequirementsPackage::CommVideoBandwidth::actualVideoHeight",
+    "TechnicalRequirementsPackage::CommVideoBandwidth::actualVideoWidth",
+    "TechnicalRequirementsPackage::CommVideoBandwidth::minFrameRate",
+    "TechnicalRequirementsPackage::CommVideoBandwidth::minVideoHeight",
+    "TechnicalRequirementsPackage::CommVideoBandwidth::minVideoWidth"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 3,
+   "driven_inputs": 0,
+   "tied_inputs": 3
+  },
+  {
+   "requirement": "CLR-R068",
+   "qn": "TechnicalRequirementsPackage::EMUPressureContainment",
+   "inputs": [
+    "TechnicalRequirementsPackage::EMUPressureContainment::actualPressureLossRate",
+    "TechnicalRequirementsPackage::EMUPressureContainment::maxPressureLossRate"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "CLR-R069",
+   "qn": "TechnicalRequirementsPackage::EASEPOperationalDuration",
+   "inputs": [
+    "TechnicalRequirementsPackage::EASEPOperationalDuration::actualDailyDataTransmission",
+    "TechnicalRequirementsPackage::EASEPOperationalDuration::actualOperationalDuration",
+    "TechnicalRequirementsPackage::EASEPOperationalDuration::minDailyDataTransmission",
+    "TechnicalRequirementsPackage::EASEPOperationalDuration::minOperationalDuration"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "CLR-R070",
+   "qn": "TechnicalRequirementsPackage::MissionSystemReliability",
+   "inputs": [
+    "TechnicalRequirementsPackage::MissionSystemReliability::actualSystemReliability",
+    "TechnicalRequirementsPackage::MissionSystemReliability::minRequiredReliability"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "CLR-R071",
+   "qn": "TechnicalRequirementsPackage::FlightSoftwareDefectRate",
+   "inputs": [
+    "TechnicalRequirementsPackage::FlightSoftwareDefectRate::actualCriticalDefectsCount",
+    "TechnicalRequirementsPackage::FlightSoftwareDefectRate::actualSimulationHours",
+    "TechnicalRequirementsPackage::FlightSoftwareDefectRate::maxCriticalDefectsAllowed",
+    "TechnicalRequirementsPackage::FlightSoftwareDefectRate::minSimulationHoursRequired"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "CLR-R072",
+   "qn": "TechnicalRequirementsPackage::ComponentAcceptanceRate",
+   "inputs": [
+    "TechnicalRequirementsPackage::ComponentAcceptanceRate::actualNonConformanceRate",
+    "TechnicalRequirementsPackage::ComponentAcceptanceRate::maxNonConformanceRate"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 1
+  },
+  {
+   "requirement": "CLR-R073",
+   "qn": "TechnicalRequirementsPackage::MaterialVacuumResistance",
+   "inputs": [
+    "TechnicalRequirementsPackage::MaterialVacuumResistance::actualDegradationLevel",
+    "TechnicalRequirementsPackage::MaterialVacuumResistance::actualExposureDuration",
+    "TechnicalRequirementsPackage::MaterialVacuumResistance::maxDegradationLevel",
+    "TechnicalRequirementsPackage::MaterialVacuumResistance::minExposureDurationReqd"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 2,
+   "driven_inputs": 0,
+   "tied_inputs": 2
+  },
+  {
+   "requirement": "CLR-R074",
+   "qn": "TechnicalRequirementsPackage::ElectronicEMIImmunity",
+   "inputs": [
+    "TechnicalRequirementsPackage::ElectronicEMIImmunity::functionalDegradationFromEMI"
+   ],
+   "units": [],
+   "translated": true,
+   "value": "open",
+   "undriven_inputs": 1,
+   "driven_inputs": 0,
+   "tied_inputs": 0
+  }
+ ],
+ "lines": {
+  "MissionRequirementsPackage::CrewReturnSafetyRequirement::crewInjuryCount": {
+   "name": "crewInjuryCount",
+   "type": "ScalarValues::Integer",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::CrewReturnSafetyRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::CrewReturnSafetyRequirement::maxAcceptableInjuries": {
+   "name": "maxAcceptableInjuries",
+   "type": "ScalarValues::Integer",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::CrewReturnSafetyRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarLanderSoftLandingRequirement::actualVerticalVelocity": {
+   "name": "actualVerticalVelocity",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::LunarLanderSoftLandingRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarLanderSoftLandingRequirement::maxVerticalVelocity": {
+   "name": "maxVerticalVelocity",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::LunarLanderSoftLandingRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarLanderSoftLandingRequirement::actualHorizontalVelocity": {
+   "name": "actualHorizontalVelocity",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::LunarLanderSoftLandingRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarLanderSoftLandingRequirement::maxHorizontalVelocity": {
+   "name": "maxHorizontalVelocity",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::LunarLanderSoftLandingRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarLanderSoftLandingRequirement::actualLandingZoneDeviation": {
+   "name": "actualLandingZoneDeviation",
+   "type": "ISQBase::LengthValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::LunarLanderSoftLandingRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarLanderSoftLandingRequirement::maxLandingZoneDeviation": {
+   "name": "maxLandingZoneDeviation",
+   "type": "ISQBase::LengthValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::LunarLanderSoftLandingRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement::actualDeltaVAccuracy": {
+   "name": "actualDeltaVAccuracy",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement::maxDeltaVAccuracy": {
+   "name": "maxDeltaVAccuracy",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement::actualTimeToLunarOrbitInsertion": {
+   "name": "actualTimeToLunarOrbitInsertion",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement::maxTimeToLunarOrbitInsertion": {
+   "name": "maxTimeToLunarOrbitInsertion",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::CommunicationUptimeRequirement::actualCommunicationUptimePercentage": {
+   "name": "actualCommunicationUptimePercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::CommunicationUptimeRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::CommunicationUptimeRequirement::minCommunicationUptimePercentage": {
+   "name": "minCommunicationUptimePercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::CommunicationUptimeRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::CommunicationUptimeRequirement::maxSingleBlackoutDuration": {
+   "name": "maxSingleBlackoutDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::CommunicationUptimeRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::CommunicationUptimeRequirement::allowedSingleBlackoutDuration": {
+   "name": "allowedSingleBlackoutDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::CommunicationUptimeRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement::actualSampleMass": {
+   "name": "actualSampleMass",
+   "type": "ISQBase::MassValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement::minRequiredSampleMass": {
+   "name": "minRequiredSampleMass",
+   "type": "ISQBase::MassValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement::contaminationPercentage": {
+   "name": "contaminationPercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement::maxContaminationPercentage": {
+   "name": "maxContaminationPercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement::actualDeployedVisualSystems": {
+   "name": "actualDeployedVisualSystems",
+   "type": "ScalarValues::Integer",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement::minRequiredVisualSystems": {
+   "name": "minRequiredVisualSystems",
+   "type": "ScalarValues::Integer",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement::actualDeployedSciencePackages": {
+   "name": "actualDeployedSciencePackages",
+   "type": "ScalarValues::Integer",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement::minRequiredSciencePackages": {
+   "name": "minRequiredSciencePackages",
+   "type": "ScalarValues::Integer",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement::actualDataTransmissionDuration": {
+   "name": "actualDataTransmissionDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement::minDataTransmissionDuration": {
+   "name": "minDataTransmissionDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarVisualDocumentationRequirement::actualStillPhotosCount": {
+   "name": "actualStillPhotosCount",
+   "type": "ScalarValues::Integer",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::LunarVisualDocumentationRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarVisualDocumentationRequirement::minStillPhotosCount": {
+   "name": "minStillPhotosCount",
+   "type": "ScalarValues::Integer",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::LunarVisualDocumentationRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarVisualDocumentationRequirement::actualMotionPictureDuration": {
+   "name": "actualMotionPictureDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::LunarVisualDocumentationRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::LunarVisualDocumentationRequirement::minMotionPictureDuration": {
+   "name": "minMotionPictureDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::LunarVisualDocumentationRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::NationalSymbolDeploymentRequirement::symbolSuccessfullyPlanted": {
+   "name": "symbolSuccessfullyPlanted",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::NationalSymbolDeploymentRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::NationalSymbolDeploymentRequirement::symbolRemainsUpright": {
+   "name": "symbolRemainsUpright",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::NationalSymbolDeploymentRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::NationalSymbolDeploymentRequirement::symbolVisibility": {
+   "name": "symbolVisibility",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::NationalSymbolDeploymentRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement::actualQuarantineLevel": {
+   "name": "actualQuarantineLevel",
+   "type": "ScalarValues::Integer",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement::requiredQuarantineLevel": {
+   "name": "requiredQuarantineLevel",
+   "type": "ScalarValues::Integer",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement::biologicalContaminationDetected": {
+   "name": "biologicalContaminationDetected",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement::contaminationThresholdExceeded": {
+   "name": "contaminationThresholdExceeded",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement"
+   ]
+  },
+  "MissionRequirementsPackage::WasteManagementEffectiveness::wasteContaminationDetected": {
+   "name": "wasteContaminationDetected",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::WasteManagementEffectiveness"
+   ]
+  },
+  "MissionRequirementsPackage::CrewSleepEnvironmentQuality::actualUndisturbedSleepDuration": {
+   "name": "actualUndisturbedSleepDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::CrewSleepEnvironmentQuality"
+   ]
+  },
+  "MissionRequirementsPackage::CrewSleepEnvironmentQuality::minUndisturbedSleepDuration": {
+   "name": "minUndisturbedSleepDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::CrewSleepEnvironmentQuality"
+   ]
+  },
+  "MissionRequirementsPackage::CrewSleepEnvironmentQuality::actualNoiseLevelMax": {
+   "name": "actualNoiseLevelMax",
+   "type": "ISQAcoustics::SoundPressureLevelValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::CrewSleepEnvironmentQuality"
+   ]
+  },
+  "MissionRequirementsPackage::CrewSleepEnvironmentQuality::maxNoiseLevelReqd": {
+   "name": "maxNoiseLevelReqd",
+   "type": "ISQAcoustics::SoundPressureLevelValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::CrewSleepEnvironmentQuality"
+   ]
+  },
+  "MissionRequirementsPackage::CrewAlarmResponseTime::actualAlarmResponseTime": {
+   "name": "actualAlarmResponseTime",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::CrewAlarmResponseTime"
+   ]
+  },
+  "MissionRequirementsPackage::CrewAlarmResponseTime::maxAlarmResponseTime": {
+   "name": "maxAlarmResponseTime",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::CrewAlarmResponseTime"
+   ]
+  },
+  "MissionRequirementsPackage::LunarLanderToOrbiterVoiceComm::actualSignalClarity": {
+   "name": "actualSignalClarity",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::LunarLanderToOrbiterVoiceComm"
+   ]
+  },
+  "MissionRequirementsPackage::LunarLanderToOrbiterVoiceComm::minSignalClarity": {
+   "name": "minSignalClarity",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::LunarLanderToOrbiterVoiceComm"
+   ]
+  },
+  "MissionRequirementsPackage::ExtravehicularMobilityUnitLifeSupportDuration::actualEMULifeSupportDuration": {
+   "name": "actualEMULifeSupportDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::ExtravehicularMobilityUnitLifeSupportDuration"
+   ]
+  },
+  "MissionRequirementsPackage::ExtravehicularMobilityUnitLifeSupportDuration::minEMULifeSupportDuration": {
+   "name": "minEMULifeSupportDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::ExtravehicularMobilityUnitLifeSupportDuration"
+   ]
+  },
+  "MissionRequirementsPackage::ExtravehicularMobilityUnitDexterityForTasks::actualTaskCompletionSuccessRate": {
+   "name": "actualTaskCompletionSuccessRate",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::ExtravehicularMobilityUnitDexterityForTasks"
+   ]
+  },
+  "MissionRequirementsPackage::ExtravehicularMobilityUnitDexterityForTasks::minTaskCompletionSuccessRate": {
+   "name": "minTaskCompletionSuccessRate",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::ExtravehicularMobilityUnitDexterityForTasks"
+   ]
+  },
+  "MissionRequirementsPackage::LunarSurfaceMobilityRange::actualTraverseDistanceCapability": {
+   "name": "actualTraverseDistanceCapability",
+   "type": "ISQBase::LengthValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::LunarSurfaceMobilityRange"
+   ]
+  },
+  "MissionRequirementsPackage::LunarSurfaceMobilityRange::minTraverseDistanceCapability": {
+   "name": "minTraverseDistanceCapability",
+   "type": "ISQBase::LengthValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::LunarSurfaceMobilityRange"
+   ]
+  },
+  "MissionRequirementsPackage::LunarSurfaceMobilityRange::actualFatigueImpact": {
+   "name": "actualFatigueImpact",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::LunarSurfaceMobilityRange"
+   ]
+  },
+  "MissionRequirementsPackage::LunarSurfaceMobilityRange::maxFatigueImpact": {
+   "name": "maxFatigueImpact",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::LunarSurfaceMobilityRange"
+   ]
+  },
+  "MissionRequirementsPackage::ExtravehicularActivityToolSecurity::toolsMeetContactRequirement": {
+   "name": "toolsMeetContactRequirement",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::ExtravehicularActivityToolSecurity"
+   ]
+  },
+  "MissionRequirementsPackage::ExtravehicularActivityToolSecurity::toolsLostDuringEVA": {
+   "name": "toolsLostDuringEVA",
+   "type": "ScalarValues::Integer",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::ExtravehicularActivityToolSecurity"
+   ]
+  },
+  "MissionRequirementsPackage::ExtravehicularActivityToolSecurity::maxToolsLost": {
+   "name": "maxToolsLost",
+   "type": "ScalarValues::Integer",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::ExtravehicularActivityToolSecurity"
+   ]
+  },
+  "MissionRequirementsPackage::SamplePristinePreservation::actualTerrestrialContamination": {
+   "name": "actualTerrestrialContamination",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::SamplePristinePreservation"
+   ]
+  },
+  "MissionRequirementsPackage::SamplePristinePreservation::maxTerrestrialContamination": {
+   "name": "maxTerrestrialContamination",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::SamplePristinePreservation"
+   ]
+  },
+  "MissionRequirementsPackage::SampleGeologicalContext::actualSampleCorrelationPercentage": {
+   "name": "actualSampleCorrelationPercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::SampleGeologicalContext"
+   ]
+  },
+  "MissionRequirementsPackage::SampleGeologicalContext::minSampleCorrelationPercentage": {
+   "name": "minSampleCorrelationPercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::SampleGeologicalContext"
+   ]
+  },
+  "MissionRequirementsPackage::SampleGeologicalContext::photosHaveScaleReferences": {
+   "name": "photosHaveScaleReferences",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::SampleGeologicalContext"
+   ]
+  },
+  "MissionRequirementsPackage::CriticalComponentRedundancy::singleFailureCausesOperationalLoss": {
+   "name": "singleFailureCausesOperationalLoss",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::CriticalComponentRedundancy"
+   ]
+  },
+  "MissionRequirementsPackage::AbortSequenceExecutionTime::actualAbortExecutionTime": {
+   "name": "actualAbortExecutionTime",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::AbortSequenceExecutionTime"
+   ]
+  },
+  "MissionRequirementsPackage::AbortSequenceExecutionTime::maxAbortExecutionTime": {
+   "name": "maxAbortExecutionTime",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::AbortSequenceExecutionTime"
+   ]
+  },
+  "MissionRequirementsPackage::ManualOverrideResponseTime::actualOverrideResponseTime": {
+   "name": "actualOverrideResponseTime",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::ManualOverrideResponseTime"
+   ]
+  },
+  "MissionRequirementsPackage::ManualOverrideResponseTime::maxOverrideResponseTime": {
+   "name": "maxOverrideResponseTime",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::ManualOverrideResponseTime"
+   ]
+  },
+  "MissionRequirementsPackage::GroundSegmentDataUpdateFrequency::actualUpdateInterval": {
+   "name": "actualUpdateInterval",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::GroundSegmentDataUpdateFrequency"
+   ]
+  },
+  "MissionRequirementsPackage::GroundSegmentDataUpdateFrequency::maxUpdateInterval": {
+   "name": "maxUpdateInterval",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::GroundSegmentDataUpdateFrequency"
+   ]
+  },
+  "MissionRequirementsPackage::LunarLanderAscentReadinessTime::actualTimeFromLandingToAscentLaunch": {
+   "name": "actualTimeFromLandingToAscentLaunch",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::LunarLanderAscentReadinessTime"
+   ]
+  },
+  "MissionRequirementsPackage::LunarLanderAscentReadinessTime::maxTimeToAscentLaunch": {
+   "name": "maxTimeToAscentLaunch",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::LunarLanderAscentReadinessTime"
+   ]
+  },
+  "MissionRequirementsPackage::FlightSoftwareUpdateTime::actualSoftwareUpdateDuration": {
+   "name": "actualSoftwareUpdateDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::FlightSoftwareUpdateTime"
+   ]
+  },
+  "MissionRequirementsPackage::FlightSoftwareUpdateTime::maxSoftwareUpdateDuration": {
+   "name": "maxSoftwareUpdateDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::FlightSoftwareUpdateTime"
+   ]
+  },
+  "MissionRequirementsPackage::CrewEmergencyMedicalProficiency::medicalProficiencyScore": {
+   "name": "medicalProficiencyScore",
+   "type": "ScalarValues::Real",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::CrewEmergencyMedicalProficiency"
+   ]
+  },
+  "MissionRequirementsPackage::CrewEmergencyMedicalProficiency::minMedicalProficiencyScore": {
+   "name": "minMedicalProficiencyScore",
+   "type": "ScalarValues::Real",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::CrewEmergencyMedicalProficiency"
+   ]
+  },
+  "MissionRequirementsPackage::CrewEmergencyMedicalProficiency::externalAssistanceRequiredBeforeTime": {
+   "name": "externalAssistanceRequiredBeforeTime",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::CrewEmergencyMedicalProficiency"
+   ]
+  },
+  "MissionRequirementsPackage::CrewEmergencyMedicalProficiency::minSelfSufficiencyDuration": {
+   "name": "minSelfSufficiencyDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::CrewEmergencyMedicalProficiency"
+   ]
+  },
+  "MissionRequirementsPackage::InFlightProcedureErrorRate::actualProcedureErrorRate": {
+   "name": "actualProcedureErrorRate",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::InFlightProcedureErrorRate"
+   ]
+  },
+  "MissionRequirementsPackage::InFlightProcedureErrorRate::maxProcedureErrorRate": {
+   "name": "maxProcedureErrorRate",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::InFlightProcedureErrorRate"
+   ]
+  },
+  "MissionRequirementsPackage::CrewNutritionAndHydration::significantGIIssuesExperienced": {
+   "name": "significantGIIssuesExperienced",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::CrewNutritionAndHydration"
+   ]
+  },
+  "MissionRequirementsPackage::CrewNutritionAndHydration::nutrientDeficienciesObserved": {
+   "name": "nutrientDeficienciesObserved",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::CrewNutritionAndHydration"
+   ]
+  },
+  "MissionRequirementsPackage::CrewPsychologicalState::actualPsychologicalStateScore": {
+   "name": "actualPsychologicalStateScore",
+   "type": "ScalarValues::Real",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::CrewPsychologicalState"
+   ]
+  },
+  "MissionRequirementsPackage::CrewPsychologicalState::minPsychologicalStateScore": {
+   "name": "minPsychologicalStateScore",
+   "type": "ScalarValues::Real",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::CrewPsychologicalState"
+   ]
+  },
+  "MissionRequirementsPackage::MicrometeoroidPenetrationRisk::actualPenetrationProbabilityPerMission": {
+   "name": "actualPenetrationProbabilityPerMission",
+   "type": "ScalarValues::Real",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::MicrometeoroidPenetrationRisk"
+   ]
+  },
+  "MissionRequirementsPackage::MicrometeoroidPenetrationRisk::maxAcceptablePenetrationProbability": {
+   "name": "maxAcceptablePenetrationProbability",
+   "type": "ScalarValues::Real",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::MicrometeoroidPenetrationRisk"
+   ]
+  },
+  "MissionRequirementsPackage::LunarElementEnvironmentalResistance::structuralIntegrityMaintained": {
+   "name": "structuralIntegrityMaintained",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::LunarElementEnvironmentalResistance"
+   ]
+  },
+  "MissionRequirementsPackage::PostFlightDataArchiving::actualDataAvailabilityPercentage": {
+   "name": "actualDataAvailabilityPercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::PostFlightDataArchiving"
+   ]
+  },
+  "MissionRequirementsPackage::PostFlightDataArchiving::minDataAvailabilityPercentage": {
+   "name": "minDataAvailabilityPercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::PostFlightDataArchiving"
+   ]
+  },
+  "MissionRequirementsPackage::PostFlightDataArchiving::actualArchivalDuration": {
+   "name": "actualArchivalDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "MissionRequirementsPackage::PostFlightDataArchiving"
+   ]
+  },
+  "MissionRequirementsPackage::PostFlightDataArchiving::minArchivalDuration": {
+   "name": "minArchivalDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "MissionRequirementsPackage::PostFlightDataArchiving"
+   ]
+  },
+  "TechnicalRequirementsPackage::GNCGuidancePrecision::actualDeltaVcalcAccuracy": {
+   "name": "actualDeltaVcalcAccuracy",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::GNCGuidancePrecision"
+   ]
+  },
+  "TechnicalRequirementsPackage::GNCGuidancePrecision::maxDeltaVcalcAccuracy": {
+   "name": "maxDeltaVcalcAccuracy",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::GNCGuidancePrecision"
+   ]
+  },
+  "TechnicalRequirementsPackage::GNCGuidancePrecision::trajectoryWithinCorridor": {
+   "name": "trajectoryWithinCorridor",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::GNCGuidancePrecision"
+   ]
+  },
+  "TechnicalRequirementsPackage::RCSControlStability::actualAttitudeDeviation": {
+   "name": "actualAttitudeDeviation",
+   "type": "ISQSpaceTime::AngularMeasureValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::RCSControlStability"
+   ]
+  },
+  "TechnicalRequirementsPackage::RCSControlStability::maxAttitudeDeviation": {
+   "name": "maxAttitudeDeviation",
+   "type": "ISQSpaceTime::AngularMeasureValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::RCSControlStability"
+   ]
+  },
+  "TechnicalRequirementsPackage::LMDSRadarPrecision::actualAltitudeAccuracy": {
+   "name": "actualAltitudeAccuracy",
+   "type": "ISQBase::LengthValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::LMDSRadarPrecision"
+   ]
+  },
+  "TechnicalRequirementsPackage::LMDSRadarPrecision::maxAltitudeAccuracy": {
+   "name": "maxAltitudeAccuracy",
+   "type": "ISQBase::LengthValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::LMDSRadarPrecision"
+   ]
+  },
+  "TechnicalRequirementsPackage::LMDSRadarPrecision::actualVelocityAccuracy": {
+   "name": "actualVelocityAccuracy",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::LMDSRadarPrecision"
+   ]
+  },
+  "TechnicalRequirementsPackage::LMDSRadarPrecision::maxVelocityAccuracy": {
+   "name": "maxVelocityAccuracy",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::LMDSRadarPrecision"
+   ]
+  },
+  "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::actualCabinTemperatureMin": {
+   "name": "actualCabinTemperatureMin",
+   "type": "ISQBase::ThermodynamicTemperatureValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement"
+   ]
+  },
+  "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::minCabinTemperatureReqd": {
+   "name": "minCabinTemperatureReqd",
+   "type": "ISQBase::ThermodynamicTemperatureValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement"
+   ]
+  },
+  "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::actualCabinTemperatureMax": {
+   "name": "actualCabinTemperatureMax",
+   "type": "ISQBase::ThermodynamicTemperatureValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement"
+   ]
+  },
+  "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::maxCabinTemperatureReqd": {
+   "name": "maxCabinTemperatureReqd",
+   "type": "ISQBase::ThermodynamicTemperatureValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement"
+   ]
+  },
+  "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::actualOxygenPressureMin": {
+   "name": "actualOxygenPressureMin",
+   "type": "ISQMechanics::PressureValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement"
+   ]
+  },
+  "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::minOxygenPressureReqd": {
+   "name": "minOxygenPressureReqd",
+   "type": "ISQMechanics::PressureValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement"
+   ]
+  },
+  "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::actualOxygenPressureMax": {
+   "name": "actualOxygenPressureMax",
+   "type": "ISQMechanics::PressureValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement"
+   ]
+  },
+  "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement::maxOxygenPressureReqd": {
+   "name": "maxOxygenPressureReqd",
+   "type": "ISQMechanics::PressureValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement"
+   ]
+  },
+  "TechnicalRequirementsPackage::SICThrustMagnitude::actualLiftoffThrust": {
+   "name": "actualLiftoffThrust",
+   "type": "ISQMechanics::ForceValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::SICThrustMagnitude"
+   ]
+  },
+  "TechnicalRequirementsPackage::SICThrustMagnitude::minLiftoffThrust": {
+   "name": "minLiftoffThrust",
+   "type": "ISQMechanics::ForceValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::SICThrustMagnitude"
+   ]
+  },
+  "TechnicalRequirementsPackage::SPSIgnitionReliability::actualMajorBurnCount": {
+   "name": "actualMajorBurnCount",
+   "type": "ScalarValues::Integer",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::SPSIgnitionReliability"
+   ]
+  },
+  "TechnicalRequirementsPackage::SPSIgnitionReliability::minMajorBurnCount": {
+   "name": "minMajorBurnCount",
+   "type": "ScalarValues::Integer",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::SPSIgnitionReliability"
+   ]
+  },
+  "TechnicalRequirementsPackage::SPSIgnitionReliability::actualIgnitionSuccessRate": {
+   "name": "actualIgnitionSuccessRate",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::SPSIgnitionReliability"
+   ]
+  },
+  "TechnicalRequirementsPackage::SPSIgnitionReliability::minIgnitionSuccessRate": {
+   "name": "minIgnitionSuccessRate",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::SPSIgnitionReliability"
+   ]
+  },
+  "TechnicalRequirementsPackage::DPSThrottlingRange::actualMinThrottlePercentage": {
+   "name": "actualMinThrottlePercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::DPSThrottlingRange"
+   ]
+  },
+  "TechnicalRequirementsPackage::DPSThrottlingRange::minRequiredThrottlePercentage": {
+   "name": "minRequiredThrottlePercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::DPSThrottlingRange"
+   ]
+  },
+  "TechnicalRequirementsPackage::DPSThrottlingRange::actualMaxThrottlePercentage": {
+   "name": "actualMaxThrottlePercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::DPSThrottlingRange"
+   ]
+  },
+  "TechnicalRequirementsPackage::DPSThrottlingRange::maxRequiredThrottlePercentage": {
+   "name": "maxRequiredThrottlePercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::DPSThrottlingRange"
+   ]
+  },
+  "TechnicalRequirementsPackage::LMASBurnDuration::actualAscentBurnDuration": {
+   "name": "actualAscentBurnDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::LMASBurnDuration"
+   ]
+  },
+  "TechnicalRequirementsPackage::LMASBurnDuration::maxAscentBurnDuration": {
+   "name": "maxAscentBurnDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::LMASBurnDuration"
+   ]
+  },
+  "TechnicalRequirementsPackage::PrimaryStructureLoadLimit::actualMaxLaunchLoadWithstood": {
+   "name": "actualMaxLaunchLoadWithstood",
+   "type": "ISQSpaceTime::AccelerationValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::PrimaryStructureLoadLimit"
+   ]
+  },
+  "TechnicalRequirementsPackage::PrimaryStructureLoadLimit::requiredMaxLaunchLoadWithstood": {
+   "name": "requiredMaxLaunchLoadWithstood",
+   "type": "ISQSpaceTime::AccelerationValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::PrimaryStructureLoadLimit"
+   ]
+  },
+  "TechnicalRequirementsPackage::PrimaryStructureLoadLimit::permanentDeformationObserved": {
+   "name": "permanentDeformationObserved",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::PrimaryStructureLoadLimit"
+   ]
+  },
+  "TechnicalRequirementsPackage::PrimaryStructureLoadLimit::structuralFailureObserved": {
+   "name": "structuralFailureObserved",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::PrimaryStructureLoadLimit"
+   ]
+  },
+  "TechnicalRequirementsPackage::CMHeatShieldThermalPerf::actualInternalTemperatureRise": {
+   "name": "actualInternalTemperatureRise",
+   "type": "ISQBase::ThermodynamicTemperatureValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::CMHeatShieldThermalPerf"
+   ]
+  },
+  "TechnicalRequirementsPackage::CMHeatShieldThermalPerf::maxInternalTemperatureRise": {
+   "name": "maxInternalTemperatureRise",
+   "type": "ISQBase::ThermodynamicTemperatureValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::CMHeatShieldThermalPerf"
+   ]
+  },
+  "TechnicalRequirementsPackage::CMHeatShieldThermalPerf::heatShieldAblationAsDesigned": {
+   "name": "heatShieldAblationAsDesigned",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::CMHeatShieldThermalPerf"
+   ]
+  },
+  "TechnicalRequirementsPackage::PyrotechnicInitiationReliability::actualInitiationReliability": {
+   "name": "actualInitiationReliability",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::PyrotechnicInitiationReliability"
+   ]
+  },
+  "TechnicalRequirementsPackage::PyrotechnicInitiationReliability::minInitiationReliability": {
+   "name": "minInitiationReliability",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::PyrotechnicInitiationReliability"
+   ]
+  },
+  "TechnicalRequirementsPackage::DockingMechanismReliability::actualCaptureLatchingSuccessRate": {
+   "name": "actualCaptureLatchingSuccessRate",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::DockingMechanismReliability"
+   ]
+  },
+  "TechnicalRequirementsPackage::DockingMechanismReliability::minCaptureLatchingSuccessRate": {
+   "name": "minCaptureLatchingSuccessRate",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::DockingMechanismReliability"
+   ]
+  },
+  "TechnicalRequirementsPackage::DockingMechanismReliability::connectionRigidityMaintained": {
+   "name": "connectionRigidityMaintained",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::DockingMechanismReliability"
+   ]
+  },
+  "TechnicalRequirementsPackage::DockingMechanismReliability::withstandsDynamicLoads": {
+   "name": "withstandsDynamicLoads",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::DockingMechanismReliability"
+   ]
+  },
+  "TechnicalRequirementsPackage::LMDSLandingGearEnergy::maxImpactVerticalVelocityAbsorbed": {
+   "name": "maxImpactVerticalVelocityAbsorbed",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::LMDSLandingGearEnergy"
+   ]
+  },
+  "TechnicalRequirementsPackage::LMDSLandingGearEnergy::minImpactVerticalVelocityRequired": {
+   "name": "minImpactVerticalVelocityRequired",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::LMDSLandingGearEnergy"
+   ]
+  },
+  "TechnicalRequirementsPackage::LMDSLandingGearEnergy::maxImpactHorizontalVelocityAbsorbed": {
+   "name": "maxImpactHorizontalVelocityAbsorbed",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::LMDSLandingGearEnergy"
+   ]
+  },
+  "TechnicalRequirementsPackage::LMDSLandingGearEnergy::minImpactHorizontalVelocityRequired": {
+   "name": "minImpactHorizontalVelocityRequired",
+   "type": "ISQSpaceTime::SpeedValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::LMDSLandingGearEnergy"
+   ]
+  },
+  "TechnicalRequirementsPackage::LMDSLandingGearEnergy::structuralFailureOccurred": {
+   "name": "structuralFailureOccurred",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::LMDSLandingGearEnergy"
+   ]
+  },
+  "TechnicalRequirementsPackage::ECSWaterSupplyRate::actualWaterProvidedPerCrewPerDay": {
+   "name": "actualWaterProvidedPerCrewPerDay",
+   "type": "ISQBase::MassValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::ECSWaterSupplyRate"
+   ]
+  },
+  "TechnicalRequirementsPackage::ECSWaterSupplyRate::minWaterRequiredPerCrewPerDay": {
+   "name": "minWaterRequiredPerCrewPerDay",
+   "type": "ISQBase::MassValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::ECSWaterSupplyRate"
+   ]
+  },
+  "TechnicalRequirementsPackage::ECSFilterEfficiency::actualCO2LevelMax": {
+   "name": "actualCO2LevelMax",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::ECSFilterEfficiency"
+   ]
+  },
+  "TechnicalRequirementsPackage::ECSFilterEfficiency::maxCO2LevelReqd": {
+   "name": "maxCO2LevelReqd",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::ECSFilterEfficiency"
+   ]
+  },
+  "TechnicalRequirementsPackage::ECSFilterEfficiency::actualParticulateRemovalEfficiency": {
+   "name": "actualParticulateRemovalEfficiency",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::ECSFilterEfficiency"
+   ]
+  },
+  "TechnicalRequirementsPackage::ECSFilterEfficiency::minParticulateRemovalEfficiency": {
+   "name": "minParticulateRemovalEfficiency",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::ECSFilterEfficiency"
+   ]
+  },
+  "TechnicalRequirementsPackage::DataHandlingIntegrity::actualDataIntegrityPercentage": {
+   "name": "actualDataIntegrityPercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::DataHandlingIntegrity"
+   ]
+  },
+  "TechnicalRequirementsPackage::DataHandlingIntegrity::minDataIntegrityPercentage": {
+   "name": "minDataIntegrityPercentage",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::DataHandlingIntegrity"
+   ]
+  },
+  "TechnicalRequirementsPackage::CommVideoBandwidth::actualVideoWidth": {
+   "name": "actualVideoWidth",
+   "type": "ScalarValues::Integer",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::CommVideoBandwidth"
+   ]
+  },
+  "TechnicalRequirementsPackage::CommVideoBandwidth::minVideoWidth": {
+   "name": "minVideoWidth",
+   "type": "ScalarValues::Integer",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::CommVideoBandwidth"
+   ]
+  },
+  "TechnicalRequirementsPackage::CommVideoBandwidth::actualVideoHeight": {
+   "name": "actualVideoHeight",
+   "type": "ScalarValues::Integer",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::CommVideoBandwidth"
+   ]
+  },
+  "TechnicalRequirementsPackage::CommVideoBandwidth::minVideoHeight": {
+   "name": "minVideoHeight",
+   "type": "ScalarValues::Integer",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::CommVideoBandwidth"
+   ]
+  },
+  "TechnicalRequirementsPackage::CommVideoBandwidth::actualFrameRate": {
+   "name": "actualFrameRate",
+   "type": "ISQSpaceTime::FrequencyValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::CommVideoBandwidth"
+   ]
+  },
+  "TechnicalRequirementsPackage::CommVideoBandwidth::minFrameRate": {
+   "name": "minFrameRate",
+   "type": "ISQSpaceTime::FrequencyValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::CommVideoBandwidth"
+   ]
+  },
+  "TechnicalRequirementsPackage::EMUPressureContainment::actualPressureLossRate": {
+   "name": "actualPressureLossRate",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::EMUPressureContainment"
+   ]
+  },
+  "TechnicalRequirementsPackage::EMUPressureContainment::maxPressureLossRate": {
+   "name": "maxPressureLossRate",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::EMUPressureContainment"
+   ]
+  },
+  "TechnicalRequirementsPackage::EASEPOperationalDuration::actualOperationalDuration": {
+   "name": "actualOperationalDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::EASEPOperationalDuration"
+   ]
+  },
+  "TechnicalRequirementsPackage::EASEPOperationalDuration::minOperationalDuration": {
+   "name": "minOperationalDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::EASEPOperationalDuration"
+   ]
+  },
+  "TechnicalRequirementsPackage::EASEPOperationalDuration::actualDailyDataTransmission": {
+   "name": "actualDailyDataTransmission",
+   "type": "ISQInformation::StorageCapacityValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::EASEPOperationalDuration"
+   ]
+  },
+  "TechnicalRequirementsPackage::EASEPOperationalDuration::minDailyDataTransmission": {
+   "name": "minDailyDataTransmission",
+   "type": "ISQInformation::StorageCapacityValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::EASEPOperationalDuration"
+   ]
+  },
+  "TechnicalRequirementsPackage::MissionSystemReliability::actualSystemReliability": {
+   "name": "actualSystemReliability",
+   "type": "ScalarValues::Real",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::MissionSystemReliability"
+   ]
+  },
+  "TechnicalRequirementsPackage::MissionSystemReliability::minRequiredReliability": {
+   "name": "minRequiredReliability",
+   "type": "ScalarValues::Real",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::MissionSystemReliability"
+   ]
+  },
+  "TechnicalRequirementsPackage::FlightSoftwareDefectRate::actualCriticalDefectsCount": {
+   "name": "actualCriticalDefectsCount",
+   "type": "ScalarValues::Integer",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::FlightSoftwareDefectRate"
+   ]
+  },
+  "TechnicalRequirementsPackage::FlightSoftwareDefectRate::maxCriticalDefectsAllowed": {
+   "name": "maxCriticalDefectsAllowed",
+   "type": "ScalarValues::Integer",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::FlightSoftwareDefectRate"
+   ]
+  },
+  "TechnicalRequirementsPackage::FlightSoftwareDefectRate::actualSimulationHours": {
+   "name": "actualSimulationHours",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::FlightSoftwareDefectRate"
+   ]
+  },
+  "TechnicalRequirementsPackage::FlightSoftwareDefectRate::minSimulationHoursRequired": {
+   "name": "minSimulationHoursRequired",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::FlightSoftwareDefectRate"
+   ]
+  },
+  "TechnicalRequirementsPackage::ComponentAcceptanceRate::actualNonConformanceRate": {
+   "name": "actualNonConformanceRate",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::ComponentAcceptanceRate"
+   ]
+  },
+  "TechnicalRequirementsPackage::ComponentAcceptanceRate::maxNonConformanceRate": {
+   "name": "maxNonConformanceRate",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::ComponentAcceptanceRate"
+   ]
+  },
+  "TechnicalRequirementsPackage::MaterialVacuumResistance::actualDegradationLevel": {
+   "name": "actualDegradationLevel",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::MaterialVacuumResistance"
+   ]
+  },
+  "TechnicalRequirementsPackage::MaterialVacuumResistance::maxDegradationLevel": {
+   "name": "maxDegradationLevel",
+   "type": "CoSMAQuantitiesAndUnitsPackage::RatioValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::MaterialVacuumResistance"
+   ]
+  },
+  "TechnicalRequirementsPackage::MaterialVacuumResistance::actualExposureDuration": {
+   "name": "actualExposureDuration",
+   "type": "ISQBase::DurationValue",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::MaterialVacuumResistance"
+   ]
+  },
+  "TechnicalRequirementsPackage::MaterialVacuumResistance::minExposureDurationReqd": {
+   "name": "minExposureDurationReqd",
+   "type": "ISQBase::DurationValue",
+   "state": "tied",
+   "gates": [
+    "TechnicalRequirementsPackage::MaterialVacuumResistance"
+   ]
+  },
+  "TechnicalRequirementsPackage::ElectronicEMIImmunity::functionalDegradationFromEMI": {
+   "name": "functionalDegradationFromEMI",
+   "type": "ScalarValues::Boolean",
+   "state": "undriven",
+   "gates": [
+    "TechnicalRequirementsPackage::ElectronicEMIImmunity"
+   ]
+  }
+ },
+ "shared_lines": {},
+ "refinements": [
+  {
+   "source": "FunctionsPackage::PerformPropellantLoading",
+   "target": "OperationsPackage::LoadConsumablesAndPropellants",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::PerformCrewIngress",
+   "target": "OperationsPackage::TransferCrewToVehicle",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ExecuteTerminalCountdown",
+   "target": "OperationsPackage::PerformPreLaunchCountdown",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ProvideStage1Thrust",
+   "target": "OperationsPackage::ExecuteLaunchSequence",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ProvideStage2Thrust",
+   "target": "OperationsPackage::ExecuteLaunchSequence",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ProvideOrbitInsertionThrust",
+   "target": "OperationsPackage::ExecuteLaunchSequence",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::GuideAscentTrajectory",
+   "target": "OperationsPackage::MonitorAscentTrajectory",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ObserveAscentDataFromCockpit",
+   "target": "OperationsPackage::MonitorAscentTrajectory",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::AnalyzeLaunchTelemetryFromGround",
+   "target": "OperationsPackage::MonitorAscentTrajectory",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ProvideTranslunarInjectionThrust",
+   "target": "OperationsPackage::ExecuteTLIBurn",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ControlTranslunarInjectionBurn",
+   "target": "OperationsPackage::ExecuteTLIBurn",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ExecuteTranspositionManeuver",
+   "target": "OperationsPackage::PerformTranspositionDockingExtraction",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ProvideAttitudeControlThrust",
+   "target": "OperationsPackage::PerformTranspositionDockingExtraction",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::MechanicallyLatchModules",
+   "target": "OperationsPackage::PerformTranspositionDockingExtraction",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::CalculateCourseCorrection",
+   "target": "OperationsPackage::ConductMidCourseCorrections",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ExecuteCourseCorrectionBurn",
+   "target": "OperationsPackage::ConductMidCourseCorrections",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::MonitorOnboardSystems",
+   "target": "OperationsPackage::MonitorSpacecraftSystems",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::MonitorDownlinkedTelemetry",
+   "target": "OperationsPackage::MonitorSpacecraftSystems",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::TransmitAndReceiveSpacecraftSignals",
+   "target": "OperationsPackage::CommunicateWithMissionControl",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::TrackAndRelayGroundSignals",
+   "target": "OperationsPackage::CommunicateWithMissionControl",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ManageCrewSchedules",
+   "target": "OperationsPackage::ManageCrewRestPeriods",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ProvideLunarOrbitInsertionThrust",
+   "target": "OperationsPackage::ExecuteLOIBurn",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ControlLunarOrbitInsertionBurn",
+   "target": "OperationsPackage::ExecuteLOIBurn",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::PerformOrbitalSystemCheckouts",
+   "target": "OperationsPackage::ConductLunarOrbitCheckouts",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::PrepareLanderForSeparation",
+   "target": "OperationsPackage::PrepareLMforUndocking",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::SeparateLanderFromOrbiter",
+   "target": "OperationsPackage::PerformLMUndocking",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ExecuteDescentBurn",
+   "target": "OperationsPackage::ExecutePoweredDescentBurn",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::MonitorDescent",
+   "target": "OperationsPackage::MonitorDescentTelemetry",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ManuallyPilotLander",
+   "target": "OperationsPackage::PerformManualPiloting",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::PerformPostLandingCheck",
+   "target": "OperationsPackage::ConductLMPostLandingChecks",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::PrepareForExtravehicularActivity",
+   "target": "OperationsPackage::PrepareForEVA",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ProvideIndividualLifesupport",
+   "target": "OperationsPackage::PerformLunarEVA",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ConductSurfaceExploration",
+   "target": "OperationsPackage::PerformLunarEVA",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::GatherLunarSamples",
+   "target": "OperationsPackage::CollectLunarSamples",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::DeploySurfaceExperiments",
+   "target": "OperationsPackage::DeployScientificInstruments",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::CompleteExtravehicularActivity",
+   "target": "OperationsPackage::ConcludeEVA",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ConductSurfaceRestPeriod",
+   "target": "OperationsPackage::ManageLunarSurfaceRestPeriod",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ExecuteAscentBurn",
+   "target": "OperationsPackage::ExecuteLunarAscentBurn",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::CalculateRendezvousManeuvers",
+   "target": "OperationsPackage::PerformRendezvousManeuvers",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ExecuteRendezvousBurns",
+   "target": "OperationsPackage::PerformRendezvousManeuvers",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ConnectSpacecraft",
+   "target": "OperationsPackage::ConductLMCSMDocking",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::TransferCrewAndMaterials",
+   "target": "OperationsPackage::TransferCrewAndSamples",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::DiscardAscentStage",
+   "target": "OperationsPackage::JettisonLM",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ExecuteTransearthBurn",
+   "target": "OperationsPackage::ExecuteTEIBurn",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::PrepareVehicleForReentry",
+   "target": "OperationsPackage::PrepareCMforReentry",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::SeparateReturnCapsule",
+   "target": "OperationsPackage::SeparateModules",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::GuideAtmosphericEntry",
+   "target": "OperationsPackage::GuideReentryTrajectory",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::DeployDecelerators",
+   "target": "OperationsPackage::DeployParachutes",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::PerformSplashdown",
+   "target": "OperationsPackage::ConductSplashdownOperations",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::RetrieveVehicleAndCrew",
+   "target": "OperationsPackage::RetrieveCrewAndCM",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::ExecuteQuarantine",
+   "target": "OperationsPackage::InitiateQuarantineProcedures",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "FunctionsPackage::SecureReturnedSamples",
+   "target": "OperationsPackage::SecureLunarSamples",
+   "verdict": "source is not a requirement (ActionDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::ProgrammaticAndPublicAffairsManagement",
+   "target": "StakeholderNeedsPackage::ProgrammaticFunding",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::ProgrammaticAndPublicAffairsManagement",
+   "target": "StakeholderNeedsPackage::ProgrammaticAdherence",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::ProgrammaticAndPublicAffairsManagement",
+   "target": "StakeholderNeedsPackage::ReputationalSuccess",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::ProgrammaticAndPublicAffairsManagement",
+   "target": "StakeholderNeedsPackage::PublicConfidence",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::HeavyLiftLaunch",
+   "target": "StakeholderNeedsPackage::MissionSuccess",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::HeavyLiftLaunch",
+   "target": "StakeholderNeedsPackage::NationalPrestige",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::HeavyLiftLaunch",
+   "target": "StakeholderNeedsPackage::NationalSecurityDemonstration",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::MultiStagePropulsion",
+   "target": "StakeholderNeedsPackage::MissionSuccess",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::PrecisionOrbitalMechanics",
+   "target": "StakeholderNeedsPackage::MissionSuccess",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::PrecisionOrbitalMechanics",
+   "target": "StakeholderNeedsPackage::NationalSecurityDemonstration",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::AtmosphericReentryAndLanding",
+   "target": "StakeholderNeedsPackage::AstronautSafety",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::AtmosphericReentryAndLanding",
+   "target": "StakeholderNeedsPackage::CrewSurvival",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::DeepSpaceHabitationAndLifeSupport",
+   "target": "StakeholderNeedsPackage::AstronautSafety",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::DeepSpaceHabitationAndLifeSupport",
+   "target": "StakeholderNeedsPackage::CrewSurvival",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::DeepSpaceHabitationAndLifeSupport",
+   "target": "StakeholderNeedsPackage::EnvironmentalHazardProtection",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::AutonomousAndAssistedNavigationGuidanceAndControl",
+   "target": "StakeholderNeedsPackage::NationalSecurityDemonstration",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::InSpacePropulsion",
+   "target": "StakeholderNeedsPackage::MissionSuccess",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::PowerGenerationAndDistribution",
+   "target": "StakeholderNeedsPackage::MissionSuccess",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::LunarSurfaceLandingAndAscent",
+   "target": "StakeholderNeedsPackage::InternationalPrestige",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::LunarSurfaceLandingAndAscent",
+   "target": "StakeholderNeedsPackage::LunarModulePerformance",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::LunarSurfaceLandingAndAscent",
+   "target": "StakeholderNeedsPackage::NationalPrestige",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::GlobalTrackingAndCommunication",
+   "target": "StakeholderNeedsPackage::ContinuousSupport",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::RealtimeMissionControl",
+   "target": "StakeholderNeedsPackage::RealtimeProblemSolving",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::RealtimeMissionControl",
+   "target": "StakeholderNeedsPackage::ContinuousSupport",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::RealtimeMissionControl",
+   "target": "StakeholderNeedsPackage::OperationalCoordination",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::ContingencyPlanningAndRapidResponse",
+   "target": "StakeholderNeedsPackage::AstronautSafety",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::ContingencyPlanningAndRapidResponse",
+   "target": "StakeholderNeedsPackage::CrewSurvival",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::CrewTrainingAndSimulation",
+   "target": "StakeholderNeedsPackage::ProceduralSuccess",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::CrewTrainingAndSimulation",
+   "target": "StakeholderNeedsPackage::TrainingFidelity",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::CrewTrainingAndSimulation",
+   "target": "StakeholderNeedsPackage::OperationalCoordination",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::HumanPerformanceUnderExtremeStress",
+   "target": "StakeholderNeedsPackage::PerformanceUnderPressure",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::ComplexSoftwareDevelopment",
+   "target": "StakeholderNeedsPackage::MissionSuccess",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::ComplexLogisticsAndIntegration",
+   "target": "StakeholderNeedsPackage::MissionSuccess",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::LaunchOperationsManagement",
+   "target": "StakeholderNeedsPackage::MissionSuccess",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::AdaptabilityAndProblemSolving",
+   "target": "StakeholderNeedsPackage::RealtimeProblemSolving",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::ExtravehicularActivitySupport",
+   "target": "StakeholderNeedsPackage::EnvironmentalHazardProtection",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::LunarMobility",
+   "target": "StakeholderNeedsPackage::InternationalPrestige",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::ScientificDataAcquisitionAndSampleReturn",
+   "target": "StakeholderNeedsPackage::ScientificReturn",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::ScientificDataAcquisitionAndSampleReturn",
+   "target": "StakeholderNeedsPackage::InvestmentJustification",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::PlanetaryProtection",
+   "target": "StakeholderNeedsPackage::PlanetaryProtection",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::RobustCommunicationAndTelemetry",
+   "target": "StakeholderNeedsPackage::DataAccuracy",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "CapabilitiesPackage::ToolDevelopment",
+   "target": "StakeholderNeedsPackage::ProceduralSuccess",
+   "verdict": "source is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::PropellantLoadingRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ConsumableConditioningRequirement",
+   "target": "MissionRequirementsPackage::SustainedCabinHabitability",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CrewIngressRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CabinPressurizationRequirement",
+   "target": "MissionRequirementsPackage::SustainedCabinHabitability",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CountdownSequencingRequirement",
+   "target": "MissionRequirementsPackage::LaunchWindowPrecision",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CountdownAbortRequirement",
+   "target": "MissionRequirementsPackage::AbortSequenceExecutionTime",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::Stage1ThrustInitiationRequirement",
+   "target": "MissionRequirementsPackage::MechanicalLoadResilience",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::Stage1ThrustMagnitudeRequirement",
+   "target": "MissionRequirementsPackage::MechanicalLoadResilience",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::Stage2ThrustInitiationRequirement",
+   "target": "MissionRequirementsPackage::MechanicalLoadResilience",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::Stage2PropulsionRequirement",
+   "target": "MissionRequirementsPackage::MechanicalLoadResilience",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::OrbitInsertionThrustInitiationRequirement",
+   "target": "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::OrbitInsertionThrustTerminationRequirement",
+   "target": "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::AscentGuidanceRequirement",
+   "target": "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::AscentStagingCommandRequirement",
+   "target": "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CrewAscentMonitoringRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CrewAscentAbortRequirement",
+   "target": "MissionRequirementsPackage::AbortSequenceExecutionTime",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::GroundTelemetryAnalysisRequirement",
+   "target": "MissionRequirementsPackage::GroundSegmentDataUpdateFrequency",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::GroundPerformanceVerificationRequirement",
+   "target": "MissionRequirementsPackage::GroundSegmentDataUpdateFrequency",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::TliThrustInitiationRequirement",
+   "target": "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::TliThrustControlRequirement",
+   "target": "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ModuleSeparationRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ModuleRepositioningRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ModuleConnectionRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::InSpacePropulsionRequirement",
+   "target": "MissionRequirementsPackage::PropulsionSystemMissionReliability",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::AttitudeControlRequirement",
+   "target": "MissionRequirementsPackage::PropulsionSystemMissionReliability",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::NavigationalDataAcquisitionRequirement",
+   "target": "MissionRequirementsPackage::TrajectoryNavigationPrecision",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::TrajectoryCalculationRequirement",
+   "target": "MissionRequirementsPackage::TrajectoryNavigationPrecision",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CourseCorrectionCalculationRequirement",
+   "target": "MissionRequirementsPackage::TrajectoryNavigationPrecision",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CourseCorrectionExecutionRequirement",
+   "target": "MissionRequirementsPackage::TrajectoryNavigationPrecision",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CrewSystemMonitoringRequirement",
+   "target": "MissionRequirementsPackage::CrewAlarmResponseTime",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::GroundSystemMonitoringRequirement",
+   "target": "MissionRequirementsPackage::CommunicationUptimeRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SpacecraftDataTransmissionRequirement",
+   "target": "MissionRequirementsPackage::CommunicationUptimeRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SpacecraftDataReceptionRequirement",
+   "target": "MissionRequirementsPackage::CommunicationUptimeRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::GroundTrackingRequirement",
+   "target": "MissionRequirementsPackage::GroundSegmentDataUpdateFrequency",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::GroundCommunicationRelayRequirement",
+   "target": "MissionRequirementsPackage::CommunicationUptimeRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CrewActivitySchedulingRequirement",
+   "target": "MissionRequirementsPackage::CrewSleepEnvironmentQuality",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CrewRestProvisionRequirement",
+   "target": "MissionRequirementsPackage::CrewSleepEnvironmentQuality",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::LoiThrustRequirement",
+   "target": "MissionRequirementsPackage::PropulsionSystemMissionReliability",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::LoiGuidanceRequirement",
+   "target": "MissionRequirementsPackage::TrajectoryNavigationPrecision",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::LanderSystemVerificationRequirement",
+   "target": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::LanderInterfaceVerificationRequirement",
+   "target": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::LanderCrewTransferRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::LanderConfigurationRequirement",
+   "target": "MissionRequirementsPackage::LunarLanderAscentReadinessTime",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ModuleDisengagementRequirement",
+   "target": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ModuleSeparationManeuverRequirement",
+   "target": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::DescentPropulsionRequirement",
+   "target": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::DescentDataDisplayRequirement",
+   "target": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::DescentDataProcessingRequirement",
+   "target": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ManualAttitudeControlRequirement",
+   "target": "MissionRequirementsPackage::ManualOverrideResponseTime",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ManualPositionControlRequirement",
+   "target": "MissionRequirementsPackage::ManualOverrideResponseTime",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::PostLandingSafingRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::PostLandingVerificationRequirement",
+   "target": "MissionRequirementsPackage::LunarLanderAscentReadinessTime",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::EgressPreparationRequirement",
+   "target": "MissionRequirementsPackage::ExtravehicularMobilityUnitLifeSupportDuration",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CabinDepressurizationRequirement",
+   "target": "MissionRequirementsPackage::ExtravehicularMobilityUnitLifeSupportDuration",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SurfaceMobilityRequirement",
+   "target": "MissionRequirementsPackage::LunarSurfaceMobilityRange",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SymbolicDeploymentRequirement",
+   "target": "MissionRequirementsPackage::NationalSymbolDeploymentRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SampleCollectionRequirement",
+   "target": "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SampleStorageRequirement",
+   "target": "MissionRequirementsPackage::SamplePristinePreservation",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::InstrumentDeploymentRequirement",
+   "target": "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::VisualTransmissionRequirement",
+   "target": "MissionRequirementsPackage::LiveVisualBroadcast",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::EvaIngressRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CabinRepressurizationRequirement",
+   "target": "MissionRequirementsPackage::SustainedCabinHabitability",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SurfaceHabitationRequirement",
+   "target": "MissionRequirementsPackage::CrewSleepEnvironmentQuality",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SurfaceTimelineManagementRequirement",
+   "target": "MissionRequirementsPackage::LunarLanderAscentReadinessTime",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::AscentThrustInitiationRequirement",
+   "target": "MissionRequirementsPackage::LunarLanderAscentReadinessTime",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::AscentPropulsionRequirement",
+   "target": "MissionRequirementsPackage::LunarLanderAscentReadinessTime",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::RendezvousCalculationRequirement",
+   "target": "MissionRequirementsPackage::TrajectoryNavigationPrecision",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::RendezvousExecutionRequirement",
+   "target": "MissionRequirementsPackage::TrajectoryNavigationPrecision",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::DockingApproachRequirement",
+   "target": "MissionRequirementsPackage::TrajectoryNavigationPrecision",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::DockingLatchingRequirement",
+   "target": "MissionRequirementsPackage::InFlightProcedureErrorRate",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::IntervehicularCrewTransferRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::IntervehicularSampleTransferRequirement",
+   "target": "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::AscentStageSeparationRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::AscentStageDisposalRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::TeiPropulsionRequirement",
+   "target": "MissionRequirementsPackage::PropulsionSystemMissionReliability",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ReentryConfigurationRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ServiceModuleJettisonRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CleanSeparationRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ReentryGuidanceRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::HeatDissipationRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::DeceleratorDeploymentRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::FinalVelocityRequirement",
+   "target": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::WaterLandingRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::PostLandingSystemsRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CrewRecoveryRequirement",
+   "target": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::VesselTransferRequirement",
+   "target": "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::QuarantineImplementationRequirement",
+   "target": "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::QuarantineHabitationRequirement",
+   "target": "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SamplePreservationRequirement",
+   "target": "MissionRequirementsPackage::SamplePristinePreservation",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SampleTransportRequirement",
+   "target": "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "MissionRequirementsPackage::TrajectoryNavigationPrecision",
+   "target": "CapabilitiesPackage::AutonomousAndAssistedNavigationGuidanceAndControl",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ManualPilotingLogic",
+   "target": "CapabilitiesPackage::HumanPerformanceUnderExtremeStress",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ManualPilotingLogic",
+   "target": "CapabilitiesPackage::AdaptabilityAndProblemSolving",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SystemInterfaceCompatibility",
+   "target": "CapabilitiesPackage::ComplexLogisticsAndIntegration",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::TrainingSimulatorHours",
+   "target": "CapabilitiesPackage::CrewTrainingAndSimulation",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CourseCorrectionCapability",
+   "target": "MissionRequirementsPackage::TrajectoryNavigationPrecision",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SpacecraftOrientationControl",
+   "target": "MissionRequirementsPackage::PropulsionSystemMissionReliability",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::DescentDataAcquisition",
+   "target": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::LaunchVehicleAscentThrust",
+   "target": "MissionRequirementsPackage::MechanicalLoadResilience",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::DescentRateModulation",
+   "target": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ThermalProtectionLogic",
+   "target": "MissionRequirementsPackage::MechanicalLoadResilience",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::TouchdownEnergyDissipation",
+   "target": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::AtmosphericScrubbingFunction",
+   "target": "MissionRequirementsPackage::SustainedCabinHabitability",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::TelemetryStreamIntegrity",
+   "target": "MissionRequirementsPackage::LiveVisualBroadcast",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::EMUPressureMaintenance",
+   "target": "MissionRequirementsPackage::ExtendedScientificOperation",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SoftwareMissionProficiency",
+   "target": "MissionRequirementsPackage::CriticalSystemAvailability",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::SpaceEnvironmentResilience",
+   "target": "MissionRequirementsPackage::MechanicalLoadResilience",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::VisualDataCapture",
+   "target": "MissionRequirementsPackage::LunarVisualDocumentationRequirement",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::WasteContainmentFunction",
+   "target": "MissionRequirementsPackage::WasteManagementEffectiveness",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::CrossVehicleAudioLink",
+   "target": "MissionRequirementsPackage::LunarLanderToOrbiterVoiceComm",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::ComponentFaultTolerance",
+   "target": "MissionRequirementsPackage::CriticalComponentRedundancy",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::HumanMedicalSelfSufficiency",
+   "target": "MissionRequirementsPackage::CrewEmergencyMedicalProficiency",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "FunctionalRequirementsPackage::DataRedundancyArchiving",
+   "target": "MissionRequirementsPackage::PostFlightDataArchiving",
+   "verdict": "no require constraint on the source"
+  },
+  {
+   "source": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "target": "CapabilitiesPackage::DeepSpaceHabitationAndLifeSupport",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "target": "CapabilitiesPackage::AtmosphericReentryAndLanding",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::CrewReturnSafetyRequirement",
+   "target": "CapabilitiesPackage::ContingencyPlanningAndRapidResponse",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "target": "CapabilitiesPackage::LunarSurfaceLandingAndAscent",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "target": "CapabilitiesPackage::PrecisionOrbitalMechanics",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::LunarLanderSoftLandingRequirement",
+   "target": "CapabilitiesPackage::AutonomousAndAssistedNavigationGuidanceAndControl",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement",
+   "target": "CapabilitiesPackage::HeavyLiftLaunch",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement",
+   "target": "CapabilitiesPackage::MultiStagePropulsion",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::TransLunarInjectionAccuracyRequirement",
+   "target": "CapabilitiesPackage::PrecisionOrbitalMechanics",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::CommunicationUptimeRequirement",
+   "target": "CapabilitiesPackage::GlobalTrackingAndCommunication",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::CommunicationUptimeRequirement",
+   "target": "CapabilitiesPackage::RobustCommunicationAndTelemetry",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::SustainedCabinHabitability",
+   "target": "CapabilitiesPackage::DeepSpaceHabitationAndLifeSupport",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement",
+   "target": "CapabilitiesPackage::ScientificDataAcquisitionAndSampleReturn",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::LunarSampleCollectionQuantityRequirement",
+   "target": "CapabilitiesPackage::ExtravehicularActivitySupport",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement",
+   "target": "CapabilitiesPackage::ScientificDataAcquisitionAndSampleReturn",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::ScientificInstrumentDeploymentRequirement",
+   "target": "CapabilitiesPackage::ExtravehicularActivitySupport",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::LunarVisualDocumentationRequirement",
+   "target": "CapabilitiesPackage::ScientificDataAcquisitionAndSampleReturn",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::NationalSymbolDeploymentRequirement",
+   "target": "CapabilitiesPackage::ExtravehicularActivitySupport",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::NationalSymbolDeploymentRequirement",
+   "target": "CapabilitiesPackage::LunarMobility",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::PlanetaryProtectionQuarantineRequirement",
+   "target": "CapabilitiesPackage::PlanetaryProtection",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::TrajectoryNavigationPrecision",
+   "target": "CapabilitiesPackage::AutonomousAndAssistedNavigationGuidanceAndControl",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::WasteManagementEffectiveness",
+   "target": "CapabilitiesPackage::DeepSpaceHabitationAndLifeSupport",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::CrewSleepEnvironmentQuality",
+   "target": "CapabilitiesPackage::DeepSpaceHabitationAndLifeSupport",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::CrewAlarmResponseTime",
+   "target": "CapabilitiesPackage::DeepSpaceHabitationAndLifeSupport",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::LunarLanderToOrbiterVoiceComm",
+   "target": "CapabilitiesPackage::RobustCommunicationAndTelemetry",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::ExtravehicularMobilityUnitLifeSupportDuration",
+   "target": "CapabilitiesPackage::ExtravehicularActivitySupport",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::ExtravehicularMobilityUnitDexterityForTasks",
+   "target": "CapabilitiesPackage::ExtravehicularActivitySupport",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::ExtravehicularMobilityUnitDexterityForTasks",
+   "target": "CapabilitiesPackage::ToolDevelopment",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::LunarSurfaceMobilityRange",
+   "target": "CapabilitiesPackage::LunarMobility",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::ExtravehicularActivityToolSecurity",
+   "target": "CapabilitiesPackage::ExtravehicularActivitySupport",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::SamplePristinePreservation",
+   "target": "CapabilitiesPackage::ScientificDataAcquisitionAndSampleReturn",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::SamplePristinePreservation",
+   "target": "CapabilitiesPackage::PlanetaryProtection",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::SampleGeologicalContext",
+   "target": "CapabilitiesPackage::ScientificDataAcquisitionAndSampleReturn",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::CriticalComponentRedundancy",
+   "target": "CapabilitiesPackage::ContingencyPlanningAndRapidResponse",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::AbortSequenceExecutionTime",
+   "target": "CapabilitiesPackage::ContingencyPlanningAndRapidResponse",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::AbortSequenceExecutionTime",
+   "target": "CapabilitiesPackage::RealtimeMissionControl",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::ManualOverrideResponseTime",
+   "target": "CapabilitiesPackage::HumanPerformanceUnderExtremeStress",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::GroundSegmentDataUpdateFrequency",
+   "target": "CapabilitiesPackage::RealtimeMissionControl",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::LunarLanderAscentReadinessTime",
+   "target": "CapabilitiesPackage::LunarSurfaceLandingAndAscent",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::FlightSoftwareUpdateTime",
+   "target": "CapabilitiesPackage::ComplexSoftwareDevelopment",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::CrewEmergencyMedicalProficiency",
+   "target": "CapabilitiesPackage::CrewTrainingAndSimulation",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::InFlightProcedureErrorRate",
+   "target": "CapabilitiesPackage::HumanPerformanceUnderExtremeStress",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::CrewNutritionAndHydration",
+   "target": "CapabilitiesPackage::DeepSpaceHabitationAndLifeSupport",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::CrewPsychologicalState",
+   "target": "CapabilitiesPackage::HumanPerformanceUnderExtremeStress",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::MicrometeoroidPenetrationRisk",
+   "target": "CapabilitiesPackage::DeepSpaceHabitationAndLifeSupport",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::LunarElementEnvironmentalResistance",
+   "target": "CapabilitiesPackage::ScientificDataAcquisitionAndSampleReturn",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::PostFlightDataArchiving",
+   "target": "CapabilitiesPackage::ComplexLogisticsAndIntegration",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::PropulsionSystemMissionReliability",
+   "target": "CapabilitiesPackage::InSpacePropulsion",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::MechanicalLoadResilience",
+   "target": "CapabilitiesPackage::HeavyLiftLaunch",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::LiveVisualBroadcast",
+   "target": "CapabilitiesPackage::RobustCommunicationAndTelemetry",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::ExtendedScientificOperation",
+   "target": "CapabilitiesPackage::ScientificDataAcquisitionAndSampleReturn",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::CriticalSystemAvailability",
+   "target": "CapabilitiesPackage::ComplexLogisticsAndIntegration",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::PublicSupportAndAffairsManagement",
+   "target": "CapabilitiesPackage::ProgrammaticAndPublicAffairsManagement",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::ElectricalPowerAvailability",
+   "target": "CapabilitiesPackage::PowerGenerationAndDistribution",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::LaunchWindowPrecision",
+   "target": "CapabilitiesPackage::LaunchOperationsManagement",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "MissionRequirementsPackage::OperationalWorkaroundProtocol",
+   "target": "CapabilitiesPackage::AdaptabilityAndProblemSolving",
+   "verdict": "target is not a requirement (PartDefinition)"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SICEngineConfiguration",
+   "target": "FunctionalRequirementsPackage::Stage1ThrustMagnitudeRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SICPropellantCompatibility",
+   "target": "FunctionalRequirementsPackage::PropellantLoadingRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SICGimbalCapability",
+   "target": "FunctionalRequirementsPackage::AscentGuidanceRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SICSeparationSystem",
+   "target": "FunctionalRequirementsPackage::AscentStagingCommandRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SIIEngineConfiguration",
+   "target": "FunctionalRequirementsPackage::Stage2PropulsionRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SIIPropellantType",
+   "target": "FunctionalRequirementsPackage::PropellantLoadingRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SIIStructuralIntegrity",
+   "target": "FunctionalRequirementsPackage::Stage2PropulsionRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SIVBEngineConfiguration",
+   "target": "FunctionalRequirementsPackage::OrbitInsertionThrustInitiationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SIVBRestartCapability",
+   "target": "FunctionalRequirementsPackage::TliThrustInitiationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SIVBAttitudeControlSystem",
+   "target": "FunctionalRequirementsPackage::TliThrustControlRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::IUGuidanceComputer",
+   "target": "FunctionalRequirementsPackage::AscentGuidanceRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::IUCommandAuthority",
+   "target": "FunctionalRequirementsPackage::AscentStagingCommandRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::IUTelemetrySystem",
+   "target": "FunctionalRequirementsPackage::GroundTelemetryAnalysisRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LESPropulsionType",
+   "target": "FunctionalRequirementsPackage::CrewAscentAbortRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LESJettisonCapability",
+   "target": "FunctionalRequirementsPackage::CrewAscentAbortRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CMHabitableVolume",
+   "target": "FunctionalRequirementsPackage::CabinPressurizationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CMHeatShield",
+   "target": "FunctionalRequirementsPackage::HeatDissipationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CMParachuteSystem",
+   "target": "FunctionalRequirementsPackage::DeceleratorDeploymentRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CMDockingMechanism",
+   "target": "FunctionalRequirementsPackage::ModuleConnectionRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::GNCGuidancePrecision",
+   "target": "FunctionalRequirementsPackage::CourseCorrectionCalculationRequirement",
+   "verdict": "no require constraint on the target"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::RCSControlStability",
+   "target": "FunctionalRequirementsPackage::SpacecraftOrientationControl",
+   "verdict": "no require constraint on the target"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LMDSRadarPrecision",
+   "target": "FunctionalRequirementsPackage::DescentDataAcquisition",
+   "verdict": "no require constraint on the target"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SMMainPropulsion",
+   "target": "FunctionalRequirementsPackage::InSpacePropulsionRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SMAttitudeControl",
+   "target": "FunctionalRequirementsPackage::AttitudeControlRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SMPowerGeneration",
+   "target": "FunctionalRequirementsPackage::CrewSystemMonitoringRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SMThermalControlSystem",
+   "target": "FunctionalRequirementsPackage::GroundSystemMonitoringRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CabinEnvironmentalControlRequirement",
+   "target": "FunctionalRequirementsPackage::AtmosphericScrubbingFunction",
+   "verdict": "no require constraint on the target"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LMDSThrottleableEngine",
+   "target": "FunctionalRequirementsPackage::DescentPropulsionRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LMDSLandingGear",
+   "target": "FunctionalRequirementsPackage::ConsumableConditioningRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LMDSLaunchPlatform",
+   "target": "FunctionalRequirementsPackage::AscentThrustInitiationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LMDSVelocityLimits",
+   "target": "FunctionalRequirementsPackage::FinalVelocityRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LMASAscentEngine",
+   "target": "FunctionalRequirementsPackage::AscentPropulsionRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LMASCrewCabin",
+   "target": "FunctionalRequirementsPackage::CabinRepressurizationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LMASRendezvousRadar",
+   "target": "FunctionalRequirementsPackage::RendezvousCalculationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::PSAPressureContainment",
+   "target": "FunctionalRequirementsPackage::EgressPreparationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::PSAMobility",
+   "target": "FunctionalRequirementsPackage::SurfaceMobilityRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::PSAHelmetVisibility",
+   "target": "FunctionalRequirementsPackage::SurfaceMobilityRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::PLSSOxygenSupply",
+   "target": "FunctionalRequirementsPackage::CabinDepressurizationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::PLSSContaminantRemoval",
+   "target": "FunctionalRequirementsPackage::EgressPreparationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::PLSSCoolingSystem",
+   "target": "FunctionalRequirementsPackage::EgressPreparationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::StagingInterfaceLoadTransfer",
+   "target": "FunctionalRequirementsPackage::Stage1ThrustMagnitudeRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::StagingInterfaceCleanSeparation",
+   "target": "FunctionalRequirementsPackage::AscentStagingCommandRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::GuidanceInterfaceCommandIntegrity",
+   "target": "FunctionalRequirementsPackage::AscentGuidanceRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::GuidanceInterfaceTelemetryLatency",
+   "target": "FunctionalRequirementsPackage::GroundTelemetryAnalysisRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CSMInterfacePowerTransfer",
+   "target": "FunctionalRequirementsPackage::CrewSystemMonitoringRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CSMInterfaceLifeSupportIntegrity",
+   "target": "FunctionalRequirementsPackage::AttitudeControlRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::DockingInterfaceStructuralRigidity",
+   "target": "FunctionalRequirementsPackage::ModuleConnectionRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::DockingInterfacePressurizedSeal",
+   "target": "FunctionalRequirementsPackage::IntervehicularCrewTransferRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LMStagingInterfaceSeparation",
+   "target": "FunctionalRequirementsPackage::AscentThrustInitiationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::EVAInterfaceSecureConnection",
+   "target": "FunctionalRequirementsPackage::EgressPreparationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LVPayloadInterfaceStructural",
+   "target": "FunctionalRequirementsPackage::Stage1ThrustMagnitudeRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SLALMDeployment",
+   "target": "FunctionalRequirementsPackage::ModuleRepositioningRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LESInterfaceStructuralIntegrity",
+   "target": "FunctionalRequirementsPackage::CrewAscentAbortRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LESInterfaceCommandReliability",
+   "target": "FunctionalRequirementsPackage::CrewAscentAbortRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SPSIgnitionReliability",
+   "target": "FunctionalRequirementsPackage::InSpacePropulsionRequirement",
+   "verdict": "no require constraint on the target"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::DPSThrottlingRange",
+   "target": "FunctionalRequirementsPackage::DescentRateModulation",
+   "verdict": "no require constraint on the target"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LMASBurnDuration",
+   "target": "FunctionalRequirementsPackage::AscentPropulsionRequirement",
+   "verdict": "no require constraint on the target"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CMHeatShieldThermalPerf",
+   "target": "FunctionalRequirementsPackage::ThermalProtectionLogic",
+   "verdict": "no require constraint on the target"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CommVideoBandwidth",
+   "target": "FunctionalRequirementsPackage::TelemetryStreamIntegrity",
+   "verdict": "no require constraint on the target"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::EMUPressureContainment",
+   "target": "FunctionalRequirementsPackage::EMUPressureMaintenance",
+   "verdict": "no require constraint on the target"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::EASEPOperationalDuration",
+   "target": "FunctionalRequirementsPackage::InstrumentDeploymentRequirement",
+   "verdict": "no require constraint on the target"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::FlightSoftwareDefectRate",
+   "target": "FunctionalRequirementsPackage::SoftwareMissionProficiency",
+   "verdict": "no require constraint on the target"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::MaterialVacuumResistance",
+   "target": "FunctionalRequirementsPackage::SpaceEnvironmentResilience",
+   "verdict": "no require constraint on the target"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::ImageResolutionStandard",
+   "target": "FunctionalRequirementsPackage::VisualDataCapture",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::WasteStorageVolume",
+   "target": "FunctionalRequirementsPackage::WasteContainmentFunction",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::VHFAudioBandwidth",
+   "target": "FunctionalRequirementsPackage::CrossVehicleAudioLink",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SystemRedundancyMapping",
+   "target": "FunctionalRequirementsPackage::ComponentFaultTolerance",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::MedicalKitSpecification",
+   "target": "FunctionalRequirementsPackage::HumanMedicalSelfSufficiency",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::GroundArchivalProtocol",
+   "target": "FunctionalRequirementsPackage::DataRedundancyArchiving",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CrewSeatLoadFactor",
+   "target": "FunctionalRequirementsPackage::CrewIngressRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LaunchAbortThresholds",
+   "target": "FunctionalRequirementsPackage::CountdownAbortRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SeparationTimerPrecision",
+   "target": "FunctionalRequirementsPackage::AscentStagingCommandRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CabinPressureHold",
+   "target": "FunctionalRequirementsPackage::CabinPressurizationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::TimingSynchError",
+   "target": "FunctionalRequirementsPackage::CountdownSequencingRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::EngineStartLatency",
+   "target": "FunctionalRequirementsPackage::Stage1ThrustInitiationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::StagingShockLimit",
+   "target": "FunctionalRequirementsPackage::Stage2ThrustInitiationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CutoffDeltaVError",
+   "target": "FunctionalRequirementsPackage::OrbitInsertionThrustTerminationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CockpitDisplayRefresh",
+   "target": "FunctionalRequirementsPackage::CrewAscentMonitoringRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::TelemetrySamplingRate",
+   "target": "FunctionalRequirementsPackage::GroundPerformanceVerificationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::PostTliSeparationVelocity",
+   "target": "FunctionalRequirementsPackage::TliThrustInitiationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SlaSeparationVelocity",
+   "target": "FunctionalRequirementsPackage::ModuleSeparationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::TranspositionManeuverRate",
+   "target": "FunctionalRequirementsPackage::ModuleRepositioningRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SextantAngularAccuracy",
+   "target": "FunctionalRequirementsPackage::NavigationalDataAcquisitionRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::StateVectorIntegrationLatency",
+   "target": "FunctionalRequirementsPackage::TrajectoryCalculationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::CommandTurnaroundLatency",
+   "target": "FunctionalRequirementsPackage::SpacecraftDataReceptionRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::GroundStationSensitivity",
+   "target": "FunctionalRequirementsPackage::GroundTrackingRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::RelayNetworkBitErrorRate",
+   "target": "FunctionalRequirementsPackage::GroundCommunicationRelayRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::TimelineDriftAlert",
+   "target": "FunctionalRequirementsPackage::CrewActivitySchedulingRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SleepAcousticLimit",
+   "target": "FunctionalRequirementsPackage::CrewRestProvisionRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::TargetOrbitPerigee",
+   "target": "FunctionalRequirementsPackage::LoiGuidanceRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::HatchClearanceDimensions",
+   "target": "FunctionalRequirementsPackage::LanderCrewTransferRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LmComputerAlignmentTime",
+   "target": "FunctionalRequirementsPackage::LanderConfigurationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::DockingLatchTorqueThreshold",
+   "target": "FunctionalRequirementsPackage::ModuleDisengagementRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::UndockingSeparationVelocity",
+   "target": "FunctionalRequirementsPackage::ModuleSeparationManeuverRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::DskyDisplayBrightness",
+   "target": "FunctionalRequirementsPackage::DescentDataDisplayRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LandingRadarLockTime",
+   "target": "FunctionalRequirementsPackage::DescentDataProcessingRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::PostLandingSafeTime",
+   "target": "FunctionalRequirementsPackage::PostLandingSafingRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LmCabinIntegrityLeakRate",
+   "target": "FunctionalRequirementsPackage::PostLandingVerificationRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SymbolicMountRigidity",
+   "target": "FunctionalRequirementsPackage::SymbolicDeploymentRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SampleToolMechanicalAdvantage",
+   "target": "FunctionalRequirementsPackage::SampleCollectionRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::EasepThermalInsulation",
+   "target": "FunctionalRequirementsPackage::InstrumentDeploymentRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::EvaCommunicationRange",
+   "target": "FunctionalRequirementsPackage::EvaIngressRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::SurfaceTimelineSync",
+   "target": "FunctionalRequirementsPackage::SurfaceTimelineManagementRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::LmAscentDeltaVMinimum",
+   "target": "FunctionalRequirementsPackage::AscentPropulsionRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::RendezvousOrbitTarget",
+   "target": "FunctionalRequirementsPackage::RendezvousExecutionRequirement",
+   "verdict": "no require constraint on either side"
+  },
+  {
+   "source": "TechnicalRequirementsPackage::ReentryFlightPathAngle",
+   "target": "FunctionalRequirementsPackage::ReentryGuidanceRequirement",
+   "verdict": "no require constraint on either side"
+  }
+ ],
+ "satisfy": [
+  {
+   "requirement": "flr-R001",
+   "by": "load",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R002",
+   "by": "load",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R003",
+   "by": "board",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R004",
+   "by": "board",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R005",
+   "by": "countdown",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R006",
+   "by": "countdown",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R007",
+   "by": "provideThrust1",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R008",
+   "by": "provideThrust1",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R009",
+   "by": "provideThrust2",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R010",
+   "by": "provideThrust2",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R011",
+   "by": "provideThrust3",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R012",
+   "by": "provideThrust3",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R013",
+   "by": "guide",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R014",
+   "by": "guide",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R015",
+   "by": "observe",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R016",
+   "by": "observe",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R017",
+   "by": "analyze",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R018",
+   "by": "analyze",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R019",
+   "by": "burn",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R020",
+   "by": "control",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R021",
+   "by": "executeTransposition",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R022",
+   "by": "executeTransposition",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R023",
+   "by": "reconfigure",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R024",
+   "by": "burn",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R025",
+   "by": "provideAttitudeControlAndThrust",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R026",
+   "by": "trackAndRelay",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R027",
+   "by": "calculate",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R028",
+   "by": "calculate",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R029",
+   "by": "correct",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R030",
+   "by": "monitorOnboard",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R031",
+   "by": "monitorGround",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R032",
+   "by": "comms",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R033",
+   "by": "comms",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R034",
+   "by": "trackAndRelay",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R035",
+   "by": "trackAndRelay",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R036",
+   "by": "rest",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R037",
+   "by": "rest",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R038",
+   "by": "burn",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R039",
+   "by": "control",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R040",
+   "by": "checkout",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R041",
+   "by": "checkout",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R042",
+   "by": "prep",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R043",
+   "by": "prep",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R044",
+   "by": "undock",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R045",
+   "by": "undock",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R046",
+   "by": "burn",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R047",
+   "by": "monitor",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R048",
+   "by": "monitor",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R049",
+   "by": "pilot",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R050",
+   "by": "pilot",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R051",
+   "by": "postLand",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R052",
+   "by": "postLand",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R053",
+   "by": "prepEva",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R054",
+   "by": "prepEva",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R055",
+   "by": "eva",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R056",
+   "by": "eva",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R057",
+   "by": "collect",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R058",
+   "by": "collect",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R059",
+   "by": "deploy",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R060",
+   "by": "deploy",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R061",
+   "by": "conclude",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R062",
+   "by": "conclude",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R063",
+   "by": "rest",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R064",
+   "by": "rest",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R065",
+   "by": "ascend",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R066",
+   "by": "ascend",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R067",
+   "by": "calculate",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R068",
+   "by": "rendezvous",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R069",
+   "by": "dock",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R070",
+   "by": "dock",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R071",
+   "by": "transfer",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R072",
+   "by": "transfer",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R073",
+   "by": "jettison",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R074",
+   "by": "jettison",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R075",
+   "by": "burn",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R076",
+   "by": "prep",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R077",
+   "by": "separate",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R078",
+   "by": "separate",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R079",
+   "by": "guide",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R080",
+   "by": "guide",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R081",
+   "by": "deploy",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R082",
+   "by": "deploy",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R083",
+   "by": "splashdown",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R084",
+   "by": "splashdown",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R085",
+   "by": "retrieve",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R086",
+   "by": "retrieve",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R087",
+   "by": "quarantine",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R088",
+   "by": "quarantine",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R089",
+   "by": "secure",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R090",
+   "by": "secure",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R091",
+   "by": "trackAndRelay",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R092",
+   "by": "pilot",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R093",
+   "by": "load",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R094",
+   "by": "board",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R095",
+   "by": "correct",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R096",
+   "by": "provideAttitudeControlAndThrust",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R097",
+   "by": "monitor",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R098",
+   "by": "provideThrust1",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R099",
+   "by": "burn",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R100",
+   "by": "guide",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R101",
+   "by": "burn",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R102",
+   "by": "monitorOnboard",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R103",
+   "by": "comms",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R104",
+   "by": "eva",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R105",
+   "by": "guide",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R106",
+   "by": "monitorOnboard",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R107",
+   "by": "deploy",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R108",
+   "by": "monitorOnboard",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R109",
+   "by": "eva",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R110",
+   "by": "burn",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R111",
+   "by": "rest",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "flr-R112",
+   "by": "retrieve",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R001",
+   "by": "retrieveCrewAndCM",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R002",
+   "by": "executePoweredDescentBurn",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R003",
+   "by": "executeTLIBurn",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R004",
+   "by": "communicateWithMissionControl",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R006",
+   "by": "collectLunarSamples",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R007",
+   "by": "deployScientificInstruments",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R008",
+   "by": "performLunarEVA",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R009",
+   "by": "performLunarEVA",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R010",
+   "by": "initiateQuarantineProcedures",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R026",
+   "by": "monitorSpacecraftSystems",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R028",
+   "by": "manageCrewRestPeriods",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R030",
+   "by": "monitorSpacecraftSystems",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R032",
+   "by": "performLunarEVA",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R033",
+   "by": "performLunarEVA",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R035",
+   "by": "performLunarEVA",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R036",
+   "by": "performLunarEVA",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R037",
+   "by": "performLunarEVA",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R038",
+   "by": "collectLunarSamples",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R040",
+   "by": "collectLunarSamples",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R045",
+   "by": "executeLOIBurn",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R046",
+   "by": "executeLaunchSequence",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R047",
+   "by": "performManualPiloting",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R048",
+   "by": "communicateWithMissionControl",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R049",
+   "by": "executeLunarAscentBurn",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R050",
+   "by": "communicateWithMissionControl",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R052",
+   "by": "transferCrewToVehicle",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R053",
+   "by": "conductLMCSMDocking",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R054",
+   "by": "manageCrewRestPeriods",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R055",
+   "by": "manageCrewRestPeriods",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R057",
+   "by": "monitorSpacecraftSystems",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R059",
+   "by": "deployScientificInstruments",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R060",
+   "by": "recoveryQuarantineOperations",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R005",
+   "by": "monitorSpacecraftSystems",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R005",
+   "by": "monitorSpacecraftSystems",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R011",
+   "by": "conductMidCourseCorrections",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R061",
+   "by": "executeLOIBurn",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R062",
+   "by": "executeLaunchSequence",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R063",
+   "by": "communicateWithMissionControl",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R063",
+   "by": "communicateWithMissionControl",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R064",
+   "by": "deployScientificInstruments",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R065",
+   "by": "monitorSpacecraftSystems",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R065",
+   "by": "monitorSpacecraftSystems",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R066",
+   "by": "communicateWithMissionControl",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R066",
+   "by": "communicateWithMissionControl",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R067",
+   "by": "monitorSpacecraftSystems",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R067",
+   "by": "monitorSpacecraftSystems",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R068",
+   "by": "performPreLaunchCountdown",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "hlr-R069",
+   "by": "performManualPiloting",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R001",
+   "by": "stage1",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R002",
+   "by": "stage1",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R003",
+   "by": "stage1",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R004",
+   "by": "stage2",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R005",
+   "by": "stage2",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R006",
+   "by": "stage3",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R007",
+   "by": "stage3",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R008",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R009",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R010",
+   "by": "launchEscapeSystem",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R011",
+   "by": "launchEscapeSystem",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R012",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R013",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R014",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R015",
+   "by": "serviceModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R016",
+   "by": "serviceModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R017",
+   "by": "serviceModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R018",
+   "by": "lunarModuleDescentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R019",
+   "by": "lunarModuleDescentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R050",
+   "by": "lunarModuleDescentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R020",
+   "by": "lunarModuleAscentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R021",
+   "by": "lunarModuleAscentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R022",
+   "by": "psa",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R023",
+   "by": "psa",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R024",
+   "by": "plss",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R025",
+   "by": "plss",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R026",
+   "by": "stage1",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R027",
+   "by": "stage2",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R028",
+   "by": "stage3",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R029",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R030",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R031",
+   "by": "serviceModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R032",
+   "by": "lunarModuleDescentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R033",
+   "by": "lunarModuleAscentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R034",
+   "by": "psa",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R035",
+   "by": "plss",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R036",
+   "by": "stage1ToStage2",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R036",
+   "by": "stage2ToStage3",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R037",
+   "by": "stage1ToStage2",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R037",
+   "by": "stage2ToStage3",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R038",
+   "by": "iuToStage3",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R039",
+   "by": "iuToStage3",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R040",
+   "by": "cmSMUmbilical",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R041",
+   "by": "cmSMUmbilical",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R042",
+   "by": "cmLMDocking",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R043",
+   "by": "cmLMDocking",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R044",
+   "by": "lmInterstage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R045",
+   "by": "suitToPLSSUmbilical",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R046",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R046",
+   "by": "spacecraftLMAdapter",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R047",
+   "by": "spacecraftLMAdapter",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R048",
+   "by": "lesConnection",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R049",
+   "by": "lesConnection",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R050",
+   "by": "lunarModuleDescentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R086",
+   "by": "stage1",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R087",
+   "by": "stage2",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R088",
+   "by": "stage3",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R091",
+   "by": "stage3",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R008",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R052",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R071",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R082",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R085",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R090",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R094",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R095",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R114",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R051",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R060",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R075",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R076",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R079",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R081",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R084",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R089",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R099",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R100",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R117",
+   "by": "commandModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R053",
+   "by": "serviceModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R056",
+   "by": "serviceModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R073",
+   "by": "serviceModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R078",
+   "by": "serviceModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R093",
+   "by": "serviceModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R101",
+   "by": "serviceModule",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R054",
+   "by": "lunarModuleDescentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R057",
+   "by": "lunarModuleDescentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R069",
+   "by": "lunarModuleDescentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R107",
+   "by": "lunarModuleDescentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R108",
+   "by": "lunarModuleDescentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R112",
+   "by": "lunarModuleDescentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R058",
+   "by": "lunarModuleAscentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R067",
+   "by": "lunarModuleAscentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R102",
+   "by": "lunarModuleAscentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R103",
+   "by": "lunarModuleAscentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R106",
+   "by": "lunarModuleAscentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R109",
+   "by": "lunarModuleAscentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R115",
+   "by": "lunarModuleAscentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R116",
+   "by": "lunarModuleAscentStage",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R068",
+   "by": "psa",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R110",
+   "by": "psa",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R111",
+   "by": "psa",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R113",
+   "by": "psa",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R024",
+   "by": "plss",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R025",
+   "by": "plss",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R035",
+   "by": "plss",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R113",
+   "by": "cmLMDocking",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R092",
+   "by": "spacecraftLMAdapter",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R083",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R096",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R097",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R098",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  },
+  {
+   "requirement": "clr-R080",
+   "by": "instrumentUnit",
+   "binds_inputs": 0
+  }
+ ]
+}

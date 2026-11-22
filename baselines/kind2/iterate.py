@@ -9,12 +9,17 @@ for base in ("ap_orig","sen_orig"):
     src=open(base+".lus").read(); cores=[]; total=0; runs=0
     while True:
         open("tmp.lus","w").write(src); out,dt=run("tmp.lus"); total+=dt; runs+=1
-        if "proven unrealizable" not in out: break
+        if "proven unrealizable" not in out:
+            assert "proven realizable" in out, out[-500:]
+            break
         core=re.findall(r'Guarantee (\S+) at position', out.split("CONFLICTING CONSTRAINTS")[1].split("Checking")[0])
         inp=re.findall(r'^\s+(\w+)\s+(\S+)$', out.split("== Inputs ==")[1].split("== Outputs ==")[0], re.M)
         cores.append(dict(core=core, deadlocking_input=dict(inp)))
-        # drop the guarantee that the authors later revised (the second-listed one in our pairs is arbitrary; drop both choices = remove one)
+        # remove from the core the requirement that NASA later revised, and run again
         drop=next(c for c in core if c not in ("FSM-002","FSM-005","FSM-006","FSM-009","FSM-010"))
         src=re.sub(r'\s*guarantee "'+re.escape(drop)+r'".*?;\n',"\n",src)
     res[base]=dict(cores=cores, runs=runs, seconds=round(total,2))
+for base in ("ap_rev", "sen_rev"):                 # NASA's revisions (and FSM-012_weak for the sensor)
+    out, dt = run(base + ".lus")
+    res[base] = dict(realizable="proven realizable" in out and "proven unrealizable" not in out, seconds=round(dt, 2))
 print(json.dumps(res,indent=1)); json.dump(res,open("kind2_results.json","w"),indent=1)

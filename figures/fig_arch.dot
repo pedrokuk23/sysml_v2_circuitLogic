@@ -1,9 +1,11 @@
 digraph G { rankdir=TB; nodesep=0.16; ranksep=0.2; pad=0.04;
 node [fontname="Helvetica", fontsize=16, fontcolor="#0b0b0b", shape=box, style="rounded,filled", fillcolor="#cde2fb", color="#2a78d6", penwidth=1.2, margin="0.08,0.04"];
-edge [color="#52514e", arrowsize=0.7, penwidth=1.1, fontname="Helvetica", fontsize=14, fontcolor="#0b0b0b"];
+edge [color="#52514e", arrowsize=0.7, penwidth=1.1, fontname="Helvetica", fontsize=16, fontcolor="#0b0b0b"];
 nl [label="natural-\nlanguage\nrequirements", shape=note, fillcolor="#ffffff", color="#52514e"];
 sys [label="SysML v2 model\n(requirements, states,\nports, actions,\nvariants, allocations)", shape=note, fillcolor="#ffffff", color="#52514e"];
-s [label="parser → IR →\nKerML → SMT (Z3)"];
+g [label="subset\ngrammar"];
+pf [label="pilot impl.\nsyntax tree"];
+s [label="IR → SMT (Z3)"];
 a [label="logic\nchecks"];
 v [label="Verilog\nnetlists"];
 l [label="Lustre\nnode"];
@@ -12,7 +14,7 @@ i [label="IC3/PDR\nlemmas"];
 k [label="Kind 2\n(cross-\ncheck)"];
 o [label="logic views\n+ report", shape=note, fillcolor="#ffffff", color="#0b0b0b"];
 nl -> sys [style=dashed]; {rank=same; nl; sys;}
-sys -> s; s -> a; s -> v; s -> l; v -> y; y -> i [label=" if open"]; l -> k;
+sys -> g; sys -> pf; g -> s; pf -> s; {rank=same; g; pf;} s -> a; s -> v; s -> l; v -> y; s -> i [label=" if induction\l does not close", style=dashed]; l -> k;
 a -> o; y -> o; i -> o; k -> o;
 {rank=same; a; v; l;} {rank=same; y; i; k;}
 }

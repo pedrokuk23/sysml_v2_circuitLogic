@@ -1,9 +1,34 @@
 {
   "title": "sysmlc: compiling SysML v2 models into digital logic (code and data)",
   "upload_type": "software",
-  "description": "Compiler from a SysML v2 textual subset to SMT formulas and Verilog, with the models, scripts, baseline runs and reference results of the article 'Systems Models as Logic Circuits: Compiling SysML v2 Requirements, Behavior, Variability and Allocation Into Digital Logic' (IEEE Access, submitted).",
-  "creators": [{"name": "Kukulka de Albuquerque, Pedro", "affiliation": "IEAv/DCTA and ITA"}],
+  "description": "Compiler from a SysML v2 textual subset to SMT formulas, Verilog and Lustre, with the models, scripts, baseline runs and reference results of the article 'Systems Models as Logic Circuits: Compiling a SysML v2 Subset into Digital Logic for Analysis' (submitted to Software and Systems Modeling).",
+  "creators": [
+    {
+      "name": "Kukulka de Albuquerque, Pedro",
+      "affiliation": "IEAv/DCTA and ITA"
+    },
+    {
+      "name": "Cardoso, Priscila Renata Barros",
+      "affiliation": "IEAv/DCTA"
+    }
+  ],
   "license": "MIT",
-  "keywords": ["SysML v2", "MBSE", "formal requirements", "digital logic", "EDA", "Yosys", "SMT", "equivalence checking"],
-  "version": "1.0.0"
+  "keywords": [
+    "SysML v2",
+    "MBSE",
+    "formal requirements",
+    "digital logic",
+    "EDA",
+    "Yosys",
+    "SMT",
+    "equivalence checking"
+  ],
+  "version": "1.0.0",
+  "related_identifiers": [
+    {
+      "identifier": "https://github.com/pedrokuk23/sysml_v2_circuitLogic",
+      "relation": "isSupplementTo",
+      "scheme": "url"
+    }
+  ]
 }

@@ -1,0 +1,37 @@
+{
+ "fret": "LPC_mini_reqts_and_vars.json",
+ "model": "models/third_party/lpc_mini.sysml",
+ "steps": 21,
+ "requirements": 19,
+ "equivalent": 19,
+ "differs": [],
+ "seconds": 1.1,
+ "per_requirement": {
+  "LPC_INIT_HOVER_MODE": "equivalent",
+  "LPC_INIT_KIAS": "equivalent",
+  "LPC_INIT_LIFT_MODE": "equivalent",
+  "LPC_KIAS_0": "equivalent",
+  "LPC_KIAS_DERIVATIVE": "equivalent",
+  "LPC_KIAS_KGS": "equivalent",
+  "LPC_LIFT_MODE": "equivalent",
+  "LPC_REACH_HOVER_06": "equivalent",
+  "LPC_REACH_HOVER_12": "equivalent",
+  "LPC_STB_STAY_ON_NEXT": "equivalent",
+  "LPC_STB_TO_SWB": "equivalent",
+  "LPC_STB_TO_TB": "equivalent",
+  "LPC_SWB_STAY_ON_NEXT": "equivalent",
+  "LPC_SWB_TO_STB": "equivalent",
+  "LPC_SWB_TO_WB": "equivalent",
+  "LPC_TB_STAY_ON_NEXT": "equivalent",
+  "LPC_TB_TO_STB": "equivalent",
+  "LPC_WB_STAY_ON_NEXT": "equivalent",
+  "LPC_WB_TO_SWB": "equivalent"
+ },
+ "perturbation": {
+  "change": "kgs <= 20.0 -> kgs <= 21.0",
+  "detected_in": [
+   "LPC_STB_TO_TB",
+   "LPC_TB_STAY_ON_NEXT"
+  ]
+ }
+}

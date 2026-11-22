@@ -1,0 +1,1454 @@
+{
+ "model": "models/lmcps_fsm.sysml",
+ "initial": "T/Nom",
+ "pairs": {
+  "FSM-002 / FSM-003": {
+   "forced_in_every_repair_of_the_others": true,
+   "max_steps_from_initial": 0,
+   "runs": 16,
+   "detail": [
+    {
+     "repairs": {
+      "FSM-004": "yields",
+      "FSM-006": "yields",
+      "FSM-008": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-004": "yields",
+      "FSM-006": "yields",
+      "FSM-008": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-004": "yields",
+      "FSM-006": "yields",
+      "FSM-009": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-004": "yields",
+      "FSM-006": "yields",
+      "FSM-009": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-004": "yields",
+      "FSM-007": "yields",
+      "FSM-008": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-004": "yields",
+      "FSM-007": "yields",
+      "FSM-008": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-004": "yields",
+      "FSM-007": "yields",
+      "FSM-009": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-004": "yields",
+      "FSM-007": "yields",
+      "FSM-009": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-005": "yields",
+      "FSM-006": "yields",
+      "FSM-008": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-005": "yields",
+      "FSM-006": "yields",
+      "FSM-008": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-005": "yields",
+      "FSM-006": "yields",
+      "FSM-009": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-005": "yields",
+      "FSM-006": "yields",
+      "FSM-009": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-005": "yields",
+      "FSM-007": "yields",
+      "FSM-008": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-005": "yields",
+      "FSM-007": "yields",
+      "FSM-008": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-005": "yields",
+      "FSM-007": "yields",
+      "FSM-009": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-005": "yields",
+      "FSM-007": "yields",
+      "FSM-009": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "T/Nom",
+      "T/Tr"
+     ]
+    }
+   ]
+  },
+  "FSM-004 / FSM-005": {
+   "forced_in_every_repair_of_the_others": true,
+   "max_steps_from_initial": 1,
+   "runs": 16,
+   "detail": [
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-006": "yields",
+      "FSM-008": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-006": "yields",
+      "FSM-008": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-006": "yields",
+      "FSM-009": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-006": "yields",
+      "FSM-009": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-007": "yields",
+      "FSM-008": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-007": "yields",
+      "FSM-008": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-007": "yields",
+      "FSM-009": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-007": "yields",
+      "FSM-009": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-006": "yields",
+      "FSM-008": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-006": "yields",
+      "FSM-008": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-006": "yields",
+      "FSM-009": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-006": "yields",
+      "FSM-009": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-007": "yields",
+      "FSM-008": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-007": "yields",
+      "FSM-008": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-007": "yields",
+      "FSM-009": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-007": "yields",
+      "FSM-009": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "N/F",
+      "T/Nom"
+     ]
+    }
+   ]
+  },
+  "FSM-006 / FSM-007": {
+   "forced_in_every_repair_of_the_others": true,
+   "max_steps_from_initial": 2,
+   "runs": 16,
+   "detail": [
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-004": "yields",
+      "FSM-008": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "S/F",
+      "S/Nom",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-004": "yields",
+      "FSM-008": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "S/F",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-004": "yields",
+      "FSM-009": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "S/F",
+      "S/Nom",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-004": "yields",
+      "FSM-009": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "S/F",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-005": "yields",
+      "FSM-008": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "S/F",
+      "S/Nom",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-005": "yields",
+      "FSM-008": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "S/F",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-005": "yields",
+      "FSM-009": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "S/F",
+      "S/Nom",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-005": "yields",
+      "FSM-009": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "S/F",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-004": "yields",
+      "FSM-008": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "S/F",
+      "S/Nom",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-004": "yields",
+      "FSM-008": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "S/F",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-004": "yields",
+      "FSM-009": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "S/F",
+      "S/Nom",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-004": "yields",
+      "FSM-009": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "S/F",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-005": "yields",
+      "FSM-008": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "S/F",
+      "S/Nom",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-005": "yields",
+      "FSM-008": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "S/F",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-005": "yields",
+      "FSM-009": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "S/F",
+      "S/Nom",
+      "T/Nom"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-005": "yields",
+      "FSM-009": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 2,
+     "attractor": [
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "S/F",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    }
+   ]
+  },
+  "FSM-008 / FSM-009": {
+   "forced_in_every_repair_of_the_others": true,
+   "max_steps_from_initial": 1,
+   "runs": 16,
+   "detail": [
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-004": "yields",
+      "FSM-006": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-004": "yields",
+      "FSM-006": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-004": "yields",
+      "FSM-007": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-004": "yields",
+      "FSM-007": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-005": "yields",
+      "FSM-006": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-005": "yields",
+      "FSM-006": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-005": "yields",
+      "FSM-007": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-005": "yields",
+      "FSM-007": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-004": "yields",
+      "FSM-006": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-004": "yields",
+      "FSM-006": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-004": "yields",
+      "FSM-007": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-004": "yields",
+      "FSM-007": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-005": "yields",
+      "FSM-006": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-005": "yields",
+      "FSM-006": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-005": "yields",
+      "FSM-007": "yields",
+      "FSM-010": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-005": "yields",
+      "FSM-007": "yields",
+      "FSM-011": "yields"
+     },
+     "forced": true,
+     "steps": 1,
+     "attractor": [
+      "M/F",
+      "M/Nom",
+      "M/Tr",
+      "N/F",
+      "N/Nom",
+      "N/Tr",
+      "S/F",
+      "S/Nom",
+      "S/Tr",
+      "T/F",
+      "T/Nom",
+      "T/Tr"
+     ]
+    }
+   ]
+  },
+  "FSM-010 / FSM-011": {
+   "forced_in_every_repair_of_the_others": true,
+   "max_steps_from_initial": 0,
+   "runs": 16,
+   "detail": [
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-004": "yields",
+      "FSM-006": "yields",
+      "FSM-008": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-004": "yields",
+      "FSM-006": "yields",
+      "FSM-009": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-004": "yields",
+      "FSM-007": "yields",
+      "FSM-008": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-004": "yields",
+      "FSM-007": "yields",
+      "FSM-009": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-005": "yields",
+      "FSM-006": "yields",
+      "FSM-008": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-005": "yields",
+      "FSM-006": "yields",
+      "FSM-009": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-005": "yields",
+      "FSM-007": "yields",
+      "FSM-008": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-002": "yields",
+      "FSM-005": "yields",
+      "FSM-007": "yields",
+      "FSM-009": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-004": "yields",
+      "FSM-006": "yields",
+      "FSM-008": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-004": "yields",
+      "FSM-006": "yields",
+      "FSM-009": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-004": "yields",
+      "FSM-007": "yields",
+      "FSM-008": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-004": "yields",
+      "FSM-007": "yields",
+      "FSM-009": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-005": "yields",
+      "FSM-006": "yields",
+      "FSM-008": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-005": "yields",
+      "FSM-006": "yields",
+      "FSM-009": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-005": "yields",
+      "FSM-007": "yields",
+      "FSM-008": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    },
+    {
+     "repairs": {
+      "FSM-003": "yields",
+      "FSM-005": "yields",
+      "FSM-007": "yields",
+      "FSM-009": "yields"
+     },
+     "forced": true,
+     "steps": 0,
+     "attractor": [
+      "M/Nom",
+      "N/Nom",
+      "S/Nom",
+      "T/Nom",
+      "T/Tr"
+     ]
+    }
+   ]
+  }
+ },
+ "control_all_pairs_repaired": {
+  "combinations": 32,
+  "with_dead_end": 0,
+  "forced": 0
+ }
+}

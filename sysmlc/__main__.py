@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """sysmlc — a single compiler from SysML v2 (textual subset) to logic.
 
-    python3 -m sysmlc MODEL.sysml [-o OUTDIR] [--no-eda]
+    python3 -m sysmlc MODEL.sysml [-o OUTDIR] [--no-eda] [--frontend grammar|pilot [--ast DUMP.json]]
 
 Pipeline:  parse -> IR -> z3 semantics -> logic checks (requirements, state machines, ports, variability,
 allocation, action flows) -> EDA back end (Verilog; Yosys proofs by SAT / temporal induction; ABC gate counts)
@@ -25,14 +25,50 @@ def report(R, files):
         L += ["", f"## Machine `{m}` (enum {M['enum']})", ""]
         L.append(f"- Conflicts (contention): {len(M['contention'])}")
         for c in M["contention"]:
-            L.append(f"  - {' × '.join(c['requirements'])}: {c['region'][0]}")
-        L.append(f"- Design violates: {', '.join(M['design_violates']) or 'none'}")
-        L.append("- Holes per state: " + ", ".join(f"{k} {v['n']}/{v['of']}" for k, v in M["holes"].items()))
+            L.append(f"  - {' × '.join(c['requirements'])}: {c['region'][0]} "
+                     f"({c.get('situations_one_step')} situations, {c.get('situations_reachable')} reachable)")
+        L.append(f"- Transitions with overlapping guards (where the textual priority matters): "
+                 f"{', '.join(' & '.join(p) for p in M.get('overlapping_guards', [])) or 'none'}")
+        L.append(f"- Design violates: {', '.join(M['design_violates']) or 'none'} "
+                 f"(reachable: {', '.join(M.get('design_violates_reachable', [])) or 'none'})")
+        L.append("- Holes per state (one step): " + ", ".join(f"{k} {v['n']}/{v['of']}" for k, v in M["holes"].items()))
+        if "holes_reachable" in M:
+            L.append(f"- Holes per state (reachable situations only, {M['situations_reachable']} of {M['situations_total']} "
+                     "situations reachable): " + ", ".join(f"{k} {v}" for k, v in M["holes_reachable"].items()))
+    if R.get("reachability"):
+        rr = R["reachability"]
+        L += ["", f"Reachable composite states: {rr['n_states']} of {rr['n_states_total']}."]
     for n, c in R.get("port_contracts", {}).items():
         L += ["", f"## Contract `{n}`", "", f"- Asserted: `{c['asserted']}`; projection: `{c['projection']}`; equivalent: {c['equivalent']}"]
         for k, v in c.items():
             if k.startswith("holes_"):
                 L.append(f"- {k}: {v['without_contract']} → {v['with_contract']}")
+    for y, g in (R.get("output_groups") or {}).items():
+        L += ["", f"## Output `{y}` selected by {', '.join(g['requirements'])}", ""]
+        L.append(f"- Conflicts (contention): {', '.join(' × '.join(c['requirements']) for c in g['conflicts']) or 'none'}")
+        cov = g["coverage"]
+        L.append(f"- Holes: {'none' if cov['complete'] else '`' + ' '.join(cov['hole_region'].split()) + '`'}")
+        L.append(f"- Overlaps: {', '.join(' & '.join(o['cases']) for o in cov['overlaps']) or 'none'}")
+        for k, dp in g["constant_subformulas"].items():
+            L.append(f"- {k}: " + "; ".join(f"`{e}` is {w}" for e, w in dp))
+    for n, r in (R.get("flowdown") or {}).items():
+        L += ["", f"## Refinement `{n}`: {r['original']} ⇐ {', '.join(r['derived'])}", ""]
+        wc = r.get("worst_case")
+        L.append(f"- Refinement: {'valid' if r['valid'] else 'fails'}; worst case of {r.get('bounded_quantity')}: "
+                 f"{wc:.6g}" if wc is not None else f"- Refinement: {'valid' if r['valid'] else 'fails'}")
+        for k, a in r["abduction"].items():
+            L.append(f"- Replace {k} (over {', '.join(a['vocabulary'])}): `{a['replacement']}` "
+                     f"[{a['method']}; {'exists' if a['exists'] else 'none exists' if a['exists'] is False else 'n/a'}]")
+        for g, e in r["interfaces"].items():
+            if e.get("contract", 1) is None:
+                L.append(f"- Interface {g} (shared {', '.join(e['shared'])}): none, {e['note']}")
+            else:
+                L.append(f"- Interface {g} (shared {', '.join(e['shared'])}): guarantees ≤ {e.get('strongest_bound'):.6g}, "
+                         f"tolerated ≤ {e.get('weakest_bound'):.6g}, margin {e.get('margin'):.4g}"
+                         if e.get("margin") is not None else f"- Interface {g}: strongest `{e.get('strongest')}`, weakest `{e.get('weakest')}`")
+        dd = r["discretisation"]
+        L.append(f"- Discretisation: {dd['feasible']} of {dd['of']} combinations of {', '.join(f'{k}: {v}' for k, v in dd['atoms'].items())} "
+                 f"are feasible; lemmas {dd['lemmas']}")
     if R.get("parents_one_step"):
         L += ["", "## Parent requirements, one step (z3)", ""]
         L += [f"- {k}: {'valid' if v['valid'] else 'counterexample'}" for k, v in R["parents_one_step"].items()]
@@ -76,13 +112,26 @@ def report(R, files):
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("model"); ap.add_argument("-o", "--out", default=None); ap.add_argument("--no-eda", action="store_true")
+    ap.add_argument("--frontend", choices=("grammar", "pilot"), default="grammar",
+                    help="read the model with the subset grammar (default) or through the SysML v2 Pilot "
+                         "Implementation's syntax tree (needs the dump of validation/dump_ast.sh)")
+    ap.add_argument("--ast", default=None, help="AST dump for --frontend pilot (default results/reference/ast/<model>.json)")
     a = ap.parse_args()
     out = a.out or os.path.splitext(a.model)[0] + "_out"
     os.makedirs(out, exist_ok=True)
     t0 = time.time()
     try:
-        S = compile_model(a.model)
-    except CompileError as ex:
+        if a.frontend == "pilot":
+            from pilot_frontend import compile_pilot
+            S = compile_pilot(a.model, a.ast)
+        else:
+            S = compile_model(a.model)
+    except Exception as ex:
+        from pilot_frontend import PilotFrontendError
+        if isinstance(ex, PilotFrontendError):
+            ex = CompileError(a.model, [str(ex)])
+        elif not isinstance(ex, CompileError):
+            raise
         print(str(ex), file=sys.stderr)
         json.dump(dict(model=a.model, status="rejected", errors=ex.errors), open(os.path.join(out, "results.json"), "w"), indent=1)
         sys.exit(2)

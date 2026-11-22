@@ -22,6 +22,10 @@
   "FSM-012",
   "FSM-013"
  ],
+ "division_hypothesis": {
+  "divisions": 0,
+  "denominator_may_be_zero": []
+ },
  "machines": {
   "apMachine": {
    "enum": "ApState",
@@ -33,6 +37,7 @@
     "standby",
     "supported"
    ],
+   "overlapping_guards": [],
    "requirements": [
     "FSM-002",
     "FSM-003",
@@ -53,9 +58,11 @@
       "[apState=T] good ∧ standby ∧ supported"
      ],
      "repairs": {
-      "FSM-002 cede a FSM-003": "Implies(And(And(0 == apState, standby),\n            Not(And(And(0 == apState, good), supported))),\n        3 == nextState)",
-      "FSM-003 cede a FSM-002": "Implies(And(And(And(0 == apState, good), supported),\n            Not(And(0 == apState, standby))),\n        1 == nextState)"
-     }
+      "FSM-002 yields to FSM-003": "Implies(And(And(0 == apState, standby),\n            Not(And(And(0 == apState, good), supported))),\n        3 == nextState)",
+      "FSM-003 yields to FSM-002": "Implies(And(And(And(0 == apState, good), supported),\n            Not(And(0 == apState, standby))),\n        1 == nextState)"
+     },
+     "situations_one_step": 2,
+     "situations_reachable": 2
     },
     {
      "requirements": [
@@ -66,9 +73,11 @@
       "[apState=N] standby ∧ ¬good"
      ],
      "repairs": {
-      "FSM-004 cede a FSM-005": "Implies(And(And(1 == apState, Not(good)),\n            Not(And(1 == apState, standby))),\n        2 == nextState)",
-      "FSM-005 cede a FSM-004": "Implies(And(And(1 == apState, standby),\n            Not(And(1 == apState, Not(good)))),\n        3 == nextState)"
-     }
+      "FSM-004 yields to FSM-005": "Implies(And(And(1 == apState, Not(good)),\n            Not(And(1 == apState, standby))),\n        2 == nextState)",
+      "FSM-005 yields to FSM-004": "Implies(And(And(1 == apState, standby),\n            Not(And(1 == apState, Not(good)))),\n        3 == nextState)"
+     },
+     "situations_one_step": 4,
+     "situations_reachable": 4
     },
     {
      "requirements": [
@@ -79,9 +88,11 @@
       "[apState=M] good ∧ standby ∧ supported"
      ],
      "repairs": {
-      "FSM-006 cede a FSM-007": "Implies(And(And(And(2 == apState, standby), good),\n            Not(And(And(2 == apState, supported), good))),\n        3 == nextState)",
-      "FSM-007 cede a FSM-006": "Implies(And(And(And(2 == apState, supported), good),\n            Not(And(And(2 == apState, standby), good))),\n        0 == nextState)"
-     }
+      "FSM-006 yields to FSM-007": "Implies(And(And(And(2 == apState, standby), good),\n            Not(And(And(2 == apState, supported), good))),\n        3 == nextState)",
+      "FSM-007 yields to FSM-006": "Implies(And(And(And(2 == apState, supported), good),\n            Not(And(And(2 == apState, standby), good))),\n        0 == nextState)"
+     },
+     "situations_one_step": 2,
+     "situations_reachable": 2
     },
     {
      "requirements": [
@@ -92,9 +103,11 @@
       "[apState=S] apfail ∧ ¬standby"
      ],
      "repairs": {
-      "FSM-008 cede a FSM-009": "Implies(And(And(3 == apState, Not(standby)),\n            Not(And(3 == apState, apfail))),\n        0 == nextState)",
-      "FSM-009 cede a FSM-008": "Implies(And(And(3 == apState, apfail),\n            Not(And(3 == apState, Not(standby)))),\n        2 == nextState)"
-     }
+      "FSM-008 yields to FSM-009": "Implies(And(And(3 == apState, Not(standby)),\n            Not(And(3 == apState, apfail))),\n        0 == nextState)",
+      "FSM-009 yields to FSM-008": "Implies(And(And(3 == apState, apfail),\n            Not(And(3 == apState, Not(standby)))),\n        2 == nextState)"
+     },
+     "situations_one_step": 4,
+     "situations_reachable": 4
     }
    ],
    "holes": {
@@ -140,7 +153,21 @@
     "FSM-008": [
      "[apState=S] apfail ∧ ¬standby"
     ]
-   }
+   },
+   "holes_reachable": {
+    "T": 6,
+    "N": 4,
+    "M": 2,
+    "S": 4
+   },
+   "situations_reachable": 56,
+   "situations_total": 64,
+   "design_violates_reachable": [
+    "FSM-003",
+    "FSM-004",
+    "FSM-007",
+    "FSM-008"
+   ]
   },
   "senMachine": {
    "enum": "SenState",
@@ -151,6 +178,7 @@
     "mode",
     "request"
    ],
+   "overlapping_guards": [],
    "requirements": [
     "FSM-010",
     "FSM-011",
@@ -167,9 +195,11 @@
       "[senState=Nom] limits ∧ ¬request"
      ],
      "repairs": {
-      "FSM-010 cede a FSM-011": "Implies(And(And(0 == senState, limits),\n            Not(And(0 == senState, Not(request)))),\n        2 == nextSenState)",
-      "FSM-011 cede a FSM-010": "Implies(And(And(0 == senState, Not(request)),\n            Not(And(0 == senState, limits))),\n        1 == nextSenState)"
-     }
+      "FSM-010 yields to FSM-011": "Implies(And(And(0 == senState, limits),\n            Not(And(0 == senState, Not(request)))),\n        2 == nextSenState)",
+      "FSM-011 yields to FSM-010": "Implies(And(And(0 == senState, Not(request)),\n            Not(And(0 == senState, limits))),\n        1 == nextSenState)"
+     },
+     "situations_one_step": 2,
+     "situations_reachable": 1
     }
    ],
    "holes": {
@@ -199,8 +229,58 @@
     "FSM-011": [
      "[senState=Nom] limits ∧ ¬request"
     ]
-   }
+   },
+   "holes_reachable": {
+    "Nom": 2,
+    "Tr": 4,
+    "F": 3
+   },
+   "situations_reachable": 16,
+   "situations_total": 24,
+   "design_violates_reachable": [
+    "FSM-011"
+   ]
   }
+ },
+ "reachability": {
+  "composition_deterministic": true,
+  "composition_total": true,
+  "states": [
+   {
+    "apMachine": "M",
+    "senMachine": "Tr"
+   },
+   {
+    "apMachine": "N",
+    "senMachine": "F"
+   },
+   {
+    "apMachine": "N",
+    "senMachine": "Nom"
+   },
+   {
+    "apMachine": "S",
+    "senMachine": "F"
+   },
+   {
+    "apMachine": "S",
+    "senMachine": "Tr"
+   },
+   {
+    "apMachine": "T",
+    "senMachine": "F"
+   },
+   {
+    "apMachine": "T",
+    "senMachine": "Nom"
+   },
+   {
+    "apMachine": "T",
+    "senMachine": "Tr"
+   }
+  ],
+  "n_states": 8,
+  "n_states_total": 12
  },
  "port_contracts": {
   "portContract": {
@@ -280,37 +360,39 @@
     },
     "FSM-001v3": {
      "result": "proved (IC3)",
-     "tail": "_|\\_)_____)\\____|_|\n\nEnd of script. Logfile hash: a689b5ec6a, time: 0.93s, user: 0.93s, system: 0.00s\nYosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)\nTime spent: 97% 1x sat (0 sec), 0% 5x opt_clean (0 sec), ...\n",
+     "tail": "_|\\_)_____)\\____|_|\n\nEnd of script. Logfile hash: a689b5ec6a, time: 0.87s, user: 0.88s, system: 0.00s\nYosys 0.70 (git sha1 28ba3cb92, Release, Clang /workspace/YoWASP/yosys/wasi-sdk-33.0-x86_64-linux/share/cmake/../..//bin/clang++ 22.1.0)\nTime spent: 97% 1x sat (0 sec), 0% 5x opt_clean (0 sec), ...\n",
      "ic3": {
       "result": "proved",
       "lemmas": [
-       "¬pre2_notLimits ∨ ¬pre1_autopilot ∨ senState ∈ {Nom, F} ∨ apState ∈ {T}",
-       "¬pre3_notLimits ∨ ¬pre1_limits ∨ ¬pre2_autopilot ∨ ¬pre1_autopilot ∨ apState ∈ {N, M, S} ∨ senState ∈ {F}",
+       "¬pre2_notLimits ∨ apState ∈ {T, N} ∨ ¬pre1_autopilot",
+       "senState ∈ {Tr, F} ∨ apState ∈ {T, N}",
+       "apState ∈ {T, N, S} ∨ senState ∈ {Tr}",
        "¬pre1_notLimits ∨ senState ∈ {Nom, Tr}",
-       "¬pre3_notLimits ∨ ¬pre3_autopilot ∨ ¬pre1_limits ∨ ¬pre4_notLimits ∨ ¬pre2_notLimits ∨ ¬pre2_autopilot ∨ senState ∈ {F}",
-       "¬pre2_notLimits ∨ ¬pre1_autopilot ∨ apState ∈ {T, N}",
-       "¬pre3_notLimits ∨ ¬pre2_notLimits ∨ ¬pre2_autopilot ∨ ¬pre1_autopilot ∨ apState ∈ {N, M, S}"
+       "apState ∈ {T, M, S} ∨ senState ∈ {F} ∨ senState ∈ {Nom}",
+       "¬pre2_notLimits ∨ ¬pre3_notLimits ∨ ¬pre2_autopilot ∨ apState ∈ {N, M, S} ∨ ¬pre1_autopilot",
+       "¬pre2_notLimits ∨ ¬pre3_notLimits ∨ ¬pre1_limits ∨ ¬pre2_autopilot ∨ ¬pre4_notLimits ∨ ¬pre3_autopilot ∨ senState ∈ {F}"
       ],
       "clauses_found": [
-       6,
-       6,
+       7,
        9,
        8,
-       8
-      ],
-      "clauses_minimal": [
-       5,
-       5,
-       6,
-       5,
+       8,
        6
       ],
+      "clauses_minimal": [
+       6,
+       7,
+       7,
+       5,
+       5
+      ],
       "lemmas_minimal": [
-       "¬pre2_notLimits ∨ ¬pre1_autopilot ∨ senState ∈ {Nom, F} ∨ apState ∈ {T}",
+       "¬pre2_notLimits ∨ apState ∈ {T, N} ∨ ¬pre1_autopilot",
+       "senState ∈ {Tr, F} ∨ apState ∈ {T, N}",
        "¬pre1_notLimits ∨ senState ∈ {Nom, Tr}",
-       "¬pre3_notLimits ∨ ¬pre3_autopilot ∨ ¬pre1_limits ∨ ¬pre4_notLimits ∨ ¬pre2_notLimits ∨ ¬pre2_autopilot ∨ senState ∈ {F}",
-       "¬pre2_notLimits ∨ ¬pre1_autopilot ∨ apState ∈ {T, N}",
-       "¬pre3_notLimits ∨ ¬pre2_notLimits ∨ ¬pre2_autopilot ∨ ¬pre1_autopilot ∨ apState ∈ {N, M, S}"
+       "apState ∈ {T, M, S} ∨ senState ∈ {F} ∨ senState ∈ {Nom}",
+       "¬pre2_notLimits ∨ ¬pre3_notLimits ∨ ¬pre2_autopilot ∨ apState ∈ {N, M, S} ∨ ¬pre1_autopilot",
+       "¬pre2_notLimits ∨ ¬pre3_notLimits ∨ ¬pre1_limits ∨ ¬pre2_autopilot ∨ ¬pre4_notLimits ∨ ¬pre3_autopilot ∨ senState ∈ {F}"
       ],
       "lemmas_in_every_minimal_set": []
      }
@@ -396,5 +478,5 @@
    ]
   }
  },
- "seconds": 9.661781072616577
+ "seconds": 9.158025979995728
 }

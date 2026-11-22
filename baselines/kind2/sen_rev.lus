@@ -5,6 +5,6 @@ node imported sen_rev(limits:bool; request:bool; MODE:bool; senstate:int) return
   guarantee 0 <= SENSTATE and SENSTATE <= 2;
   guarantee "FSM-010" ( senstate = sen_nominal_state and limits ) => SENSTATE = sen_fault_state;
   guarantee "FSM-011v2" ( senstate = sen_nominal_state and not request and not limits ) => SENSTATE = sen_transition_state;
-  guarantee "FSM-012" ( senstate = sen_fault_state and not request and not limits ) => SENSTATE = sen_transition_state;
+  guarantee "FSM-012_weak" ( senstate = sen_fault_state and (not request or not limits) ) => SENSTATE = sen_transition_state;
   guarantee "FSM-013" ( senstate = sen_transition_state and request and MODE ) => SENSTATE = sen_nominal_state;
 *)

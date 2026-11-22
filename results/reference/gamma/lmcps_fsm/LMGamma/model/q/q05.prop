@@ -1,0 +1,1 @@
+prop { !(rapMachine_LMFSM == N_apMachine && rsenMachine_LMFSM == F_senMachine) }

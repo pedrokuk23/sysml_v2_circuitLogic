@@ -1,4 +1,4 @@
-// Revised requirement set: FSM-003v2, 004v2, 007v2, 008v2, 011v2 (FRET repository) and FSM-012 weak (reference model).
+// Revised requirement set: FSM-003v2, 004v2, 007v2, 008v2, 011v2 and FSM-012_weak (FRET repository; FSM-012_weak is also the rule of the reference model).
 // LMCPS "Finite State Machine" challenge (Lockheed Martin / NASA FRET case study) in SysML v2 textual notation.
 // Requirements are written as SysML v2 requirement definitions whose 'require constraint' is a Boolean
 // expression in the KerML expression language: the logic IS the requirement; the doc keeps the original text.

@@ -33,7 +33,7 @@ label=<<b>Logic view — action flow DetectAndReport</b><br/><font point-size="1
 "archive" -> "sync";
 "sync" -> "notify";
 "notify" -> "done";
-"note_linkCheck" [shape=note, style=filled, fillcolor="#fdecea", color="#c62828", fontcolor="#c62828", fontsize=10, label="linkCheck\nincomplete selection: ¬linkUp\noverlapping guards: sync & retry"];
+"note_linkCheck" [shape=note, style=filled, fillcolor="#fdecea", color="#c62828", fontcolor="#c62828", fontsize=10, label="linkCheck\nincomplete selection: And(Not(linkUp), Not(And(linkUp, backlog)))\noverlapping guards: sync & retry"];
 "linkCheck" -> "note_linkCheck" [color="#c62828", style=dashed, arrowhead=none];
 "summary" [shape=note, style=filled, fillcolor="#fff4e0", color="#e08a00", label="deadlock in 2 of 8 input valuations\npossible loop in 1\nnominal cycle (min): 6; each loop: +4"];
 }

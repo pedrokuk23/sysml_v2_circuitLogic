@@ -1,0 +1,56 @@
+@requires discrete-time
+-- lmcps_fsm.sysml: FSM-001 (one-step) refined by the autopilot and sensor requirement sets;
+-- generated from the compiler's IR by baselines/ocra/ocra_baseline.py
+COMPONENT FSM system
+INTERFACE
+  INPUT PORT v_apState: 0..3;
+  INPUT PORT v_apfail: boolean;
+  INPUT PORT v_limits: boolean;
+  INPUT PORT v_senState: 0..2;
+  INPUT PORT v_standby: boolean;
+  INPUT PORT v_supported: boolean;
+  OUTPUT PORT v_pullup: boolean;
+  CONTRACT parent
+    assume: true;
+    guarantee: always (((((v_limits & (! v_standby)) & (! v_apfail)) & v_supported) -> v_pullup));
+REFINEMENT
+  SUB ap: Autopilot;
+  SUB sen: Sensor;
+  CONNECTION ap.v_apState := v_apState;
+  CONNECTION ap.v_apfail := v_apfail;
+  CONNECTION ap.v_good := sen.v_good;
+  CONNECTION ap.v_standby := v_standby;
+  CONNECTION ap.v_supported := v_supported;
+  CONNECTION sen.v_limits := v_limits;
+  CONNECTION sen.v_mode := ap.v_mode;
+  CONNECTION sen.v_request := ap.v_request;
+  CONNECTION sen.v_senState := v_senState;
+  CONNECTION v_pullup := ap.v_pullup;
+  CONTRACT parent REFINEDBY ap.c, sen.c;
+COMPONENT Autopilot
+INTERFACE
+  INPUT PORT v_apState: 0..3;
+  INPUT PORT v_apfail: boolean;
+  INPUT PORT v_good: boolean;
+  INPUT PORT v_standby: boolean;
+  INPUT PORT v_supported: boolean;
+  OUTPUT PORT v_autopilot: boolean;
+  OUTPUT PORT v_mode: boolean;
+  OUTPUT PORT v_nextState: 0..3;
+  OUTPUT PORT v_pullup: boolean;
+  OUTPUT PORT v_request: boolean;
+  CONTRACT c
+    assume: true;
+    guarantee: always ((v_pullup <-> (2 = v_nextState)) & ((v_mode <-> (0 != v_nextState)) & (v_request <-> ((0 = v_nextState) | (1 = v_nextState)))) & (v_autopilot <-> (((! v_standby) & v_supported) & (! v_apfail))) & (((0 = v_apState) & v_standby) -> (3 = v_nextState)) & ((((0 = v_apState) & v_good) & v_supported) -> (1 = v_nextState)) & (((1 = v_apState) & (! v_good)) -> (2 = v_nextState)) & (((1 = v_apState) & v_standby) -> (3 = v_nextState)) & ((((2 = v_apState) & v_standby) & v_good) -> (3 = v_nextState)) & ((((2 = v_apState) & v_supported) & v_good) -> (0 = v_nextState)) & (((3 = v_apState) & (! v_standby)) -> (0 = v_nextState)) & (((3 = v_apState) & v_apfail) -> (2 = v_nextState)));
+COMPONENT Sensor
+INTERFACE
+  INPUT PORT v_limits: boolean;
+  INPUT PORT v_mode: boolean;
+  INPUT PORT v_request: boolean;
+  INPUT PORT v_senState: 0..2;
+  OUTPUT PORT v_good: boolean;
+  OUTPUT PORT v_nextSenState: 0..2;
+  OUTPUT PORT v_notLimits: boolean;
+  CONTRACT c
+    assume: always ((v_mode | v_request));
+    guarantee: always ((v_good <-> (2 != v_senState)) & (v_notLimits <-> (! v_limits)) & (((0 = v_senState) & v_limits) -> (2 = v_nextSenState)) & (((0 = v_senState) & (! v_request)) -> (1 = v_nextSenState)) & ((((2 = v_senState) & (! v_request)) & (! v_limits)) -> (1 = v_nextSenState)) & ((((1 = v_senState) & v_request) & v_mode) -> (0 = v_nextSenState)));

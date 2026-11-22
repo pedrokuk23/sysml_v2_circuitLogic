@@ -1,0 +1,56 @@
+{
+ "firesat": {
+  "leaves": 280,
+  "identical": 276,
+  "echoed_expressions_equivalent": 4,
+  "regions_equivalent": 0,
+  "bounds_numerically_equal": 0,
+  "method_differs_time_limit": 0,
+  "failures": []
+ },
+ "firesat_flowdown": {
+  "leaves": 247,
+  "identical": 222,
+  "echoed_expressions_equivalent": 0,
+  "regions_equivalent": 19,
+  "bounds_numerically_equal": 3,
+  "method_differs_time_limit": 3,
+  "failures": []
+ },
+ "lmcps_fsm": {
+  "leaves": 161,
+  "identical": 160,
+  "echoed_expressions_equivalent": 1,
+  "regions_equivalent": 0,
+  "bounds_numerically_equal": 0,
+  "method_differs_time_limit": 0,
+  "failures": []
+ },
+ "lmcps_fsm_rev": {
+  "leaves": 116,
+  "identical": 115,
+  "echoed_expressions_equivalent": 1,
+  "regions_equivalent": 0,
+  "bounds_numerically_equal": 0,
+  "method_differs_time_limit": 0,
+  "failures": []
+ },
+ "lmcps_roll_tsm": {
+  "leaves": 64,
+  "identical": 62,
+  "echoed_expressions_equivalent": 0,
+  "regions_equivalent": 2,
+  "bounds_numerically_equal": 0,
+  "method_differs_time_limit": 0,
+  "failures": []
+ },
+ "lmcps_roll_tsm_glossary": {
+  "leaves": 46,
+  "identical": 44,
+  "echoed_expressions_equivalent": 0,
+  "regions_equivalent": 2,
+  "bounds_numerically_equal": 0,
+  "method_differs_time_limit": 0,
+  "failures": []
+ }
+}

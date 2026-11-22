@@ -59,7 +59,7 @@ def repair_candidates(a, b):
     out = {}
     for lose, win in ((a, b), (b, a)):
         f = R[lose][0]
-        out[f"{lose} cede a {win}"] = Implies(And(f.arg(0), Not(ante(win))), f.arg(1))
+        out[f"{lose} yields to {win}"] = Implies(And(f.arg(0), Not(ante(win))), f.arg(1))
     return out
 
 

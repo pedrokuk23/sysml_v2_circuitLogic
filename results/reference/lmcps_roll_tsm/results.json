@@ -1,0 +1,168 @@
+{
+ "model": "models/lmcps_roll_tsm.sysml",
+ "requirements": [
+  "AP-003A",
+  "AP-003B",
+  "AP-003C",
+  "AP-003D",
+  "GLO-FC",
+  "TSM-002",
+  "TSM-003a",
+  "TSM-003b",
+  "TSM-003c"
+ ],
+ "division_hypothesis": {
+  "divisions": 0,
+  "denominator_may_be_zero": []
+ },
+ "output_groups": {
+  "rollHoldReference": {
+   "requirements": [
+    "AP-003A",
+    "AP-003B",
+    "AP-003C",
+    "AP-003D"
+   ],
+   "inputs": [
+    "rollAngle",
+    "turnKnob"
+   ],
+   "conflicts": [
+    {
+     "requirements": [
+      "AP-003B",
+      "AP-003D"
+     ],
+     "region": "Not(Exists(x!135,\n           And(0 <= ToReal(x!135),\n               7 >= ToReal(x!135),\n               Or(Not(And(Not(6 <= rollAngle),\n                          Not(rollAngle <= -6))),\n                  And(turnKnob >= 0, turnKnob <= 0),\n                  And(Not(And(Not(6 <= rollAngle),\n                              Not(rollAngle <= -6))),\n                      Not(And(Or(3 <= turnKnob,\n                                 turnKnob <= -3),\n                              Or(30 >= turnKnob,\n                                 turnKnob >= -30)))),\n                  Not(And(Or(3 <= turnKnob, turnKnob <= -3),\n                          Or(30 >= turnKnob,\n                             turnKnob >= -30))),\n                  And(Not(And(Not(6 <= rollAngle),\n                              Not(rollAngle <= -6))),\n                      Or(Not(And(Or(3 <= turnKnob,\n                                    turnKnob <= -3),\n                                 Or(30 >= turnKnob,\n                                    turnKnob >= -30))),\n                         And(turnKnob >= 0,\n                             Not(0 <= turnKnob))))))))"
+    },
+    {
+     "requirements": [
+      "AP-003C",
+      "AP-003D"
+     ],
+     "region": "Not(Exists(x!207,\n           And(0 <= ToReal(x!207),\n               7 >= ToReal(x!207),\n               Or(Not(And(Or(3 <= turnKnob, turnKnob <= -3),\n                          Or(30 >= turnKnob,\n                             turnKnob >= -30))),\n                  Not(Or(30 <= rollAngle, -30 >= rollAngle)),\n                  And(-1*turnKnob +\n                      30*If(0 <= rollAngle, 1, -1) <=\n                      0,\n                      turnKnob +\n                      -30*If(0 <= rollAngle, 1, -1) <=\n                      0),\n                  And(Not(Or(30 <= rollAngle,\n                             -30 >= rollAngle)),\n                      Not(And(Or(3 <= turnKnob,\n                                 turnKnob <= -3),\n                              Or(30 >= turnKnob,\n                                 turnKnob >= -30)))),\n                  And(-30*If(0 <= rollAngle, 1, -1) +\n                      turnKnob <=\n                      0,\n                      30*If(0 <= rollAngle, 1, -1) +\n                      -1*turnKnob <=\n                      0),\n                  And(Or(Not(Or(30 <= rollAngle,\n                                -30 >= rollAngle)),\n                         And(-30*If(0 <= rollAngle, 1, -1) +\n                             turnKnob <=\n                             0,\n                             Not(0 <=\n                                 30*\n                                 If(0 <= rollAngle, 1, -1) +\n                                 -1*turnKnob))),\n                      Not(And(Or(3 <= turnKnob,\n                                 turnKnob <= -3),\n                              Or(30 >= turnKnob,\n                                 turnKnob >= -30)))),\n                  And(Not(Or(30 <= rollAngle,\n                             -30 >= rollAngle)),\n                      Or(Not(And(Or(3 <= turnKnob,\n                                    turnKnob <= -3),\n                                 Or(30 >= turnKnob,\n                                    turnKnob >= -30))),\n                         And(-1*turnKnob +\n                             30*If(0 <= rollAngle, 1, -1) <=\n                             0,\n                             Not(0 <=\n                                 turnKnob +\n                                 -30*\n                                 If(0 <= rollAngle, 1, -1)))))))))"
+    }
+   ],
+   "coverage": {
+    "complete": true,
+    "overlaps": [
+     {
+      "cases": [
+       "AP-003B",
+       "AP-003D"
+      ],
+      "region": "And(0 <= ToReal(FC),\n    7 >= ToReal(FC),\n    Not(6 <= rollAngle),\n    Not(rollAngle <= -6),\n    Or(3 <= turnKnob, turnKnob <= -3),\n    Or(30 >= turnKnob, turnKnob >= -30))"
+     },
+     {
+      "cases": [
+       "AP-003C",
+       "AP-003D"
+      ],
+      "region": "And(0 <= ToReal(FC),\n    7 >= ToReal(FC),\n    Or(30 <= rollAngle, -30 >= rollAngle),\n    Or(3 <= turnKnob, turnKnob <= -3),\n    Or(30 >= turnKnob, turnKnob >= -30))"
+     }
+    ]
+   },
+   "constant_subformulas": {
+    "AP-003A": [
+     [
+      "Or(30 >= turnKnob, turnKnob >= -30)",
+      "always true"
+     ]
+    ],
+    "AP-003D": [
+     [
+      "Or(30 >= turnKnob, turnKnob >= -30)",
+      "always true"
+     ]
+    ]
+   }
+  },
+  "setVal": {
+   "requirements": [
+    "TSM-002",
+    "TSM-003a",
+    "TSM-003b",
+    "TSM-003c"
+   ],
+   "inputs": [
+    "FC",
+    "ia",
+    "ib",
+    "ic",
+    "midValue",
+    "noFail"
+   ],
+   "conflicts": [
+    {
+     "requirements": [
+      "TSM-002",
+      "TSM-003a"
+     ],
+     "region": "And(0 <= ToReal(FC),\n    7 >= ToReal(FC),\n    Not(And(0 <= ToReal(FC),\n            7 >= ToReal(FC),\n            Or(Not(1 == ToReal(FC)),\n               And(Not(noFail),\n                   Or(Not(1 == ToReal(FC)),\n                      And(-1/2*ib + -1/2*ia + midValue <= 0,\n                          Not(0 <=\n                              1/2*ib + 1/2*ia + -1*midValue)))),\n               Not(noFail),\n               And(Or(Not(noFail),\n                      And(-1*midValue + 1/2*ib + 1/2*ia <= 0,\n                          Not(0 <=\n                              midValue + -1/2*ib + -1/2*ia))),\n                   Not(1 == ToReal(FC))),\n               And(-1/2*ib + -1/2*ia + midValue <= 0,\n                   1/2*ib + 1/2*ia + -1*midValue <= 0),\n               And(-1*midValue + 1/2*ib + 1/2*ia <= 0,\n                   midValue + -1/2*ib + -1/2*ia <= 0),\n               And(Not(noFail), Not(1 == ToReal(FC)))))))"
+    },
+    {
+     "requirements": [
+      "TSM-002",
+      "TSM-003b"
+     ],
+     "region": "And(0 <= ToReal(FC),\n    7 >= ToReal(FC),\n    Not(And(0 <= ToReal(FC),\n            7 >= ToReal(FC),\n            Or(And(Not(noFail), Not(2 == ToReal(FC))),\n               Not(noFail),\n               And(-1/2*ic + -1/2*ia + midValue <= 0,\n                   1/2*ic + 1/2*ia + -1*midValue <= 0),\n               And(-1*midValue + 1/2*ic + 1/2*ia <= 0,\n                   midValue + -1/2*ic + -1/2*ia <= 0),\n               Not(2 == ToReal(FC)),\n               And(Not(noFail),\n                   Or(Not(2 == ToReal(FC)),\n                      And(-1/2*ic + -1/2*ia + midValue <= 0,\n                          Not(0 <=\n                              1/2*ic + 1/2*ia + -1*midValue)))),\n               And(Or(Not(noFail),\n                      And(-1*midValue + 1/2*ic + 1/2*ia <= 0,\n                          Not(0 <=\n                              midValue + -1/2*ic + -1/2*ia))),\n                   Not(2 == ToReal(FC)))))))"
+    },
+    {
+     "requirements": [
+      "TSM-002",
+      "TSM-003c"
+     ],
+     "region": "And(0 <= ToReal(FC),\n    7 >= ToReal(FC),\n    Not(And(0 <= ToReal(FC),\n            7 >= ToReal(FC),\n            Or(Not(noFail),\n               Not(4 == ToReal(FC)),\n               And(Not(noFail),\n                   Or(Not(4 == ToReal(FC)),\n                      And(-1/2*ic + -1/2*ib + midValue <= 0,\n                          Not(0 <=\n                              1/2*ic + 1/2*ib + -1*midValue)))),\n               And(Not(noFail), Not(4 == ToReal(FC))),\n               And(Or(Not(noFail),\n                      And(-1*midValue + 1/2*ic + 1/2*ib <= 0,\n                          Not(0 <=\n                              midValue + -1/2*ic + -1/2*ib))),\n                   Not(4 == ToReal(FC))),\n               And(-1/2*ic + -1/2*ib + midValue <= 0,\n                   1/2*ic + 1/2*ib + -1*midValue <= 0),\n               And(-1*midValue + 1/2*ic + 1/2*ib <= 0,\n                   midValue + -1/2*ic + -1/2*ib <= 0)))))"
+    }
+   ],
+   "coverage": {
+    "complete": false,
+    "hole_region": "And(0 <= ToReal(FC),\n    7 >= ToReal(FC),\n    Not(noFail),\n    Not(1 == ToReal(FC)),\n    Not(2 == ToReal(FC)),\n    Not(4 == ToReal(FC)))",
+    "hole_example": {
+     "FC": "0",
+     "noFail": "False"
+    },
+    "overlaps": [
+     {
+      "cases": [
+       "TSM-002",
+       "TSM-003a"
+      ],
+      "region": "And(7 >= ToReal(FC), noFail, 1 == ToReal(FC))"
+     },
+     {
+      "cases": [
+       "TSM-002",
+       "TSM-003b"
+      ],
+      "region": "And(7 >= ToReal(FC), noFail, 2 == ToReal(FC))"
+     },
+     {
+      "cases": [
+       "TSM-002",
+       "TSM-003c"
+      ],
+      "region": "And(7 >= ToReal(FC), noFail, 4 == ToReal(FC))"
+     }
+    ]
+   },
+   "constant_subformulas": {}
+  }
+ },
+ "status": "complete",
+ "coverage": {
+  "translated": {
+   "require constraint": 9,
+   "requirement def": 9,
+   "attribute": 25
+  },
+  "structural": {
+   "package": 1,
+   "subject": 9,
+   "import": 1,
+   "doc": 9
+  },
+  "statements_recognized": 63
+ },
+ "seconds": 0.22704172134399414
+}

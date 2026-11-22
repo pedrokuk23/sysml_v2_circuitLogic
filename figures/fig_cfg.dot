@@ -1,35 +1,35 @@
 digraph G {
-rankdir=TB; nodesep=0.18; ranksep=0.32; pad=0.05; newrank=true;
-node [fontname="Helvetica", fontsize=17, fontcolor="#0b0b0b"];
+rankdir=TB; nodesep=0.1; ranksep=0.32; pad=0.05; newrank=true;
+node [fontname="Helvetica", fontsize=22, fontcolor="#0b0b0b"];
 edge [color="#52514e", penwidth=1.1, arrowsize=0.7];
-subgraph cluster_payload { label="payload"; fontname="Helvetica-Bold"; fontsize=17; style="rounded,dashed"; color="#b9b8b3"; margin=6;
+subgraph cluster_payload { label="payload"; fontname="Helvetica-Bold"; fontsize=22; style="rounded,dashed"; color="#b9b8b3"; margin=6;
  p1 [shape=plaintext, label="smallIR"]; p2 [shape=plaintext, label="largeIR"]; }
-subgraph cluster_orbit { label="orbit"; fontname="Helvetica-Bold"; fontsize=17; style="rounded,dashed"; color="#b9b8b3"; margin=6;
- o1 [shape=plaintext, label=<leo2<br/><b>CORE ✓</b>>]; o2 [shape=plaintext, label=<geo1<br/><b>DEAD ✗</b><br/><font point-size="15">by MR-RES</font>>]; }
-subgraph cluster_bus { label="bus"; fontname="Helvetica-Bold"; fontsize=17; style="rounded,dashed"; color="#b9b8b3"; margin=6;
+subgraph cluster_orbit { label="orbit"; fontname="Helvetica-Bold"; fontsize=22; style="rounded,dashed"; color="#b9b8b3"; margin=6;
+ o1 [shape=plaintext, label=<leo2<br/><b>CORE ✓</b>>]; o2 [shape=plaintext, label=<geo1<br/><b>DEAD ✗</b><br/><font point-size="22">by MR-RES</font>>]; }
+subgraph cluster_bus { label="bus"; fontname="Helvetica-Bold"; fontsize=22; style="rounded,dashed"; color="#b9b8b3"; margin=6;
  b1 [shape=plaintext, label="smallBus"]; b2 [shape=plaintext, label="midBus"]; }
-subgraph cluster_ground { label="ground network"; fontname="Helvetica-Bold"; fontsize=17; style="rounded,dashed"; color="#b9b8b3"; margin=6;
+subgraph cluster_ground { label="ground network"; fontname="Helvetica-Bold"; fontsize=22; style="rounded,dashed"; color="#b9b8b3"; margin=6;
  g1 [shape=plaintext, label="gs4"]; g2 [shape=plaintext, label="gs12"]; }
-subgraph cluster_comm { label="communication"; fontname="Helvetica-Bold"; fontsize=17; style="rounded,dashed"; color="#b9b8b3"; margin=6;
+subgraph cluster_comm { label="communication"; fontname="Helvetica-Bold"; fontsize=22; style="rounded,dashed"; color="#b9b8b3"; margin=6;
  c1 [shape=plaintext, label="direct"]; c2 [shape=plaintext, label="relayLink"]; }
-subgraph cluster_alloc { label="allocation"; fontname="Helvetica-Bold"; fontsize=17; style="rounded,dashed"; color="#b9b8b3"; margin=6;
+subgraph cluster_alloc { label="allocation"; fontname="Helvetica-Bold"; fontsize=22; style="rounded,dashed"; color="#b9b8b3"; margin=6;
  a1 [shape=plaintext, label=<∃ on board / ground<br/>for detect, geolocate>]; }
-node [shape=box, width=0.6, height=0.55, fixedsize=true, style="rounded", fontname="Helvetica-Bold", fontsize=19, color="#0b0b0b"];
+node [shape=box, width=0.7, height=0.6, fixedsize=true, style="rounded", fontname="Helvetica-Bold", fontsize=22, color="#0b0b0b"];
 ohp [label="=1"]; oho [label="=1"]; ohb [label="=1"]; ohg [label="=1"]; ohc [label="=1"];
 p1 -> ohp [arrowhead=none]; p2 -> ohp [arrowhead=none];
 o1 -> oho [arrowhead=none]; o2 -> oho [arrowhead=none, color="#d03b3b", penwidth=1.8, style=dashed];
 b1 -> ohb [arrowhead=none]; b2 -> ohb [arrowhead=none];
 g1 -> ohg [arrowhead=none]; g2 -> ohg [arrowhead=none];
 c1 -> ohc [arrowhead=none]; c2 -> ohc [arrowhead=none];
-node [shape=box, width=1.6, height=0.5, fixedsize=true, style="rounded,filled", fillcolor="#cde2fb", color="#2a78d6", fontname="Helvetica", fontsize=17];
+node [shape=box, width=2.05, height=0.5, fixedsize=true, style="rounded,filled", fillcolor="#cde2fb", color="#2a78d6", fontname="Helvetica", fontsize=22];
 res [label="MR-RES"]; mass [label="MR-MASS"]; tl [label="MR-TL"]; cap [label="CPU capacity"];
 ohp -> res; oho -> res; ohp -> mass; ohb -> mass;
 oho -> tl; ohg -> tl; ohc -> tl; a1 -> tl; ohb -> cap; a1 -> cap;
 {rank=same; ohp; oho; ohb; ohg; ohc;}
 {rank=same; res; mass; tl; cap;}
-valid [shape=box, width=0.6, height=0.55, fixedsize=true, style="rounded", fillcolor=white, color="#0b0b0b", fontname="Helvetica-Bold", fontsize=19, label="&"];
+valid [shape=box, width=0.7, height=0.6, fixedsize=true, style="rounded", fillcolor=white, color="#0b0b0b", fontname="Helvetica-Bold", fontsize=22, label="&"];
 res -> valid; mass -> valid; tl -> valid; cap -> valid;
-out [shape=plaintext, fixedsize=false, style="", width=0, height=0, fontsize=18, label=<<b>valid:</b> 9 of 32 configurations>];
+out [shape=plaintext, fixedsize=false, style="", width=0, height=0, fontsize=22, label=<<b>valid:</b> 9 of 32 configurations>];
 valid -> out [arrowsize=0.7];
 {rank=same; valid; out;}
 }

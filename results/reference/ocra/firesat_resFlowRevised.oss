@@ -1,0 +1,32 @@
+@requires discrete-time
+-- FireSat resFlowRevised: MR-RES refined by ORB-1, PAY-2, ADCS-1R; angular form, microradians (see ocra_baseline.py)
+COMPONENT FlowdownSystem system
+INTERFACE
+  OUTPUT PORT v_ok: boolean;
+  CONTRACT parent
+    assume: true;
+    guarantee: always (v_ok);
+REFINEMENT
+  SUB payload: Payload;
+  SUB adcs: Adcs;
+  SUB orbit: Orbit;
+  CONNECTION v_ok := payload.v_beta + adcs.v_eps <= orbit.v_r;
+  CONTRACT parent REFINEDBY payload.c, adcs.c, orbit.c;
+COMPONENT Payload
+INTERFACE
+  OUTPUT PORT v_beta: real;
+  CONTRACT c
+    assume: true;
+    guarantee: always (v_beta >= 0 & 0.26 * v_beta <= 10.248);
+COMPONENT Adcs
+INTERFACE
+  OUTPUT PORT v_eps: real;
+  CONTRACT c
+    assume: true;
+    guarantee: always (v_eps >= 0 & v_eps <= 3);
+COMPONENT Orbit
+INTERFACE
+  OUTPUT PORT v_r: real;
+  CONTRACT c
+    assume: true;
+    guarantee: always (v_r > 0 & 7 * v_r >= 300);

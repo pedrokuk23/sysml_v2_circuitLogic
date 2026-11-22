@@ -136,9 +136,9 @@ def dead_parts(f, A=BoolVal(True)):
         seen.add(e.get_id())
         if is_bool(e) and (is_and(e) or is_or(e) or is_not(e) or is_implies(e)):
             if valid(e, A)[0]:
-                out.append((str(e), "sempre verdadeira"))
+                out.append((str(e), "always true"))
             elif not is_sat(A, e)[0]:
-                out.append((str(e), "sempre falsa"))
+                out.append((str(e), "always false"))
         for c in e.children():
             walk(c)
     walk(f)

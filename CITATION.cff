@@ -2,18 +2,24 @@ cff-version: 1.2.0
 message: "If you use this software, please cite the article and this archive."
 title: "sysmlc: compiling SysML v2 models into digital logic (code and data)"
 version: 1.0.0
-date-released: 2026-11-06
+date-released: 2026-11-22
 license: MIT
 authors:
   - family-names: "Kukulka de Albuquerque"
     given-names: "Pedro"
     affiliation: "Institute for Advanced Studies (IEAv), DCTA; Aeronautics Institute of Technology (ITA)"
+  - family-names: "Cardoso"
+    given-names: "Priscila Renata Barros"
+    affiliation: "Institute for Advanced Studies (IEAv), DCTA"
+repository-code: "https://github.com/pedrokuk23/sysml_v2_circuitLogic"
 preferred-citation:
   type: article
-  title: "Systems Models as Logic Circuits: Compiling SysML v2 Requirements, Behavior, Variability and Allocation Into Digital Logic"
+  title: "Systems Models as Logic Circuits: Compiling a SysML v2 Subset into Digital Logic for Analysis"
   authors:
     - family-names: "Kukulka de Albuquerque"
       given-names: "Pedro"
-  journal: "IEEE Access"
+    - family-names: "Cardoso"
+      given-names: "Priscila Renata Barros"
+  journal: "Software and Systems Modeling"
   year: 2026
-  status: in-preparation
+  status: submitted

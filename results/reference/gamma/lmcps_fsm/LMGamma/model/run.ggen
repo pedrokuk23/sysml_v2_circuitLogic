@@ -1,0 +1,6 @@
+import "LMFSM.gcd"
+
+analysis {
+	component : LMSystem
+	language : Theta
+}
